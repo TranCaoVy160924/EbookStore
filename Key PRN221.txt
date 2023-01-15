@@ -1,1 +1,2 @@
 pBfgxa1rMmCBcVv0Kc74
+git clone https://x-token-auth:pBfgxa1rMmCBcVv0Kc74@bitbucket.org/weed1210/prn221_ebookstore.git
