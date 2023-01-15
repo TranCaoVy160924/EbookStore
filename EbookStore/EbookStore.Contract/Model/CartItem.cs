@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace EbookStore.Contract.Model
 {
-    public class LibraryItem
+    public class CartItem
     {
         public int UserID { get; set; }
         public int BookID { get; set; }
 
         public User User { get; set; }
-
         public Book Book { get; set; }
     }
 }

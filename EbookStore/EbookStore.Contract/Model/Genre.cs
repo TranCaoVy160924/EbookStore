@@ -8,9 +8,9 @@ namespace EbookStore.Contract.Model
 {
     public class Genre
     {
-        public int GenreId { get; set; }
+        public int GenreID { get; set; }
         public string Name { get; set; }
 
-        public List<Book> Books { get; set; }
+        public List<Book>? Books { get; set; }
     }
 }

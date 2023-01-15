@@ -8,7 +8,7 @@ namespace EbookStore.Contract.Model
 {
     public class User
     {
-        public int UserId { get; set; }
+        public int UserID { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,8 +17,10 @@ namespace EbookStore.Contract.Model
         public string PhoneNumber { get; set; }
         public string Status { get; set; }
 
-        public List<WishItem> WishList { get; set; }
+        public List<WishItem>? WishList { get; set; }
 
-        public List<LibraryItem> Library { get; set; }
+        public List<LibraryItem>? Library { get; set; }
+
+        public List<CartItem>? Cart { get; set; }
     }
 }
