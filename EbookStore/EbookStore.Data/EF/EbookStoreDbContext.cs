@@ -1,4 +1,5 @@
 ﻿using EbookStore.Contract.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,17 @@ using static EbookStore.Data.Extensions.ModelBuilderExtensions;
 
 namespace EbookStore.Data.EF
 {
-    public class EbookStoreDbContext: DbContext
+    public class EbookStoreDbContext: IdentityDbContext<User, AppRole, Guid>
     {
-        protected override void OnConfiguring(
-            DbContextOptionsBuilder optionsBuilder)
-        {
-            string connectionString = "Server=.; Database=EbookStore; " +
-                "Trusted_Connection=True; Trust Server Certificate=true";
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+        public EbookStoreDbContext(DbContextOptions options) : base(options)
+        { }
+        //protected override void OnConfiguring(
+        //    DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string connectionString = "Server=.; Database=EbookStore; " +
+        //        "Trusted_Connection=True; Trust Server Certificate=true";
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,6 +37,8 @@ namespace EbookStore.Data.EF
         public DbSet<Genre> Genres { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<AppRole> AppRoles { get; set; }
 
         public DbSet<WishItem> WishItems { get; set; }
 

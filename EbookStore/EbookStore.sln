@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbookStore.Data", "EbookStore.Data\EbookStore.Data.csproj", "{B345FB3A-E27E-428C-95DF-B624AF8E462C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbookStore.Data", "EbookStore.Data\EbookStore.Data.csproj", "{B345FB3A-E27E-428C-95DF-B624AF8E462C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbookStore.Contract", "EbookStore.Contract\EbookStore.Contract.csproj", "{326F6045-49D6-41CB-9FFA-3F2E26A105DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbookStore.Contract", "EbookStore.Contract\EbookStore.Contract.csproj", "{326F6045-49D6-41CB-9FFA-3F2E26A105DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbookStore.Application", "EbookStore.Application\EbookStore.Application.csproj", "{7D288695-D63E-4464-BCF2-B93EB510C8B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{326F6045-49D6-41CB-9FFA-3F2E26A105DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{326F6045-49D6-41CB-9FFA-3F2E26A105DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{326F6045-49D6-41CB-9FFA-3F2E26A105DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D288695-D63E-4464-BCF2-B93EB510C8B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D288695-D63E-4464-BCF2-B93EB510C8B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D288695-D63E-4464-BCF2-B93EB510C8B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D288695-D63E-4464-BCF2-B93EB510C8B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

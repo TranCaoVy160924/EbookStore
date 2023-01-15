@@ -8,7 +8,7 @@ namespace EbookStore.Contract.Model
 {
     public class CartItem
     {
-        public int UserID { get; set; }
+        public Guid UserID { get; set; }
         public int BookID { get; set; }
 
         public User User { get; set; }
