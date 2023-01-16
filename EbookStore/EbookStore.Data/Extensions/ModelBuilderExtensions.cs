@@ -1,8 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EbookStore.Contract.Model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,32 +18,125 @@ namespace EbookStore.Data.Extensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            //// any guid
-            //var adminRoleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
-            //var staffRoleId = new Guid("12147FE0-4571-4AD2-B8F7-D2C863EB78A5");
-            //var adminHcmId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
-            //var adminHNId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00BF");
-            //var staffAbleId1 = new Guid("70BD714F-9576-45BA-B5B7-F00649BE00DE");
-            //var staffAbleId2 = new Guid("70BD814F-9576-45BA-B5B7-F00649BE00DE");
-            //var staffUnableId = new Guid("73BD714F-9576-45BA-B5B7-F00649BE00DE");
+            // guid
 
-            //modelBuilder.Entity<AppRole>().HasData(new AppRole
-            //{
-            //    Id = adminRoleId,
-            //    Name = "Admin",
-            //    NormalizedName = "admin",
-            //    Description = "Administrator role"
-            //});
+            var adminRoleId = new Guid("423e533c-d43d-4fd9-9676-e31af724522a");
+            var userRoleId = new Guid("da35db1a-5b54-4618-884e-bcd7f7b1dd19");
 
-            //modelBuilder.Entity<AppRole>().HasData(new AppRole
-            //{
-            //    Id = staffRoleId,
-            //    Name = "Staff",
-            //    NormalizedName = "staff",
-            //    Description = "Staff role"
-            //});
+            var userId = new Guid[10];
 
-            //var hasher = new PasswordHasher<AppUser>();
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = adminRoleId,
+                Name = "Admin",
+                NormalizedName = "admin",
+                Description = "Administrator role"
+            });
+
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = userRoleId,
+                Name = "User",
+                NormalizedName = "user",
+                Description = "User role"
+            });
+
+            var hasher = new PasswordHasher<User>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                userId[i - 1] = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef6" + (i-1));
+
+                //user
+                modelBuilder.Entity<User>().HasData(new User
+                {
+                    Id = userId[i - 1],
+                    UserName = "user" + i.ToString(),
+                    NormalizedUserName = "user" + i.ToString(),
+                    Email = "user" + i.ToString() + "@gmail.com",
+                    NormalizedEmail = "user" + i.ToString() + "@gmail.com",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "123456"),
+                    SecurityStamp = string.Empty,
+                    FirstName = "Ten " + i.ToString(),
+                    LastName = "Ho " + i.ToString(),
+                    PhoneNumber = "12345678" + i.ToString(),
+                    IsActive = true
+                });
+
+                if (i - 1 == 0)
+                {
+                    modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+                    {
+                        RoleId = adminRoleId,
+                        UserId = userId[i - 1]
+                    });
+                }
+                else
+                {
+                    modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+                    {
+                        RoleId = userRoleId,
+                        UserId = userId[i - 1]
+                    });
+                }
+
+                //sales
+                modelBuilder.Entity<Sale>().HasData(new Sale
+                {
+                    SaleID = i,
+                    Name = "Sale " + i.ToString(),
+                    SalePercent = i,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now
+                });
+
+                //book
+                modelBuilder.Entity<Book>().HasData(new Book
+                {
+                    BookID = i,
+                    Title = "Book " + i.ToString(),
+                    IsActive = true,
+                    SaleID = i,
+                    NumberOfPage = i * 100,
+                    Price = i * 10,
+                    CoverImage = "cover " + i.ToString(),
+                    PdfLink = "PdfLink " + i.ToString(),
+                    EpubLink = "EpubLink" + i.ToString(),
+                    ReleaseDate = DateTime.Now
+                });
+
+                //genre
+                modelBuilder.Entity<Genre>().HasData(new Genre
+                {
+                    GenreID = i,
+                    Name = "Genre " + i.ToString()
+                });
+
+                //whishItem
+                modelBuilder.Entity<WishItem>().HasData(new WishItem
+                {
+                    UserID = userId[i-1],
+                    BookID = i,
+                });
+
+                //cartItem
+                modelBuilder.Entity<CartItem>().HasData(new CartItem
+                {
+                    UserID = userId[i - 1],
+                    BookID = i,
+                });
+
+                //libraryItem
+                modelBuilder.Entity<LibraryItem>().HasData(new LibraryItem
+                {
+                    UserID = userId[i - 1],
+                    BookID = i,
+                });
+            }
+
+
+
             //modelBuilder.Entity<AppUser>().HasData(new AppUser
             //{
             //    Id = adminHcmId,
