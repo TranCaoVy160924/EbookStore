@@ -17,10 +17,10 @@
             <Setter Property="CornerRadius" Value="5, 0, 5, 0"/>
             <Setter Property="BorderBrush" Value="#D3D3D3"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="5, 0, 5, 0"/>
+            <Setter Property="Margin" Value="10, 0, 10, 0"/>
         </Style>
         <Style x:Key="InputBox" TargetType="GroupBox">
-            <Setter Property="Margin" Value="5, 0, 5, 0"/>
+            <Setter Property="Margin" Value="10, 0, 10, 20"/>
             <Setter Property="Height" Value="40"/>
         </Style>
         <Style x:Key="TextInput" TargetType="TextBox">

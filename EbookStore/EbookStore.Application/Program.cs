@@ -1,3 +1,4 @@
+using EbookStore.Contract.Mapper;
 using EbookStore.Contract.Model;
 using EbookStore.Data.EF;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<EbookStoreDbContext>(options =>
                .AddIdentity<User, AppRole>()
                .AddEntityFrameworkStores<EbookStoreDbContext>()
                .AddDefaultTokenProviders();
+
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperProfile)));
 
 //JWT configuration 
 string issuer = builder.Configuration.GetValue<string>("JwtSettings:validIssuer");

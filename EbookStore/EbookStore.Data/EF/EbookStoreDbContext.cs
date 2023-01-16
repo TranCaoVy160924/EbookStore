@@ -11,23 +11,17 @@ using static EbookStore.Data.Extensions.ModelBuilderExtensions;
 
 namespace EbookStore.Data.EF
 {
-    public class EbookStoreDbContext: IdentityDbContext<User, AppRole, Guid>
+    public class EbookStoreDbContext : IdentityDbContext<User, AppRole, Guid>
     {
         public EbookStoreDbContext(DbContextOptions options) : base(options)
         { }
-        //protected override void OnConfiguring(
-        //    DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    string connectionString = "Server=.; Database=EbookStore; " +
-        //        "Trusted_Connection=True; Trust Server Certificate=true";
-        //    optionsBuilder.UseSqlServer(connectionString);
-        //}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<WishItem>().HasKey(sc => new { sc.UserID, sc.BookID });
-            builder.Entity<LibraryItem>().HasKey(sc => new { sc.UserID, sc.BookID });
-            builder.Entity<CartItem>().HasKey(sc => new { sc.UserID, sc.BookID });
+            builder.Entity<WishItem>().HasKey(sc => new { sc.UserId, sc.BookId });
+            builder.Entity<LibraryItem>().HasKey(sc => new { sc.UserId, sc.BookId });
+            builder.Entity<CartItem>().HasKey(sc => new { sc.UserId, sc.BookId });
+
             builder.Seed();
             base.OnModelCreating(builder);
         }

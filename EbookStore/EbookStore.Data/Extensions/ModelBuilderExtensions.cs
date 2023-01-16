@@ -84,7 +84,7 @@ namespace EbookStore.Data.Extensions
                 //sales
                 modelBuilder.Entity<Sale>().HasData(new Sale
                 {
-                    SaleID = i,
+                    SaleId = i,
                     Name = "Sale " + i.ToString(),
                     SalePercent = i,
                     StartDate = DateTime.Now,
@@ -94,10 +94,10 @@ namespace EbookStore.Data.Extensions
                 //book
                 modelBuilder.Entity<Book>().HasData(new Book
                 {
-                    BookID = i,
+                    BookId = i,
                     Title = "Book " + i.ToString(),
                     IsActive = true,
-                    SaleID = i,
+                    SaleId = i,
                     NumberOfPage = i * 100,
                     Price = i * 10,
                     CoverImage = "cover " + i.ToString(),
@@ -109,29 +109,29 @@ namespace EbookStore.Data.Extensions
                 //genre
                 modelBuilder.Entity<Genre>().HasData(new Genre
                 {
-                    GenreID = i,
+                    GenreId = i,
                     Name = "Genre " + i.ToString()
                 });
 
-                //whishItem
+                //wishItem
                 modelBuilder.Entity<WishItem>().HasData(new WishItem
                 {
-                    UserID = userId[i-1],
-                    BookID = i,
+                    UserId = userId[i - 1],
+                    BookId = i,
                 });
 
                 //cartItem
                 modelBuilder.Entity<CartItem>().HasData(new CartItem
                 {
-                    UserID = userId[i - 1],
-                    BookID = i,
+                    UserId = userId[i - 1],
+                    BookId = i,
                 });
 
                 //libraryItem
                 modelBuilder.Entity<LibraryItem>().HasData(new LibraryItem
                 {
-                    UserID = userId[i - 1],
-                    BookID = i,
+                    UserId = userId[i - 1],
+                    BookId = i,
                 });
             }
 
