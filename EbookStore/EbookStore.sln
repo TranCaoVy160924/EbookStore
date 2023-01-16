@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbookStore.Data", "EbookSto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbookStore.Contract", "EbookStore.Contract\EbookStore.Contract.csproj", "{326F6045-49D6-41CB-9FFA-3F2E26A105DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbookStore.Application", "EbookStore.Application\EbookStore.Application.csproj", "{7D288695-D63E-4464-BCF2-B93EB510C8B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbookStore.Application", "EbookStore.Application\EbookStore.Application.csproj", "{7D288695-D63E-4464-BCF2-B93EB510C8B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
