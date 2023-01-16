@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EbookStore.Presentation.View.Pages" xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
-      d:DesignHeight="550" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="1000"
       Title="RegisterPage">
     <Page.Resources>
         <sys:String x:Key="InformationTop">
@@ -24,9 +24,11 @@
             <Setter Property="Height" Value="40"/>
         </Style>
         <Style x:Key="TextInput" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="InputLabel" TargetType="Label">
             <Setter Property="FontSize" Value="13"/>
@@ -102,9 +104,11 @@
                 <StackPanel Margin="0, 5, 0, 0">
                     <Label Style="{StaticResource InputLabel}">Username</Label>
                     <GroupBox 
+                        x:Name="Username_GroupBox"
                         Style="{StaticResource InputBox}"
                         Header="" Foreground="Red">
                         <TextBox 
+                            x:Name="Username_TextBox"
                             Style="{StaticResource TextInput}">
                         </TextBox>
                     </GroupBox>
@@ -118,9 +122,11 @@
                     <StackPanel Grid.Column="0">
                         <Label Style="{StaticResource InputLabel}">First Name</Label>
                         <GroupBox 
+                            x:Name="FirstName_GroupBox"
                             Style="{StaticResource InputBox}"
                             Header="" Foreground="Red">
                             <TextBox 
+                                x:Name="FirstName_TextBox"
                                 Style="{StaticResource TextInput}">
                             </TextBox>
                         </GroupBox>
@@ -128,9 +134,11 @@
                     <StackPanel Grid.Column="1">
                         <Label Style="{StaticResource InputLabel}">Last Name</Label>
                         <GroupBox 
+                            x:Name="LastName_GroupBox"
                             Style="{StaticResource InputBox}"
                             Header="" Foreground="Red">
                             <TextBox 
+                                x:Name="LastName_TextBox"
                                 Style="{StaticResource TextInput}">
                             </TextBox>
                         </GroupBox>
@@ -145,9 +153,10 @@
                     <StackPanel Grid.Column="0">
                         <Label Style="{StaticResource InputLabel}">Password</Label>
                         <GroupBox 
+                            x:Name="Password_GroupBox"
                             Style="{StaticResource InputBox}"
                             Header="" Foreground="Red">
-                            <TextBox 
+                            <TextBox x:Name="Password_TextBox"
                                 Style="{StaticResource TextInput}">
                             </TextBox>
                         </GroupBox>
@@ -155,9 +164,11 @@
                     <StackPanel Grid.Column="1">
                         <Label Style="{StaticResource InputLabel}">Confirm Password</Label>
                         <GroupBox 
+                            x:Name="ConfirmPassword_GroupBox"
                             Style="{StaticResource InputBox}"
                             Header="" Foreground="Red">
                             <TextBox 
+                                x:Name="ConfirmPassword_TextBox"
                                 Style="{StaticResource TextInput}">
                             </TextBox>
                         </GroupBox>
@@ -167,10 +178,12 @@
                 <StackPanel Grid.Column="1">
                     <Label Style="{StaticResource InputLabel}">Email</Label>
                     <GroupBox 
+                        x:Name="Email_GroupBox"
                         Style="{StaticResource InputBox}"
                         Header="" Foreground="Red">
                         <TextBox 
-                                Style="{StaticResource TextInput}">
+                            x:Name="Email_TextBox"
+                            Style="{StaticResource TextInput}">
                         </TextBox>
                     </GroupBox>
                 </StackPanel>
@@ -178,40 +191,26 @@
                 <StackPanel Grid.Column="1">
                     <Label Style="{StaticResource InputLabel}">Phone Number</Label>
                     <GroupBox 
+                        x:Name="PhoneNumber_GroupBox"
                         Style="{StaticResource InputBox}"
                         Header="" Foreground="Red">
                         <TextBox 
-                                Style="{StaticResource TextInput}">
+                            x:Name="PhoneNumber_TextBox"
+                            Style="{StaticResource TextInput}">
                         </TextBox>
                     </GroupBox>
                 </StackPanel>
 
-                <StackPanel Margin="5, 5, 0, 0"  Orientation="Horizontal">
-                    <CheckBox VerticalAlignment="Bottom"/>
-                    <TextBlock
-                        VerticalAlignment="Bottom"
-                        Margin="10, 0, 0, 0"
-                        FontWeight="Bold"
-                        FontSize="15">
-                        <Run Text="I agree to the"/>
-                        <Run 
-                            TextDecorations="Underline"
-                            FontWeight="Bold" 
-                            Text="Terms and Conditions" >
-                            <Run.Foreground>
-                                <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
-                            </Run.Foreground>
-                        </Run>
-                    </TextBlock>
-                </StackPanel>
                 <Border
-                        Style="{StaticResource ButtonBorder}"
-                        HorizontalAlignment="Center"
-                        >
+                    Style="{StaticResource ButtonBorder}"
+                    HorizontalAlignment="Center">
                     <Border.Background>
                         <SolidColorBrush Color="{StaticResource PrimaryBlue}" />
                     </Border.Background>
-                    <Button Foreground="White">
+                    <Button
+                        x:Name="Register_Button"
+                        Click="Register_Button_Click"
+                        Foreground="White">
                         Register
                     </Button>
                 </Border>
