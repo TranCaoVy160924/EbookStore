@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Contract.Model
-{
-    public class Genre
-    {
-        public int GenreID { get; set; }
-        public string Name { get; set; }
+namespace EbookStore.Contract.Model;
 
-        public List<Book>? Books { get; set; }
-    }
+public class Genre
+{
+    public int GenreId { get; set; }
+    public string Name { get; set; }
+
+    public virtual List<Book> Books { get; set; }
 }

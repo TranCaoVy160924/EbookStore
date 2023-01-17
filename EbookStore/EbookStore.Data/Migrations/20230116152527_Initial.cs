@@ -56,20 +56,20 @@ namespace EbookStore.Data.Migrations
                 name: "Genres",
                 columns: table => new
                 {
-                    GenreID = table.Column<int>(type: "int", nullable: false)
+                    GenreId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genres", x => x.GenreID);
+                    table.PrimaryKey("PK_Genres", x => x.GenreId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Sales",
                 columns: table => new
                 {
-                    SaleID = table.Column<int>(type: "int", nullable: false)
+                    SaleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SalePercent = table.Column<double>(type: "float", nullable: false),
@@ -78,7 +78,7 @@ namespace EbookStore.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sales", x => x.SaleID);
+                    table.PrimaryKey("PK_Sales", x => x.SaleId);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,11 +191,11 @@ namespace EbookStore.Data.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    BookID = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    SaleID = table.Column<int>(type: "int", nullable: false),
+                    SaleId = table.Column<int>(type: "int", nullable: false),
                     NumberOfPage = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -205,12 +205,12 @@ namespace EbookStore.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.BookID);
+                    table.PrimaryKey("PK_Books", x => x.BookId);
                     table.ForeignKey(
-                        name: "FK_Books_Sales_SaleID",
-                        column: x => x.SaleID,
+                        name: "FK_Books_Sales_SaleId",
+                        column: x => x.SaleId,
                         principalTable: "Sales",
-                        principalColumn: "SaleID",
+                        principalColumn: "SaleId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -218,23 +218,23 @@ namespace EbookStore.Data.Migrations
                 name: "BookGenre",
                 columns: table => new
                 {
-                    BooksBookID = table.Column<int>(type: "int", nullable: false),
-                    GenresGenreID = table.Column<int>(type: "int", nullable: false)
+                    BooksBookId = table.Column<int>(type: "int", nullable: false),
+                    GenresGenreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookGenre", x => new { x.BooksBookID, x.GenresGenreID });
+                    table.PrimaryKey("PK_BookGenre", x => new { x.BooksBookId, x.GenresGenreId });
                     table.ForeignKey(
-                        name: "FK_BookGenre_Books_BooksBookID",
-                        column: x => x.BooksBookID,
+                        name: "FK_BookGenre_Books_BooksBookId",
+                        column: x => x.BooksBookId,
                         principalTable: "Books",
-                        principalColumn: "BookID",
+                        principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookGenre_Genres_GenresGenreID",
-                        column: x => x.GenresGenreID,
+                        name: "FK_BookGenre_Genres_GenresGenreId",
+                        column: x => x.GenresGenreId,
                         principalTable: "Genres",
-                        principalColumn: "GenreID",
+                        principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -242,23 +242,24 @@ namespace EbookStore.Data.Migrations
                 name: "CartItems",
                 columns: table => new
                 {
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BookID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItems", x => new { x.UserID, x.BookID });
+                    table.PrimaryKey("PK_CartItems", x => new { x.UserId, x.BookId });
                     table.ForeignKey(
-                        name: "FK_CartItems_AspNetUsers_UserID",
-                        column: x => x.UserID,
+                        name: "FK_CartItems_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CartItems_Books_BookID",
-                        column: x => x.BookID,
+                        name: "FK_CartItems_Books_BookId",
+                        column: x => x.BookId,
                         principalTable: "Books",
-                        principalColumn: "BookID",
+                        principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -266,23 +267,23 @@ namespace EbookStore.Data.Migrations
                 name: "LibraryItems",
                 columns: table => new
                 {
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BookID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LibraryItems", x => new { x.UserID, x.BookID });
+                    table.PrimaryKey("PK_LibraryItems", x => new { x.UserId, x.BookId });
                     table.ForeignKey(
-                        name: "FK_LibraryItems_AspNetUsers_UserID",
-                        column: x => x.UserID,
+                        name: "FK_LibraryItems_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LibraryItems_Books_BookID",
-                        column: x => x.BookID,
+                        name: "FK_LibraryItems_Books_BookId",
+                        column: x => x.BookId,
                         principalTable: "Books",
-                        principalColumn: "BookID",
+                        principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -290,23 +291,24 @@ namespace EbookStore.Data.Migrations
                 name: "WishItems",
                 columns: table => new
                 {
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BookID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WishItems", x => new { x.UserID, x.BookID });
+                    table.PrimaryKey("PK_WishItems", x => new { x.UserId, x.BookId });
                     table.ForeignKey(
-                        name: "FK_WishItems_AspNetUsers_UserID",
-                        column: x => x.UserID,
+                        name: "FK_WishItems_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WishItems_Books_BookID",
-                        column: x => x.BookID,
+                        name: "FK_WishItems_Books_BookId",
+                        column: x => x.BookId,
                         principalTable: "Books",
-                        principalColumn: "BookID",
+                        principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -315,8 +317,8 @@ namespace EbookStore.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("423e533c-d43d-4fd9-9676-e31af724522a"), "18df5d38-f263-44dd-8559-467b1c7a433d", "Administrator role", "Admin", "admin" },
-                    { new Guid("da35db1a-5b54-4618-884e-bcd7f7b1dd19"), "2f424691-f36a-44d3-8d6b-0b8c3daf50b4", "User role", "User", "user" }
+                    { new Guid("423e533c-d43d-4fd9-9676-e31af724522a"), "022bbb42-7ced-460f-8011-a4d4a39a6ad9", "Administrator role", "Admin", "admin" },
+                    { new Guid("da35db1a-5b54-4618-884e-bcd7f7b1dd19"), "8203dc71-884d-4d23-af77-36aaa3993184", "User role", "User", "user" }
                 });
 
             migrationBuilder.InsertData(
@@ -324,21 +326,21 @@ namespace EbookStore.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsActive", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60"), 0, "57a0946d-35ca-4fad-b4a7-da2885ac17ba", "user1@gmail.com", true, "Ten 1", true, "Ho 1", false, null, "user1@gmail.com", "user1", "AQAAAAEAACcQAAAAEAMCSJChYYAl479D9dpX/JN58HBIr1c1KNv48EMoaGF+19zFQHl5ChrAVzpI3lpvxg==", "123456781", false, "", false, "user1" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61"), 0, "37ef0fd2-e002-4499-a4e5-f840cd4120dc", "user2@gmail.com", true, "Ten 2", true, "Ho 2", false, null, "user2@gmail.com", "user2", "AQAAAAEAACcQAAAAEL0BtXEYQgq/v5/mIrG0jPfh74nepG34p3yuzPPU6cFYR6xeEw0ahmtvgYF5op3c+A==", "123456782", false, "", false, "user2" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62"), 0, "7bbfb514-4d46-468b-bf0d-c485eb21ba95", "user3@gmail.com", true, "Ten 3", true, "Ho 3", false, null, "user3@gmail.com", "user3", "AQAAAAEAACcQAAAAEB3fV+VziGDSKzXyeF4uqq2FRnvxjGISx3hNd3/NkmNSPVB5SGUwAdjrQUKhm8F28g==", "123456783", false, "", false, "user3" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63"), 0, "dd0a4c7d-786d-404a-a771-01facc95ee40", "user4@gmail.com", true, "Ten 4", true, "Ho 4", false, null, "user4@gmail.com", "user4", "AQAAAAEAACcQAAAAEC8tyQ+x1qzt31d9Xc4WK4YWRIwen8ux8u2YUNAA1hL5Cxx3UTVpToOle0wKJ/bTBQ==", "123456784", false, "", false, "user4" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64"), 0, "e31caea0-88a1-4f7d-85f1-a4263e1885c8", "user5@gmail.com", true, "Ten 5", true, "Ho 5", false, null, "user5@gmail.com", "user5", "AQAAAAEAACcQAAAAELqncIoCR7QsvdveOxmwnRiqBl+Kq281AH3CRJJt2KSXSlJNoMIyRWXapQeTLbewXQ==", "123456785", false, "", false, "user5" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65"), 0, "98340213-2397-44c4-8b30-5e5dea77f2b5", "user6@gmail.com", true, "Ten 6", true, "Ho 6", false, null, "user6@gmail.com", "user6", "AQAAAAEAACcQAAAAEMKaox9T06YOdqE8h7kPOaiOtrlFwECh92pErjgUB3hDZIlK49c2jm4Afjjd1Ibb5w==", "123456786", false, "", false, "user6" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66"), 0, "182cac94-b1e8-45d9-bb13-d956fe50f4d1", "user7@gmail.com", true, "Ten 7", true, "Ho 7", false, null, "user7@gmail.com", "user7", "AQAAAAEAACcQAAAAEFVyi6V0Apusx1wejKgxjBtt3fGq3ZSy8SnJH3rxowHFN+Koc0MfrdbcvxI+Kwi5Aw==", "123456787", false, "", false, "user7" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67"), 0, "798e00ae-1e1b-455b-b9f0-3a8177645925", "user8@gmail.com", true, "Ten 8", true, "Ho 8", false, null, "user8@gmail.com", "user8", "AQAAAAEAACcQAAAAEPEfOVqwiwLUo2tv9L4abLBpsVXKsun3126qEHH0A6bWBNij3aKLyempyIkxzViCRQ==", "123456788", false, "", false, "user8" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68"), 0, "a2282cad-293a-4b72-8a50-b4afde18de0f", "user9@gmail.com", true, "Ten 9", true, "Ho 9", false, null, "user9@gmail.com", "user9", "AQAAAAEAACcQAAAAED71yVy+xY670VVJ+KO4tKDvEzNSN0q7TI+3qbQwSlwVJ6ZwRTNSoPrHSVc6P2WaQw==", "123456789", false, "", false, "user9" },
-                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69"), 0, "a4052923-2e70-4fa0-bee5-29f87f86d1fc", "user10@gmail.com", true, "Ten 10", true, "Ho 10", false, null, "user10@gmail.com", "user10", "AQAAAAEAACcQAAAAEAvYXztpPydXLFCQba9QjbKxqTJXwmMWaZHMMp6Qxu+ucDQ5GiDgTwy+ywXUh1tUzA==", "1234567810", false, "", false, "user10" }
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60"), 0, "37485df4-d02e-42dc-aff5-94703b4ed6dc", "user1@gmail.com", true, "Ten 1", true, "Ho 1", false, null, "user1@gmail.com", "user1", "AQAAAAEAACcQAAAAEIgrYlppJoCjgogkBMllAXftJeXoY+Cm8kK/uwsmKNuNGna8bCrLRsJlf/qAIocqHQ==", "123456781", false, "", false, "user1" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61"), 0, "86e11b21-24ed-4573-a98c-6b067f8ca5e6", "user2@gmail.com", true, "Ten 2", true, "Ho 2", false, null, "user2@gmail.com", "user2", "AQAAAAEAACcQAAAAEG9pymx9ORu4RyUhi8rhMRWAFhNX+b68j3qA7fg1+dn/8dlTWdMFMZny7vwQzW34yw==", "123456782", false, "", false, "user2" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62"), 0, "f38fd923-4592-45db-a9df-9905b2d8aac0", "user3@gmail.com", true, "Ten 3", true, "Ho 3", false, null, "user3@gmail.com", "user3", "AQAAAAEAACcQAAAAEJXPAi0ZYhS0jP7BBw9LLHB3MSPfj3HIdRUcvFv3Ul8hgi2qJjhBKYN8RwO2DOCMAw==", "123456783", false, "", false, "user3" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63"), 0, "9ae33cfd-48b5-43c7-979d-93807bd1fa45", "user4@gmail.com", true, "Ten 4", true, "Ho 4", false, null, "user4@gmail.com", "user4", "AQAAAAEAACcQAAAAELJeH7I9NOkunhtjk5DKXabxIFItNZP7NBotAlyZTCxf6N4eHOHY8wzP/5gowegt9w==", "123456784", false, "", false, "user4" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64"), 0, "f8a1628f-b9d8-4346-ba9a-70264ec83b8a", "user5@gmail.com", true, "Ten 5", true, "Ho 5", false, null, "user5@gmail.com", "user5", "AQAAAAEAACcQAAAAEHQkdByyTo/f4/qfwfP4MBmcQCpkxB8rS3VuM8S0R6Mc2BxV3LPqdSLEN9PYTg/Pow==", "123456785", false, "", false, "user5" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65"), 0, "2731f955-6f6f-40c0-a3a8-774b5ebcce2c", "user6@gmail.com", true, "Ten 6", true, "Ho 6", false, null, "user6@gmail.com", "user6", "AQAAAAEAACcQAAAAEDEwOF77HFfI9eEuwiDGYsCh+qnK4JvRzwwCf9VFH9wvFM0g0r67qr0dJRmm8G9I0g==", "123456786", false, "", false, "user6" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66"), 0, "89c07e7c-e5a2-46c8-8ae5-80e0ecfdecb6", "user7@gmail.com", true, "Ten 7", true, "Ho 7", false, null, "user7@gmail.com", "user7", "AQAAAAEAACcQAAAAEBEPLKIMvrXPC0DBiPfOMgpKEqoh+eosW7u7w3PHUH+6M6i8Lpg7hdRbwmju6zdQRg==", "123456787", false, "", false, "user7" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67"), 0, "b3acae8b-7f20-491d-a766-a900f10da3ba", "user8@gmail.com", true, "Ten 8", true, "Ho 8", false, null, "user8@gmail.com", "user8", "AQAAAAEAACcQAAAAEHw4U0Afyw+FWc9+twPJGrqX3xYvU/hYmhzh5mSauhFCmSGMgkiG+8WIZmGQA2q4BQ==", "123456788", false, "", false, "user8" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68"), 0, "4165f2e9-43ed-4fad-924b-99ce3255c256", "user9@gmail.com", true, "Ten 9", true, "Ho 9", false, null, "user9@gmail.com", "user9", "AQAAAAEAACcQAAAAEOdDwfEWbGrCvySyl1nPDQZuCsVtG/XOgOwz8ckMgenXHK4ZNc01eJ8XYccNGfWeGQ==", "123456789", false, "", false, "user9" },
+                    { new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69"), 0, "2df78c5f-6451-4156-a52a-3be8535d73f1", "user10@gmail.com", true, "Ten 10", true, "Ho 10", false, null, "user10@gmail.com", "user10", "AQAAAAEAACcQAAAAED8IiPOsiY9iGq0FwCncyJnE9ATFugabZw29ye9FGdUgzT7oFc7xEDOvKUHBHmkCvQ==", "1234567810", false, "", false, "user10" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Genres",
-                columns: new[] { "GenreID", "Name" },
+                columns: new[] { "GenreId", "Name" },
                 values: new object[,]
                 {
                     { 1, "Genre 1" },
@@ -355,19 +357,19 @@ namespace EbookStore.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Sales",
-                columns: new[] { "SaleID", "EndDate", "Name", "SalePercent", "StartDate" },
+                columns: new[] { "SaleId", "EndDate", "Name", "SalePercent", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 1, 16, 17, 40, 45, 97, DateTimeKind.Local).AddTicks(9219), "Sale 1", 1.0, new DateTime(2023, 1, 16, 17, 40, 45, 97, DateTimeKind.Local).AddTicks(9209) },
-                    { 2, new DateTime(2023, 1, 16, 17, 40, 45, 109, DateTimeKind.Local).AddTicks(2553), "Sale 2", 2.0, new DateTime(2023, 1, 16, 17, 40, 45, 109, DateTimeKind.Local).AddTicks(2539) },
-                    { 3, new DateTime(2023, 1, 16, 17, 40, 45, 120, DateTimeKind.Local).AddTicks(6072), "Sale 3", 3.0, new DateTime(2023, 1, 16, 17, 40, 45, 120, DateTimeKind.Local).AddTicks(6062) },
-                    { 4, new DateTime(2023, 1, 16, 17, 40, 45, 131, DateTimeKind.Local).AddTicks(9722), "Sale 4", 4.0, new DateTime(2023, 1, 16, 17, 40, 45, 131, DateTimeKind.Local).AddTicks(9708) },
-                    { 5, new DateTime(2023, 1, 16, 17, 40, 45, 143, DateTimeKind.Local).AddTicks(5210), "Sale 5", 5.0, new DateTime(2023, 1, 16, 17, 40, 45, 143, DateTimeKind.Local).AddTicks(5195) },
-                    { 6, new DateTime(2023, 1, 16, 17, 40, 45, 155, DateTimeKind.Local).AddTicks(2596), "Sale 6", 6.0, new DateTime(2023, 1, 16, 17, 40, 45, 155, DateTimeKind.Local).AddTicks(2584) },
-                    { 7, new DateTime(2023, 1, 16, 17, 40, 45, 166, DateTimeKind.Local).AddTicks(9436), "Sale 7", 7.0, new DateTime(2023, 1, 16, 17, 40, 45, 166, DateTimeKind.Local).AddTicks(9424) },
-                    { 8, new DateTime(2023, 1, 16, 17, 40, 45, 178, DateTimeKind.Local).AddTicks(3795), "Sale 8", 8.0, new DateTime(2023, 1, 16, 17, 40, 45, 178, DateTimeKind.Local).AddTicks(3781) },
-                    { 9, new DateTime(2023, 1, 16, 17, 40, 45, 189, DateTimeKind.Local).AddTicks(7977), "Sale 9", 9.0, new DateTime(2023, 1, 16, 17, 40, 45, 189, DateTimeKind.Local).AddTicks(7954) },
-                    { 10, new DateTime(2023, 1, 16, 17, 40, 45, 201, DateTimeKind.Local).AddTicks(731), "Sale 10", 10.0, new DateTime(2023, 1, 16, 17, 40, 45, 201, DateTimeKind.Local).AddTicks(715) }
+                    { 1, new DateTime(2023, 1, 16, 22, 25, 27, 170, DateTimeKind.Local).AddTicks(3156), "Sale 1", 1.0, new DateTime(2023, 1, 16, 22, 25, 27, 170, DateTimeKind.Local).AddTicks(3145) },
+                    { 2, new DateTime(2023, 1, 16, 22, 25, 27, 183, DateTimeKind.Local).AddTicks(3124), "Sale 2", 2.0, new DateTime(2023, 1, 16, 22, 25, 27, 183, DateTimeKind.Local).AddTicks(3111) },
+                    { 3, new DateTime(2023, 1, 16, 22, 25, 27, 196, DateTimeKind.Local).AddTicks(1946), "Sale 3", 3.0, new DateTime(2023, 1, 16, 22, 25, 27, 196, DateTimeKind.Local).AddTicks(1934) },
+                    { 4, new DateTime(2023, 1, 16, 22, 25, 27, 208, DateTimeKind.Local).AddTicks(9202), "Sale 4", 4.0, new DateTime(2023, 1, 16, 22, 25, 27, 208, DateTimeKind.Local).AddTicks(9190) },
+                    { 5, new DateTime(2023, 1, 16, 22, 25, 27, 221, DateTimeKind.Local).AddTicks(5443), "Sale 5", 5.0, new DateTime(2023, 1, 16, 22, 25, 27, 221, DateTimeKind.Local).AddTicks(5423) },
+                    { 6, new DateTime(2023, 1, 16, 22, 25, 27, 233, DateTimeKind.Local).AddTicks(8851), "Sale 6", 6.0, new DateTime(2023, 1, 16, 22, 25, 27, 233, DateTimeKind.Local).AddTicks(8836) },
+                    { 7, new DateTime(2023, 1, 16, 22, 25, 27, 246, DateTimeKind.Local).AddTicks(3137), "Sale 7", 7.0, new DateTime(2023, 1, 16, 22, 25, 27, 246, DateTimeKind.Local).AddTicks(3125) },
+                    { 8, new DateTime(2023, 1, 16, 22, 25, 27, 258, DateTimeKind.Local).AddTicks(4676), "Sale 8", 8.0, new DateTime(2023, 1, 16, 22, 25, 27, 258, DateTimeKind.Local).AddTicks(4656) },
+                    { 9, new DateTime(2023, 1, 16, 22, 25, 27, 270, DateTimeKind.Local).AddTicks(7807), "Sale 9", 9.0, new DateTime(2023, 1, 16, 22, 25, 27, 270, DateTimeKind.Local).AddTicks(7789) },
+                    { 10, new DateTime(2023, 1, 16, 22, 25, 27, 283, DateTimeKind.Local).AddTicks(1653), "Sale 10", 10.0, new DateTime(2023, 1, 16, 22, 25, 27, 283, DateTimeKind.Local).AddTicks(1636) }
                 });
 
             migrationBuilder.InsertData(
@@ -389,41 +391,41 @@ namespace EbookStore.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "BookID", "CoverImage", "EpubLink", "IsActive", "NumberOfPage", "PdfLink", "Price", "ReleaseDate", "SaleID", "Title" },
+                columns: new[] { "BookId", "CoverImage", "EpubLink", "IsActive", "NumberOfPage", "PdfLink", "Price", "ReleaseDate", "SaleId", "Title" },
                 values: new object[,]
                 {
-                    { 1, "cover 1", "EpubLink1", true, 100, "PdfLink 1", 10.0, new DateTime(2023, 1, 16, 17, 40, 45, 97, DateTimeKind.Local).AddTicks(9255), 1, "Book 1" },
-                    { 2, "cover 2", "EpubLink2", true, 200, "PdfLink 2", 20.0, new DateTime(2023, 1, 16, 17, 40, 45, 109, DateTimeKind.Local).AddTicks(2595), 2, "Book 2" },
-                    { 3, "cover 3", "EpubLink3", true, 300, "PdfLink 3", 30.0, new DateTime(2023, 1, 16, 17, 40, 45, 120, DateTimeKind.Local).AddTicks(6107), 3, "Book 3" },
-                    { 4, "cover 4", "EpubLink4", true, 400, "PdfLink 4", 40.0, new DateTime(2023, 1, 16, 17, 40, 45, 131, DateTimeKind.Local).AddTicks(9766), 4, "Book 4" },
-                    { 5, "cover 5", "EpubLink5", true, 500, "PdfLink 5", 50.0, new DateTime(2023, 1, 16, 17, 40, 45, 143, DateTimeKind.Local).AddTicks(5263), 5, "Book 5" },
-                    { 6, "cover 6", "EpubLink6", true, 600, "PdfLink 6", 60.0, new DateTime(2023, 1, 16, 17, 40, 45, 155, DateTimeKind.Local).AddTicks(2635), 6, "Book 6" },
-                    { 7, "cover 7", "EpubLink7", true, 700, "PdfLink 7", 70.0, new DateTime(2023, 1, 16, 17, 40, 45, 166, DateTimeKind.Local).AddTicks(9477), 7, "Book 7" },
-                    { 8, "cover 8", "EpubLink8", true, 800, "PdfLink 8", 80.0, new DateTime(2023, 1, 16, 17, 40, 45, 178, DateTimeKind.Local).AddTicks(3832), 8, "Book 8" },
-                    { 9, "cover 9", "EpubLink9", true, 900, "PdfLink 9", 90.0, new DateTime(2023, 1, 16, 17, 40, 45, 189, DateTimeKind.Local).AddTicks(8238), 9, "Book 9" },
-                    { 10, "cover 10", "EpubLink10", true, 1000, "PdfLink 10", 100.0, new DateTime(2023, 1, 16, 17, 40, 45, 201, DateTimeKind.Local).AddTicks(778), 10, "Book 10" }
+                    { 1, "cover 1", "EpubLink1", true, 100, "PdfLink 1", 10.0, new DateTime(2023, 1, 16, 22, 25, 27, 170, DateTimeKind.Local).AddTicks(3199), 1, "Book 1" },
+                    { 2, "cover 2", "EpubLink2", true, 200, "PdfLink 2", 20.0, new DateTime(2023, 1, 16, 22, 25, 27, 183, DateTimeKind.Local).AddTicks(3172), 2, "Book 2" },
+                    { 3, "cover 3", "EpubLink3", true, 300, "PdfLink 3", 30.0, new DateTime(2023, 1, 16, 22, 25, 27, 196, DateTimeKind.Local).AddTicks(1987), 3, "Book 3" },
+                    { 4, "cover 4", "EpubLink4", true, 400, "PdfLink 4", 40.0, new DateTime(2023, 1, 16, 22, 25, 27, 208, DateTimeKind.Local).AddTicks(9237), 4, "Book 4" },
+                    { 5, "cover 5", "EpubLink5", true, 500, "PdfLink 5", 50.0, new DateTime(2023, 1, 16, 22, 25, 27, 221, DateTimeKind.Local).AddTicks(5488), 5, "Book 5" },
+                    { 6, "cover 6", "EpubLink6", true, 600, "PdfLink 6", 60.0, new DateTime(2023, 1, 16, 22, 25, 27, 233, DateTimeKind.Local).AddTicks(8892), 6, "Book 6" },
+                    { 7, "cover 7", "EpubLink7", true, 700, "PdfLink 7", 70.0, new DateTime(2023, 1, 16, 22, 25, 27, 246, DateTimeKind.Local).AddTicks(3177), 7, "Book 7" },
+                    { 8, "cover 8", "EpubLink8", true, 800, "PdfLink 8", 80.0, new DateTime(2023, 1, 16, 22, 25, 27, 258, DateTimeKind.Local).AddTicks(4744), 8, "Book 8" },
+                    { 9, "cover 9", "EpubLink9", true, 900, "PdfLink 9", 90.0, new DateTime(2023, 1, 16, 22, 25, 27, 270, DateTimeKind.Local).AddTicks(7866), 9, "Book 9" },
+                    { 10, "cover 10", "EpubLink10", true, 1000, "PdfLink 10", 100.0, new DateTime(2023, 1, 16, 22, 25, 27, 283, DateTimeKind.Local).AddTicks(1696), 10, "Book 10" }
                 });
 
             migrationBuilder.InsertData(
                 table: "CartItems",
-                columns: new[] { "BookID", "UserID" },
+                columns: new[] { "BookId", "UserId", "IsActive" },
                 values: new object[,]
                 {
-                    { 1, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60") },
-                    { 2, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61") },
-                    { 3, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62") },
-                    { 4, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63") },
-                    { 5, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64") },
-                    { 6, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65") },
-                    { 7, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66") },
-                    { 8, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67") },
-                    { 9, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68") },
-                    { 10, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69") }
+                    { 1, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60"), false },
+                    { 2, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61"), false },
+                    { 3, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62"), false },
+                    { 4, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63"), false },
+                    { 5, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64"), false },
+                    { 6, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65"), false },
+                    { 7, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66"), false },
+                    { 8, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67"), false },
+                    { 9, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68"), false },
+                    { 10, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69"), false }
                 });
 
             migrationBuilder.InsertData(
                 table: "LibraryItems",
-                columns: new[] { "BookID", "UserID" },
+                columns: new[] { "BookId", "UserId" },
                 values: new object[,]
                 {
                     { 1, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60") },
@@ -440,19 +442,19 @@ namespace EbookStore.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "WishItems",
-                columns: new[] { "BookID", "UserID" },
+                columns: new[] { "BookId", "UserId", "IsActive" },
                 values: new object[,]
                 {
-                    { 1, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60") },
-                    { 2, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61") },
-                    { 3, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62") },
-                    { 4, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63") },
-                    { 5, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64") },
-                    { 6, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65") },
-                    { 7, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66") },
-                    { 8, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67") },
-                    { 9, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68") },
-                    { 10, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69") }
+                    { 1, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60"), false },
+                    { 2, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61"), false },
+                    { 3, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62"), false },
+                    { 4, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63"), false },
+                    { 5, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64"), false },
+                    { 6, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65"), false },
+                    { 7, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66"), false },
+                    { 8, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67"), false },
+                    { 9, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68"), false },
+                    { 10, new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69"), false }
                 });
 
             migrationBuilder.CreateIndex(
@@ -495,29 +497,29 @@ namespace EbookStore.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookGenre_GenresGenreID",
+                name: "IX_BookGenre_GenresGenreId",
                 table: "BookGenre",
-                column: "GenresGenreID");
+                column: "GenresGenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_SaleID",
+                name: "IX_Books_SaleId",
                 table: "Books",
-                column: "SaleID");
+                column: "SaleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_BookID",
+                name: "IX_CartItems_BookId",
                 table: "CartItems",
-                column: "BookID");
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LibraryItems_BookID",
+                name: "IX_LibraryItems_BookId",
                 table: "LibraryItems",
-                column: "BookID");
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WishItems_BookID",
+                name: "IX_WishItems_BookId",
                 table: "WishItems",
-                column: "BookID");
+                column: "BookId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
