@@ -1,4 +1,6 @@
-﻿using EbookStore.Presentation.View.Pages;
+﻿using DIInWPF.StartupHelpers;
+using EbookStore.Presentation.RefitClient;
+using EbookStore.Presentation.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,34 +16,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EbookStore.Presentation
+namespace EbookStore.Presentation;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private readonly Page _registerPage;
+
+    public MainWindow(IAbstractFactory<RegisterPage> registerFactory)
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            frMain.Content = new RegisterPage();
-        }
+        InitializeComponent();
+        _registerPage = registerFactory.Create();
+        frMain.Content = _registerPage;
+    }
 
 
-        private void Minimize_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+    private void Minimize_Button_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
+    }
 
-        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+    private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
+    }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
-        }
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed)
+            DragMove();
     }
 }

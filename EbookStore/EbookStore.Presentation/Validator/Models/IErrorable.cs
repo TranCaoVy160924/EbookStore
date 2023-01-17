@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Presentation.Validator.Models
+namespace EbookStore.Presentation.Validator.Models;
+
+interface IErrorable
 {
-    interface IErrorable
-    {
-        bool IsValid();
-    }
+    bool IsValid();
 }

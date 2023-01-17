@@ -8,13 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Contract.Mapper
+namespace EbookStore.Contract.Mapper;
+
+public class MapperProfile: Profile
 {
-    public class MapperProfile: Profile
+    public MapperProfile() 
     {
-        public MapperProfile() 
-        {
-            CreateMap<User, UserRegisterResponse>();
-        }
+        CreateMap<User, UserRegisterResponse>();
     }
 }

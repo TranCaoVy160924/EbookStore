@@ -13,16 +13,14 @@
         </sys:String>
         <sys:String x:Key="InformationBottomLabel">Eu ultrices:</sys:String>
         <sys:String x:Key="InformationBottom">Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</sys:String>
-        <Style x:Key="InputBorder" TargetType="Border">
-            <Setter Property="CornerRadius" Value="5, 0, 5, 0"/>
-            <Setter Property="BorderBrush" Value="#D3D3D3"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="10, 0, 10, 0"/>
-        </Style>
+        <!-- Validator group box-->
         <Style x:Key="InputBox" TargetType="GroupBox">
             <Setter Property="Margin" Value="10, 0, 10, 20"/>
             <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="Red" />
         </Style>
+        
+        <!-- Text input-->
         <Style x:Key="TextInput" TargetType="TextBox">
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -30,10 +28,23 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+        
+        <!-- Password input-->
+        <Style x:Key="PasswordInput" TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Label-->
         <Style x:Key="InputLabel" TargetType="Label">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+
+        <!-- Button border-->
         <Style x:Key="ButtonBorder" TargetType="Border">
             <Setter Property="Width" Value="160"/>
             <Setter Property="Height" Value="50"/>
@@ -42,6 +53,8 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Margin" Value="0, 20, 0, 0"/>
         </Style>
+
+        <!-- Button-->
         <Style TargetType="Button">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="18" />
@@ -50,6 +63,16 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
+
+        <!-- Error message -->
+        <Style x:Key="ErrorMessage" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="Margin" Value="30, 0, 30, 0" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+
     </Page.Resources>
     <Border 
         CornerRadius="15"
@@ -57,7 +80,7 @@
         Background="White">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="400"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" CornerRadius="15, 0, 0, 15">
@@ -105,10 +128,10 @@
                     <Label Style="{StaticResource InputLabel}">Username</Label>
                     <GroupBox 
                         x:Name="Username_GroupBox"
-                        Style="{StaticResource InputBox}"
-                        Header="" Foreground="Red">
+                        Style="{StaticResource InputBox}">
                         <TextBox 
                             x:Name="Username_TextBox"
+                            Text="{Binding UserName}"
                             Style="{StaticResource TextInput}">
                         </TextBox>
                     </GroupBox>
@@ -123,10 +146,10 @@
                         <Label Style="{StaticResource InputLabel}">First Name</Label>
                         <GroupBox 
                             x:Name="FirstName_GroupBox"
-                            Style="{StaticResource InputBox}"
-                            Header="" Foreground="Red">
+                            Style="{StaticResource InputBox}">
                             <TextBox 
                                 x:Name="FirstName_TextBox"
+                                Text="{Binding FirstName}"
                                 Style="{StaticResource TextInput}">
                             </TextBox>
                         </GroupBox>
@@ -135,10 +158,10 @@
                         <Label Style="{StaticResource InputLabel}">Last Name</Label>
                         <GroupBox 
                             x:Name="LastName_GroupBox"
-                            Style="{StaticResource InputBox}"
-                            Header="" Foreground="Red">
+                            Style="{StaticResource InputBox}">
                             <TextBox 
                                 x:Name="LastName_TextBox"
+                                Text="{Binding LastName}"
                                 Style="{StaticResource TextInput}">
                             </TextBox>
                         </GroupBox>
@@ -154,35 +177,34 @@
                         <Label Style="{StaticResource InputLabel}">Password</Label>
                         <GroupBox 
                             x:Name="Password_GroupBox"
-                            Style="{StaticResource InputBox}"
-                            Header="" Foreground="Red">
-                            <TextBox x:Name="Password_TextBox"
-                                Style="{StaticResource TextInput}">
-                            </TextBox>
+                            Style="{StaticResource InputBox}">
+                            <PasswordBox 
+                                x:Name="Password_Passwordbox"
+                                Style="{StaticResource PasswordInput}">
+                            </PasswordBox>
                         </GroupBox>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <Label Style="{StaticResource InputLabel}">Confirm Password</Label>
                         <GroupBox 
                             x:Name="ConfirmPassword_GroupBox"
-                            Style="{StaticResource InputBox}"
-                            Header="" Foreground="Red">
-                            <TextBox 
-                                x:Name="ConfirmPassword_TextBox"
-                                Style="{StaticResource TextInput}">
-                            </TextBox>
+                            Style="{StaticResource InputBox}">
+                            <PasswordBox 
+                                x:Name="ConfirmPassword_PasswordBox"
+                                Style="{StaticResource PasswordInput}">
+                            </PasswordBox>
                         </GroupBox>
                     </StackPanel>
                 </Grid>
 
                 <StackPanel Grid.Column="1">
-                    <Label Style="{StaticResource InputLabel}">Email</Label>
+                    <Label Content="Email"  Style="{StaticResource InputLabel}"></Label>
                     <GroupBox 
                         x:Name="Email_GroupBox"
-                        Style="{StaticResource InputBox}"
-                        Header="" Foreground="Red">
+                        Style="{StaticResource InputBox}">
                         <TextBox 
                             x:Name="Email_TextBox"
+                            Text="{Binding Email}"
                             Style="{StaticResource TextInput}">
                         </TextBox>
                     </GroupBox>
@@ -192,14 +214,19 @@
                     <Label Style="{StaticResource InputLabel}">Phone Number</Label>
                     <GroupBox 
                         x:Name="PhoneNumber_GroupBox"
-                        Style="{StaticResource InputBox}"
-                        Header="" Foreground="Red">
+                        Style="{StaticResource InputBox}">
                         <TextBox 
                             x:Name="PhoneNumber_TextBox"
+                            Text="{Binding PhoneNumber}"
                             Style="{StaticResource TextInput}">
                         </TextBox>
                     </GroupBox>
                 </StackPanel>
+
+                <TextBlock 
+                    x:Name="RegisterError_TextBlock"
+                    Text="Register Unsuccess!"
+                    Style="{StaticResource ErrorMessage}"/>
 
                 <Border
                     Style="{StaticResource ButtonBorder}"

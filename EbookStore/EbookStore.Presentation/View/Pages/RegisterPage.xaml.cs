@@ -1,64 +1,75 @@
-﻿using EbookStore.Presentation.Validator;
+﻿using DIInWPF.StartupHelpers;
+using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
+using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
+using EbookStore.Presentation.RefitClient;
+using EbookStore.Presentation.Validator;
 using EbookStore.Presentation.Validator.Models;
-using System;
-using System.Collections.Generic;
+using EbookStore.Presentation.ViewModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static EbookStore.Presentation.Validator.TextInputWithGroupBoxValidator;
+using static EbookStore.Presentation.Validator.PasswordWithGroupBoxValidator;
+using System;
 
-namespace EbookStore.Presentation.View.Pages
+namespace EbookStore.Presentation.View.Pages;
+
+public partial class RegisterPage : Page
 {
-    /// <summary>
-    /// Interaction logic for RegisterPage.xaml
-    /// </summary>
-    public partial class RegisterPage : Page
+    private readonly UserRegisterViewModel _registerViewModel;
+    public string Haha = "sfgdf";
+
+    public RegisterPage(IAbstractFactory<UserRegisterViewModel> registerViewModelFactory)
     {
-        public RegisterPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        _registerViewModel = registerViewModelFactory.Create();
+        this.DataContext = _registerViewModel.RegisterRequest;
+    }
 
-        private void Register_Button_Click(object sender, RoutedEventArgs e)
+    private async void Register_Button_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            if(ValidateUser())
+            Register_Button.IsEnabled = false;
+            if (ValidateUser())
             {
-                Trace.WriteLine("valid");
+                var request = _registerViewModel.RegisterRequest;
+                request.Password = Password_Passwordbox.Password.Trim();
+                request.ConfirmPassword = Password_Passwordbox.Password.Trim();
+                await _registerViewModel.RegisterUserAsync();
             }
-            else
-            {
-                Trace.WriteLine("Invalid");
-            }
         }
-
-        private bool ValidateUser()
+        catch
         {
-            IErrorable registerError = new RegisterError
-            {
-                UsernameValidity = Username_TextBox.ValidateValidStringLength(4, 20),
-                FirstNameValidity = FirstName_TextBox.ValidateHasInput(),
-                LastNameValidity = LastName_TextBox.ValidateHasInput(),
-                PasswordValidity = Password_TextBox.ValidateValidStringLength(6, 100),
-                ConfirmPasswordValidity = 
-                    ConfirmPassword_TextBox.ValidateMatchTextBox(Password_TextBox, "Password"),
-                EmailValidity = 
-                    Email_TextBox.ValidateMatchPattern(RegexPattern.EmailAddress, "Email Address"),
-                PhoneNumberValidity = 
-                    PhoneNumber_TextBox.ValidateMatchPattern(RegexPattern.PhoneNumber, "Phone number")
-            };
-
-            return registerError.IsValid();
+            ShowErrorMessage();
         }
+        finally
+        {
+            Register_Button.IsEnabled = true;
+        }
+    }
+
+    private void ShowErrorMessage()
+    {
+        RegisterError_TextBlock.Visibility = Visibility.Visible;
+    }
+
+    private bool ValidateUser()
+    {
+        IErrorable registerError = new RegisterError
+        {
+            UsernameValidity = Username_TextBox.ValidateValidStringLength(4, 20),
+            FirstNameValidity = FirstName_TextBox.ValidateHasInput(),
+            LastNameValidity = LastName_TextBox.ValidateHasInput(),
+            PasswordValidity = Password_Passwordbox.ValidatePassword(),
+            ConfirmPasswordValidity = 
+                ConfirmPassword_PasswordBox.ValidateMatchPassword(Password_Passwordbox),
+            EmailValidity = 
+                Email_TextBox.ValidateMatchPattern(RegexPattern.EmailAddress, "Email Address"),
+            PhoneNumberValidity = 
+                PhoneNumber_TextBox.ValidateMatchPattern(RegexPattern.PhoneNumber, "Phone number")
+        };
+
+        return registerError.IsValid();
     }
 }
