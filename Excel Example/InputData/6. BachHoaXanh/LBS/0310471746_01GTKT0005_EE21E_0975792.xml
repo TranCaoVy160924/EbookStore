@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HDonGTKT>
+   <NDungHDon>
+      <TTinHDon>
+         <loaiLogo />
+         <ddanLogo />
+         <tenHDon>Hóa đơn GTGT</tenHDon>
+         <mauHDon>01GTKT0/005</mauHDon>
+         <kyHieuHDon>EE/21E</kyHieuHDon>
+         <soHDon>0975792</soHDon>
+         <ngayHDon>2021-05-23 17:06:47</ngayHDon>
+         <lienHDon />
+         <ngayBan>2021-05-23 16:31:27</ngayBan>
+         <tieuDeChuyenHoaDonGiay />
+         <chuyenHoaDonGiay />
+         <nguoiMua />
+         <nguoiChuyenDoi />
+         <ngayChuyenDoi />
+         <maCTChuyenDoi />
+         <nguoiBan>2399 - Nguyễn Mỹ Hạnh</nguoiBan>
+         <hoaDonThayThe />
+         <hoaDonThamChieu />
+         <ghiChu>BHX-Pos: 1.26-Release</ghiChu>
+         <ProductContent />
+         <chungTuLienQuan>21051054550076607</chungTuLienQuan>
+         <loaiMauIn>2016</loaiMauIn>
+         <maCongTy>2</maCongTy>
+         <khongHienThiDonGia>0</khongHienThiDonGia>
+         <khonghienThiSoLuong>0</khonghienThiSoLuong>
+         <khonghienThiDonViTinh>0</khonghienThiDonViTinh>
+      </TTinHDon>
+      <NBan>
+         <tenDVi>CÔNG TY CỔ PHẦN THƯƠNG MẠI BÁCH HÓA XANH</tenDVi>
+         <MSTTinh>0310471746</MSTTinh>
+         <diaChi>Số 128 Đường Trần Quang Khải, Phường Tân Định, Quận 1, TP. Hồ Chí Minh</diaChi>
+         <dienThoai>1900.1216</dienThoai>
+         <fax>0303217354</fax>
+         <eMail />
+         <soTKhoan />
+         <taiNHang />
+         <tenCN>ĐĐKD CÔNG TY CP THƯƠNG MẠI BÁCH HÓA XANH - CH BÁCH HÓA XANH SỐ 271</tenCN>
+         <diaChiCN>125/7 - 125/9 Đường Bùi Đình Túy, Phường 24, Quận Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam</diaChiCN>
+         <dienThoaiCN>19001216</dienThoaiCN>
+         <MST>0310471746</MST>
+      </NBan>
+      <NMua>
+         <hoTen />
+         <tenDVi>CÔNG TY TNHH D&amp;D CARE</tenDVi>
+         <diaChi>247/23 Bùi Đình Tuý, Phường 24, Quận Bình Thạnh, Thành phố Hồ Chí Minh</diaChi>
+         <hinhThucTToan>Tiền mặt tại siêu thị</hinhThucTToan>
+         <MST>0316156282</MST>
+         <dienThoai>0916011258</dienThoai>
+         <eMail>dndcare2002@gmail.com</eMail>
+         <khoNhapHang />
+         <soHoChieuKH />
+         <tenQuocTichKH />
+      </NMua>
+      <DSachHHoaDVu>
+         <HHoaDVu>
+            <tenHHoaDVu>CÀ PHÊ G7 3IN1 TÚI 20*16GR</tenHHoaDVu>
+            <soLuong>12</soLuong>
+            <DVT>Gói</DVT>
+            <donGia>43636</donGia>
+            <thanhTienChuaThue>523636</thanhTienChuaThue>
+            <thueSuat>10</thueSuat>
+            <tienThue>52364</tienThue>
+            <thanhTienCoThue>576000</thanhTienCoThue>
+            <ghiChu />
+         </HHoaDVu>
+         <TToan>
+            <tongTienChuaThueKhongChiuThue>0</tongTienChuaThueKhongChiuThue>
+            <tongTienThueKhongChiuThue>X</tongTienThueKhongChiuThue>
+            <tongTienCoThueKhongChiuThue>0</tongTienCoThueKhongChiuThue>
+            <tongTienChuaThue0>0</tongTienChuaThue0>
+            <tongTienThue0>0</tongTienThue0>
+            <tongTienCoThue0>0</tongTienCoThue0>
+            <tongTienChuaThue5>0</tongTienChuaThue5>
+            <tongTienThue5>0</tongTienThue5>
+            <tongTienCoThue5>0</tongTienCoThue5>
+            <tongTienChuaThue10>523636</tongTienChuaThue10>
+            <tongTienThue10>52364</tongTienThue10>
+            <tongTienCoThue10>576000</tongTienCoThue10>
+            <tongTienChuaThue>523636</tongTienChuaThue>
+            <tongTienThue>52364</tongTienThue>
+            <tongTienCoThue>576000</tongTienCoThue>
+            <tongTienTToanBChu>Năm trăm bảy mươi sáu nghìn đồng chẵn</tongTienTToanBChu>
+         </TToan>
+      </DSachHHoaDVu>
+   </NDungHDon>
+   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+         <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+         <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+         <Reference URI="">
+            <Transforms>
+               <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+            </Transforms>
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>8+JO1WNbnhdPDjyq58Mrn7myo7Y=</DigestValue>
+         </Reference>
+      </SignedInfo>
+      <SignatureValue>YikBivjJdDhVumXg4CZqnNZuzhl6rkefvflvwQBaU+otWDCpkOuM9IEE/E45fc8efeMfTggHj17AP18Z//pRgPc2xtZ9oOyzeQReJkvaEUrXvdq2KPn8LZUiw2RvYv01dnA+KOuIGMl2sT2NH1zC96e/dboPCns2G0GFeADrYioWPNe86oyIbske64KIomrFJyV4+O2DxaTDXJtLNHHEHLN59q57XENbfk9Lw+BLpWX3z2wvQn8t9hAR/gHGGUt2JSyF54+J98Bee00u2D5yzSXL4Q7KUT0znfa3uAZOwY5sXMw6wTh08VVNvQK+QZTAZ99EXeGxnGmz3Dxw1MYq1g==</SignatureValue>
+      <KeyInfo>
+         <KeyValue>
+            <RSAKeyValue>
+               <Modulus>q4Fo26Itj6EfTZa5UBhCM4KjuocqatGPUSGrvh9oX2RieaHYi4Jp2SA0D5XMoGlv7Gcij5wr5blnxtdy4UWx8CQvCZLNftsZXyA9nldKGTlg3beC3/G5fnDVe4Z/UcVVCDyVM4V7J3EOaLtSGkR/8NI6wa29QAe00d+qyv8izKkcbck4dX/nz8L5qsPgR2DJnUdL8ozFGCHG4OIS5xvBukxY5vqS7o3ninjY4aY0p/HPmed8q/pr5TfLhlfEo11KeSS3I+CkLLYmZv/MJ5u7noaj0Aqt+tZ1XlIemWxoOVTGgevyLWNDT6WGQZDeYCTNPnSC8dTB0IDtYIQ6Z0xf3Q==</Modulus>
+               <Exponent>AQAB</Exponent>
+            </RSAKeyValue>
+         </KeyValue>
+         <X509Data>
+            <X509Certificate>MIIFkzCCBHugAwIBAgIQVAEBCFts3Xn7lINzbwS3dDANBgkqhkiG9w0BAQUFADBXMQswCQYDVQQGEwJWTjEkMCIGA1UEChMbU0FGRS1DQSBKb2ludCBTdG9jayBDb21wYW55MRAwDgYDVQQLEwdTQUZFLUNBMRAwDgYDVQQDEwdTQUZFLUNBMB4XDTIwMDkyOTA0MjgyNloXDTIyMDkyMjAxMzUxNlowgfUxLjAsBgkqhkiG9w0BCQEWH2h1bmcudHJhbm1pbmhAdGhlZ2lvaWRpZG9uZy5jb20xPDA6BgNVBAMMM0PDlE5HIFRZIEPhu5QgUEjhuqZOIFRIxq/GoE5HIE3huqBJIELDgUNIIEjDk0EgWEFOSDEXMBUGA1UECgwOTVNUOjAzMTA0NzE3NDYxXzBdBgNVBAcMVjEyOCBUcuG6p24gUXVhbmcgS2jhuqNpLCBQaMaw4budbmcgVMOibiDEkOG7i25oLCBRdeG6rW4gMSwgVGjDoG5oIFBo4buRIEjhu5MgQ2jDrSBNaW5oMQswCQYDVQQGEwJWTjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKuBaNuiLY+hH02WuVAYQjOCo7qHKmrRj1Ehq74faF9kYnmh2IuCadkgNA+VzKBpb+xnIo+cK+W5Z8bXcuFFsfAkLwmSzX7bGV8gPZ5XShk5YN23gt/xuX5w1XuGf1HFVQg8lTOFeydxDmi7UhpEf/DSOsGtvUAHtNHfqsr/IsypHG3JOHV/58/C+arD4EdgyZ1HS/KMxRghxuDiEucbwbpMWOb6ku6N54p42OGmNKfxz5nnfKv6a+U3y4ZXxKNdSnkktyPgpCy2Jmb/zCebu56Go9AKrfrWdV5SHplsaDlUxoHr8i1jQ0+lhkGQ3mAkzT50gvHUwdCA7WCEOmdMX90CAwEAAaOCAbowggG2MIG1BggrBgEFBQcBAQSBqDCBpTA3BggrBgEFBQcwAoYraHR0cDovL3B1YmxpYy5yb290Y2EuZ292LnZuL2NydC9taWNucmNhLmNydDBABggrBgEFBQcwAoY0aHR0cDovL3d3dy5zYWZlY2VydC5jb20udm4vd3d3L2NlcnQvU0FGRS1DQS0yMDE3LmNlcjAoBggrBgEFBQcwAYYcaHR0cDovL29jc3AxLnNhZmVjZXJ0LmNvbS52bjAdBgNVHQ4EFgQU/XwggFz+qU83OuelLizAZsWtjz0wDAYDVR0TAQH/BAIwADAfBgNVHSMEGDAWgBT0DRR4wEhM2TramxpNX453CzaL5DBHBgNVHSAEQDA+MDwGCGCFQAMBAgMEMDAwLgYIKwYBBQUHAgEWImh0dHA6Ly93d3cuc2FmZWNlcnQuY29tLnZuL3d3dy9ycGEwLAYDVR0fBCUwIzAhoB+gHYYbaHR0cDovL2NybDEuc2FmZWNlcnQuY29tLnZuMA4GA1UdDwEB/wQEAwIE8DAnBgNVHSUEIDAeBggrBgEFBQcDAgYIKwYBBQUHAwMGCCsGAQUFBwMEMA0GCSqGSIb3DQEBBQUAA4IBAQA9QXiFvZxXbtiwrF+j6xPb/XLeSCj464e606R0ts/yUQoyhlBaCbc6Pvnmz0U+KLJmVW5b+OElpRu5hvMzvRRn6i+FB0DO841yY1djny1tkQUBS8FNcN/hSigaCF0LXHh2i1afkr8Vlb1a9cFljeM9hw3YzOvSjT18LPDy6LdcIstj+Vbki8fgEZ9TpbmBXv/15Az7bjFisbyKP1ihumNR7asSX8weOtvn97ISdbDnGjfybxSWvPc4GkxBSdzsONpdaNgF3Dotzl2UCTscPyBx65p08He5/j3ypNqKu0eQNzxUi6so2hGPe283g//cy7b81nBQCt19loy3KSeHCuO0</X509Certificate>
+         </X509Data>
+      </KeyInfo>
+      <Object Id="time on module 1 is 2021-05-23 17:11:07 SE Asia Standard Time&#xD;&#xA;" />
+   </Signature>
+</HDonGTKT>

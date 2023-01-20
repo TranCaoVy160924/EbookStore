@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HDonGTKT>
+   <NDungHDon>
+      <TTinHDon>
+         <loaiLogo />
+         <ddanLogo />
+         <tenHDon>Hóa đơn GTGT</tenHDon>
+         <mauHDon>01GTKT0/007</mauHDon>
+         <kyHieuHDon>AB/20E</kyHieuHDon>
+         <soHDon>4488242</soHDon>
+         <ngayHDon>2021-05-21 20:53:35</ngayHDon>
+         <lienHDon />
+         <ngayBan>2021-05-21 20:49:49</ngayBan>
+         <tieuDeChuyenHoaDonGiay />
+         <chuyenHoaDonGiay />
+         <nguoiMua />
+         <nguoiChuyenDoi />
+         <ngayChuyenDoi>2021-05-21 20:53:35</ngayChuyenDoi>
+         <maCTChuyenDoi />
+         <nguoiBan>35011 - Trương Thị Mỹ Hiền</nguoiBan>
+         <hoaDonThayThe>01GTKT0/007; AB/20E; 4488079; 21-05-2021</hoaDonThayThe>
+         <hoaDonThamChieu />
+         <ghiChu />
+         <ProductContent />
+         <chungTuLienQuan>07728OV2105024619</chungTuLienQuan>
+         <loaiMauIn>2016</loaiMauIn>
+         <maCongTy>1</maCongTy>
+         <khongHienThiDonGia>0</khongHienThiDonGia>
+         <khonghienThiSoLuong>0</khonghienThiSoLuong>
+         <khonghienThiDonViTinh>0</khonghienThiDonViTinh>
+      </TTinHDon>
+      <NBan>
+         <tenDVi>CÔNG TY CỔ PHẦN THẾ GIỚI DI ĐỘNG</tenDVi>
+         <MSTTinh>0303217354</MSTTinh>
+         <diaChi>128 Trần Quang Khải, Phường Tân Định, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</diaChi>
+         <dienThoai>1800 1061(Bán hàng) - 1800 1063(Khiếu nại) - 1800 1065(Bảo hành)</dienThoai>
+         <fax>0303217354</fax>
+         <eMail />
+         <soTKhoan>044.100.061.5156</soTKhoan>
+         <taiNHang>VCB_CN Tân Bình, HCM</taiNHang>
+         <tenCN>ĐỊA ĐIỂM KINH DOANH CÔNG TY CỔ PHẦN THẾ GIỚI DI ĐỘNG - CỬA HÀNG ĐIỆN MÁY XANH 230 BẠCH ĐẰNG</tenCN>
+         <diaChiCN>Số 230 Bạch Đằng, Phường 24, Quận Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam</diaChiCN>
+         <dienThoaiCN>18001061</dienThoaiCN>
+         <MST>0303217354</MST>
+      </NBan>
+      <NMua>
+         <hoTen />
+         <tenDVi>CÔNG TY TNHH D&amp;D CARE</tenDVi>
+         <diaChi>247/23 Bùi Đình Tuý, Phường 24, Quận Bình Thạnh, Thành phố Hồ Chí Minh</diaChi>
+         <hinhThucTToan>Tiền mặt siêu thị</hinhThucTToan>
+         <MST>0316156282</MST>
+         <dienThoai>0916011258</dienThoai>
+         <eMail>email@thegioididong.com</eMail>
+         <khoNhapHang />
+         <soHoChieuKH />
+         <tenQuocTichKH />
+      </NMua>
+      <DSachHHoaDVu>
+         <HHoaDVu>
+            <tenHHoaDVu>Mã nạp tiền Vinaphone 300.000đ</tenHHoaDVu>
+            <soLuong>2</soLuong>
+            <DVT>Cái</DVT>
+            <donGia>272727</donGia>
+            <thanhTienChuaThue>545454</thanhTienChuaThue>
+            <thueSuat>10</thueSuat>
+            <tienThue>54545</tienThue>
+            <thanhTienCoThue>599999</thanhTienCoThue>
+            <ghiChu />
+         </HHoaDVu>
+         <tenTienTe>VNĐ</tenTienTe>
+         <tyGiaQuyDoi>1.0</tyGiaQuyDoi>
+         <tenTienTeChuan>VNĐ</tenTienTeChuan>
+         <noiDungTienTe>(1 VNĐ = 1 VNĐ)</noiDungTienTe>
+         <TToan>
+            <tongTienChuaThueKhongChiuThue>0</tongTienChuaThueKhongChiuThue>
+            <tongTienThueKhongChiuThue>X</tongTienThueKhongChiuThue>
+            <tongTienCoThueKhongChiuThue>0</tongTienCoThueKhongChiuThue>
+            <tongTienChuaThue0>0</tongTienChuaThue0>
+            <tongTienThue0>0</tongTienThue0>
+            <tongTienCoThue0>0</tongTienCoThue0>
+            <tongTienChuaThue5>0</tongTienChuaThue5>
+            <tongTienThue5>0</tongTienThue5>
+            <tongTienCoThue5>0</tongTienCoThue5>
+            <tongTienChuaThue10>545454</tongTienChuaThue10>
+            <tongTienThue10>54545</tongTienThue10>
+            <tongTienCoThue10>599999</tongTienCoThue10>
+            <tongTienChuaThue>545454</tongTienChuaThue>
+            <tongTienThue>54545</tongTienThue>
+            <tongTienCoThue>599999</tongTienCoThue>
+            <tongTienTToanBChu>Năm trăm chín mươi chín nghìn chín trăm chín mươi chín đồng chẵn</tongTienTToanBChu>
+         </TToan>
+      </DSachHHoaDVu>
+   </NDungHDon>
+   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+         <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+         <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+         <Reference URI="">
+            <Transforms>
+               <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+            </Transforms>
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>vDBpzs6A/jTOtogAi6ioMbJPVgs=</DigestValue>
+         </Reference>
+      </SignedInfo>
+      <SignatureValue>Tw6jzBrsy8jFdwK34MEQkRkY6VYNaAouXLEaVti96xz/C5ug+tWkNW37iq8v/w9Y+xyFurSELWxE&#xD;
+vm1Y6a3cp8YdrVATsQUcSUz/rOEDPvgrd0vIf8qiYWsoUzfsBeiLf+O+iOpNBoR+2fM/M9fvL0ov&#xD;
+gQfkdo3i0S/bDTf5qZgTqiITdl+NE8QzvhhLN9K1qd707gQegY61BbfKnYehqpTRfNri8jaCTIMS&#xD;
+TGBj6U5Ryh1AUltN8YFOd/2t8OweXtmryMSN3CL2SHkmpU2gpvl9wOM2Qy+EVVDYYIeNOwXxDzkb&#xD;
+2RBiETcbEIdodCEEWnVP1p+aD56YTvhgce3lBA==</SignatureValue>
+      <KeyInfo>
+         <KeyValue>
+            <RSAKeyValue>
+               <Modulus>wxmZhREmh3mxyKclF1S0vb5QpNudReV3o0JbXLWL35hnhl6qBhBCe5srMVydTK/QnWA+6miAYdwc&#xD;
+XknDl1LP9lAZ3ea9UBaY6o54k33k4LI5gpX+84c5tUyuBxky9zfRU4Vo5ueoMqtGRDkTE55XnFak&#xD;
+0XUl7f0BPUF8jpriPVTLmg6CTA+7v/FjUjooptJgC3+zSQ+2A2l8BenzEgnGOFa+BN/R7nEuWuH7&#xD;
+LKsMGl7Qo7zKGO1uYP/42/SicA3sYZNR57xg6PJCzdAuiufHrRvgOUN+r3tPaIdCze7A5Qx/VqiJ&#xD;
+IKA/CgI/4q45CHc3yYakYs/PZ17WA6pBtOEpLw==</Modulus>
+               <Exponent>AQAB</Exponent>
+            </RSAKeyValue>
+         </KeyValue>
+         <X509Data>
+            <X509SubjectName>C=VN,L=128 Trần Quang Khải\, Phường Tân Định\, Quận 1\, Thành Phố Hồ Chí Minh,O=MST:0303217354,CN=CÔNG TY CỔ PHẦN THẾ GIỚI DI ĐỘNG,1.2.840.113549.1.9.1=#161f68756e672e7472616e6d696e684074686567696f696469646f6e672e636f6d</X509SubjectName>
+            <X509Certificate>MIIFgjCCBGqgAwIBAgIQVAEBCH/KV2IuUcASvdBrQTANBgkqhkiG9w0BAQUFADBXMQswCQYDVQQG&#xD;
+EwJWTjEkMCIGA1UEChMbU0FGRS1DQSBKb2ludCBTdG9jayBDb21wYW55MRAwDgYDVQQLEwdTQUZF&#xD;
+LUNBMRAwDgYDVQQDEwdTQUZFLUNBMB4XDTE4MTExMjA2MTkyNFoXDTIyMDIxMjE2NTkwMFowge4x&#xD;
+LjAsBgkqhkiG9w0BCQEWH2h1bmcudHJhbm1pbmhAdGhlZ2lvaWRpZG9uZy5jb20xNTAzBgNVBAMM&#xD;
+LEPDlE5HIFRZIEPhu5QgUEjhuqZOIFRI4bq+IEdJ4buaSSBESSDEkOG7mE5HMRcwFQYDVQQKDA5N&#xD;
+U1Q6MDMwMzIxNzM1NDFfMF0GA1UEBwxWMTI4IFRy4bqnbiBRdWFuZyBLaOG6o2ksIFBoxrDhu51u&#xD;
+ZyBUw6JuIMSQ4buLbmgsIFF14bqtbiAxLCBUaMOgbmggUGjhu5EgSOG7kyBDaMOtIE1pbmgxCzAJ&#xD;
+BgNVBAYTAlZOMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwxmZhREmh3mxyKclF1S0&#xD;
+vb5QpNudReV3o0JbXLWL35hnhl6qBhBCe5srMVydTK/QnWA+6miAYdwcXknDl1LP9lAZ3ea9UBaY&#xD;
+6o54k33k4LI5gpX+84c5tUyuBxky9zfRU4Vo5ueoMqtGRDkTE55XnFak0XUl7f0BPUF8jpriPVTL&#xD;
+mg6CTA+7v/FjUjooptJgC3+zSQ+2A2l8BenzEgnGOFa+BN/R7nEuWuH7LKsMGl7Qo7zKGO1uYP/4&#xD;
+2/SicA3sYZNR57xg6PJCzdAuiufHrRvgOUN+r3tPaIdCze7A5Qx/VqiJIKA/CgI/4q45CHc3yYak&#xD;
+Ys/PZ17WA6pBtOEpLwIDAQABo4IBsDCCAawwgbUGCCsGAQUFBwEBBIGoMIGlMDcGCCsGAQUFBzAC&#xD;
+hitodHRwOi8vcHVibGljLnJvb3RjYS5nb3Yudm4vY3J0L21pY25yY2EuY3J0MEAGCCsGAQUFBzAC&#xD;
+hjRodHRwOi8vd3d3LnNhZmVjZXJ0LmNvbS52bi93d3cvY2VydC9TQUZFLUNBLTIwMTcuY2VyMCgG&#xD;
+CCsGAQUFBzABhhxodHRwOi8vb2NzcDEuc2FmZWNlcnQuY29tLnZuMB0GA1UdDgQWBBQe7z0iO2q7&#xD;
+51WOHtxIyTFVS5KJhjAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFPQNFHjASEzZOtqbGk1fjncL&#xD;
+NovkMEcGA1UdIARAMD4wPAYIYIVAAwECAwQwMDAuBggrBgEFBQcCARYiaHR0cDovL3d3dy5zYWZl&#xD;
+Y2VydC5jb20udm4vd3d3L3JwYTAsBgNVHR8EJTAjMCGgH6AdhhtodHRwOi8vY3JsMS5zYWZlY2Vy&#xD;
+dC5jb20udm4wDgYDVR0PAQH/BAQDAgTwMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAN&#xD;
+BgkqhkiG9w0BAQUFAAOCAQEAK4PyYWUjZrM/pRws9uORz/ik7XT1BtUJMeuovVT4R0fIMIUz3HXi&#xD;
+NoP9+BeW0pYjZ6HExvYGy2RZNm+rthnlv2e9rAmwtagw0efjlOjmogRVdTBO8QyXhbNDAMQP0/AE&#xD;
+hq0mvWGbh0fKc17eaGJzzeiv47uqso4jbF2E5uGmMnwY6GC37p2dh8nEzE0NSCAihqkFU1kjb0TK&#xD;
+oeaiCSSfK6Wgbe0xzkAeHk4595/tOQBhQLLnCMM16OoFQsQus5/xnKPfWHIrYvbOXWeV5/3HnjiJ&#xD;
+wPbE93QZ4DAj1zDpSZf6bSzKp5dhvoIx6UIm8zOTt06EsyL3fsOl5lyu2JQFKw==</X509Certificate>
+         </X509Data>
+      </KeyInfo>
+      <Object Id="2021-05-21 20:53:35" />
+   </Signature>
+</HDonGTKT>

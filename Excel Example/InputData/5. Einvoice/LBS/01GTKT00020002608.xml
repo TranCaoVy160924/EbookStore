@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='01GTKT00020002608.xslt' ?>
+<inv:invoice xmlns:inv="http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+   <inv:invoiceData id="data">
+      <inv:sellerAppRecordId />
+      <inv:invoiceAppRecordId>80888</inv:invoiceAppRecordId>
+      <inv:invoiceType>01GTKT</inv:invoiceType>
+      <inv:templateCode>01GTKT0/002</inv:templateCode>
+      <inv:invoiceSeries>TC/21E</inv:invoiceSeries>
+      <inv:invoiceNumber>0002608</inv:invoiceNumber>
+      <inv:invoiceName>Hóa đơn giá trị gia tăng</inv:invoiceName>
+      <inv:invoiceIssuedDate>2021-04-30T00:00:00</inv:invoiceIssuedDate>
+      <inv:signedDate>2021-04-30T00:00:00</inv:signedDate>
+      <inv:submittedDate>2021-04-30T00:00:00</inv:submittedDate>
+      <inv:currencyCode>VND</inv:currencyCode>
+      <inv:invoiceNote />
+      <inv:adjustmentType>1</inv:adjustmentType>
+      <inv:additionalReferenceDesc />
+      <inv:payments>
+         <inv:payment>
+            <inv:paymentMethodName>TM/CK</inv:paymentMethodName>
+         </inv:payment>
+      </inv:payments>
+      <inv:delivery>
+         <inv:containerNumber>DD0777C4F7</inv:containerNumber>
+         <inv:UrlWebTraCuu>http://gtel.einvoice.com.vn</inv:UrlWebTraCuu>
+      </inv:delivery>
+      <inv:sellerLegalName>TỔNG CÔNG TY VIỄN THÔNG TOÀN CẦU</inv:sellerLegalName>
+      <inv:sellerTaxCode>0102556773</inv:sellerTaxCode>
+      <inv:sellerAddressLine>Số 280B Lạc Long Quân, Phường Bưởi, Quận Tây Hồ, Thành phố Hà Nội</inv:sellerAddressLine>
+      <inv:sellerPhoneNumber>0243.9411396</inv:sellerPhoneNumber>
+      <inv:sellerFaxNumber>0243.9411445</inv:sellerFaxNumber>
+      <inv:sellerEmail>phongkttk.gtel@gmail.com</inv:sellerEmail>
+      <inv:sellerBankName>Ngân hàng BIDV - Chi nhánh Thái Hà, TP Hà Nội</inv:sellerBankName>
+      <inv:sellerBankAccount>26810000128888 (VND)</inv:sellerBankAccount>
+      <inv:sellerContactPersonName />
+      <inv:sellerSignedPersonName />
+      <inv:sellerSubmittedPersonName />
+      <inv:buyerDisplayName />
+      <inv:buyerLegalName>CÔNG TY TNHH D&amp;D CARE</inv:buyerLegalName>
+      <inv:buyerTaxCode>0316156282</inv:buyerTaxCode>
+      <inv:buyerAddressLine>247/23 Bùi Đình Túy, Phường 24, Quận Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam</inv:buyerAddressLine>
+      <inv:buyerPhoneNumber />
+      <inv:buyerFaxNumber />
+      <inv:buyerEmail>thu.nt@gtel.org.vn</inv:buyerEmail>
+      <inv:buyerBankName />
+      <inv:buyerBankAccount />
+      <inv:buyerCode />
+      <inv:soBangKe>BK_0002608</inv:soBangKe>
+      <inv:THONG_BAO_BANG_KE>0</inv:THONG_BAO_BANG_KE>
+      <inv:soBienLai>0005210</inv:soBienLai>
+      <inv:THOI_HAN_THANH_TOAN />
+      <inv:tongHoaDonVAT>0</inv:tongHoaDonVAT>
+      <inv:LENH_DIEU_DONG_NGAY xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" p4:nil="true" />
+      <inv:NGAY_BIEN_BAN xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" p4:nil="true" />
+      <inv:HINH_THUCTT>TM/CK</inv:HINH_THUCTT>
+      <inv:quantity_input>0</inv:quantity_input>
+      <inv:quantity>0</inv:quantity>
+      <inv:NGAY_XUAT_KHO xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" p4:nil="true" />
+      <inv:NGAY_NHAP_KHO xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" p4:nil="true" />
+      <inv:items>
+         <inv:item>
+            <inv:lineNumber>1</inv:lineNumber>
+            <inv:itemName>Cước dịch vụ GVoice tháng 04/2021 theo số HĐ 00138/2020/GVOICE/VAS</inv:itemName>
+            <inv:CHIET_KHAU_TIEN>0</inv:CHIET_KHAU_TIEN>
+            <inv:DEBIT_DATE xmlns:p6="http://www.w3.org/2001/XMLSchema-instance" p6:nil="true" />
+            <inv:NGAY_THEO_HOA_DON xmlns:p6="http://www.w3.org/2001/XMLSchema-instance" p6:nil="true" />
+            <inv:TIEN_HANG_SAU_THUE>0</inv:TIEN_HANG_SAU_THUE>
+            <inv:unitCode />
+            <inv:groupitemname>IS_NOT_USING_GROUP_ITEM_NAME</inv:groupitemname>
+            <inv:unitName />
+            <inv:quantity_input>0</inv:quantity_input>
+            <inv:itemTotalAmountWithoutVat>20000.00000000</inv:itemTotalAmountWithoutVat>
+            <inv:vatPercentage>10</inv:vatPercentage>
+            <inv:vatAmount>2000.00000000</inv:vatAmount>
+         </inv:item>
+      </inv:items>
+      <inv:invoiceTaxBreakdowns>
+         <inv:invoiceTaxBreakdown>
+            <inv:vatPercentage>10</inv:vatPercentage>
+            <inv:vatTaxableAmount>20000.00000000</inv:vatTaxableAmount>
+            <inv:vatTaxAmount>2000.00000000</inv:vatTaxAmount>
+         </inv:invoiceTaxBreakdown>
+      </inv:invoiceTaxBreakdowns>
+      <inv:sumOfTotalLineAmountWithoutVAT>20000.00000000</inv:sumOfTotalLineAmountWithoutVAT>
+      <inv:totalAmountWithoutVAT>20000.00000000</inv:totalAmountWithoutVAT>
+      <inv:totalVATAmount>2000.00000000</inv:totalVATAmount>
+      <inv:totalAmountWithVAT>22000.00000000</inv:totalAmountWithVAT>
+      <inv:totalAmountWithVATInWords>Hai mươi hai nghìn đồng</inv:totalAmountWithVATInWords>
+      <inv:totalAmountWithVATInWordsBilingual />
+      <inv:discountRate>0.00000000</inv:discountRate>
+      <inv:discountAmount>0.00000000</inv:discountAmount>
+      <inv:isDiscountAmtPos>false</inv:isDiscountAmtPos>
+   </inv:invoiceData>
+   <inv:controlData>
+      <inv:systemCode>LHD_THAISON</inv:systemCode>
+      <inv:taxOfficeCode>10100</inv:taxOfficeCode>
+   </inv:controlData>
+   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="seller">
+      <SignedInfo>
+         <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+         <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+         <Reference URI="#data">
+            <Transforms>
+               <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+               <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+            </Transforms>
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>/+Ss+HDITGMcg6/RiiZMZNKqCls=</DigestValue>
+         </Reference>
+      </SignedInfo>
+      <SignatureValue>I96dXV5UHmnPe1JX4lBR/vfadx1r2uitdlKVyr6lnr+CqeZjeHjBFmEu8SUTwI0q050nAiN7gmTwCBWhB2Tp9MkNTgBlC2QN/1btKG3ggXh5f0rlS/m2hUqlbZsBmuA07+XMMk83Ck/nh/RpV0qc+X8Kjh4sH61ibS4+ZJH3F4kxWmSXqjZfhsQc+F/C/G94BieURv+B91uZ3KW5ytD8c/Rp3DpBpBzWCufcumaQdpiQcZekIOXzZmhKbQg0hBedySee4lnbVZlxJc9jzJ3ogQZi4MSIJex/mVOilO4Wjt+mik2BiZmmR+6b9TPXX39OgUjWVTvQqIIjgbFoFmzvPA==</SignatureValue>
+      <KeyInfo>
+         <X509Data>
+            <X509Certificate>MIIFOjCCBCKgAwIBAgIQVAEBBDb+EAs6I5RrzNPlbjANBgkqhkiG9w0BAQUFADBuMQswCQYDVQQGEwJWTjEYMBYGA1UEChMPRlBUIENvcnBvcmF0aW9uMR8wHQYDVQQLExZGUFQgSW5mb3JtYXRpb24gU3lzdGVtMSQwIgYDVQQDExtGUFQgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMjAwNDEzMDMwMzAwWhcNMjEwOTA1MDMwMzAwWjCBgjELMAkGA1UEBhMCVk4xHzAdBgNVBAgMFlRIw4BOSCBQSOG7kCBIw4AgTuG7mEkxMjAwBgNVBAMMKVThu5RORyBDw5RORyBUWSBWSeG7hE4gVEjDlE5HIFRPw4BOIEPhuqZVMR4wHAYKCZImiZPyLGQBAQwOTVNUOjAxMDI1NTY3NzMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC59y3g8rbnyVhVfkdGsubNe6Z0hED7i67dX2kzc1dbdM3ul+SmMBQnkp1afWr0of7mPEr0i0E8fmzxPS4FygTRrwIxyD1+DenQiCXFj2eu5k3YxO4jB0WCgwVUaAL7aKlUxdhAYn7te7viRtPtewgc7M2J0cIE+/4U/8DviBmrRvxjO+XwyedHCP3XKcLxdO+6y6o51tcnH+vWuc+xjpYmpHDYVFFu3MO0Vh+7D19sdUYQ3d+QdfMVoiTI2g9mHQpj92D1E3JYmMu1Z8k7dLdy17b+IXA0YzqqEVlicqlyGh/hwkwfo16CHAS8I3QxnV7eB5bUj6SmWIISUXQkXbxrAgMBAAGjggG9MIIBuTAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFJqmEaULDowSLRIt9ZbW5RdrIDwvMIGoBggrBgEFBQcBAQSBmzCBmDA3BggrBgEFBQcwAoYraHR0cDovL3B1YmxpYy5yb290Y2EuZ292LnZuL2NydC9taWNucmNhLmNydDA4BggrBgEFBQcwAoYsaHR0cDovL2RpY2h2dWRpZW50dS5mcHQuY29tLnZuL2NydC9mcHRjYS5jcnQwIwYIKwYBBQUHMAGGF2h0dHA6Ly9vY3NwMi5maXMuY29tLnZuME8GA1UdIARIMEYwRAYLKwYBBAGB7QMBBAEwNTAzBggrBgEFBQcCARYnaHR0cDovL2RpY2h2dWRpZW50dS5mcHQuY29tLnZuL2Nwcy5odG1sMDQGA1UdJQQtMCsGCCsGAQUFBwMCBggrBgEFBQcDBAYKKwYBBAGCNwoDDAYJKoZIhvcvAQEFMCcGA1UdHwQgMB4wHKAaoBiGFmh0dHA6Ly9jcmwyLmZpcy5jb20udm4wHQYDVR0OBBYEFJqygaQ3ktmIqn4DgA7qydcfz1XZMA4GA1UdDwEB/wQEAwIE8DANBgkqhkiG9w0BAQUFAAOCAQEAYtEdOZUy3/fC2/429JebAyiP4jOm9FnbfyotQmOawWSqTc6Rwf9zT3wixK9thL1yjK7CpfqYjq1p3u/jHE6z4K+StKhqHtug2C9hbAWN0K5hB0CgS5o+j3w/+ijgfktbDxlXjTXSSwo/3vWhXBo7KLsIqOIpXHhgOPi2KPg/22skLytvSrrXo5PtO39rNKvP9mXQ1s3qsrXN6L9LKLDohzU7b8LqifEuYH5ZyBclQcw6xsdQgRJ5X34mwctUhnVn+TNRCy3EgX5+KoFpeJsjTpSRJyqaJKfcHwAqhtT+yv6TLel8KaGU/6p9TF7tVsrOhKQmrePQ8Y/gBbWZTxr3dg==</X509Certificate>
+         </X509Data>
+      </KeyInfo>
+   </Signature>
+   <inv:viewData>
+      <inv:printFlag>false</inv:printFlag>
+      <inv:DateExchange>2021/09/25</inv:DateExchange>
+   </inv:viewData>
+</inv:invoice>
