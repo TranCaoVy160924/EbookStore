@@ -1,0 +1,29 @@
+Web bán sách điện tử
+
+Admin
+Book: 
+	- CRUD
+	- Host pdf/epub trên server hoặc trên cloud (ưu tiên làm cloud nếu đc)
+	- Host ảnh bìa sách trên server hoặc thông qua API cloudinary (giúp đồng bộ kích thước ảnh)
+Category:
+	- CRUD
+Author (optional):
+	- Thêm chọn author khi thêm 1 cuốn sách nào đó hoặc tạo mới author nếu chưa có
+User:
+	- Xem danh sách
+	- Cấm/Xóa user (optional)
+Sale: 
+	- Thêm 1 đợt giảm giá
+
+User
+- Đc tạo/update tải khoản chính mình
+- Login/logout
+Book:
+	- Xem danh sách và tìm/filter theo tên/category/author/giá...
+	- Thêm vào giỏ hàng -> mua (ko làm tính thanh toán, coi như đã trả)
+	- Thêm vào wishlist -> nhận email thông báo khi sách trong wishlist giảm giá
+	- Xem danh sách các sách đã mua
+	- Tải pdf/epub sách đã mua
+
+Dùng automapper, entity framework, Refit để gọi API nếu cần
+	
