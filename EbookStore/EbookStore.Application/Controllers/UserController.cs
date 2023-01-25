@@ -73,7 +73,7 @@ public class UserController  : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> login([FromBody] UserLoginRequest userLoginRequest)
+    public async Task<IActionResult> Login([FromQuery]UserLoginRequest userLoginRequest)
     {
         var builder = WebApplication.CreateBuilder();
         var users = _userManager.Users.ToList();
@@ -85,7 +85,7 @@ public class UserController  : ControllerBase
                 var issuer = builder.Configuration["Jwt:Issuer"];
                 var audience = builder.Configuration["Jwt:Audience"];
                 var key = Encoding.ASCII.GetBytes
-                (builder.Configuration["Jwt:Key"]);
+                (builder.Configuration["JWT:Key"]);
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new[]
