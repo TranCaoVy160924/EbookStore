@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EbookStore.Contract.Model;
+using EbookStore.Contract.ViewModel.User.UserLoginRequest;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using EbookStore.Data.EF;
@@ -7,16 +8,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using static EbookStore.Application.ValidateHelper;
 
 namespace EbookStore.Application.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController : ControllerBase
+public class UserController  : ControllerBase
 {
     private readonly EbookStoreDbContext _dbContext;
     private readonly UserManager<User> _userManager;
@@ -66,5 +70,47 @@ public class UserController : ControllerBase
         }
 
         return BadRequest("Create user unsuccessfully!");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> login([FromBody] UserLoginRequest userLoginRequest)
+    {
+        var builder = WebApplication.CreateBuilder();
+        var users = _userManager.Users.ToList();
+        foreach (var user in users)
+        {
+            if (userLoginRequest.UserName == user.UserName && 
+                userLoginRequest.Password == user.PasswordHash)
+            {
+                var issuer = builder.Configuration["Jwt:Issuer"];
+                var audience = builder.Configuration["Jwt:Audience"];
+                var key = Encoding.ASCII.GetBytes
+                (builder.Configuration["Jwt:Key"]);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                new Claim("Id", Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti,
+                Guid.NewGuid().ToString())
+             }),
+                    Expires = DateTime.UtcNow.AddMinutes(60),
+                    Issuer = issuer,
+                    Audience = audience,
+                    SigningCredentials = new SigningCredentials
+                    (new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha512Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var jwtToken = tokenHandler.WriteToken(token);
+                var stringToken = tokenHandler.WriteToken(token);
+                return Ok(stringToken);
+            }
+            return Unauthorized();
+        }
+        return Unauthorized();
     }
 }

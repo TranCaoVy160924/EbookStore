@@ -1,0 +1,175 @@
+﻿<Page x:Class="EbookStore.Presentation.View.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EbookStore.Presentation.View.Pages" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="RegisterPage">
+    <Page.Resources>
+        <sys:String x:Key="InformationTop">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.
+        </sys:String>
+        <sys:String x:Key="InformationBottomLabel">Eu ultrices:</sys:String>
+        <sys:String x:Key="InformationBottom">Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</sys:String>
+        <!-- Validator group box-->
+        <Style x:Key="InputBox" TargetType="GroupBox">
+            <Setter Property="Margin" Value="10, 0, 10, 20"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+
+        <!-- Text input-->
+        <Style x:Key="TextInput" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Password input-->
+        <Style x:Key="PasswordInput" TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Label-->
+        <Style x:Key="InputLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!-- Button border-->
+        <Style x:Key="ButtonBorder" TargetType="Border">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="CornerRadius" Value="10, 0, 10, 0"/>
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="0, 20, 0, 0"/>
+        </Style>
+
+        <!-- Button-->
+        <Style TargetType="Button">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <!-- Error message -->
+        <Style x:Key="ErrorMessage" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="Margin" Value="30, 0, 30, 0" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+
+    </Page.Resources>
+    <Border 
+        CornerRadius="15"
+        BorderThickness="2"
+        Background="White">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" CornerRadius="15, 0, 0, 15">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
+                </Border.Background>
+                <StackPanel Margin="30">
+                    <TextBlock Foreground="White" FontSize="30">
+                        <Bold>INFORMATION</Bold>
+                    </TextBlock>
+                    <TextBlock 
+                        Text="{StaticResource InformationTop}"
+                        TextWrapping="WrapWithOverflow"
+                        Margin="0, 20, 0, 0"
+                        Foreground="White"
+                        FontSize="18"/>
+                    <TextBlock 
+                        TextWrapping="WrapWithOverflow"
+                        Margin="0, 20, 0, 0"
+                        Foreground="White"
+                        FontSize="18">
+                        <TextBlock.Inlines>
+                            <Run FontWeight="Bold" Text="{StaticResource InformationBottomLabel}"/>
+                            <Run Text="{StaticResource InformationBottom}" />
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                    <Border
+                        Style="{StaticResource ButtonBorder}"
+                        Background="White"
+                        HorizontalAlignment="Left">
+                        <Button>
+                            Don't have an account
+                        </Button>
+                    </Border>
+                </StackPanel>
+            </Border>
+            <StackPanel Margin="30" Grid.Column="1">
+                <TextBlock FontSize="30">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
+                    </TextBlock.Foreground>
+                        <Bold>LOGIN FORM</Bold>
+                </TextBlock>
+                <StackPanel Margin="0, 5, 0, 0">
+                    <Label Style="{StaticResource InputLabel}">Username</Label>
+                    <GroupBox 
+                        x:Name="Username_GroupBox"
+                        Style="{StaticResource InputBox}">
+                        <TextBox 
+                            x:Name="Username_TextBox"
+                            Text="{Binding UserName}"
+                            Style="{StaticResource TextInput}">
+                        </TextBox>
+                    </GroupBox>
+                </StackPanel>
+
+                <Grid>
+                    <StackPanel Margin="0, 5, 0, 0">
+                        <Label Style="{StaticResource InputLabel}">Password</Label>
+                        <GroupBox 
+                            x:Name="Password_GroupBox"
+                            Style="{StaticResource InputBox}">
+                            <PasswordBox 
+                                x:Name="Password_Passwordbox"
+                                Style="{StaticResource PasswordInput}">
+                            </PasswordBox>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock 
+                    x:Name="RegisterError_TextBlock"
+                    Text="Register Unsuccess!"
+                    Style="{StaticResource ErrorMessage}"/>
+
+                <Border
+                    Style="{StaticResource ButtonBorder}"
+                    HorizontalAlignment="Center">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource PrimaryBlue}" />
+                    </Border.Background>
+                    <Button
+                        x:Name="Login_Button"
+                        Click="Login_Button_Click"
+                        Foreground="White">
+                        Login
+                    </Button>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>
