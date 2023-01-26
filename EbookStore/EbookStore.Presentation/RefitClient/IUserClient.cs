@@ -16,5 +16,5 @@ public interface IUserClient
     [Post("/User/")]
     Task<UserRegisterResponse> RegisterAsync([Body] UserRegisterRequest registerRequest);
     [Get("/User/")]
-    Task<UserRegisterResponse> loginAsync([Query] UserLoginRequest loginRequest);
+    Task<string> LoginAsync([Query] UserLoginRequest loginRequest);
 }
