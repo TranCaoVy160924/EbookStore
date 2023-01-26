@@ -4,6 +4,7 @@ using EbookStore.Contract.ViewModel.User.UserLoginRequest;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using EbookStore.Data.EF;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ public class UserController  : ControllerBase
         _mapper = mapper;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest registerRequest)
     {
@@ -86,8 +88,8 @@ public class UserController  : ControllerBase
     private string GenerateJSONWebToken(UserLoginRequest userLoginRequest)
     {
         var builder = WebApplication.CreateBuilder();
-        var issuer = builder.Configuration["Jwt:Issuer"];
-        var audience = builder.Configuration["Jwt:Audience"];
+        var issuer = builder.Configuration["JwtSettings:validIssuer"];
+        var audience = builder.Configuration["JwtSettings:validIssuer"];
         var key = Encoding.ASCII.GetBytes
         (builder.Configuration["JwtSettings:key"]);
         var tokenDescriptor = new SecurityTokenDescriptor
