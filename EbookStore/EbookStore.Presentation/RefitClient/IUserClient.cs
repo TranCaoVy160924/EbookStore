@@ -1,4 +1,5 @@
-﻿using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
+﻿using EbookStore.Contract.ViewModel.User.UserLoginRequest;
+using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
@@ -14,4 +15,6 @@ public interface IUserClient
 {
     [Post("/User/")]
     Task<UserRegisterResponse> RegisterAsync([Body] UserRegisterRequest registerRequest);
+    [Get("/User/")]
+    Task<UserRegisterResponse> loginAsync([Query] UserLoginRequest loginRequest);
 }

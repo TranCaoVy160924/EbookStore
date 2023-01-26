@@ -25,11 +25,13 @@ public class UserController  : ControllerBase
 {
     private readonly EbookStoreDbContext _dbContext;
     private readonly UserManager<User> _userManager;
+    private readonly IConfiguration _config;
     private readonly IMapper _mapper;
 
     public UserController(
         EbookStoreDbContext dbContext,
         UserManager<User> userManager,
+        IConfiguration config,
         IMapper mapper)
     {
         _dbContext = dbContext;
@@ -37,7 +39,6 @@ public class UserController  : ControllerBase
         _mapper = mapper;
     }
 
-    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest registerRequest)
     {
@@ -75,9 +76,9 @@ public class UserController  : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Login([FromQuery]UserLoginRequest userLoginRequest)
+    public async Task<IActionResult> Login([FromQuery] UserLoginRequest userLoginRequest)
     {
-        if(AuthenticateUser(userLoginRequest) != null)
+        if (AuthenticateUser(userLoginRequest) != null)
         {
             string jwtToken = GenerateJSONWebToken(userLoginRequest).ToString();
             return Ok(jwtToken);
@@ -128,4 +129,69 @@ public class UserController  : ControllerBase
         }
         return null;
     }
+
+    //[HttpGet]
+    //public async Task<IActionResult> Authenticate([FromQuery] UserLoginRequest userLoginRequest)
+    //{
+    //    if (AuthenticateUser(userLoginRequest) != null)
+    //    {
+    //        var user = await _userManager.FindByNameAsync(userLoginRequest.UserName);
+    //        var role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+    //        //var role = await _dbContext.AppRoles.FindAsync(user.RoleId);
+    //        return Ok(CreateToken(user, userLoginRequest.UserName, role));
+    //    }
+    //    return Unauthorized();
+    //}
+
+    //private UserLoginRequest? AuthenticateUser(UserLoginRequest userLoginRequest)
+    //{
+    //    var users = _userManager.Users.ToList();
+    //    foreach (var user in users)
+    //    {
+    //        if (userLoginRequest.UserName == user.UserName &&
+    //            userLoginRequest.Password == user.PasswordHash)
+    //        {
+    //            return userLoginRequest;
+    //        }
+    //    }
+    //    return null;
+    //}
+
+    //private string CreateToken(User user, string username, string role)
+    //{
+    //    var signingCredentials = GetSigningCredentials();
+    //    var claims = GetClaims(user, username, role);
+    //    var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+
+    //    return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+    //}
+
+    //private IList<Claim> GetClaims(User user, string username, string role)
+    //{
+    //    var claims = new List<Claim>
+    //        {
+    //            new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+    //            new Claim(ClaimTypes.Name, username),
+    //            new Claim(ClaimTypes.Role, role)
+    //        };
+
+    //    return claims;
+    //}
+
+    //private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, IList<Claim> claims)
+    //{
+    //    var tokenOptions = new JwtSecurityToken
+    //        (issuer: _config["JwtSettings:validIssuer"],
+    //        audience: _config["JwtSettings:validIssuer"],
+    //        claims: claims,
+    //        expires: DateTime.Now.AddHours(int.Parse(_config["JwtSettings:expires"])),
+    //        signingCredentials: signingCredentials);
+    //    return tokenOptions;
+    //}
+
+    //private SigningCredentials GetSigningCredentials()
+    //{
+    //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:key"]));
+    //    return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    //}
 }
