@@ -75,42 +75,55 @@ public class UserController  : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Login([FromQuery]UserLoginRequest userLoginRequest)
     {
-        var builder = WebApplication.CreateBuilder();
-        var users = _userManager.Users.ToList();
-        foreach (var user in users)
+        if(AuthenticateUser(userLoginRequest) != null)
         {
-            if (userLoginRequest.UserName == user.UserName && 
-                userLoginRequest.Password == user.PasswordHash)
+            string jwtToken = GenerateJSONWebToken(userLoginRequest).ToString();
+            return Ok(jwtToken);
+        }
+        return Unauthorized();
+    }
+
+    private string GenerateJSONWebToken(UserLoginRequest userLoginRequest)
+    {
+        var builder = WebApplication.CreateBuilder();
+        var issuer = builder.Configuration["Jwt:Issuer"];
+        var audience = builder.Configuration["Jwt:Audience"];
+        var key = Encoding.ASCII.GetBytes
+        (builder.Configuration["JwtSettings:key"]);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[]
             {
-                var issuer = builder.Configuration["Jwt:Issuer"];
-                var audience = builder.Configuration["Jwt:Audience"];
-                var key = Encoding.ASCII.GetBytes
-                (builder.Configuration["JWT:Key"]);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new[]
-                    {
                 new Claim("Id", Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Sub, userLoginRequest.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString())
              }),
-                    Expires = DateTime.UtcNow.AddMinutes(60),
-                    Issuer = issuer,
-                    Audience = audience,
-                    SigningCredentials = new SigningCredentials
-                    (new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha512Signature)
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var jwtToken = tokenHandler.WriteToken(token);
-                var stringToken = tokenHandler.WriteToken(token);
-                return Ok(stringToken);
+            Expires = DateTime.UtcNow.AddMinutes(60),
+            Issuer = issuer,
+            Audience = audience,
+            SigningCredentials = new SigningCredentials
+            (new SymmetricSecurityKey(key),
+            SecurityAlgorithms.HmacSha512Signature)
+        };
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var jwtToken = tokenHandler.WriteToken(token);
+        var stringToken = tokenHandler.WriteToken(token);
+        return stringToken;
+    }
+
+    private UserLoginRequest? AuthenticateUser(UserLoginRequest userLoginRequest)
+    {
+        var users = _userManager.Users.ToList();
+        foreach (var user in users)
+        {
+            if (userLoginRequest.UserName == user.UserName &&
+                userLoginRequest.Password == user.PasswordHash)
+            {
+                return userLoginRequest;
             }
-            return Unauthorized();
         }
-        return Unauthorized();
+        return null;
     }
 }
