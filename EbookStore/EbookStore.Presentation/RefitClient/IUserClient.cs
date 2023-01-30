@@ -15,6 +15,6 @@ public interface IUserClient
 {
     [Post("/User/")]
     Task<UserRegisterResponse> RegisterAsync([Body] UserRegisterRequest registerRequest);
-    [Get("/User/")]
-    Task<string> LoginAsync([Query] UserLoginRequest loginRequest);
+    [Post("/User/auth/token/")]
+    Task<string> AuthenticateAsync([Body] UserLoginRequest loginRequest);
 }

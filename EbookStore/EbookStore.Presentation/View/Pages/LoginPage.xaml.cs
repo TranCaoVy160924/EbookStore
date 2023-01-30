@@ -26,9 +26,10 @@ namespace EbookStore.Presentation.View.Pages
         private readonly IUserClient _userClient;
         public UserLoginRequest LoginRequest { get; set; }
 
-        public LoginPage()
+        public LoginPage(IUserClient userClient)
         {
             InitializeComponent();
+            _userClient = userClient;
         }
 
         private async void Login_Button_Click(object sender, RoutedEventArgs e)
@@ -38,11 +39,11 @@ namespace EbookStore.Presentation.View.Pages
                 Login_Button.IsEnabled = false;
                 var request = new UserLoginRequest()
                 {
-                    UserName = string.Empty,
-                    Password = string.Empty
+                    UserName = Username_TextBox.Text,
+                    Password = Password_Passwordbox.Password
                 };
                 request.Password = Password_Passwordbox.Password.Trim();
-                string token = await _userClient.LoginAsync(LoginRequest);
+                string token = await _userClient.AuthenticateAsync(request);
             }
             catch
             {
