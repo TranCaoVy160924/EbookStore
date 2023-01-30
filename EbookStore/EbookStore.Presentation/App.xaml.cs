@@ -22,6 +22,7 @@ public partial class App : Application
             {
                 services.AddSingleton<MainWindow>();
                 services.AddDependencyFactory<RegisterPage>();
+                services.AddDependencyFactory<LoginPage>();
                 services.AddDependencyFactory<UserRegisterViewModel>();
                 services.AddRefitClient<IUserClient>()
                     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
