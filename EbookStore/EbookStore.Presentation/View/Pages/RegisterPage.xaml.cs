@@ -72,4 +72,9 @@ public partial class RegisterPage : Page
 
         return registerError.IsValid();
     }
+
+    private void To_Login_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
