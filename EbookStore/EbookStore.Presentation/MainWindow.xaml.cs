@@ -21,18 +21,25 @@ namespace EbookStore.Presentation;
 
 public partial class MainWindow : Window
 {
-    //private readonly Page _registerPage;
-    private readonly Page _loginPage;
+    private readonly IAbstractFactory<RegisterPage> _registerFactory;
+    private readonly IAbstractFactory<LoginPage> _loginFactory;
 
-    //public MainWindow(IAbstractFactory<RegisterPage> registerFactory)
-    public MainWindow(IAbstractFactory<LoginPage> loginFactory)
+    public Frame FrMain { get; set; }
+
+    public MainWindow(
+        IAbstractFactory<RegisterPage> registerFactory,
+        IAbstractFactory<LoginPage> loginFactory)
     {
         InitializeComponent();
-        //_registerPage = registerFactory.Create();
-        _loginPage = loginFactory.Create();
-        //frMain.Content = _registerPage;
-        frMain.Content = _loginPage;
+        _registerFactory = registerFactory;
+        _loginFactory = loginFactory;
+        FrMain = frMain;
+        FrMain.Content = GetLoginPage();
     }
+
+    public RegisterPage GetRegisterPage() => _registerFactory.Create();
+
+    public LoginPage GetLoginPage() => _loginFactory.Create();
 
 
     private void Minimize_Button_Click(object sender, RoutedEventArgs e)

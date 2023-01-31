@@ -111,7 +111,9 @@
                         Style="{StaticResource ButtonBorder}"
                         Background="White"
                         HorizontalAlignment="Left">
-                        <Button>
+                        <Button
+                            x:Name="ToRegisterPage_Button"
+                            Click="ToRegisterPage_Button_Click">
                             Don't have an account
                         </Button>
                     </Border>

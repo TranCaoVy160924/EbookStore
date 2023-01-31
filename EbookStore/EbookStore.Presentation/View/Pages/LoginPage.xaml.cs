@@ -1,50 +1,55 @@
-﻿using EbookStore.Contract.ViewModel.User.UserLoginRequest;
+﻿using DIInWPF.StartupHelpers;
+using EbookStore.Contract.ViewModel.User.UserLoginRequest;
 using EbookStore.Presentation.RefitClient;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EbookStore.Presentation.View.Pages
+namespace EbookStore.Presentation.View.Pages;
+
+public partial class LoginPage : Page
 {
-    /// <summary>
-    /// Interaction logic for LoginPage.xaml
-    /// </summary>
-    public partial class LoginPage : Page
+    private readonly IUserClient _userClient;
+    private readonly MainWindow _mainWindow; 
+
+    public UserLoginRequest LoginRequest { get; set; }
+
+    public LoginPage(IUserClient userClient)
     {
-        private readonly IUserClient _userClient;
-        public UserLoginRequest LoginRequest { get; set; }
+        InitializeComponent();
+        _userClient = userClient;
+        _mainWindow = Application.Current.MainWindow as MainWindow;
+    }
 
-        public LoginPage(IUserClient userClient)
+    private async void Login_Button_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
-            _userClient = userClient;
+            Login_Button.IsEnabled = false;
+            var request = new UserLoginRequest()
+            {
+                UserName = Username_TextBox.Text,
+                Password = Password_Passwordbox.Password
+            };
+            request.Password = Password_Passwordbox.Password.Trim();
+            string token = await _userClient.AuthenticateAsync(request);
         }
-
-        private async void Login_Button_Click(object sender, RoutedEventArgs e)
+        catch
         {
-            try
-            {
-                Login_Button.IsEnabled = false;
-                var request = new UserLoginRequest()
-                {
-                    UserName = Username_TextBox.Text,
-                    Password = Password_Passwordbox.Password
-                };
-                request.Password = Password_Passwordbox.Password.Trim();
-                string token = await _userClient.AuthenticateAsync(request);
-            }
-            catch
-            {
-                ShowErrorMessage();
-            }
-            finally
-            {
-                Login_Button.IsEnabled = true;
-            }
+            ShowErrorMessage();
         }
-
-        private void ShowErrorMessage()
+        finally
         {
-
+            Login_Button.IsEnabled = true;
         }
+    }
+
+    private void ShowErrorMessage()
+    {
+
+    }
+
+    private void ToRegisterPage_Button_Click(object sender, RoutedEventArgs e)
+    {
+        _mainWindow.FrMain.Content = _mainWindow.GetRegisterPage();
     }
 }
