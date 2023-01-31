@@ -1,20 +1,7 @@
-﻿using EbookStore.Contract.Model;
-using EbookStore.Contract.ViewModel.User.UserLoginRequest;
-using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
+﻿using EbookStore.Contract.ViewModel.User.UserLoginRequest;
 using EbookStore.Presentation.RefitClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace EbookStore.Presentation.View.Pages
 {
@@ -57,7 +44,7 @@ namespace EbookStore.Presentation.View.Pages
 
         private void ShowErrorMessage()
         {
-            
+
         }
     }
 }
