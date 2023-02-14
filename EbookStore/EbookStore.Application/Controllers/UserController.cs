@@ -19,17 +19,11 @@ namespace EbookStore.Application.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly UserManager<User> _userManager;
-    private readonly IConfiguration _config;
     private readonly IUserRepository _userRepo;
 
     public UserController(
-        UserManager<User> userManager,
-        IConfiguration config,
         IUserRepository userRepo)
     {
-        _userManager = userManager;
-        _config = config;
         _userRepo = userRepo;
     }
 
@@ -69,50 +63,11 @@ public class UserController : ControllerBase
         try
         {
             var user = await _userRepo.FindUserFromLoginRequestAsync(request);
-            var role = await _userRepo.GetUserRoleAsync(user);
-            return Ok(CreateToken(user, request.UserName, role));
+            return Ok(_userRepo.CreateToken(user));
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }
-    }
-
-    private string CreateToken(User user, string username, string role)
-    {
-        var signingCredentials = GetSigningCredentials();
-        var claims = GetClaims(user, username, role);
-        var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
-
-        return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-    }
-
-    private IList<Claim> GetClaims(User user, string username, string role)
-    {
-        var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, role),
-            };
-
-        return claims;
-    }
-
-    private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, IList<Claim> claims)
-    {
-        var tokenOptions = new JwtSecurityToken
-            (issuer: _config["JwtSettings:validIssuer"],
-            audience: _config["JwtSettings:validIssuer"],
-            claims: claims,
-            expires: DateTime.Now.AddHours(int.Parse(_config["JwtSettings:expires"])),
-            signingCredentials: signingCredentials);
-        return tokenOptions;
-    }
-
-    private SigningCredentials GetSigningCredentials()
-    {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]));
-        return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
     }
 }
