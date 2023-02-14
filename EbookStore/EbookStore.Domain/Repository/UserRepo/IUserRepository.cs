@@ -15,5 +15,5 @@ public interface IUserRepository
     Task<UserRegisterResponse> CreateAsync(UserRegisterRequest request);
     Task<bool> IsDuplicateUserNameAsync(string username);
     Task<User> FindUserFromLoginRequestAsync(UserLoginRequest request);
-    Task<string> CreateToken(User user);
+    Task<string> CreateTokenAsync(User user);
 }

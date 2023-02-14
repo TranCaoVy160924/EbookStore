@@ -99,8 +99,8 @@ public class UserRepository : IUserRepository
     }
     #endregion
 
-    #region CreateToken
-    public async Task<string> CreateToken(User user)
+    #region CreateTokenAsync
+    public async Task<string> CreateTokenAsync(User user)
     {
         var signingCredentials = GetSigningCredentials();
         var claims = GetClaims(user, user.UserName, await GetUserRoleAsync(user));
