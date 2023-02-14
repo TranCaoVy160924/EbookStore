@@ -66,26 +66,16 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var user = await _userManager.FindByNameAsync(request.UserName);
-        if (user == null)
+        try
         {
-            return BadRequest("Username or password is incorrect. Please try again");
+            var user = await _userRepo.FindUserFromLoginRequestAsync(request);
+            var role = await _userRepo.GetUserRoleAsync(user);
+            return Ok(CreateToken(user, request.UserName, role));
         }
-        else if (!user.IsActive)
+        catch (Exception ex)
         {
-            return BadRequest("Your account is disabled. Please contact with IT Team");
+            return BadRequest(ex.Message);
         }
-
-        var result = await _userManager.CheckPasswordAsync(user, request.Password);
-        if (!result)
-        {
-            return BadRequest("Username or password is incorrect. Please try again");
-        }
-
-        var role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
-        //var role = await _dbContext.AppRoles.FindAsync(user.RoleId);
-        //StaticValues.Usernames.Add(request.Username);
-        return Ok(CreateToken(user, request.UserName, role));
     }
 
     private string CreateToken(User user, string username, string role)

@@ -1,4 +1,6 @@
-﻿using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
+﻿using EbookStore.Contract.Model;
+using EbookStore.Contract.ViewModel.User.UserLoginRequest;
+using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using System;
 using System.Collections.Generic;
@@ -12,4 +14,6 @@ public interface IUserRepository
 {
     Task<UserRegisterResponse> CreateAsync(UserRegisterRequest request);
     Task<bool> IsDuplicateUserNameAsync(string username);
+    Task<User> FindUserFromLoginRequestAsync(UserLoginRequest request);
+    Task<string> GetUserRoleAsync(User user);
 }
