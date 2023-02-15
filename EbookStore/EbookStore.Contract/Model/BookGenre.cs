@@ -5,11 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EbookStore.Contract.Model;
-
-public class Genre
+public class BookGenre
 {
+    public int BookId { get; set; }
     public int GenreId { get; set; }
-    public string Name { get; set; }
-
-    public virtual List<BookGenre> BookGenres { get; set; }
 }

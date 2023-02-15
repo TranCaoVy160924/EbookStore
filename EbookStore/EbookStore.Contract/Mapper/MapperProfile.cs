@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using EbookStore.Contract.Model;
+using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -15,6 +17,7 @@ public class MapperProfile: Profile
 {
     public MapperProfile() 
     {
+        #region User
         CreateMap<User, UserRegisterResponse>();
         CreateMap<UserRegisterRequest, User>()
             .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
@@ -24,5 +27,12 @@ public class MapperProfile: Profile
             .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
             .ForMember(dest => dest.SecurityStamp, opt => opt.MapFrom(src => src.FirstName))
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
+        #endregion
+
+
+        #region Book
+        CreateMap<Book, BookResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.BookId));
+        #endregion
     }
 }

@@ -2,6 +2,7 @@ using EbookStore.Contract.Mapper;
 using EbookStore.Contract.Model;
 using EbookStore.Data.EF;
 using EbookStore.Domain.Repository;
+using EbookStore.Domain.Repository.BookRepo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<EbookStoreDbContext>(options =>
                .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperProfile)));
 

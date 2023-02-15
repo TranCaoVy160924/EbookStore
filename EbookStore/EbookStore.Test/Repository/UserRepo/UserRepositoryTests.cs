@@ -151,7 +151,7 @@ public class UserRepositoryTests
         string expectedResult = JsonConvert.SerializeObject(UserData.CreateActiveUser());
 
         // Act
-        string result 
+        string result
             = JsonConvert.SerializeObject(await userRepository.FindUserFromLoginRequestAsync(request));
 
         // Assert
@@ -217,8 +217,9 @@ public class UserRepositoryTests
     }
     #endregion
 
+    #region CreateTokenAsync
     [Fact]
-    public async Task CreateToken_StateUnderTest_ExpectedBehavior()
+    public async Task CreateTokenAsync_StateUnderTest_ExpectedBehavior()
     {
         // Arrange
         Mock<UserManager<User>> mockUserManager
@@ -235,4 +236,5 @@ public class UserRepositoryTests
         Assert.IsType<string>(result);
         _mockRepository.VerifyAll();
     }
+    #endregion
 }

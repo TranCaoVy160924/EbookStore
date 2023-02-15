@@ -4,6 +4,7 @@ using EbookStore.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EbookStore.Data.Migrations
 {
     [DbContext(typeof(EbookStoreDbContext))]
-    partial class EbookStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230215033956_AddBookDescription")]
+    partial class AddBookDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,21 @@ namespace EbookStore.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BookGenre", b =>
+                {
+                    b.Property<int>("BooksBookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenresGenreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BooksBookId", "GenresGenreId");
+
+                    b.HasIndex("GenresGenreId");
+
+                    b.ToTable("BookGenre");
+                });
 
             modelBuilder.Entity("EbookStore.Contract.Model.AppRole", b =>
                 {
@@ -57,7 +74,7 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             Id = new Guid("423e533c-d43d-4fd9-9676-e31af724522a"),
-                            ConcurrencyStamp = "5b1e2fee-733e-4270-a5c3-ded64579e2c6",
+                            ConcurrencyStamp = "37e7f001-e332-42a7-a245-c1e126715860",
                             Description = "Administrator role",
                             Name = "Admin",
                             NormalizedName = "admin"
@@ -65,7 +82,7 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             Id = new Guid("da35db1a-5b54-4618-884e-bcd7f7b1dd19"),
-                            ConcurrencyStamp = "1c3969c2-651f-484b-bc45-56f872e0aed8",
+                            ConcurrencyStamp = "46f6b089-506a-45d8-8e40-f8d6023982a4",
                             Description = "User role",
                             Name = "User",
                             NormalizedName = "user"
@@ -132,7 +149,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 100,
                             PdfLink = "PdfLink 1",
                             Price = 10.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 891, DateTimeKind.Local).AddTicks(6312),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 492, DateTimeKind.Local).AddTicks(6452),
                             SaleId = 1,
                             Title = "Book 1"
                         },
@@ -146,7 +163,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 200,
                             PdfLink = "PdfLink 2",
                             Price = 20.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 898, DateTimeKind.Local).AddTicks(7828),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 499, DateTimeKind.Local).AddTicks(5194),
                             SaleId = 2,
                             Title = "Book 2"
                         },
@@ -160,7 +177,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 300,
                             PdfLink = "PdfLink 3",
                             Price = 30.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 908, DateTimeKind.Local).AddTicks(4245),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 507, DateTimeKind.Local).AddTicks(541),
                             SaleId = 3,
                             Title = "Book 3"
                         },
@@ -174,7 +191,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 400,
                             PdfLink = "PdfLink 4",
                             Price = 40.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 916, DateTimeKind.Local).AddTicks(2669),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 518, DateTimeKind.Local).AddTicks(8653),
                             SaleId = 4,
                             Title = "Book 4"
                         },
@@ -188,7 +205,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 500,
                             PdfLink = "PdfLink 5",
                             Price = 50.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 923, DateTimeKind.Local).AddTicks(7105),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 530, DateTimeKind.Local).AddTicks(5071),
                             SaleId = 5,
                             Title = "Book 5"
                         },
@@ -202,7 +219,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 600,
                             PdfLink = "PdfLink 6",
                             Price = 60.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 931, DateTimeKind.Local).AddTicks(3225),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 541, DateTimeKind.Local).AddTicks(8199),
                             SaleId = 6,
                             Title = "Book 6"
                         },
@@ -216,7 +233,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 700,
                             PdfLink = "PdfLink 7",
                             Price = 70.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 941, DateTimeKind.Local).AddTicks(2823),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 552, DateTimeKind.Local).AddTicks(9687),
                             SaleId = 7,
                             Title = "Book 7"
                         },
@@ -230,7 +247,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 800,
                             PdfLink = "PdfLink 8",
                             Price = 80.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 951, DateTimeKind.Local).AddTicks(7899),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 563, DateTimeKind.Local).AddTicks(9714),
                             SaleId = 8,
                             Title = "Book 8"
                         },
@@ -244,7 +261,7 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 900,
                             PdfLink = "PdfLink 9",
                             Price = 90.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 962, DateTimeKind.Local).AddTicks(3494),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 572, DateTimeKind.Local).AddTicks(9659),
                             SaleId = 9,
                             Title = "Book 9"
                         },
@@ -258,76 +275,9 @@ namespace EbookStore.Data.Migrations
                             NumberOfPage = 1000,
                             PdfLink = "PdfLink 10",
                             Price = 100.0,
-                            ReleaseDate = new DateTime(2023, 2, 15, 15, 56, 45, 972, DateTimeKind.Local).AddTicks(223),
+                            ReleaseDate = new DateTime(2023, 2, 15, 10, 39, 55, 579, DateTimeKind.Local).AddTicks(8811),
                             SaleId = 10,
                             Title = "Book 10"
-                        });
-                });
-
-            modelBuilder.Entity("EbookStore.Contract.Model.BookGenre", b =>
-                {
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookId", "GenreId");
-
-                    b.HasIndex("GenreId");
-
-                    b.ToTable("BookGenres");
-
-                    b.HasData(
-                        new
-                        {
-                            BookId = 1,
-                            GenreId = 1
-                        },
-                        new
-                        {
-                            BookId = 2,
-                            GenreId = 2
-                        },
-                        new
-                        {
-                            BookId = 3,
-                            GenreId = 3
-                        },
-                        new
-                        {
-                            BookId = 4,
-                            GenreId = 4
-                        },
-                        new
-                        {
-                            BookId = 5,
-                            GenreId = 5
-                        },
-                        new
-                        {
-                            BookId = 6,
-                            GenreId = 6
-                        },
-                        new
-                        {
-                            BookId = 7,
-                            GenreId = 7
-                        },
-                        new
-                        {
-                            BookId = 8,
-                            GenreId = 8
-                        },
-                        new
-                        {
-                            BookId = 9,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BookId = 10,
-                            GenreId = 10
                         });
                 });
 
@@ -576,82 +526,82 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             SaleId = 1,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 891, DateTimeKind.Local).AddTicks(6288),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 492, DateTimeKind.Local).AddTicks(6427),
                             Name = "Sale 1",
                             SalePercent = 1.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 891, DateTimeKind.Local).AddTicks(6276)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 492, DateTimeKind.Local).AddTicks(6413)
                         },
                         new
                         {
                             SaleId = 2,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 898, DateTimeKind.Local).AddTicks(7801),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 499, DateTimeKind.Local).AddTicks(5170),
                             Name = "Sale 2",
                             SalePercent = 2.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 898, DateTimeKind.Local).AddTicks(7793)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 499, DateTimeKind.Local).AddTicks(5167)
                         },
                         new
                         {
                             SaleId = 3,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 908, DateTimeKind.Local).AddTicks(4151),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 507, DateTimeKind.Local).AddTicks(504),
                             Name = "Sale 3",
                             SalePercent = 3.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 908, DateTimeKind.Local).AddTicks(4083)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 507, DateTimeKind.Local).AddTicks(489)
                         },
                         new
                         {
                             SaleId = 4,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 916, DateTimeKind.Local).AddTicks(2646),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 518, DateTimeKind.Local).AddTicks(8606),
                             Name = "Sale 4",
                             SalePercent = 4.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 916, DateTimeKind.Local).AddTicks(2632)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 518, DateTimeKind.Local).AddTicks(8593)
                         },
                         new
                         {
                             SaleId = 5,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 923, DateTimeKind.Local).AddTicks(7080),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 530, DateTimeKind.Local).AddTicks(5038),
                             Name = "Sale 5",
                             SalePercent = 5.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 923, DateTimeKind.Local).AddTicks(7070)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 530, DateTimeKind.Local).AddTicks(5024)
                         },
                         new
                         {
                             SaleId = 6,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 931, DateTimeKind.Local).AddTicks(3150),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 541, DateTimeKind.Local).AddTicks(8168),
                             Name = "Sale 6",
                             SalePercent = 6.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 931, DateTimeKind.Local).AddTicks(3124)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 541, DateTimeKind.Local).AddTicks(8152)
                         },
                         new
                         {
                             SaleId = 7,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 941, DateTimeKind.Local).AddTicks(2706),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 552, DateTimeKind.Local).AddTicks(9652),
                             Name = "Sale 7",
                             SalePercent = 7.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 941, DateTimeKind.Local).AddTicks(2627)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 552, DateTimeKind.Local).AddTicks(9643)
                         },
                         new
                         {
                             SaleId = 8,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 951, DateTimeKind.Local).AddTicks(7754),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 563, DateTimeKind.Local).AddTicks(9673),
                             Name = "Sale 8",
                             SalePercent = 8.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 951, DateTimeKind.Local).AddTicks(7669)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 563, DateTimeKind.Local).AddTicks(9661)
                         },
                         new
                         {
                             SaleId = 9,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 962, DateTimeKind.Local).AddTicks(3456),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 572, DateTimeKind.Local).AddTicks(9495),
                             Name = "Sale 9",
                             SalePercent = 9.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 962, DateTimeKind.Local).AddTicks(3432)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 572, DateTimeKind.Local).AddTicks(9478)
                         },
                         new
                         {
                             SaleId = 10,
-                            EndDate = new DateTime(2023, 2, 15, 15, 56, 45, 972, DateTimeKind.Local).AddTicks(187),
+                            EndDate = new DateTime(2023, 2, 15, 10, 39, 55, 579, DateTimeKind.Local).AddTicks(8786),
                             Name = "Sale 10",
                             SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 2, 15, 15, 56, 45, 972, DateTimeKind.Local).AddTicks(172)
+                            StartDate = new DateTime(2023, 2, 15, 10, 39, 55, 579, DateTimeKind.Local).AddTicks(8777)
                         });
                 });
 
@@ -738,7 +688,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c16d027c-9e6d-4b4f-88be-7fe9be4975c0",
+                            ConcurrencyStamp = "933ca9bd-efff-4033-a075-d8fe40851745",
                             Email = "user1@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 1",
@@ -747,7 +697,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user1@gmail.com",
                             NormalizedUserName = "user1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMpWZthA8hvr87xJEWvZBo96plzALS4zSmwHp4XYHy9tCR3J9tsH2bLGSS+JJ7+Imw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBUY5H6Pz1evbKWhaqX4F09GyF+j+tsPq5FJ5/j642NvVWrTSsInhGXJeEhYkwJwJA==",
                             PhoneNumber = "123456781",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -758,7 +708,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c35c1c1-9df8-4376-82d2-ccb2363dbf56",
+                            ConcurrencyStamp = "3c32e7d9-fef3-48c2-a5f3-c0795f98f2ad",
                             Email = "user2@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 2",
@@ -767,7 +717,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user2@gmail.com",
                             NormalizedUserName = "user2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF0lnmCXLFhKoonS1EEdzFE3PgcOn9e99p3TkX4+UnW38Rl5v0BdkOHHRImKHf/BqQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEBqczvLLPwu7HFsLqGVVWjy7rX4zZZZLz9KttCc3oRZBWWJnNArtUTlzt0uoi9Tgg==",
                             PhoneNumber = "123456782",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -778,7 +728,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e53493ee-cda3-41be-a228-2349ead319df",
+                            ConcurrencyStamp = "f8a71934-adee-451c-bc1d-ce8c704a73b7",
                             Email = "user3@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 3",
@@ -787,7 +737,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user3@gmail.com",
                             NormalizedUserName = "user3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJz2GibzXcs0NzfELHKamoonRxiJgGtbTpuBsutXZaA4HYU8gyjajwXGRh2A/0pd9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENMq8IBurT7WeSffswcN5PkWe3iDIgCJ9N/lECBQO+EYwYaBkuZTnsNZFKAhPrEZTA==",
                             PhoneNumber = "123456783",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -798,7 +748,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a21dff9f-a5e6-4070-845a-64b6907e3a49",
+                            ConcurrencyStamp = "4f662376-6ae9-4c01-8ee6-15e17dbcbd37",
                             Email = "user4@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 4",
@@ -807,7 +757,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user4@gmail.com",
                             NormalizedUserName = "user4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB2wTeC5TSBZwUEtJ9Sen7HBEo6kS1PqmjQFkfY/aMwrvO8J7VdsmfqBuZZpVJwRTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMJqfhMKa6POMbdfJEEiybDkPcf6zSbK2kgzjuPZCxvdIGM4pTJAwWMDj8Oq9Hw+eQ==",
                             PhoneNumber = "123456784",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -818,7 +768,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "500d5148-2bc5-4f05-8966-a781c0e0b0a1",
+                            ConcurrencyStamp = "89a2011b-ba5a-4b83-916a-8555678647b9",
                             Email = "user5@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 5",
@@ -827,7 +777,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user5@gmail.com",
                             NormalizedUserName = "user5",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM9KnXglFFG2zpzRjehYAbLiP6nYlI4/briYGbD6nCN34vaKz0ewZbCatZG1cfJNIg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH2znZMi+Hy23RRXzEy8WDmqMHYq6kPuYhu3lO7oqPPqaW035p9uXUop4WlwiRUJLg==",
                             PhoneNumber = "123456785",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -838,7 +788,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c512ac2f-7716-4d52-8cfd-f9f6c0371cd9",
+                            ConcurrencyStamp = "39c535d1-dbbf-4958-bd79-678878405df9",
                             Email = "user6@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 6",
@@ -847,7 +797,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user6@gmail.com",
                             NormalizedUserName = "user6",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC1R/KBdHOKpeyCYDy0Zz1owyZTg54La2IzsgEt45xPm/X+Qkq8YyfKNOdU+n+ZbHg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJy9SevqFFb8moaaNg0MztC9pimuR9/ysfcUaOM1g66z/gz8Oi6t1LaojY4mAhhY+Q==",
                             PhoneNumber = "123456786",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -858,7 +808,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22e2e356-5994-4301-9c55-17d886f9ac67",
+                            ConcurrencyStamp = "bf7768c3-4a92-4270-b18c-8d73ee915277",
                             Email = "user7@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 7",
@@ -867,7 +817,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user7@gmail.com",
                             NormalizedUserName = "user7",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ4AbftoDKsWlSsFrEmZNkUAIrvb8BLqUj3RHO2z+0Isp2b0zA+4/+aohclO3fRFwA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIuMj4SHIasUqGE6N/ALPJZXcAKGxyBgKcKtOGQMWGEmNWvCetgvyc3rv8k0W5GUYg==",
                             PhoneNumber = "123456787",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -878,7 +828,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae876bd0-fedb-4c4c-be78-78be1eaf5449",
+                            ConcurrencyStamp = "60df29b0-078a-4566-b6c2-efd65ef9b211",
                             Email = "user8@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 8",
@@ -887,7 +837,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user8@gmail.com",
                             NormalizedUserName = "user8",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEASs9WczxGEGDisGzBBLfKWH8Iu6nu2ccxLSRnwN0NEJAffBu/SoyGDxSeLVQY5jQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJTtJ2FKdodUab5en0Phs+Vq4yI5bn1yiJAt4s0N3/qoDT7a8yteV1tqL/h2pElp8A==",
                             PhoneNumber = "123456788",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -898,7 +848,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5883455-cfea-4aa3-9fd2-573508b16be0",
+                            ConcurrencyStamp = "51ec3460-1a95-4916-bc36-e056634adf63",
                             Email = "user9@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 9",
@@ -907,7 +857,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user9@gmail.com",
                             NormalizedUserName = "user9",
-                            PasswordHash = "AQAAAAEAACcQAAAAEALlgDtBy1kzpqZ7xOSmITqH3MFLoDGh6cFSlhc30DUtdPqzC8KF8F4+CdOz9UQ+0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELZwPMmJUFm0XNjpJyvK5zYjIF9QzD8Sldd6GleQ86vtoB/hpQG9+F5PIvUhPCn2hA==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -918,7 +868,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "475a6803-0a2e-4214-90a1-27910f326d28",
+                            ConcurrencyStamp = "d6782091-c69f-42bb-ac07-68dd4f9bc2af",
                             Email = "user10@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 10",
@@ -927,7 +877,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user10@gmail.com",
                             NormalizedUserName = "user10",
-                            PasswordHash = "AQAAAAEAACcQAAAAELvzo/hDy0is9nzlfrJj2k0hav2zkdJLS+I35PIbc15lKtWF63L8QvfZ5Dqkru/DvQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB/daZM4OCjE8Dm1O0xqabjRZp3gX3/vR9M6zFzPEnsj/1zNB35FMZlcPnwM9tY7uA==",
                             PhoneNumber = "1234567810",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -1171,6 +1121,21 @@ namespace EbookStore.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BookGenre", b =>
+                {
+                    b.HasOne("EbookStore.Contract.Model.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksBookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EbookStore.Contract.Model.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenresGenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EbookStore.Contract.Model.Book", b =>
                 {
                     b.HasOne("EbookStore.Contract.Model.Sale", "Sale")
@@ -1180,21 +1145,6 @@ namespace EbookStore.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Sale");
-                });
-
-            modelBuilder.Entity("EbookStore.Contract.Model.BookGenre", b =>
-                {
-                    b.HasOne("EbookStore.Contract.Model.Book", null)
-                        .WithMany("BookGenres")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EbookStore.Contract.Model.Genre", null)
-                        .WithMany("BookGenres")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EbookStore.Contract.Model.CartItem", b =>
@@ -1307,18 +1257,11 @@ namespace EbookStore.Data.Migrations
 
             modelBuilder.Entity("EbookStore.Contract.Model.Book", b =>
                 {
-                    b.Navigation("BookGenres");
-
                     b.Navigation("CartItems");
 
                     b.Navigation("LibraryItems");
 
                     b.Navigation("WishItems");
-                });
-
-            modelBuilder.Entity("EbookStore.Contract.Model.Genre", b =>
-                {
-                    b.Navigation("BookGenres");
                 });
 
             modelBuilder.Entity("EbookStore.Contract.Model.Sale", b =>

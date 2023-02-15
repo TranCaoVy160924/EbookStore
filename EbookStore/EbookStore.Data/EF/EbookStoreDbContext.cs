@@ -21,6 +21,7 @@ public class EbookStoreDbContext : IdentityDbContext<User, AppRole, Guid>
         builder.Entity<WishItem>().HasKey(sc => new { sc.UserId, sc.BookId });
         builder.Entity<LibraryItem>().HasKey(sc => new { sc.UserId, sc.BookId });
         builder.Entity<CartItem>().HasKey(sc => new { sc.UserId, sc.BookId });
+        builder.Entity<BookGenre>().HasKey(sc => new { sc.BookId, sc.GenreId });
 
         builder.Seed();
         base.OnModelCreating(builder);
@@ -39,6 +40,8 @@ public class EbookStoreDbContext : IdentityDbContext<User, AppRole, Guid>
     public DbSet<LibraryItem> LibraryItems { get; set; }
 
     public DbSet<CartItem> CartItems { get; set; }
+
+    public DbSet<BookGenre> BookGenres { get; set; }
 
     public DbSet<Sale> Sales { get; set; }
 }

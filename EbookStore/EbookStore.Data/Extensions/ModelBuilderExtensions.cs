@@ -45,7 +45,7 @@ public static class ModelBuilderExtensions
 
         for (int i = 1; i <= 10; i++)
         {
-            userId[i - 1] = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef6" + (i-1));
+            userId[i - 1] = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef6" + (i - 1));
 
             //user
             modelBuilder.Entity<User>().HasData(new User
@@ -100,6 +100,7 @@ public static class ModelBuilderExtensions
                 SaleId = i,
                 NumberOfPage = i * 100,
                 Price = i * 10,
+                Description = "Description " + i.ToString(),
                 CoverImage = "cover " + i.ToString(),
                 PdfLink = "PdfLink " + i.ToString(),
                 EpubLink = "EpubLink" + i.ToString(),
@@ -110,8 +111,16 @@ public static class ModelBuilderExtensions
             modelBuilder.Entity<Genre>().HasData(new Genre
             {
                 GenreId = i,
-                Name = "Genre " + i.ToString()
+                Name = "Genre " + i.ToString(),
             });
+
+            modelBuilder.Entity<BookGenre>().HasData(
+                new BookGenre
+                {
+                     BookId = i,
+                     GenreId = i,
+                }
+            );
 
             //wishItem
             modelBuilder.Entity<WishItem>().HasData(new WishItem
