@@ -1,6 +1,7 @@
 ﻿using DIInWPF.StartupHelpers;
 using EbookStore.Contract.ViewModel.User.UserLoginRequest;
 using EbookStore.Presentation.RefitClient;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,7 +10,7 @@ namespace EbookStore.Presentation.View.Pages;
 public partial class LoginPage : Page
 {
     private readonly IUserClient _userClient;
-    private readonly MainWindow _mainWindow; 
+    private readonly MainWindow _mainWindow;
 
     public UserLoginRequest LoginRequest { get; set; }
 
@@ -32,8 +33,10 @@ public partial class LoginPage : Page
             };
             request.Password = Password_Passwordbox.Password.Trim();
             string token = await _userClient.AuthenticateAsync(request);
+            _mainWindow.JwtToken = "Bearer " + token;
+            _mainWindow.ToHomePage();
         }
-        catch
+        catch (Exception ex)
         {
             ShowErrorMessage();
         }
@@ -50,6 +53,6 @@ public partial class LoginPage : Page
 
     private void ToRegisterPage_Button_Click(object sender, RoutedEventArgs e)
     {
-        _mainWindow.FrMain.Content = _mainWindow.GetRegisterPage();
+        _mainWindow.ToRegisterPage();
     }
 }

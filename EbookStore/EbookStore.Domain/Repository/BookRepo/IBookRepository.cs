@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 namespace EbookStore.Domain.Repository.BookRepo;
 public interface IBookRepository
 {
-    PagedList<BookResponse> Get(BookQueryRequest request);
+    Task<PagedList<BookResponse>> GetAsync(BookQueryRequest request);
 }

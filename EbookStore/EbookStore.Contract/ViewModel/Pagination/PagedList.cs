@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,10 @@ public class PagedList<T>
         Data = new List<T>();
         Data.AddRange(items);
     }
-    public static PagedList<T> ToPagedList(IQueryable<T> source, int pageNumber, int pageSize)
+    public static async Task<PagedList<T>> ToPagedListAsync(IQueryable<T> source, int pageNumber, int pageSize)
     {
         var count = source.Count();
-        var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         return new PagedList<T>(items, count, pageNumber, pageSize);
     }
 
@@ -41,16 +42,16 @@ public class PagedList<T>
 
     public string GetMetadata()
     {
-        var metadata = new
+        var metadata = new PaginationHeader
         {
-            TotalCount,
-            PageSize,
-            CurrentPage,
-            TotalPages,
-            HasNext,
-            HasPrevious
+            TotalCount = TotalCount,
+            PageSize = PageSize,
+            CurrentPage = CurrentPage,
+            TotalPages = TotalPages,
+            HasNext = HasNext,
+            HasPrevious = HasPrevious
         };
-        
+
         return JsonConvert.SerializeObject(metadata);
     }
 }

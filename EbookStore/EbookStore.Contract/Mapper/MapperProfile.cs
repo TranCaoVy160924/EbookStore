@@ -32,7 +32,8 @@ public class MapperProfile: Profile
 
         #region Book
         CreateMap<Book, BookResponse>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.BookId));
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.BookId))
+            .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(src => src.Sale.SalePercent));
         #endregion
     }
 }

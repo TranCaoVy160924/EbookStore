@@ -63,7 +63,7 @@ public class UserController : ControllerBase
         try
         {
             var user = await _userRepo.FindUserFromLoginRequestAsync(request);
-            return Ok(_userRepo.CreateTokenAsync(user));
+            return Ok(await _userRepo.CreateTokenAsync(user));
         }
         catch (Exception ex)
         {

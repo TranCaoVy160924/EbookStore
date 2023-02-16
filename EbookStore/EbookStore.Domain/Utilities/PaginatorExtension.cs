@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace EbookStore.Domain.Utilities;
 internal static class PaginatorExtension
 {
-    public static PagedList<T> PaginateResult<T>(
+    public static async Task<PagedList<T>> PaginateResultAsync<T>(
         this IQueryable<T> query, QueryStringParameters queryParams)
     {
-        return PagedList<T>.ToPagedList(query, queryParams.PageNumber, queryParams.PageSize);
+        return await PagedList<T>.ToPagedListAsync(query, queryParams.PageNumber, queryParams.PageSize);
     }
 
     public static PagedList<Dest> MapResultToResponse<Src, Dest>(

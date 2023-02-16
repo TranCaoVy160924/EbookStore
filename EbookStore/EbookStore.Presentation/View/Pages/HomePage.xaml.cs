@@ -1,5 +1,12 @@
-﻿using System;
+﻿using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+using EbookStore.Contract.ViewModel.Book.BookResponse;
+using EbookStore.Contract.ViewModel.Pagination;
+using EbookStore.Presentation.RefitClient;
+using Newtonsoft.Json;
+using Refit;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static EbookStore.Presentation.RefitClient.RefitExtensions;
 
 namespace EbookStore.Presentation.View.Pages;
 /// <summary>
@@ -19,8 +27,109 @@ namespace EbookStore.Presentation.View.Pages;
 /// </summary>
 public partial class HomePage : Page
 {
-    public HomePage()
+    private readonly MainWindow _mainWindow;
+    private readonly IBookClient _bookClient;
+    private readonly string _jwtToken;
+    private PaginationHeader PaginationMetadata;
+
+    public List<BookResponse> Data { get; private set; }
+
+    public HomePage(IBookClient bookClient)
     {
         InitializeComponent();
+        _mainWindow = Application.Current.MainWindow as MainWindow;
+        _bookClient = bookClient;
+        _jwtToken = _mainWindow.JwtToken;
+
+        StartDate_DatePicker.DisplayDate = DateTime.MinValue;
+        EndDate_DatePicker.DisplayDate = DateTime.MaxValue;
+    }
+
+    private async void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await LoadBookData(new BookQueryRequest());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task LoadBookData(BookQueryRequest queryRequest)
+    {
+        ApiResponse<List<BookResponse>> response
+            = await _bookClient.GetResponseAsync(queryRequest, _jwtToken);
+        string headerString = await response.GetPaginationHeader();
+        PaginationMetadata = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
+        Data = response.ReadResult();
+
+        ChooseGenre_ComboBox.ItemsSource = response.ReadResult();
+        ChooseGenre_ComboBox.Items.Refresh();
+
+        RefreshList();
+    }
+
+    private void RefreshList()
+    {
+        BookList.ItemsSource = Data;
+        BookList.Items.Refresh();
+
+        if (PaginationMetadata.HasNext)
+        {
+            NextPage_Button.IsEnabled = true;
+        }
+        else
+        {
+            NextPage_Button.IsEnabled = false;
+        }
+
+        if (PaginationMetadata.HasPrevious)
+        {
+            PreviousPage_Button.IsEnabled = true;
+        }
+        else
+        {
+            PreviousPage_Button.IsEnabled = false;
+        }
+    }
+
+    private async void Search_Button_Click(object sender, RoutedEventArgs e)
+    {
+        await LoadBookData(GetQueryRequest());
+    }
+
+    private BookQueryRequest GetQueryRequest()
+    {
+        BookQueryRequest queryRequest = new BookQueryRequest();
+        if (!String.IsNullOrEmpty(Title_TextBox.Text))
+        {
+            queryRequest.Title = Title_TextBox.Text;
+        }
+        if (StartDate_DatePicker.DisplayDate != DateTime.MinValue)
+        {
+            queryRequest.StartReleaseDate = StartDate_DatePicker.DisplayDate;
+        }
+        if (EndDate_DatePicker.DisplayDate != DateTime.MaxValue)
+        {
+            queryRequest.EndReleaseDate = EndDate_DatePicker.DisplayDate;
+        }
+
+        return queryRequest;
+    }
+
+    private async void NextPage_Button_Click(object sender, RoutedEventArgs e)
+    {
+        BookQueryRequest queryRequest = GetQueryRequest();
+        queryRequest.PageNumber = PaginationMetadata.CurrentPage + 1;
+        await LoadBookData(queryRequest);
+    }
+
+    private async void PreviousPage_Button_Click(object sender, RoutedEventArgs e)
+    {
+        BookQueryRequest queryRequest = GetQueryRequest();
+        queryRequest.PageNumber = PaginationMetadata.CurrentPage - 1;
+        await LoadBookData(queryRequest);
     }
 }

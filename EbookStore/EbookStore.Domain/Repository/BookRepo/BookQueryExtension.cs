@@ -15,7 +15,11 @@ public static class BookQueryExtension
 
     public static IQueryable<Book> QueryGenres(this IQueryable<Book> query, List<int> genres)
     {
-        return query.Where(b => b.BookGenres.Any(bg => genres.Contains(bg.GenreId))); ;
+        if (genres.Count > 0)
+        {
+            query = query.Where(b => b.BookGenres.Any(bg => genres.Contains(bg.GenreId)));
+        }
+        return query;
     }
 
     public static IQueryable<Book> QueryReleaseDate(

@@ -43,7 +43,7 @@ public partial class RegisterPage : Page
                 request.ConfirmPassword = Password_Passwordbox.Password.Trim();
                 await _registerViewModel.RegisterUserAsync();
 
-                ChangePageToLogin();
+                _mainWindow.ToLoginPage();
             }
         }
         catch
@@ -83,11 +83,6 @@ public partial class RegisterPage : Page
 
     private void To_Login_Click(object sender, RoutedEventArgs e)
     {
-        ChangePageToLogin();
-    }
-
-    private void ChangePageToLogin()
-    {
-        _mainWindow.FrMain.Content = _mainWindow.GetLoginPage();
+        _mainWindow.ToLoginPage();
     }
 }

@@ -26,15 +26,16 @@ public class BookRepository : IBookRepository
         _mapper = mapper;
     }
 
-    public PagedList<BookResponse> Get(BookQueryRequest request)
+    public async Task<PagedList<BookResponse>> GetAsync(BookQueryRequest request)
     {
         IQueryable<Book> query = _dbContext.Books
+            .Include(b => b.Sale)
             .QueryTitle(request.Title)
             .QueryGenres(request.Genres)
             .QueryReleaseDate(request.StartReleaseDate, request.EndReleaseDate)
             .AsQueryable();
 
-        var paginatedResult = query.PaginateResult(request);
+        var paginatedResult = await query.PaginateResultAsync(request);
         return paginatedResult.MapResultToResponse<Book, BookResponse>(_mapper);
     }
 }

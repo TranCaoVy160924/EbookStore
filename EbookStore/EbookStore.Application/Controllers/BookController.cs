@@ -3,6 +3,7 @@ using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Domain.Repository;
 using EbookStore.Domain.Repository.BookRepo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Reflection.PortableExecutable;
@@ -21,12 +22,13 @@ public class BookController : ControllerBase
         _bookRepo = bookRepo;
     }
 
-    [HttpGet("")]
-    public IActionResult Get([FromQuery] BookQueryRequest queryRequest)
+    //[Authorize]
+    [HttpGet()]
+    public async Task<IActionResult> GetAsync([FromBody] BookQueryRequest queryRequest)
     {
         try
         {
-            var pagedResult = _bookRepo.Get(queryRequest);
+            var pagedResult = await _bookRepo.GetAsync(queryRequest);
 
             Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
 

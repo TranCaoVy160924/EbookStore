@@ -3,15 +3,185 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:EbookStore.Presentation.ViewModel.BookManage;assembly=Books"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
       d:DesignHeight="650" d:DesignWidth="1000"
       Title="HomePage">
     <Page.Resources>
+        <Style x:Key="InputLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!-- Validator group box-->
+        <Style x:Key="InputBox" TargetType="GroupBox">
+            <Setter Property="Margin" Value="10, 0, 10, 20"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+
+        <!-- Text input-->
+        <Style x:Key="TextInput" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="DateInput" TargetType="DatePicker">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ComboBoxInput" TargetType="ComboBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom" />
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
     </Page.Resources>
     <Border 
         CornerRadius="15"
         BorderThickness="2"
         Background="White">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="15, 35, 15, 0">
+                <StackPanel Margin="0, 5, 0, 0">
+                    <Label Style="{StaticResource InputLabel}">Title</Label>
+                    <GroupBox 
+                        x:Name="TitleSearch_GroupBox"
+                        Width="250"
+                        Style="{StaticResource InputBox}">
+                        <TextBox 
+                            x:Name="Title_TextBox"
+                            Text="{Binding UserName}"
+                            Style="{StaticResource TextInput}">
+                        </TextBox>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel Margin="0, 5, 0, 0">
+                    <Label Style="{StaticResource InputLabel}">Release After</Label>
+                    <GroupBox 
+                        x:Name="StartDateSearch_GroupBox"
+                        Width="150"
+                        Style="{StaticResource InputBox}">
+                        <DatePicker 
+                            x:Name="StartDate_DatePicker"
+                            DisplayDate=""
+                            Text="{Binding UserName}"
+                            Style="{StaticResource DateInput}">
+                        </DatePicker>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel Margin="0, 5, 0, 0">
+                    <Label Style="{StaticResource InputLabel}">Release Before</Label>
+                    <GroupBox 
+                        x:Name="EndDateSearch_GroupBox"
+                        Width="150"
+                        Style="{StaticResource InputBox}">
+                        <DatePicker 
+                            x:Name="EndDate_DatePicker"
+                            DisplayDate=""
+                            Text="{Binding UserName}"
+                            Style="{StaticResource DateInput}">
+                        </DatePicker>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel Margin="0, 5, 0, 0">
+                    <Label Style="{StaticResource InputLabel}">Genres</Label>
+                    <GroupBox 
+                        x:Name="GenreFilter_GroupBox"
+                        Width="150"
+                        Style="{StaticResource InputBox}">
+                        <ComboBox 
+                            x:Name="ChooseGenre_ComboBox"
+                            Style="{StaticResource ComboBoxInput}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="False" Width="20" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </GroupBox>
+                </StackPanel>
+                <Button 
+                    x:Name="Search_Button" 
+                    Click="Search_Button_Click" 
+                    Width="100" Height="20">
+                    Search
+                </Button>
+            </StackPanel>
+            <ListView x:Name="BookList" Margin="15, 10, 15, 0" Height="300">
+                <ListView.View>
+                    <GridView x:Name="Book_GridView">
+                        <GridViewColumn 
+                        Width="50"
+                        DisplayMemberBinding="{Binding Path=Id}"
+                        Header="Book Id"/>
+                        <GridViewColumn 
+                        Width="300"
+                        DisplayMemberBinding="{Binding Path=Title}"
+                        Header="Title"/>
+                        <GridViewColumn 
+                        Width="70"
+                        DisplayMemberBinding="{Binding Path=Price}"
+                        Header="Price"/>
+                        <GridViewColumn 
+                        Width="70"
+                        DisplayMemberBinding="{Binding Path=SalePercent}"
+                        Header="Sale"/>
+                        <GridViewColumn 
+                        Width="100"
+                        DisplayMemberBinding="{Binding Path=NumberOfPage}"
+                        Header="Number Of Page"/>
+                        <GridViewColumn 
+                        Width="200"
+                        DisplayMemberBinding="{Binding Path=ReleaseDate}"
+                        Header="ReleaseDate"/>
+                        <GridViewColumn
+                        Width="160">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button
+                                            Content="Edit"
+                                            Margin="0, 0, 10, 0"
+                                            Width="60"
+                                            VerticalAlignment="Center"/>
+                                        <Button
+                                            Content="Delete"
+                                            Margin="10, 0, 0, 0"
+                                            Width="60"
+                                            VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button 
+                    x:Name="PreviousPage_Button"
+                    Click="PreviousPage_Button_Click"
+                    Width="60" Margin="20">
+                    Previous
+                </Button>
+                <Button 
+                    x:Name="NextPage_Button"
+                    Click="NextPage_Button_Click"
+                    Width="60" Margin="20">
+                    Next
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Border>
 </Page>
