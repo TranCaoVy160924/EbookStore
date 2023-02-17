@@ -1,6 +1,7 @@
 ﻿using EbookStore.Contract.Model;
 using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.BookResponse;
+using EbookStore.Contract.ViewModel.Book.Request;
 using EbookStore.Domain.Repository;
 using EbookStore.Domain.Repository.BookRepo;
 using Microsoft.AspNetCore.Authorization;
@@ -22,8 +23,7 @@ public class BookController : ControllerBase
         _bookRepo = bookRepo;
     }
 
-    //[Authorize]
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetAsync([FromBody] BookQueryRequest queryRequest)
     {
         try
@@ -38,5 +38,76 @@ public class BookController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetOneAsync(int id)
+    {
+        try
+        {
+            return Ok(await _bookRepo.GetOneAsync(id));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> CreateAsync([FromBody] BookCreateRequest createRequest)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        try
+        {
+            await _bookRepo.CreateAsync(createRequest);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+        return Ok();
+    }
+
+    [HttpPatch]
+    [Authorize]
+    public async Task<IActionResult> UpdateAsync([FromBody] BookUpdateRequest updateRequest)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        try
+        {
+            await _bookRepo.UpdateAsync(updateRequest);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        try
+        {
+            await _bookRepo.DeleteAsync(id);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+        return Ok();
     }
 }

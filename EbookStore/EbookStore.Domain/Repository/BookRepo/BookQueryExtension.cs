@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 namespace EbookStore.Domain.Repository.BookRepo;
 public static class BookQueryExtension
 {
+    public static IQueryable<Book> QueryId(this IQueryable<Book> query, int id)
+    {
+        return query.Where(x => x.BookId == id);
+    }
+
     public static IQueryable<Book> QueryTitle(this IQueryable<Book> query, string title)
     {
         return query.Where(b => b.Title.Contains(title));
@@ -27,5 +32,10 @@ public static class BookQueryExtension
     {
         return query.Where(b => DateTime.Compare(b.ReleaseDate, start) > 0
             && DateTime.Compare(b.ReleaseDate, end) < 0);
+    }
+
+    public static IQueryable<Book> QueryActive(this IQueryable<Book> query)
+    {
+        return query.Where(x => x.IsActive == true);
     }
 }

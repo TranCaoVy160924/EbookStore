@@ -30,7 +30,7 @@ public class UserRegisterRequest
     [Required(ErrorMessage = "Please confirm password")]
     public string ConfirmPassword { get; set; }
 
-    [DataType(DataType.EmailAddress, ErrorMessage = "Invalid rmail address")]
+    [DataType(DataType.EmailAddress, ErrorMessage = "Invalid email address")]
     [EmailAddress(ErrorMessage = "Invalid rmail address")]
     [Required(ErrorMessage = "Please enter email")]
     public string Email { get; set; }
