@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EbookStore.Contract\EbookStore.Contract.csproj" />
     <ProjectReference Include="..\EbookStore.Data\EbookStore.Data.csproj" />
+    <ProjectReference Include="..\EbookStore.Domain\EbookStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

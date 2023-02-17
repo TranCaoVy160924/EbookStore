@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,17 +22,44 @@ namespace EbookStore.Presentation;
 
 public partial class MainWindow : Window
 {
-    //private readonly Page _registerPage;
-    private readonly Page _loginPage;
+    [DllImport("Kernel32")]
+    public static extern void AllocConsole();
 
-    //public MainWindow(IAbstractFactory<RegisterPage> registerFactory)
-    public MainWindow(IAbstractFactory<LoginPage> loginFactory)
+    [DllImport("Kernel32")]
+    public static extern void FreeConsole();
+
+    private readonly IAbstractFactory<RegisterPage> _registerFactory;
+    private readonly IAbstractFactory<LoginPage> _loginFactory;
+    private readonly IAbstractFactory<HomePage> _homeFactory;
+
+    public string JwtToken { get; set; }
+
+    public MainWindow(
+        IAbstractFactory<RegisterPage> registerFactory,
+        IAbstractFactory<LoginPage> loginFactory,
+        IAbstractFactory<HomePage> homeFactory)
     {
+        AllocConsole();
         InitializeComponent();
-        //_registerPage = registerFactory.Create();
-        _loginPage = loginFactory.Create();
-        //frMain.Content = _registerPage;
-        frMain.Content = _loginPage;
+        _registerFactory = registerFactory;
+        _loginFactory = loginFactory;
+        _homeFactory = homeFactory;
+        ToLoginPage();
+    }
+
+    public void ToRegisterPage()
+    {
+        frMain.Content = _registerFactory.Create();
+    }
+
+    public void ToLoginPage()
+    {
+        frMain.Content = _loginFactory.Create();
+    }
+
+    public void ToHomePage()
+    {
+        frMain.Content = _homeFactory.Create();
     }
 
 

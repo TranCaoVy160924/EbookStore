@@ -45,7 +45,39 @@ public static class ModelBuilderExtensions
 
         for (int i = 1; i <= 10; i++)
         {
-            userId[i - 1] = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef6" + (i-1));
+            //sales
+            modelBuilder.Entity<Sale>().HasData(new Sale
+            {
+                SaleId = i,
+                Name = "Sale " + i.ToString(),
+                SalePercent = i,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now
+            });
+        }
+
+        for (int i = 1; i <= 30; i++)
+        {
+            //book
+            modelBuilder.Entity<Book>().HasData(new Book
+            {
+                BookId = i,
+                Title = "Book " + i.ToString(),
+                IsActive = true,
+                SaleId = i % 3 + 1,
+                NumberOfPage = i * 100,
+                Price = i * 10,
+                Description = "Description " + i.ToString(),
+                CoverImage = "cover " + i.ToString(),
+                PdfLink = "PdfLink " + i.ToString(),
+                EpubLink = "EpubLink" + i.ToString(),
+                ReleaseDate = DateTime.Now
+            });
+        }
+
+        for (int i = 1; i <= 10; i++)
+        {
+            userId[i - 1] = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef6" + (i - 1));
 
             //user
             modelBuilder.Entity<User>().HasData(new User
@@ -81,37 +113,30 @@ public static class ModelBuilderExtensions
                 });
             }
 
-            //sales
-            modelBuilder.Entity<Sale>().HasData(new Sale
-            {
-                SaleId = i,
-                Name = "Sale " + i.ToString(),
-                SalePercent = i,
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now
-            });
-
-            //book
-            modelBuilder.Entity<Book>().HasData(new Book
-            {
-                BookId = i,
-                Title = "Book " + i.ToString(),
-                IsActive = true,
-                SaleId = i,
-                NumberOfPage = i * 100,
-                Price = i * 10,
-                CoverImage = "cover " + i.ToString(),
-                PdfLink = "PdfLink " + i.ToString(),
-                EpubLink = "EpubLink" + i.ToString(),
-                ReleaseDate = DateTime.Now
-            });
-
             //genre
             modelBuilder.Entity<Genre>().HasData(new Genre
             {
                 GenreId = i,
-                Name = "Genre " + i.ToString()
+                Name = "Genre " + i.ToString(),
             });
+
+            modelBuilder.Entity<BookGenre>().HasData(
+                new BookGenre
+                {
+                    BookId = i,
+                    GenreId = i,
+                },
+                new BookGenre
+                {
+                    BookId = 10 + i,
+                    GenreId = i,
+                },
+                new BookGenre
+                {
+                    BookId = 20 + i,
+                    GenreId = i,
+                }
+            );
 
             //wishItem
             modelBuilder.Entity<WishItem>().HasData(new WishItem

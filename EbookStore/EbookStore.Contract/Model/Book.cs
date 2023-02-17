@@ -14,12 +14,13 @@ public class Book
     public int SaleId { get; set; }
     public int NumberOfPage { get; set; }
     public double Price { get; set; }
+    public string Description { get; set; }
     public string CoverImage { get; set; }
     public string PdfLink { get; set; }
     public string EpubLink { get; set; }
     public DateTime ReleaseDate { get; set; }
 
-    public virtual List<Genre> Genres { get; set; }
+    public virtual List<BookGenre> BookGenres { get; set; }
 
     public virtual List<WishItem>? WishItems { get; set; }
 

@@ -17,12 +17,17 @@ namespace EbookStore.Presentation.View.Pages;
 public partial class RegisterPage : Page
 {
     private readonly UserRegisterViewModel _registerViewModel;
-    public string Haha = "sfgdf";
+    private readonly MainWindow _mainWindow;
 
-    public RegisterPage(IAbstractFactory<UserRegisterViewModel> registerViewModelFactory)
+
+    public RegisterPage(
+        IAbstractFactory<UserRegisterViewModel> registerViewModelFactory)
     {
         InitializeComponent();
+
         _registerViewModel = registerViewModelFactory.Create();
+        _mainWindow = Application.Current.MainWindow as MainWindow;
+
         this.DataContext = _registerViewModel.RegisterRequest;
     }
 
@@ -37,6 +42,8 @@ public partial class RegisterPage : Page
                 request.Password = Password_Passwordbox.Password.Trim();
                 request.ConfirmPassword = Password_Passwordbox.Password.Trim();
                 await _registerViewModel.RegisterUserAsync();
+
+                _mainWindow.ToLoginPage();
             }
         }
         catch
@@ -62,19 +69,20 @@ public partial class RegisterPage : Page
             FirstNameValidity = FirstName_TextBox.ValidateHasInput(),
             LastNameValidity = LastName_TextBox.ValidateHasInput(),
             PasswordValidity = Password_Passwordbox.ValidatePassword(),
-            ConfirmPasswordValidity = 
+            ConfirmPasswordValidity =
                 ConfirmPassword_PasswordBox.ValidateMatchPassword(Password_Passwordbox),
-            EmailValidity = 
+            EmailValidity =
                 Email_TextBox.ValidateMatchPattern(RegexPattern.EmailAddress, "Email Address"),
-            PhoneNumberValidity = 
+            PhoneNumberValidity =
                 PhoneNumber_TextBox.ValidateMatchPattern(RegexPattern.PhoneNumber, "Phone number")
         };
 
         return registerError.IsValid();
     }
 
+
     private void To_Login_Click(object sender, RoutedEventArgs e)
     {
-
+        _mainWindow.ToLoginPage();
     }
 }
