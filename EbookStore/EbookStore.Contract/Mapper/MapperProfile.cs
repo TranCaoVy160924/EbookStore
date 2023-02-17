@@ -2,6 +2,9 @@
 using EbookStore.Contract.Model;
 using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.BookResponse;
+using EbookStore.Contract.ViewModel.Book.Request;
+using EbookStore.Contract.ViewModel.Book.Response;
+using EbookStore.Contract.ViewModel.Genre.Response;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -13,9 +16,9 @@ using System.Threading.Tasks;
 
 namespace EbookStore.Contract.Mapper;
 
-public class MapperProfile: Profile
+public class MapperProfile : Profile
 {
-    public MapperProfile() 
+    public MapperProfile()
     {
         #region User
         CreateMap<User, UserRegisterResponse>();
@@ -29,11 +32,20 @@ public class MapperProfile: Profile
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
         #endregion
 
-
         #region Book
         CreateMap<Book, BookResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.BookId))
-            .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(src => src.Sale.SalePercent));
+            .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(
+                src => src.Sale != null ? src.Sale.SalePercent : 0));
+        CreateMap<BookCreateRequest, Book>()
+            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
+        CreateMap<Book, BookDetailResponse>()
+            .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(
+                src => src.Sale != null ? src.Sale.SalePercent : 0));
+        #endregion
+
+        #region Genre
+        CreateMap<Genre, GenreResponse>();
         #endregion
     }
 }

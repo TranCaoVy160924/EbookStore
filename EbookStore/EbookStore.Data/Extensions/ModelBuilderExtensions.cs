@@ -64,7 +64,7 @@ public static class ModelBuilderExtensions
                 BookId = i,
                 Title = "Book " + i.ToString(),
                 IsActive = true,
-                SaleId = i % 3 + 1,
+                SaleId = (i % 4 == 0) ? null : (i % 3 + 1),
                 NumberOfPage = i * 100,
                 Price = i * 10,
                 Description = "Description " + i.ToString(),
