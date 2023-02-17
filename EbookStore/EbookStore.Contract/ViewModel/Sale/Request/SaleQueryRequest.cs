@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Contract.ViewModel.Sale.SaleQueryRequest;
-public class SaleQueryRequest: QueryStringParameters
+namespace EbookStore.Contract.ViewModel.Sale.Request;
+public class SaleQueryRequest : QueryStringParameters
 {
     public string Name { get; set; } = "";
     public DateTime StartDate { get; set; } = DateTime.MinValue;

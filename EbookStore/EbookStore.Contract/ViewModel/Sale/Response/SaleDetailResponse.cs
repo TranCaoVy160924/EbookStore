@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Contract.ViewModel.Sale.SaleDetailResponse;
+namespace EbookStore.Contract.ViewModel.Sale.Response;
 public class SaleDetailResponse
 {
     public int Id { get; set; }

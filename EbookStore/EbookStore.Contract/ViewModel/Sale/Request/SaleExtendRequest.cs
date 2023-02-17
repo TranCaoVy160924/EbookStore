@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Contract.ViewModel.Sale.SaleExtendRequest;
+namespace EbookStore.Contract.ViewModel.Sale.Request;
 public class SaleExtendRequest
 {
     [Required(ErrorMessage = "Please enter extended sale id")]

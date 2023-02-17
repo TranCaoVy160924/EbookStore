@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbookStore.Contract.ViewModel.Sale.SaleCreateRequest;
+namespace EbookStore.Contract.ViewModel.Sale.Request;
 public class SaleCreateRequest
 {
     [StringLength(50, MinimumLength = 4, ErrorMessage = "Sale name must be between 4 and 50 characters!")]
