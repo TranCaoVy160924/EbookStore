@@ -14,5 +14,5 @@ public class Sale
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
 
-    public virtual List<Book> OnSaleBooks { get; set; }
+    public virtual List<Book> Books { get; set; }
 }

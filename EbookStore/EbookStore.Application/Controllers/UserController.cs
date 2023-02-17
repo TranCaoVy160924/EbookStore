@@ -11,7 +11,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using static EbookStore.Application.ValidateHelper;
 
 namespace EbookStore.Application.Controllers;
 
@@ -30,9 +29,9 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
     {
-        if (!Validate(request))
+        if (!ModelState.IsValid)
         {
-            return BadRequest("Invalid Request");
+            return BadRequest(ModelState);
         }
 
         if (await _userRepo.IsDuplicateUserNameAsync(request.UserName))

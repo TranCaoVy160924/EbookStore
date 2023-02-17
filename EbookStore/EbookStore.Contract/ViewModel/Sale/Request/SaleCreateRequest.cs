@@ -12,7 +12,7 @@ public class SaleCreateRequest
     [Required(ErrorMessage = "Please enter sale name")]
     public string Name { get; set; }
 
-    [Range(100, 1, ErrorMessage = "Sale percent must be between 1 and 100!")]
+    [Range(1, 100, ErrorMessage = "Sale percent must be between 1 and 100!")]
     [Required(ErrorMessage = "Please enter sale percent")]
     public double SalePercent { get; set; }
 

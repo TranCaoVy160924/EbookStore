@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EbookStore.Domain.Repository.SaleRepo;
-public class SaleRepository
+public class SaleRepository: ISaleRepository
 {
 }
