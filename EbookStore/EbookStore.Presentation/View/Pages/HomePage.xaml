@@ -143,7 +143,7 @@
                         DisplayMemberBinding="{Binding Path=Id}"
                         Header="Book Id"/>
                         <GridViewColumn 
-                        Width="300"
+                        Width="250"
                         DisplayMemberBinding="{Binding Path=Title}"
                         Header="Title"/>
                         <GridViewColumn 
@@ -169,11 +169,13 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button
                                             Content="Edit"
+                                            Click="Edit_Button_Click"
                                             Margin="0, 0, 10, 0"
                                             Width="60"
                                             VerticalAlignment="Center"/>
                                         <Button
                                             Content="Delete"
+                                            Click="Delete_Button_Click"
                                             Margin="10, 0, 0, 0"
                                             Width="60"
                                             VerticalAlignment="Center"/>

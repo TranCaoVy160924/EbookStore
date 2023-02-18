@@ -147,8 +147,28 @@ public partial class HomePage : Page
         _mainWindow.ToBookCreatePage();
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private async void Edit_Button_Click(object sender, RoutedEventArgs e)
     {
+       
+    }
 
+    private async void Delete_Button_Click(object sender, RoutedEventArgs e)
+    {
+        Button button = (Button)sender;
+        BookResponse book = button.DataContext as BookResponse;
+
+        ConfirmDeletionWindow confirmDelete = new ConfirmDeletionWindow();
+        if (confirmDelete.ShowDialog() == true)
+        {
+            try
+            {
+                await _bookClient.DeleteAsync(book.Id, _jwtToken);
+                await LoadBookData(new BookQueryRequest());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

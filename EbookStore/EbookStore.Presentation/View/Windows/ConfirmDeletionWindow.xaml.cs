@@ -17,9 +17,9 @@ namespace EbookStore.Presentation.View
     /// <summary>
     /// Interaction logic for ConfirmDeletion.xaml
     /// </summary>
-    public partial class ConfirmDeletion : Window
+    public partial class ConfirmDeletionWindow : Window
     {
-        public ConfirmDeletion()
+        public ConfirmDeletionWindow()
         {
             InitializeComponent();
         }
