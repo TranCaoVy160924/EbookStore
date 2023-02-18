@@ -5,6 +5,7 @@ using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.Book.Request;
 using EbookStore.Contract.ViewModel.Book.Response;
 using EbookStore.Contract.ViewModel.Genre.Response;
+using EbookStore.Contract.ViewModel.Sale.Request;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -42,6 +43,10 @@ public class MapperProfile : Profile
         CreateMap<Book, BookDetailResponse>()
             .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(
                 src => src.Sale != null ? src.Sale.SalePercent : 0));
+        #endregion
+
+        #region Sale
+        CreateMap<SaleCreateRequest, Sale>();
         #endregion
 
         #region Genre
