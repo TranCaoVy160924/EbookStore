@@ -23,4 +23,6 @@ public class SaleCreateRequest
     [DataType(DataType.Date)]
     [Required(ErrorMessage = "Please enter sale end date")]
     public DateTime EndDate { get; set; }
+
+
 }

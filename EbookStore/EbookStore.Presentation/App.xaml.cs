@@ -24,10 +24,13 @@ public partial class App : Application
                 services.AddDependencyFactory<RegisterPage>();
                 services.AddDependencyFactory<LoginPage>();
                 services.AddDependencyFactory<HomePage>();
+                services.AddDependencyFactory<BookCreatePage>();
                 services.AddDependencyFactory<UserRegisterViewModel>();
                 services.AddRefitClient<IUserClient>()
                     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
                 services.AddRefitClient<IBookClient>()
+                    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+                services.AddRefitClient<IGenreClient>()
                     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
             })
             .Build();

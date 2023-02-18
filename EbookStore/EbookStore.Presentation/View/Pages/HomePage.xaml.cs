@@ -1,5 +1,6 @@
 ﻿using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.BookResponse;
+using EbookStore.Contract.ViewModel.Genre.Response;
 using EbookStore.Contract.ViewModel.Pagination;
 using EbookStore.Presentation.RefitClient;
 using Newtonsoft.Json;
@@ -29,16 +30,19 @@ public partial class HomePage : Page
 {
     private readonly MainWindow _mainWindow;
     private readonly IBookClient _bookClient;
+    private readonly IGenreClient _genreClient;
     private readonly string _jwtToken;
     private PaginationHeader PaginationMetadata;
 
     public List<BookResponse> Data { get; private set; }
+    public List<GenreResponse> GenreChoices { get; private set; }
 
-    public HomePage(IBookClient bookClient)
+    public HomePage(IBookClient bookClient, IGenreClient genreClient)
     {
         InitializeComponent();
         _mainWindow = Application.Current.MainWindow as MainWindow;
         _bookClient = bookClient;
+        _genreClient = genreClient;
         _jwtToken = _mainWindow.JwtToken;
 
         StartDate_DatePicker.DisplayDate = DateTime.MinValue;
@@ -50,6 +54,7 @@ public partial class HomePage : Page
         try
         {
             await LoadBookData(new BookQueryRequest());
+            await LoadGenreData();
         }
         catch (Exception ex)
         {
@@ -64,11 +69,14 @@ public partial class HomePage : Page
         string headerString = await response.GetPaginationHeader();
         PaginationMetadata = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         Data = response.ReadResult();
-
-        ChooseGenre_ComboBox.ItemsSource = response.ReadResult();
-        ChooseGenre_ComboBox.Items.Refresh();
-
         RefreshList();
+    }
+
+    private async Task LoadGenreData()
+    {
+        GenreChoices = await _genreClient.GetAsync();
+        ChooseGenre_ComboBox.ItemsSource = GenreChoices;
+        ChooseGenre_ComboBox.Items.Refresh();
     }
 
     private void RefreshList()
@@ -115,6 +123,7 @@ public partial class HomePage : Page
         {
             queryRequest.EndReleaseDate = EndDate_DatePicker.DisplayDate;
         }
+        queryRequest.Genres.AddRange(GenreChoices.Where(g => g.IsChecked).Select(g => g.GenreId));
 
         return queryRequest;
     }
@@ -131,5 +140,15 @@ public partial class HomePage : Page
         BookQueryRequest queryRequest = GetQueryRequest();
         queryRequest.PageNumber = PaginationMetadata.CurrentPage - 1;
         await LoadBookData(queryRequest);
+    }
+
+    private void AddBook_Button_Click(object sender, RoutedEventArgs e)
+    {
+        _mainWindow.ToBookCreatePage();
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

@@ -75,6 +75,7 @@ public class BookRepository : IBookRepository
     public async Task CreateAsync(BookCreateRequest createRequest)
     {
         Book newBook = _mapper.Map<Book>(createRequest);
+        newBook.ReleaseDate = DateTime.Today;
         List<int> requestGenreIds = createRequest.BookGenreIds;
         List<int> genreIds = await _dbContext.Genres.Select(g => g.GenreId).ToListAsync();
 

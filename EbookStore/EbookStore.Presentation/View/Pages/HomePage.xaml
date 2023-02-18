@@ -49,8 +49,14 @@
         CornerRadius="15"
         BorderThickness="2"
         Background="White">
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="15, 35, 15, 0">
+        <StackPanel Margin="15, 35, 15, 0">
+            <TextBlock FontSize="30">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
+                </TextBlock.Foreground>
+                        <Bold>BOOK MANAGEMENT</Bold>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="0, 5, 0, 0">
                     <Label Style="{StaticResource InputLabel}">Title</Label>
                     <GroupBox 
@@ -104,20 +110,30 @@
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="False" Width="20" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
+                                        <CheckBox IsChecked="{Binding IsChecked}" Width="20" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </GroupBox>
                 </StackPanel>
-                <Button 
-                    x:Name="Search_Button" 
-                    Click="Search_Button_Click" 
-                    Width="100" Height="20">
-                    Search
-                </Button>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <Button 
+                        x:Name="Search_Button" 
+                        Margin="20, 5, 0, 5"
+                        Click="Search_Button_Click" 
+                        Width="100" Height="20">
+                        Search
+                    </Button>
+                    <Button
+                        x:Name="AddBook_Button"
+                        Margin="20, 5, 0, 0"
+                        Click="AddBook_Button_Click"
+                        Width="100" Height="20">
+                        Add New Book
+                    </Button>
+                </StackPanel>
             </StackPanel>
             <ListView x:Name="BookList" Margin="15, 10, 15, 0" Height="300">
                 <ListView.View>

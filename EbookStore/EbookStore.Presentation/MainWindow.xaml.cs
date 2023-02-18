@@ -31,19 +31,22 @@ public partial class MainWindow : Window
     private readonly IAbstractFactory<RegisterPage> _registerFactory;
     private readonly IAbstractFactory<LoginPage> _loginFactory;
     private readonly IAbstractFactory<HomePage> _homeFactory;
+    private readonly IAbstractFactory<BookCreatePage> _bookCreateFactory;
 
     public string JwtToken { get; set; }
 
     public MainWindow(
         IAbstractFactory<RegisterPage> registerFactory,
         IAbstractFactory<LoginPage> loginFactory,
-        IAbstractFactory<HomePage> homeFactory)
+        IAbstractFactory<HomePage> homeFactory,
+        IAbstractFactory<BookCreatePage> bookCreateFactory)
     {
         AllocConsole();
         InitializeComponent();
         _registerFactory = registerFactory;
         _loginFactory = loginFactory;
         _homeFactory = homeFactory;
+        _bookCreateFactory = bookCreateFactory;
         ToLoginPage();
     }
 
@@ -60,6 +63,11 @@ public partial class MainWindow : Window
     public void ToHomePage()
     {
         frMain.Content = _homeFactory.Create();
+    }
+
+    public void ToBookCreatePage()
+    {
+        frMain.Content = _bookCreateFactory.Create();
     }
 
 

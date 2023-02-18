@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,49 @@ public static class TextInputWithGroupBoxValidator
         if (!Regex.IsMatch(textInput, pattern))
         {
             inputContainer.Header = $"{patternMeaning} not valid";
+            result = false;
+        }
+        else
+        {
+            inputContainer.Header = "";
+        }
+        return result;
+    }
+
+    public static bool ValidatePositiveInt(this TextBox input)
+    {
+        string textInput = input.Text.Trim();
+        bool result = true;
+        GroupBox inputContainer = (GroupBox)input.Parent;
+        if (textInput.Contains("."))
+        {
+            inputContainer.Header = "Must be a int";
+        }
+        else
+        {
+            if (!int.TryParse(textInput, out int num) || num <= 0)
+            {
+                inputContainer.Header = "Must be a positive number";
+                result = false;
+            }
+            else
+            {
+                inputContainer.Header = "";
+            }
+        }
+        
+        return result;
+    }
+
+    public static bool ValidatePositiveDouble(this TextBox input)
+    {
+        string textInput = input.Text.Trim();
+        bool result = true;
+        GroupBox inputContainer = (GroupBox)input.Parent;
+
+        if (!double.TryParse(textInput, out double num) || num <= 0)
+        {
+            inputContainer.Header = "Must be a positive number";
             result = false;
         }
         else
