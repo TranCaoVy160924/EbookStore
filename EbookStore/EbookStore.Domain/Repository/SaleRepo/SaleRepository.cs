@@ -75,30 +75,34 @@ public class SaleRepository : ISaleRepository
     }
     #endregion
 
-    public async Task CreateBookSaleAsync(SaleCreateRequest createRequest)
+    #region CreateAsync
+    public async Task CreateAsync(SaleCreateRequest createRequest)
     {
         Sale sale = _mapper.Map<Sale>(createRequest);
         List<Book> books = new List<Book>();
         List<int> bookIds = createRequest.BookIds;
+
         foreach (int bookId in bookIds)
         {
             Book book = await _dbContext.Books.FirstOrDefaultAsync(b => b.BookId == bookId);
             if (book != null)
             {
+                if (book.SaleId != null)
+                {
+                    throw new Exception("Book already has a sale assigned.");
+                }
                 books.Add(book);
             }
             else
             {
-                throw new Exception("Book dont exist");
+                throw new Exception($"Book with id {bookId} does not exist.");
             }
         }
+
         sale.Books = books;
         _dbContext.Sales.Add(sale);
         await _dbContext.SaveChangesAsync();
-        foreach (Book book in books)
-        {
-            book.SaleId = sale.SaleId;
-        }
-        await _dbContext.SaveChangesAsync();
     }
+    #endregion
+
 }

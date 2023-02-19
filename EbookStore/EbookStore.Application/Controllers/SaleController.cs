@@ -31,11 +31,11 @@ public class SaleController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateBookSaleAsync([FromBody] SaleCreateRequest createRequest)
+    public async Task<IActionResult> CreateAsync([FromBody] SaleCreateRequest createRequest)
     {
         try
         {
-            await _saleRepo.CreateBookSaleAsync(createRequest);
+            await _saleRepo.CreateAsync(createRequest);
             return Ok();
         }
         catch (Exception ex)
@@ -44,19 +44,21 @@ public class SaleController : ControllerBase
         }
     }
 
-    
+
     [HttpPatch]
     [Authorize]
     public async Task<IActionResult> UpdateExtendSaleAsync([FromBody] SaleExtendRequest updateSaleExtendRequest)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
+
         try
         {
             await _saleRepo.UpdateExtendSaleAsync(updateSaleExtendRequest);
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }
