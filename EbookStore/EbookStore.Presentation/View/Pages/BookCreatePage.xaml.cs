@@ -99,7 +99,7 @@ public partial class BookCreatePage : Page
 
     private bool ValidateCreateRequest()
     {
-        IErrorable createError = new BookCreateError
+        IErrorable createError = new BookCreateUpdateError
         {
             TitleValidity = Title_TextBox.ValidateValidStringLength(4, 50),
             NumberOfPageValidity = NumOfPage_TextBox.ValidatePositiveInt(),

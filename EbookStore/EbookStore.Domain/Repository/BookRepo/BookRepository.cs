@@ -56,6 +56,7 @@ public class BookRepository : IBookRepository
     {
         Book book = await _dbContext.Books
             .Include(b => b.Sale)
+            .Include(b => b.BookGenres)
             .QueryActive()
             .QueryId(bookId)
             .FirstOrDefaultAsync();

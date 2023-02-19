@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EbookStore.Presentation.Validator.Models;
-public class BookCreateError: IErrorable
+public class BookCreateUpdateError: IErrorable
 {
     public bool TitleValidity { get; set; }
     public bool NumberOfPageValidity { get; set; }

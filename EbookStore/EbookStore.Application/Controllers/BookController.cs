@@ -1,13 +1,8 @@
-﻿using EbookStore.Contract.Model;
-using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
-using EbookStore.Contract.ViewModel.Book.BookResponse;
+﻿using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.Request;
-using EbookStore.Domain.Repository;
 using EbookStore.Domain.Repository.BookRepo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Reflection.PortableExecutable;
 
 namespace EbookStore.Application.Controllers;
 

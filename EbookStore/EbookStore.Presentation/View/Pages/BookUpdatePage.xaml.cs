@@ -2,6 +2,8 @@
 using EbookStore.Contract.ViewModel.Book.Response;
 using EbookStore.Contract.ViewModel.Genre.Response;
 using EbookStore.Presentation.RefitClient;
+using EbookStore.Presentation.Validator.Models;
+using EbookStore.Presentation.Validator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,9 +57,9 @@ public partial class BookUpdatePage : Page
             NumberOfPage = OriginalBook.NumberOfPage,
             Price = OriginalBook.Price,
             Description = OriginalBook.Description,
-            CoverImage = OriginalBook.CoverImage,
-            PdfLink = OriginalBook.PdfLink,
-            EpubLink = OriginalBook.EpubLink,
+            CoverImage = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox",
+            PdfLink = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox",
+            EpubLink = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox",
             BookGenreIds = OriginalBook.BookGenreIds
         };
 
@@ -82,5 +84,52 @@ public partial class BookUpdatePage : Page
     private void Cancel_Button_Click(object sender, RoutedEventArgs e)
     {
         _mainWindow.ToHomePage();
+    }
+
+    private async void UpdateBook_Button_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            UpdateBook_Button.IsEnabled = false;
+            if (ValidateCreateRequest())
+            {
+                UpdateRequest.Title = Title_TextBox.Text.Trim();
+                UpdateRequest.NumberOfPage = int.Parse(NumOfPage_TextBox.Text.Trim());
+                UpdateRequest.Price = double.Parse(Price_TextBox.Text.Trim());
+                UpdateRequest.BookGenreIds
+                    = GenreChoices.Where(g => g.IsChecked).Select(g => g.GenreId).ToList();
+                UpdateRequest.Description = Description_TextBox.Text.Trim();
+                await _bookClient.UpdateAsync(UpdateRequest, _jwtToken);
+
+                _mainWindow.ToHomePage();
+            }
+        }
+        catch(Exception ex)
+        {
+            ShowErrorMessage();
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            UpdateBook_Button.IsEnabled = true;
+        }
+    }
+
+    private bool ValidateCreateRequest()
+    {
+        IErrorable createError = new BookCreateUpdateError
+        {
+            TitleValidity = Title_TextBox.ValidateValidStringLength(4, 50),
+            NumberOfPageValidity = NumOfPage_TextBox.ValidatePositiveInt(),
+            PriceValidity = Price_TextBox.ValidatePositiveDouble(),
+            DescriptionValidity = Description_TextBox.ValidateHasInput(),
+        };
+
+        return createError.IsValid();
+    }
+
+    private void ShowErrorMessage()
+    {
+        UpdateError_TextBlock.Visibility = Visibility.Visible;
     }
 }

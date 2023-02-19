@@ -67,7 +67,7 @@
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
                     </TextBlock.Foreground>
-                        <Bold>BOOK MANAGEMENT</Bold>
+                        <Bold>BOOK CREATE</Bold>
                 </TextBlock>
                 <StackPanel>
                     <Label Style="{StaticResource InputLabel}">Title</Label>

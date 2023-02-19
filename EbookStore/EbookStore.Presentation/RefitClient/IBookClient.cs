@@ -29,4 +29,8 @@ public interface IBookClient
 
     [Get("/Book/{id}")]
     Task<BookDetailResponse> GetOneAsync(int id);
+
+    [Patch("/Book")]
+    Task UpdateAsync([Body] BookUpdateRequest updateRequest,
+        [Header("Authorization")] string jwtToken);
 }
