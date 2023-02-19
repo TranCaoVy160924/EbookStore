@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EbookStore.Domain.Repository.BookRepo;
-public static class BookQueryExtension
+public static class SaleQueryExtension
 {
     public static IQueryable<Book> QueryId(this IQueryable<Book> query, int id)
     {

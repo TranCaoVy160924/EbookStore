@@ -24,5 +24,5 @@ public class SaleCreateRequest
     [Required(ErrorMessage = "Please enter sale end date")]
     public DateTime EndDate { get; set; }
 
-
+    public List<int> BookIds { get; set; }
 }
