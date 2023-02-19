@@ -26,6 +26,36 @@ public class SaleRepository : ISaleRepository
         _mapper = mapper;
     }
 
+    #region UpdateAsync
+    public async Task UpdateExtendSaleAsync(SaleExtendRequest updateRequest)
+    {
+        Sale updateExtendSale = await _dbContext.Sales
+            .QueryId(updateRequest.SaleId)
+            .FirstOrDefaultAsync();
+
+
+        if (updateExtendSale != null)
+        {
+            try
+            {
+                UpdateExtendSale(updateExtendSale, updateRequest);
+                await _dbContext.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        else
+        {
+            throw new Exception("Update extend date sale fail!");
+        }
+    }
+    private static void UpdateExtendSale(Sale sale, SaleExtendRequest saleExtendRequest)
+    {
+        sale.EndDate = saleExtendRequest.NewEndDate;
+    }
+    #endregion
+
     #region GetOneAsync
     public async Task<SaleDetailResponse> GetOneAsync(int saleId)
     {
