@@ -1,7 +1,4 @@
-﻿using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
-using EbookStore.Contract.ViewModel.Book.Request;
 using EbookStore.Contract.ViewModel.Sale.Request;
-using EbookStore.Domain.Repository.BookRepo;
 using EbookStore.Domain.Repository.SaleRepo;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,12 +16,25 @@ public class SaleController : ControllerBase
         _saleRepo = saleRepo;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateBookSaleAsync([FromBody] SaleCreateRequest createRequest, [FromQuery] List<int> bookIds)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetOneAsync(int id)
     {
         try
         {
-            await _saleRepo.CreateBookSaleAsync(createRequest, bookIds);
+            return Ok(await _saleRepo.GetOneAsync(id));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateBookSaleAsync([FromBody] SaleCreateRequest createRequest)
+    {
+        try
+        {
+            await _saleRepo.CreateBookSaleAsync(createRequest);
             return Ok();
         }
         catch (Exception ex)
