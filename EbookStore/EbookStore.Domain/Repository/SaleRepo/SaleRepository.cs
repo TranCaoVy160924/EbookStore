@@ -81,10 +81,6 @@ public class SaleRepository : ISaleRepository
         Sale sale = _mapper.Map<Sale>(createRequest);
         List<Book> books = new List<Book>();
         List<int> bookIds = createRequest.BookIds;
-        if (bookIds == null || bookIds.Count == 0)
-        {
-            throw new ArgumentException("BookIds cannot be null or empty.");
-        }
 
         foreach (int bookId in bookIds)
         {
@@ -101,11 +97,6 @@ public class SaleRepository : ISaleRepository
             {
                 throw new Exception($"Book with id {bookId} does not exist.");
             }
-        }
-
-        if (sale == null || sale.SaleId == null)
-        {
-            throw new Exception("Sale object cannot be null or have a null SaleId.");
         }
 
         sale.Books = books;

@@ -44,19 +44,21 @@ public class SaleController : ControllerBase
         }
     }
 
-    
+
     [HttpPatch]
     [Authorize]
     public async Task<IActionResult> UpdateExtendSaleAsync([FromBody] SaleExtendRequest updateSaleExtendRequest)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
+
         try
         {
             await _saleRepo.UpdateExtendSaleAsync(updateSaleExtendRequest);
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }
