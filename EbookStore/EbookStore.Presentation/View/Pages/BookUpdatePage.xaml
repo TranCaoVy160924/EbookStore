@@ -1,0 +1,181 @@
+﻿<Page x:Class="EbookStore.Presentation.View.Pages.BookUpdatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EbookStore.Presentation.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="BookUpdatePage">
+    <Page.Resources>
+        <Style x:Key="InputLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!-- Validator group box-->
+        <Style x:Key="InputBox" TargetType="GroupBox">
+            <Setter Property="Margin" Value="10, 0, 10, 20"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+
+        <!-- Text input-->
+        <Style x:Key="TextInput" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        </Style>
+
+        <Style x:Key="DateInput" TargetType="DatePicker">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ComboBoxInput" TargetType="ComboBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom" />
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+
+        <Style x:Key="ErrorMessage" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="Margin" Value="30, 0, 30, 0" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Border 
+            CornerRadius="15"
+            BorderThickness="2"
+            Background="White">
+            <StackPanel
+                HorizontalAlignment="Center"
+                Margin="15, 35, 15, 0">
+                <TextBlock FontSize="30">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
+                    </TextBlock.Foreground>
+                        <Bold>BOOK MANAGEMENT</Bold>
+                </TextBlock>
+                <StackPanel>
+                    <Label Style="{StaticResource InputLabel}">Title</Label>
+                    <GroupBox 
+                        x:Name="Title_GroupBox"
+                        Width="500"
+                        Style="{StaticResource InputBox}">
+                        <TextBox 
+                            x:Name="Title_TextBox"
+                            Text="{Binding Title}"
+                            Style="{StaticResource TextInput}">
+                        </TextBox>
+                    </GroupBox>
+                </StackPanel>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Label Style="{StaticResource InputLabel}">Number Of Page</Label>
+                        <GroupBox 
+                        x:Name="NumOfPage_GroupBox"
+                        Width="240"
+                        Style="{StaticResource InputBox}">
+                            <TextBox 
+                            x:Name="NumOfPage_TextBox"
+                            Text="{Binding NumberOfPage}"
+                            Style="{StaticResource TextInput}">
+                            </TextBox>
+                        </GroupBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Style="{StaticResource InputLabel}">Price</Label>
+                        <GroupBox 
+                        x:Name="Price_GroupBox"
+                        Width="240"
+                        Style="{StaticResource InputBox}">
+                            <TextBox 
+                            x:Name="Price_TextBox"
+                            Text="{Binding Price}"
+                            Style="{StaticResource TextInput}">
+                            </TextBox>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel>
+                    <Label Style="{StaticResource InputLabel}">Genres</Label>
+                    <GroupBox 
+                        x:Name="GenreFilter_GroupBox"
+                        Width="500"
+                        Style="{StaticResource InputBox}">
+                        <ComboBox 
+                            x:Name="ChooseGenre_ComboBox"
+                            Style="{StaticResource ComboBoxInput}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding IsChecked}" Width="20" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </GroupBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <Label Style="{StaticResource InputLabel}">Description</Label>
+                    <GroupBox 
+                        x:Name="Description_GroupBox"
+                        Width="500"
+                        Height="150"
+                        Style="{StaticResource InputBox}">
+                        <TextBox 
+                            Height="140"
+                            VerticalScrollBarVisibility="Visible"
+                            x:Name="Description_TextBox"
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            Text="{Binding Description}"
+                            Style="{StaticResource TextInput}">
+                        </TextBox>
+                    </GroupBox>
+                </StackPanel>
+
+                <TextBlock 
+                    x:Name="CreateError_TextBlock"
+                    Text="Add Book Unsuccess!"
+                    Margin="10"
+                    Style="{StaticResource ErrorMessage}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button
+                        x:Name="Cancel_Button"
+                        Click="Cancel_Button_Click"
+                        Height="30"
+                        Width="150" Margin="20, 0, 20, 0">
+                        Cancel
+                    </Button>
+                    <Button
+                        x:Name="AddBook_Button"
+                        Width="150" Margin="20, 0, 20, 0">
+                        Add Book
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

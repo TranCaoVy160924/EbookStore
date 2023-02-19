@@ -32,6 +32,7 @@ public partial class MainWindow : Window
     private readonly IAbstractFactory<LoginPage> _loginFactory;
     private readonly IAbstractFactory<HomePage> _homeFactory;
     private readonly IAbstractFactory<BookCreatePage> _bookCreateFactory;
+    private readonly IAbstractFactory<BookUpdatePage> _bookUpdateFactory;
 
     public string JwtToken { get; set; }
 
@@ -39,7 +40,8 @@ public partial class MainWindow : Window
         IAbstractFactory<RegisterPage> registerFactory,
         IAbstractFactory<LoginPage> loginFactory,
         IAbstractFactory<HomePage> homeFactory,
-        IAbstractFactory<BookCreatePage> bookCreateFactory)
+        IAbstractFactory<BookCreatePage> bookCreateFactory,
+        IAbstractFactory<BookUpdatePage> bookUpdateFactory)
     {
         AllocConsole();
         InitializeComponent();
@@ -47,6 +49,7 @@ public partial class MainWindow : Window
         _loginFactory = loginFactory;
         _homeFactory = homeFactory;
         _bookCreateFactory = bookCreateFactory;
+        _bookUpdateFactory = bookUpdateFactory;
         ToLoginPage();
     }
 
@@ -68,6 +71,13 @@ public partial class MainWindow : Window
     public void ToBookCreatePage()
     {
         frMain.Content = _bookCreateFactory.Create();
+    }
+
+    public async Task ToBookUpdatePage(int id)
+    {
+        BookUpdatePage bookUpdatePage = _bookUpdateFactory.Create();
+        await bookUpdatePage.SetOriginalBook(id);
+        frMain.Content = bookUpdatePage;
     }
 
 

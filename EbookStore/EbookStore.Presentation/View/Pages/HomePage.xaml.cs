@@ -149,7 +149,17 @@ public partial class HomePage : Page
 
     private async void Edit_Button_Click(object sender, RoutedEventArgs e)
     {
-       
+        Button button = (Button)sender;
+        BookResponse book = button.DataContext as BookResponse;
+
+        try
+        {
+            await _mainWindow.ToBookUpdatePage(book.Id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     private async void Delete_Button_Click(object sender, RoutedEventArgs e)

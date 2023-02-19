@@ -18,4 +18,5 @@ public class BookDetailResponse
     public DateTime ReleaseDate { get; set; }
     public int? SaleId { get; set; }
     public double? SalePercent { get; set; }
+    public List<int> BookGenreIds { get; set; }
 }

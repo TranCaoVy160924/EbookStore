@@ -41,7 +41,9 @@ public class MapperProfile : Profile
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
         CreateMap<Book, BookDetailResponse>()
             .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(
-                src => src.Sale != null ? src.Sale.SalePercent : 0));
+                src => src.Sale != null ? src.Sale.SalePercent : 0))
+            .ForMember(dest => dest.BookGenreIds, opt => opt.MapFrom(
+                src => src.BookGenres.Select(g => g.GenreId)));
         #endregion
 
         #region Genre
