@@ -10,6 +10,6 @@ namespace EbookStore.Domain.Repository.SaleRepo;
 public interface ISaleRepository
 {
     Task <SaleDetailResponse> GetOneAsync(int saleId);
-    Task CreateBookSaleAsync(SaleCreateRequest createRequest);
+    Task CreateAsync(SaleCreateRequest createRequest);
 
 }

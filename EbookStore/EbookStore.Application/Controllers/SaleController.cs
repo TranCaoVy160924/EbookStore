@@ -30,11 +30,11 @@ public class SaleController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateBookSaleAsync([FromBody] SaleCreateRequest createRequest)
+    public async Task<IActionResult> CreateAsync([FromBody] SaleCreateRequest createRequest)
     {
         try
         {
-            await _saleRepo.CreateBookSaleAsync(createRequest);
+            await _saleRepo.CreateAsync(createRequest);
             return Ok();
         }
         catch (Exception ex)
