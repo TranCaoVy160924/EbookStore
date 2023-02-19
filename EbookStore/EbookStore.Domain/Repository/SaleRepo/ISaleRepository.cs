@@ -1,5 +1,6 @@
 ﻿using EbookStore.Contract.ViewModel.Sale.Response;
 ﻿using EbookStore.Contract.ViewModel.Sale.Request;
+using EbookStore.Contract.ViewModel.Sale.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,4 +13,5 @@ public interface ISaleRepository
     Task <SaleDetailResponse> GetOneAsync(int saleId);
     Task CreateAsync(SaleCreateRequest createRequest);
 
+    Task UpdateExtendSaleAsync(SaleExtendRequest saleExtendRequest);
 }

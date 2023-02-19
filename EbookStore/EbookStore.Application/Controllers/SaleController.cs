@@ -1,5 +1,6 @@
 using EbookStore.Contract.ViewModel.Sale.Request;
 using EbookStore.Domain.Repository.SaleRepo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EbookStore.Application.Controllers;
@@ -43,4 +44,22 @@ public class SaleController : ControllerBase
         }
     }
 
+    
+    [HttpPatch]
+    [Authorize]
+    public async Task<IActionResult> UpdateExtendSaleAsync([FromBody] SaleExtendRequest updateSaleExtendRequest)
+    {
+        if(!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        try
+        {
+            await _saleRepo.UpdateExtendSaleAsync(updateSaleExtendRequest);
+        }catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        return Ok();
+    }
 }
