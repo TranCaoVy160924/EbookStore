@@ -2,8 +2,10 @@
 using EbookStore.Contract.Model;
 using EbookStore.Contract.ViewModel.Book.Response;
 using EbookStore.Contract.ViewModel.Sale.Response;
+using EbookStore.Contract.ViewModel.Pagination;
 using EbookStore.Contract.ViewModel.Sale.Request;
 using EbookStore.Data.EF;
+using EbookStore.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -105,4 +107,18 @@ public class SaleRepository : ISaleRepository
     }
     #endregion
 
+    #region GetSalesAsync
+    public async Task<PagedList<SaleResponse>> GetSalesAsync(SaleQueryRequest queryRequest)
+    {
+        IQueryable<Sale> query = _dbContext.Sales
+            .Include(s => s.Books)
+            .QueryName(queryRequest.Name)
+            .QuerySaleDate(queryRequest.StartDate, queryRequest.EndDate)
+            .AsQueryable();
+
+        var paginatedResult = await query.PaginateResultAsync(queryRequest);
+        return paginatedResult.MapResultToResponse<Sale, SaleResponse>(_mapper);
+    }
+    #endregion
 }
+

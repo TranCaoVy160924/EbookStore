@@ -12,4 +12,13 @@ public static class SaleQueryExtension
     {
         return query.Where(x => x.SaleId == id);
     }
+    public static IQueryable<Sale> QueryName(this IQueryable<Sale> query, string name)
+    {
+        return query.Where(s => s.Name.Contains(name));
+    }
+    public static IQueryable<Sale> QuerySaleDate(this IQueryable<Sale> query, DateTime start, DateTime end)
+    {
+        return query.Where(s => DateTime.Compare(s.StartDate, start) >= 0
+            && DateTime.Compare(s.EndDate, end) <= 0);
+    }
 }

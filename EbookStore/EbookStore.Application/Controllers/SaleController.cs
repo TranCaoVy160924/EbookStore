@@ -64,4 +64,21 @@ public class SaleController : ControllerBase
         }
         return Ok();
     }
+    [HttpPost("Search")]
+    public async Task<IActionResult> GetSalesAsync([FromBody] SaleQueryRequest queryRequest)
+    {
+        try
+        {
+            var pagedResult = await _saleRepo.GetSalesAsync(queryRequest);
+
+            Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
+
+            return Ok(pagedResult.Data);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
 }
