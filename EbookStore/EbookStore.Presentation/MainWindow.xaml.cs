@@ -35,6 +35,7 @@ public partial class MainWindow : Window
     private readonly IAbstractFactory<BookUpdatePage> _bookUpdateFactory;
 
     public string JwtToken { get; set; }
+    public string OriginalToken { get; set; }
 
     public MainWindow(
         IAbstractFactory<RegisterPage> registerFactory,

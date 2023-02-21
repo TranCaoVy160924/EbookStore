@@ -56,6 +56,12 @@
                 </TextBlock.Foreground>
                         <Bold>BOOK MANAGEMENT</Bold>
             </TextBlock>
+            <TextBlock x:Name="UserDisplay_TextBlock" FontSize="30" Text="">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="0, 5, 0, 0">
                     <Label Style="{StaticResource InputLabel}">Title</Label>

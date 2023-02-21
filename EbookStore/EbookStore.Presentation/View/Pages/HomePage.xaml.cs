@@ -8,7 +8,9 @@ using Refit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,9 @@ public partial class HomePage : Page
     private readonly IBookClient _bookClient;
     private readonly IGenreClient _genreClient;
     private readonly string _jwtToken;
+    private readonly string _originalToken;
     private PaginationHeader PaginationMetadata;
+    private bool IsAdmin;
 
     public List<BookResponse> Data { get; private set; }
     public List<GenreResponse> GenreChoices { get; private set; }
@@ -44,6 +48,7 @@ public partial class HomePage : Page
         _bookClient = bookClient;
         _genreClient = genreClient;
         _jwtToken = _mainWindow.JwtToken;
+        _originalToken = _mainWindow.OriginalToken;
 
         StartDate_DatePicker.DisplayDate = DateTime.MinValue;
         EndDate_DatePicker.DisplayDate = DateTime.MaxValue;
@@ -55,6 +60,7 @@ public partial class HomePage : Page
         {
             await LoadBookData(new BookQueryRequest());
             await LoadGenreData();
+            CheckAuthority();
         }
         catch (Exception ex)
         {
@@ -144,41 +150,68 @@ public partial class HomePage : Page
 
     private void AddBook_Button_Click(object sender, RoutedEventArgs e)
     {
-        _mainWindow.ToBookCreatePage();
+        if (IsAdmin)
+        {
+            _mainWindow.ToBookCreatePage();
+        }
     }
 
     private async void Edit_Button_Click(object sender, RoutedEventArgs e)
     {
-        Button button = (Button)sender;
-        BookResponse book = button.DataContext as BookResponse;
-
-        try
+        if (IsAdmin)
         {
-            await _mainWindow.ToBookUpdatePage(book.Id);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
+            Button button = (Button)sender;
+            BookResponse book = button.DataContext as BookResponse;
 
-    private async void Delete_Button_Click(object sender, RoutedEventArgs e)
-    {
-        Button button = (Button)sender;
-        BookResponse book = button.DataContext as BookResponse;
-
-        ConfirmDeletionWindow confirmDelete = new ConfirmDeletionWindow();
-        if (confirmDelete.ShowDialog() == true)
-        {
             try
             {
-                await _bookClient.DeleteAsync(book.Id, _jwtToken);
-                await LoadBookData(new BookQueryRequest());
+                await _mainWindow.ToBookUpdatePage(book.Id);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
+    }
+
+    private async void Delete_Button_Click(object sender, RoutedEventArgs e)
+    {
+        if (IsAdmin)
+        {
+            Button button = (Button)sender;
+            BookResponse book = button.DataContext as BookResponse;
+
+            ConfirmDeletionWindow confirmDelete = new ConfirmDeletionWindow();
+            if (confirmDelete.ShowDialog() == true)
+            {
+                try
+                {
+                    await _bookClient.DeleteAsync(book.Id, _jwtToken);
+                    await LoadBookData(new BookQueryRequest());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+    }
+
+    private void CheckAuthority()
+    {
+        JwtSecurityToken secureToken;
+        var handler = new JwtSecurityTokenHandler();
+        secureToken = handler.ReadJwtToken(_originalToken); 
+        if (secureToken.Claims.Where(c => c.Type == ClaimTypes.Role).SingleOrDefault().Value == "Admin")
+        {
+            IsAdmin = true;
+        }
+        else
+        {
+            IsAdmin = false;
+        }
+
+        string username = secureToken.Claims.Where(c => c.Type == ClaimTypes.Name).SingleOrDefault().Value;
+        UserDisplay_TextBlock.Text = username + " - " + (IsAdmin ? "Admin" : "User");
     }
 }

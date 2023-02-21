@@ -15,7 +15,7 @@ namespace EbookStore.Presentation.RefitClient;
 [Headers("Content-Type: application/json")]
 public interface IBookClient
 {
-    [Get("/Book")]
+    [Post("/Book/Search")]
     Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] BookQueryRequest queryRequest,
         [Header("Authorization")] string jwtToken);
 
