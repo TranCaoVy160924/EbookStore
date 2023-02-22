@@ -103,7 +103,7 @@ public class UserRepository : IUserRepository
     public async Task<string> CreateTokenAsync(User user)
     {
         var signingCredentials = GetSigningCredentials();
-        var claims = GetClaims(user, user.UserName, await GetUserRoleAsync(user));
+        var claims = GetClaims(user, user.Id,user.UserName, await GetUserRoleAsync(user));
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
@@ -115,11 +115,12 @@ public class UserRepository : IUserRepository
         return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
     }
 
-    private IList<Claim> GetClaims(User user, string username, string role)
+    private IList<Claim> GetClaims(User user, Guid userid, string username, string role)
     {
         var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.Sid, userid.ToString()),
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Role, role),
             };

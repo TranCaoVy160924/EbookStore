@@ -21,8 +21,19 @@ public class WishlistController : ControllerBase
     [Authorize]
     public async Task<IActionResult> AddBookToWishlist(int bookId)
     {
-        var username = User.GetUsername();
-        await _wishlistRepo.AddBookToWishlistAsync(bookId, username);
-        return Ok();
+        try
+        {
+            var username = User.GetUsername();
+            await _wishlistRepo.AddBookToWishlistAsync(bookId, username);
+            return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
     }
 }

@@ -4,8 +4,8 @@ namespace EbookStore.Application.Helpers;
 
 public static class UserHelper
 {
-    public static string GetUsername(this ClaimsPrincipal claimsPrincipal)
+    public static string GetUsername(this ClaimsPrincipal userClaims)
     {
-        return claimsPrincipal.FindFirstValue(ClaimTypes.Name);
+        return userClaims.Claims.Where(c => c.Type == ClaimTypes.Sid).FirstOrDefault().Value;
     }
 }
