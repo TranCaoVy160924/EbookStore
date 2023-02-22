@@ -25,6 +25,33 @@ public class WishlistRepository : IWishlistRepository
         _mapper = mapper;
     }
 
+    public async Task AddBookToWishlistAsync(int bookId, string username)
+    {
+        var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
+        if (user == null)
+        {
+            throw new ApplicationException($"Unable to find user with username: {username}");
+        }
+
+        var book = await _dbContext.Books.SingleOrDefaultAsync(b => b.BookId == bookId);
+
+        if (book == null)
+        {
+            throw new ApplicationException($"Unable to find book with id: {bookId}");
+        }
+
+        var wishItem = new WishItem
+        {
+            UserId = user.Id,
+            BookId = book.BookId,
+            IsActive = true
+        };
+
+        _dbContext.WishItems.Add(wishItem);
+        await _dbContext.SaveChangesAsync();
+    }
+
     #region GetWisherAsync
     public async Task<List<User>> GetWishersAsync(int bookId)
     {
