@@ -13,18 +13,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Net.Mail;
+using System.Net;
+using EbookStore.Domain.Repository.WishlistRepo;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace EbookStore.Domain.Repository.SaleRepo;
 public class SaleRepository : ISaleRepository
 {
     private readonly EbookStoreDbContext _dbContext;
+    private readonly IWishlistRepository _wishlistRepo;
     private readonly IMapper _mapper;
 
     public SaleRepository(
         EbookStoreDbContext dbContext,
+        IWishlistRepository wishlistRepo,
         IMapper mapper)
     {
         _dbContext = dbContext;
+        _wishlistRepo = wishlistRepo;
         _mapper = mapper;
     }
 
@@ -42,7 +49,8 @@ public class SaleRepository : ISaleRepository
             {
                 UpdateExtendSale(updateExtendSale, updateRequest);
                 await _dbContext.SaveChangesAsync();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -81,8 +89,25 @@ public class SaleRepository : ISaleRepository
     public async Task CreateAsync(SaleCreateRequest createRequest)
     {
         Sale sale = _mapper.Map<Sale>(createRequest);
+        List<Book> books = await CheckBookForAddingToSale(createRequest.BookIds);
+
+        if (books.Count > 0)
+        {
+            sale.Books = books;
+            _dbContext.Sales.Add(sale);
+            await _dbContext.SaveChangesAsync();
+
+            await NotifyUserByEmail(books);
+        }
+        else
+        {
+            throw new Exception("No book in sale");
+        }
+    }
+
+    private async Task<List<Book>> CheckBookForAddingToSale(List<int> bookIds)
+    {
         List<Book> books = new List<Book>();
-        List<int> bookIds = createRequest.BookIds;
 
         foreach (int bookId in bookIds)
         {
@@ -101,9 +126,17 @@ public class SaleRepository : ISaleRepository
             }
         }
 
-        sale.Books = books;
-        _dbContext.Sales.Add(sale);
-        await _dbContext.SaveChangesAsync();
+        return books;
+    }
+
+    private async Task NotifyUserByEmail(List<Book> books)
+    {
+        foreach (Book book in books)
+        {
+            List<User> wishers = await _wishlistRepo.GetWishersAsync(book.BookId);
+            List<string> wisherEmails = wishers.Select(u => u.Email).ToList();
+            _wishlistRepo.SendSaleNotifyEmail(wisherEmails, book.Title);
+        }
     }
     #endregion
 
