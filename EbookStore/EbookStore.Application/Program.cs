@@ -5,6 +5,7 @@ using EbookStore.Domain.Repository;
 using EbookStore.Domain.Repository.BookRepo;
 using EbookStore.Domain.Repository.GenreRepo;
 using EbookStore.Domain.Repository.SaleRepo;
+using EbookStore.Domain.Repository.WishlistRepo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
 
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperProfile)));
 
