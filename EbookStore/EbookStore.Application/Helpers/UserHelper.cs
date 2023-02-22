@@ -6,7 +6,6 @@ public static class UserHelper
 {
     public static string GetUsername(this ClaimsPrincipal claimsPrincipal)
     {
-        Console.WriteLine(ClaimTypes.Sid);
-        return claimsPrincipal.FindFirstValue(ClaimTypes.Sid);
+        return claimsPrincipal.FindFirstValue(ClaimTypes.Name);
     }
 }
