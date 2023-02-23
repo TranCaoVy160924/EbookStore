@@ -50,12 +50,22 @@
         BorderThickness="2"
         Background="White">
         <StackPanel Margin="15, 35, 15, 0">
-            <TextBlock FontSize="30">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
-                </TextBlock.Foreground>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="30">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>
+                    </TextBlock.Foreground>
                         <Bold>BOOK MANAGEMENT</Bold>
-            </TextBlock>
+                </TextBlock>
+                <Button 
+                    x:Name="Logout_Button"
+                    Click="Logout_Button_Click"
+                    Width="100" Height="20"
+                    Margin="500, 0, 0, 0"
+                    HorizontalAlignment="Right">
+                    Log out
+                </Button>
+            </StackPanel>
             <TextBlock x:Name="UserDisplay_TextBlock" FontSize="30" Text="">
                 <TextBlock.Foreground>
                     <SolidColorBrush Color="{StaticResource PrimaryBlue}"/>

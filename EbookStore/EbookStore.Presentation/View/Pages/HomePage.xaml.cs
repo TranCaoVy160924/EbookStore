@@ -3,6 +3,7 @@ using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.Genre.Response;
 using EbookStore.Contract.ViewModel.Pagination;
 using EbookStore.Presentation.RefitClient;
+using EbookStore.Presentation.View.Windows;
 using Newtonsoft.Json;
 using Refit;
 using System;
@@ -154,6 +155,11 @@ public partial class HomePage : Page
         {
             _mainWindow.ToBookCreatePage();
         }
+        else
+        {
+            UnauthorizeWindow unauthorizeWindow = new UnauthorizeWindow();
+            unauthorizeWindow.ShowDialog();
+        }
     }
 
     private async void Edit_Button_Click(object sender, RoutedEventArgs e)
@@ -171,6 +177,11 @@ public partial class HomePage : Page
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+        else
+        {
+            UnauthorizeWindow unauthorizeWindow = new UnauthorizeWindow();
+            unauthorizeWindow.ShowDialog();
         }
     }
 
@@ -195,13 +206,18 @@ public partial class HomePage : Page
                 }
             }
         }
+        else
+        {
+            UnauthorizeWindow unauthorizeWindow = new UnauthorizeWindow();
+            unauthorizeWindow.ShowDialog();
+        }
     }
 
     private void CheckAuthority()
     {
         JwtSecurityToken secureToken;
         var handler = new JwtSecurityTokenHandler();
-        secureToken = handler.ReadJwtToken(_originalToken); 
+        secureToken = handler.ReadJwtToken(_originalToken);
         if (secureToken.Claims.Where(c => c.Type == ClaimTypes.Role).SingleOrDefault().Value == "Admin")
         {
             IsAdmin = true;
@@ -213,5 +229,10 @@ public partial class HomePage : Page
 
         string username = secureToken.Claims.Where(c => c.Type == ClaimTypes.Name).SingleOrDefault().Value;
         UserDisplay_TextBlock.Text = username + " - " + (IsAdmin ? "Admin" : "User");
+    }
+
+    private void Logout_Button_Click(object sender, RoutedEventArgs e)
+    {
+        _mainWindow.Logout();
     }
 }

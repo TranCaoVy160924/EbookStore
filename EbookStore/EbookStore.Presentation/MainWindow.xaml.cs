@@ -81,6 +81,12 @@ public partial class MainWindow : Window
         frMain.Content = bookUpdatePage;
     }
 
+    public void Logout()
+    {
+        JwtToken = String.Empty;
+        OriginalToken = String.Empty;
+        frMain.Content = _loginFactory.Create();
+    }
 
     private void Minimize_Button_Click(object sender, RoutedEventArgs e)
     {
