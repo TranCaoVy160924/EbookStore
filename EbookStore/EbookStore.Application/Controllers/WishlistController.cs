@@ -2,6 +2,7 @@
 using EbookStore.Domain.Repository.WishlistRepo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EbookStore.Application.Controllers;
@@ -23,8 +24,10 @@ public class WishlistController : ControllerBase
     {
         try
         {
-            var username = User.GetUsername();
-            await _wishlistRepo.AddBookToWishlistAsync(bookId, username);
+            //var userid = User.GetUserId();
+            Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.Sid)?.Value);
+
+            await _wishlistRepo.AddBookToWishlistAsync(bookId, userId);
             return Ok();
         }
         catch (ApplicationException ex)

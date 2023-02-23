@@ -10,5 +10,5 @@ public interface IWishlistRepository
 {
     Task<List<User>> GetWishersAsync(int bookId);
     void SendSaleNotifyEmail(List<string> wishers, string bookName);
-    Task AddBookToWishlistAsync(int bookId, string username);
+    Task AddBookToWishlistAsync(int bookId, Guid userId);
 }
