@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using EbookStore.Contract.ViewModel.User.Request;
 
 namespace EbookStore.Application.Controllers;
 
@@ -63,6 +64,22 @@ public class UserController : ControllerBase
         {
             var user = await _userRepo.FindUserFromLoginRequestAsync(request);
             return Ok(await _userRepo.CreateTokenAsync(user));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    [HttpPost("Search")]
+    public async Task<IActionResult> GetUsersAsync([FromBody] UserQueryRequest queryRequest)
+    {
+        try
+        {
+            var pagedResult = await _userRepo.GetUsersAsync(queryRequest);
+
+            Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
+
+            return Ok(pagedResult.Data);
         }
         catch (Exception ex)
         {

@@ -16,6 +16,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using System.Security.Claims;
+using EbookStore.Contract.ViewModel.Pagination;
+using EbookStore.Contract.ViewModel.User.Response;
+using EbookStore.Contract.ViewModel.User.Request;
+using EbookStore.Domain.Utilities;
 
 namespace EbookStore.Domain.Repository;
 
@@ -25,15 +29,18 @@ public class UserRepository : IUserRepository
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _config;
     private readonly IMapper _mapper;
+    private EbookStoreDbContext _dbContext;
 
     public UserRepository(
         UserManager<User> userManager,
         IConfiguration config,
-        IMapper mapper)
+        IMapper mapper,
+        EbookStoreDbContext dbContext)
     {
         _mapper = mapper;
         _config = config;
         _userManager = userManager;
+        _dbContext = dbContext;
     }
     #endregion
 
@@ -140,6 +147,20 @@ public class UserRepository : IUserRepository
             expires: DateTime.Now.AddHours(int.Parse(_config["JwtSettings:expires"])),
             signingCredentials: signingCredentials);
         return tokenOptions;
+    }
+    #endregion
+
+    #region GetUsers
+    public async Task<PagedList<UserQueryResponse>> GetUsersAsync(UserQueryRequest queryRequest)
+    {
+        IQueryable<User> query = _dbContext.Users.Where(u => u.UserName.Contains(queryRequest.UserName));
+        var paginatedResult = await query.PaginateResultAsync(queryRequest);
+
+        var result = paginatedResult.MapResultToResponse<User, UserQueryResponse>(_mapper);
+        int count = (result.CurrentPage - 1) * result.PageSize;
+        foreach (var userResponse in result.Data) { userResponse.UserId = ++count; };
+         
+        return result;
     }
     #endregion
 }
