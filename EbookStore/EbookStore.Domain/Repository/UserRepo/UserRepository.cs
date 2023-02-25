@@ -33,16 +33,13 @@ public class UserRepository : IUserRepository
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _config;
     private readonly IMapper _mapper;
-    private EbookStoreDbContext _dbContext;
 
     public UserRepository(
         EbookStoreDbContext dbContext,
         UserManager<User> userManager,
         IConfiguration config,
-        IMapper mapper,
-        EbookStoreDbContext dbContext)
+        IMapper mapper)
     {
-        _dbContext = dbContext;
         _mapper = mapper;
         _config = config;
         _userManager = userManager;
