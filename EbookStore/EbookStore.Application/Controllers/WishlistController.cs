@@ -1,15 +1,15 @@
-﻿using EbookStore.Contract.Model;
-using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+﻿using EbookStore.Application.Helpers;
+using EbookStore.Contract.Model;
 using EbookStore.Contract.ViewModel.WishItem.Request;
-using EbookStore.Domain.Repository.BookRepo;
 using EbookStore.Domain.Repository.WishlistRepo;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace EbookStore.Application.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class WishlistController : ControllerBase
@@ -52,5 +52,27 @@ public class WishlistController : ControllerBase
         User user = await _userManager.FindByNameAsync(userName);
 
         return user.Id;
+    }
+
+    [HttpPost("{bookId}")]
+    [Authorize]
+    public async Task<IActionResult> AddBookToWishlist(int bookId)
+    {
+        try
+        {
+            //var userid = User.GetUserId();
+            Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.Sid)?.Value);
+
+            await _wishlistRepo.AddBookToWishlistAsync(bookId, userId);
+            return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
     }
 }
