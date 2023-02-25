@@ -1,4 +1,7 @@
 ﻿using EbookStore.Contract.Model;
+using EbookStore.Contract.ViewModel.Pagination;
+using EbookStore.Contract.ViewModel.User.Request;
+using EbookStore.Contract.ViewModel.User.Response;
 using EbookStore.Contract.ViewModel.User.UserLoginRequest;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
@@ -16,4 +19,5 @@ public interface IUserRepository
     Task<bool> IsDuplicateUserNameAsync(string username);
     Task<User> FindUserFromLoginRequestAsync(UserLoginRequest request);
     Task<string> CreateTokenAsync(User user);
+    Task<PagedList<UserQueryResponse>> GetUsersAsync(UserQueryRequest queryRequest);
 }

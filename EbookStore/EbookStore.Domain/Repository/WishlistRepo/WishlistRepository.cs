@@ -37,6 +37,41 @@ public class WishlistRepository : IWishlistRepository
         _userManager = userManager;
     }
 
+    
+    public async Task AddBookToWishlistAsync(int bookId, Guid userid)
+    {
+        var existingWishItem = await _dbContext.WishItems.SingleOrDefaultAsync(wi => wi.UserId == userid && wi.BookId == bookId);
+        if (existingWishItem != null)
+        {
+            throw new ApplicationException($"This book {bookId} is already in the wishlist.");
+        }
+        var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == userid);
+
+        if (user == null)
+        {
+            throw new ApplicationException($"Unable to find user with username: {userid}");
+        }
+
+        var book = await _dbContext.Books.SingleOrDefaultAsync(b => b.BookId == bookId);
+
+        if (book == null)
+        {
+            throw new ApplicationException($"Unable to find book with id: {bookId}");
+        }
+
+        var wishItem = new WishItem
+        {
+            UserId = user.Id,
+            User = user,
+            BookId = book.BookId,
+            Book = book,
+            IsActive = false
+        };
+
+        _dbContext.WishItems.Add(wishItem);
+        await _dbContext.SaveChangesAsync();
+    }
+
     #region GetWisherAsync
     public async Task<List<User>> GetWishersAsync(int bookId)
     {

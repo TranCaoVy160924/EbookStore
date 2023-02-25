@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using EbookStore.Contract.ViewModel.User.Request;
 
 namespace EbookStore.Application.Controllers;
 
@@ -106,5 +107,21 @@ public class UserController : ControllerBase
             return BadRequest(ex.Message);
         }
         return Ok();
+    }
+    [HttpPost("Search")]
+    public async Task<IActionResult> GetUsersAsync([FromBody] UserQueryRequest queryRequest)
+    {
+        try
+        {
+            var pagedResult = await _userRepo.GetUsersAsync(queryRequest);
+
+            Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
+
+            return Ok(pagedResult.Data);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
