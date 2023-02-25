@@ -160,13 +160,14 @@ public class UserRepository : IUserRepository
         User user = await _userManager.FindByNameAsync(username);   
         if(user != null)
         {
-            try
+            if (!user.IsActive == false)
             {
                 user.IsActive = false;
                 await _dbContext.SaveChangesAsync();
-            }catch(Exception ex)
+            }
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("User already been banned!");
             }
         }
         else
@@ -182,14 +183,14 @@ public class UserRepository : IUserRepository
         User user = await _userManager.FindByNameAsync(username);
         if (user != null)
         {
-            try
+            if(user.IsActive == true)
             {
                 user.IsActive = true;
                 await _dbContext.SaveChangesAsync();
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("User already been unbanned!");
             }
         }
         else

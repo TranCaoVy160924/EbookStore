@@ -72,7 +72,7 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpPost("Search")]
+    [HttpPost("Ban/Unban")]
     [Authorize]
     public async Task<IActionResult> BanUser([FromBody] String username)
     {
@@ -108,7 +108,8 @@ public class UserController : ControllerBase
         }
         return Ok();
     }
-    [HttpPost("Search")]
+    [HttpPost("Ban/Unban")]
+    [Authorize]
     public async Task<IActionResult> GetUsersAsync([FromBody] UserQueryRequest queryRequest)
     {
         try
