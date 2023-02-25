@@ -143,6 +143,7 @@ public static class ModelBuilderExtensions
             {
                 UserId = userId[i - 1],
                 BookId = i,
+                IsActive = true
             });
 
             //cartItem

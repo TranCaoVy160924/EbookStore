@@ -7,9 +7,9 @@ using EbookStore.Contract.ViewModel.Book.Response;
 using EbookStore.Contract.ViewModel.Genre.Response;
 using EbookStore.Contract.ViewModel.Sale.Response;
 using EbookStore.Contract.ViewModel.Sale.Request;
-using EbookStore.Contract.ViewModel.Sale.Response;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
+using EbookStore.Contract.ViewModel.User.Response;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
@@ -33,6 +33,7 @@ public class MapperProfile : Profile
             .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
             .ForMember(dest => dest.SecurityStamp, opt => opt.MapFrom(src => src.FirstName))
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
+        CreateMap<User, UserQueryResponse>();
         #endregion
 
         #region Book

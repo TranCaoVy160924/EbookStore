@@ -10,19 +10,31 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using EbookStore.Contract.ViewModel.Pagination;
+using EbookStore.Contract.ViewModel.WishItem.Request;
+using EbookStore.Contract.ViewModel.Book.BookResponse;
+using EbookStore.Domain.Utilities;
+using EbookStore.Domain.Repository.GenreRepo;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+using System.Net.Http;
 
 namespace EbookStore.Domain.Repository.WishlistRepo;
 public class WishlistRepository : IWishlistRepository
 {
     private readonly EbookStoreDbContext _dbContext;
     private readonly IMapper _mapper;
+    private readonly UserManager<User> _userManager;
 
     public WishlistRepository(
         EbookStoreDbContext dbContext,
-        IMapper mapper)
+        IMapper mapper,
+        UserManager<User> userManager)
     {
         _dbContext = dbContext;
         _mapper = mapper;
+        _userManager = userManager;
     }
 
     
@@ -96,6 +108,23 @@ public class WishlistRepository : IWishlistRepository
         }
 
         smtpClient.Send(mailMessage);
+    }
+    #endregion
+
+    #region GetAsync
+    public async Task<PagedList<BookResponse>> GetAsync(WishItemQueryRequest request, Task<Guid> id)
+    {
+        IQueryable<Book> query = _dbContext.Books
+            .Include(b => b.Sale)
+            .QueryActive()
+            .QueryTitle(request.Title)
+            .QueryGenres(request.Genres)
+            .QueryReleaseDate(request.StartReleaseDate, request.EndReleaseDate)
+            .QueryCurrentWishItem(_dbContext.WishItems, await id)
+            .AsQueryable();
+
+        var paginatedResult = await query.PaginateResultAsync(request);
+        return paginatedResult.MapResultToResponse<Book, BookResponse>(_mapper);
     }
     #endregion
 }
