@@ -183,7 +183,7 @@ public class UserRepository : IUserRepository
         User user = await _userManager.FindByNameAsync(username);
         if (user != null)
         {
-            if(user.IsActive == true)
+            if(!user.IsActive == true)
             {
                 user.IsActive = true;
                 await _dbContext.SaveChangesAsync();
