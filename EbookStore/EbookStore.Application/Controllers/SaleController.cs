@@ -82,8 +82,4 @@ public class SaleController : ControllerBase
     }
 }
 
-<<<<<<< Updated upstream
-}
-=======
     
->>>>>>> Stashed changes
