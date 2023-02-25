@@ -80,5 +80,10 @@ public class SaleController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
 }
+
+<<<<<<< Updated upstream
+}
+=======
+    
+>>>>>>> Stashed changes

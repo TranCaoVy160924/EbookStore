@@ -16,21 +16,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using System.Security.Claims;
+using EbookStore.Domain.Repository.UserRepo;
+using System.Net.Mail;
+using System.Net;
 
 namespace EbookStore.Domain.Repository;
 
 public class UserRepository : IUserRepository
 {
     #region Properties and constructors
+    private readonly EbookStoreDbContext _dbContext;
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _config;
     private readonly IMapper _mapper;
 
     public UserRepository(
+        EbookStoreDbContext dbContext,
         UserManager<User> userManager,
         IConfiguration config,
         IMapper mapper)
     {
+        _dbContext = dbContext;
         _mapper = mapper;
         _config = config;
         _userManager = userManager;
@@ -140,6 +146,105 @@ public class UserRepository : IUserRepository
             expires: DateTime.Now.AddHours(int.Parse(_config["JwtSettings:expires"])),
             signingCredentials: signingCredentials);
         return tokenOptions;
+    }
+    #endregion
+
+    #region Ban user
+    public async Task BanUser(String username)
+    {
+        User user = await _userManager.FindByNameAsync(username);   
+        if(user != null)
+        {
+            try
+            {
+                user.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        else
+        {
+            throw new Exception("Ban user fail!");
+        }
+    }
+    #endregion
+
+    #region Unban user
+    public async Task UnbanUser(String username)
+    {
+        User user = await _userManager.FindByNameAsync(username);
+        if (user != null)
+        {
+            try
+            {
+                user.IsActive = true;
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        else
+        {
+            throw new Exception("Unban user fail!");
+        }
+    }
+    #endregion
+
+    #region EmailBanNotification
+    public void SendBanNotificationEmail(String username)
+    {
+        var smtpClient = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential("vytcse160924@fpt.edu.vn", "wnwdgndadurwcwzg"),
+            EnableSsl = true,
+        };
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress("vytcse160924@fpt.edu.vn"),
+            Subject = "Your account has been Banned",
+            Body = $"account with email <h1>{username} has been banned!!</h1>",
+            IsBodyHtml = true,
+        };
+    }
+    #endregion
+
+    #region EmailUnBanNotification
+    public void SendUnbanNotificationEmail(String username)
+    {
+        var smtpClient = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential("vytcse160924@fpt.edu.vn", "wnwdgndadurwcwzg"),
+            EnableSsl = true,
+        };
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress("vytcse160924@fpt.edu.vn"),
+            Subject = "Your account has been Unbanned",
+            Body = $"account with email <h1>{username} has been Unbanned!!</h1>",
+            IsBodyHtml = true,
+        };
+    }
+    #endregion
+
+    #region NotificationUserBan
+    private async Task NotificationUserBanByEmail(User user)
+    {
+        String username = user.UserName;
+        SendBanNotificationEmail(username);
+    }
+    #endregion
+
+    #region NotificationUserUnban
+    private async Task NotificationUserUnban(User user)
+    {
+        String username = user.UserName;
+        SendUnbanNotificationEmail(username);
     }
     #endregion
 }
