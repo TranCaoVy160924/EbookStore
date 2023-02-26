@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using EbookStore.Contract.ViewModel.User.Request;
 
 namespace EbookStore.Application.Controllers;
@@ -70,7 +71,51 @@ public class UserController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpPost("Ban")]
+    [Authorize]
+    public async Task<IActionResult> BanUser([FromQuery] string username)
+    {
+        var thisUsername = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        if (thisUsername.Equals(username))
+        {
+            return BadRequest("User cannot ban themself");
+        }
+
+        try
+        {
+            await _userRepo.BanUserAsync(username);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        return Ok();
+    }
+
+    [HttpPost("Unban")]
+    [Authorize]
+    public async Task<IActionResult> UnbanUser([FromQuery] string username)
+    {
+        var thisUsername = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        if (thisUsername.Equals(username))
+        {
+            return BadRequest("User cannot unban themself");
+        }
+
+        try
+        {
+            await _userRepo.UnbanUserAsync(username);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        return Ok();
+    }
+
     [HttpPost("Search")]
+    [Authorize]
     public async Task<IActionResult> GetUsersAsync([FromBody] UserQueryRequest queryRequest)
     {
         try

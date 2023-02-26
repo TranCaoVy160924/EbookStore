@@ -19,5 +19,8 @@ public interface IUserRepository
     Task<bool> IsDuplicateUserNameAsync(string username);
     Task<User> FindUserFromLoginRequestAsync(UserLoginRequest request);
     Task<string> CreateTokenAsync(User user);
+
+    Task BanUserAsync(String username);
+    Task UnbanUserAsync(String username);
     Task<PagedList<UserQueryResponse>> GetUsersAsync(UserQueryRequest queryRequest);
 }

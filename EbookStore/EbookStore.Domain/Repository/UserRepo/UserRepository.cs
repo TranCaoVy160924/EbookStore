@@ -13,29 +13,28 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using System.Security.Claims;
 using EbookStore.Contract.ViewModel.Pagination;
 using EbookStore.Contract.ViewModel.User.Response;
 using EbookStore.Contract.ViewModel.User.Request;
 using EbookStore.Domain.Utilities;
+using System.Net.Mail;
+using System.Net;
 
 namespace EbookStore.Domain.Repository;
 
 public class UserRepository : IUserRepository
 {
     #region Properties and constructors
+    private readonly EbookStoreDbContext _dbContext;
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _config;
     private readonly IMapper _mapper;
-    private EbookStoreDbContext _dbContext;
 
     public UserRepository(
+        EbookStoreDbContext dbContext,
         UserManager<User> userManager,
         IConfiguration config,
-        IMapper mapper,
-        EbookStoreDbContext dbContext)
+        IMapper mapper)
     {
         _mapper = mapper;
         _config = config;
@@ -111,7 +110,7 @@ public class UserRepository : IUserRepository
     public async Task<string> CreateTokenAsync(User user)
     {
         var signingCredentials = GetSigningCredentials();
-        var claims = GetClaims(user, user.Id,user.UserName, await GetUserRoleAsync(user));
+        var claims = GetClaims(user, user.Id, user.UserName, await GetUserRoleAsync(user));
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
@@ -151,6 +150,106 @@ public class UserRepository : IUserRepository
     }
     #endregion
 
+    #region Ban user
+    public async Task BanUserAsync(String username)
+    {
+        User user = await _userManager.FindByNameAsync(username);
+        if (user != null)
+        {
+            if (user.IsActive)
+            {
+                user.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("User already been banned!");
+            }
+        }
+        else
+        {
+            throw new Exception("Ban user fail!");
+        }
+    }
+    #endregion
+
+    #region Unban user
+    public async Task UnbanUserAsync(String username)
+    {
+        User user = await _userManager.FindByNameAsync(username);
+        if (user != null)
+        {
+            if (!user.IsActive)
+            {
+                user.IsActive = true;
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("User already been unbanned!");
+            }
+        }
+        else
+        {
+            throw new Exception("Unban user fail!");
+        }
+    }
+    #endregion
+
+    #region EmailBanNotification
+    public void SendBanNotificationEmail(String username)
+    {
+        var smtpClient = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential("vytcse160924@fpt.edu.vn", "wnwdgndadurwcwzg"),
+            EnableSsl = true,
+        };
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress("vytcse160924@fpt.edu.vn"),
+            Subject = "Your account has been Banned",
+            Body = $"account with email <h1>{username} has been banned!!</h1>",
+            IsBodyHtml = true,
+        };
+    }
+    #endregion
+
+    #region EmailUnBanNotification
+    public void SendUnbanNotificationEmail(String username)
+    {
+        var smtpClient = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential("vytcse160924@fpt.edu.vn", "wnwdgndadurwcwzg"),
+            EnableSsl = true,
+        };
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress("vytcse160924@fpt.edu.vn"),
+            Subject = "Your account has been Unbanned",
+            Body = $"account with email <h1>{username} has been Unbanned!!</h1>",
+            IsBodyHtml = true,
+        };
+    }
+    #endregion
+
+    #region NotificationUserBan
+    private async Task NotificationUserBanByEmail(User user)
+    {
+        String username = user.UserName;
+        SendBanNotificationEmail(username);
+    }
+    #endregion
+
+    #region NotificationUserUnban
+    private async Task NotificationUserUnban(User user)
+    {
+        String username = user.UserName;
+        SendUnbanNotificationEmail(username);
+    }
+    #endregion
+
     #region GetUsers
     public async Task<PagedList<UserQueryResponse>> GetUsersAsync(UserQueryRequest queryRequest)
     {
@@ -160,7 +259,7 @@ public class UserRepository : IUserRepository
         var result = paginatedResult.MapResultToResponse<User, UserQueryResponse>(_mapper);
         int count = (result.CurrentPage - 1) * result.PageSize;
         foreach (var userResponse in result.Data) { userResponse.UserId = ++count; };
-         
+
         return result;
     }
     #endregion

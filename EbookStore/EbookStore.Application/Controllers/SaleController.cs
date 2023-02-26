@@ -80,5 +80,6 @@ public class SaleController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
 }
+
+    
