@@ -20,7 +20,7 @@ public interface IUserRepository
     Task<User> FindUserFromLoginRequestAsync(UserLoginRequest request);
     Task<string> CreateTokenAsync(User user);
 
-    Task BanUser(String username);
-    Task UnbanUser(String username);
+    Task BanUserAsync(String username);
+    Task UnbanUserAsync(String username);
     Task<PagedList<UserQueryResponse>> GetUsersAsync(UserQueryRequest queryRequest);
 }

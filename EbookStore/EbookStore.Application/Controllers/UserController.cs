@@ -72,35 +72,19 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpPost("Ban/Unban")]
+    [HttpPost("Ban")]
     [Authorize]
-    public async Task<IActionResult> BanUser([FromBody] String username)
+    public async Task<IActionResult> BanUser([FromQuery] string username)
     {
-        if (!ModelState.IsValid)
+        var thisUsername = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        if (thisUsername.Equals(username))
         {
-            return BadRequest(ModelState);
+            return BadRequest("User cannot ban themself");
         }
-        try
-        {
-            await _userRepo.BanUser(username);
-        }catch(Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        return Ok();
-    }
 
-    [HttpPost("Search")]
-    [Authorize]
-    public async Task<IActionResult> UnbanUser([FromBody] String username)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         try
         {
-            await _userRepo.UnbanUser(username);
+            await _userRepo.BanUserAsync(username);
         }
         catch (Exception ex)
         {
@@ -108,7 +92,29 @@ public class UserController : ControllerBase
         }
         return Ok();
     }
-    [HttpPost("Ban/Unban")]
+
+    [HttpPost("Unban")]
+    [Authorize]
+    public async Task<IActionResult> UnbanUser([FromQuery] string username)
+    {
+        var thisUsername = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        if (thisUsername.Equals(username))
+        {
+            return BadRequest("User cannot unban themself");
+        }
+
+        try
+        {
+            await _userRepo.UnbanUserAsync(username);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        return Ok();
+    }
+
+    [HttpPost("Search")]
     [Authorize]
     public async Task<IActionResult> GetUsersAsync([FromBody] UserQueryRequest queryRequest)
     {

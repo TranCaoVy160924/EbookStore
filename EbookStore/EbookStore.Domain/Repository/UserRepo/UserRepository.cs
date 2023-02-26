@@ -13,14 +13,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using System.Security.Claims;
 using EbookStore.Contract.ViewModel.Pagination;
 using EbookStore.Contract.ViewModel.User.Response;
 using EbookStore.Contract.ViewModel.User.Request;
 using EbookStore.Domain.Utilities;
-using EbookStore.Domain.Repository.UserRepo;
 using System.Net.Mail;
 using System.Net;
 
@@ -114,7 +110,7 @@ public class UserRepository : IUserRepository
     public async Task<string> CreateTokenAsync(User user)
     {
         var signingCredentials = GetSigningCredentials();
-        var claims = GetClaims(user, user.Id,user.UserName, await GetUserRoleAsync(user));
+        var claims = GetClaims(user, user.Id, user.UserName, await GetUserRoleAsync(user));
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
@@ -155,12 +151,12 @@ public class UserRepository : IUserRepository
     #endregion
 
     #region Ban user
-    public async Task BanUser(String username)
+    public async Task BanUserAsync(String username)
     {
-        User user = await _userManager.FindByNameAsync(username);   
-        if(user != null)
+        User user = await _userManager.FindByNameAsync(username);
+        if (user != null)
         {
-            if (!user.IsActive == false)
+            if (user.IsActive)
             {
                 user.IsActive = false;
                 await _dbContext.SaveChangesAsync();
@@ -178,12 +174,12 @@ public class UserRepository : IUserRepository
     #endregion
 
     #region Unban user
-    public async Task UnbanUser(String username)
+    public async Task UnbanUserAsync(String username)
     {
         User user = await _userManager.FindByNameAsync(username);
         if (user != null)
         {
-            if(!user.IsActive == true)
+            if (!user.IsActive)
             {
                 user.IsActive = true;
                 await _dbContext.SaveChangesAsync();
@@ -263,7 +259,7 @@ public class UserRepository : IUserRepository
         var result = paginatedResult.MapResultToResponse<User, UserQueryResponse>(_mapper);
         int count = (result.CurrentPage - 1) * result.PageSize;
         foreach (var userResponse in result.Data) { userResponse.UserId = ++count; };
-         
+
         return result;
     }
     #endregion
