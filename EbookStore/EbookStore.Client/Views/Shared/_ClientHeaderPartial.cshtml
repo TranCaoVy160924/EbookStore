@@ -31,10 +31,14 @@
                         {
                             <form asp-controller="Auth" asp-action="Login" method="get">
                                 <button class="dropdown-item" type="submit">
-                                    Signin
+                                    Sign in
                                 </button>
                             </form>
-                            <button class="dropdown-item" type="button">Sign up</button>
+                            <form asp-controller="Auth" asp-action="Register" method="get">
+                                <button class="dropdown-item" type="submit">
+                                    Sign up
+                                </button>
+                            </form>
                         }
                         else
                         {

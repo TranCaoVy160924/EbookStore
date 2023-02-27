@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
 using System.Security.Claims;
+using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 
 namespace EbookStore.Client.Controllers;
 public class AuthController : Controller
@@ -23,9 +24,19 @@ public class AuthController : Controller
         return View();
     }
 
+    public IActionResult Register()
+    {
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> Login(UserLoginRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
         try
         {
             string token = await _userClient.AuthenticateAsync(request);
@@ -48,6 +59,27 @@ public class AuthController : Controller
         {
             TempData["LoginErrorMessage"] = "Password or Username is invalid";
             return RedirectToAction("Login", "Auth");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Register(UserRegisterRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction("Register", "Auth");
+        }
+
+        try
+        {
+            await _userClient.RegisterAsync(request);
+
+            return RedirectToAction("Login", "Auth");
+        }
+        catch (Exception ex)
+        {
+            TempData["RegisterErrorMessage"] = "Register unccessfully";
+            return RedirectToAction("Register", "Auth");
         }
     }
 
