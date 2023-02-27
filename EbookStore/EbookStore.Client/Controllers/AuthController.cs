@@ -52,7 +52,7 @@ public class AuthController : Controller
             }
             else
             {
-                throw new Exception("Admin");
+                return RedirectToAction("Index", "Book");
             }
         }
         catch

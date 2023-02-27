@@ -1,3 +1,12 @@
-﻿@{
-    Layout = "_ClientLayout";
+﻿@using EbookStore.Client.Helper;
+@{
+    UserManager userManager = new UserManager(User);
+    if (userManager.IsLogin() && userManager.GetUserRole().Equals("Admin"))
+    {
+        Layout = "_AdminLayout";
+    }
+    else
+    {
+        Layout = "_ClientLayout";
+    }
 }
