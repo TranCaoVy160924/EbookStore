@@ -213,6 +213,12 @@ public class UserRepository : IUserRepository
             IsBodyHtml = true,
         };
     }
+
+    private async Task NotificationUserBanByEmail(User user)
+    {
+        String username = user.UserName;
+        SendBanNotificationEmail(username);
+    }
     #endregion
 
     #region EmailUnBanNotification
@@ -232,17 +238,7 @@ public class UserRepository : IUserRepository
             IsBodyHtml = true,
         };
     }
-    #endregion
 
-    #region NotificationUserBan
-    private async Task NotificationUserBanByEmail(User user)
-    {
-        String username = user.UserName;
-        SendBanNotificationEmail(username);
-    }
-    #endregion
-
-    #region NotificationUserUnban
     private async Task NotificationUserUnban(User user)
     {
         String username = user.UserName;
