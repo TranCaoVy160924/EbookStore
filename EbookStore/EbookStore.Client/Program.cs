@@ -1,4 +1,6 @@
+using EbookStore.Client.RefitClient;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +19,13 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-string baseUrl = "https://localhost:7281";
+string baseUrl = "https://localhost:7186/api";
+builder.Services.AddRefitClient<IUserClient>()
+                    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<IBookClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<IGenreClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 
 builder.Services.AddRazorPages();
 
