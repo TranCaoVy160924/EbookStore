@@ -26,6 +26,8 @@ builder.Services.AddRefitClient<IBookClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<IGenreClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient< IGenreClient>()
+    .ConfigureHttpClient(c=>c.BaseAddress= new Uri(baseUrl));
 
 builder.Services.AddRazorPages();
 
