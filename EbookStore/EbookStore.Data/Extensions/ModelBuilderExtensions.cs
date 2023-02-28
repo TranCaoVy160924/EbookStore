@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
+using LoremNET;
 
 namespace EbookStore.Data.Extensions;
 
@@ -43,6 +44,8 @@ public static class ModelBuilderExtensions
 
         var hasher = new PasswordHasher<User>();
 
+        Random rand = new Random();
+
         for (int i = 1; i <= 10; i++)
         {
             //sales
@@ -50,30 +53,117 @@ public static class ModelBuilderExtensions
             {
                 SaleId = i,
                 Name = "Sale " + i.ToString(),
-                SalePercent = i,
+                SalePercent = rand.Next(1, 5) * 10,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now
             });
         }
 
-        for (int i = 1; i <= 30; i++)
+        for (int i = 1; i <= 100; i++)
         {
             //book
             modelBuilder.Entity<Book>().HasData(new Book
             {
                 BookId = i,
-                Title = "Book " + i.ToString(),
+                Title = LoremNET.Lorem.Words(1, 5, true, false),
                 IsActive = true,
                 SaleId = (i % 4 == 0) ? null : (i % 3 + 1),
-                NumberOfPage = i * 100,
+                NumberOfPage = rand.Next(1, 5) * 100,
                 Price = i * 10,
-                Description = "Description " + i.ToString(),
+                Description = LoremNET.Lorem.Words(1, 20, true, true),
                 CoverImage = "cover " + i.ToString(),
                 PdfLink = "PdfLink " + i.ToString(),
                 EpubLink = "EpubLink" + i.ToString(),
                 ReleaseDate = DateTime.Now
             });
         }
+
+        //genre
+        #region genre
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 1,
+            Name = "Action and Adventure"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 2,
+            Name = "Classics"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 3,
+            Name = "Comic Book/Graphic Novel"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 4,
+            Name = "Detective and Mystery"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 5,
+            Name = "Fantasy"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 6,
+            Name = "Historical Fiction"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 7,
+            Name = "Horror"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 8,
+            Name = "Literary Fiction"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 9,
+            Name = "Romance"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 10,
+            Name = "Thrillers"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 11,
+            Name = "Poetry"
+        });
+
+        modelBuilder.Entity<Genre>().HasData(new Genre
+        {
+            GenreId = 12,
+            Name = "Sci-Fi"
+        });
+        #endregion
+
+        for(int i = 1; i <= 100; i++)
+        {
+            modelBuilder.Entity<BookGenre>().HasData(
+                new BookGenre
+                {
+                    BookId = i,
+                    GenreId = rand.Next(1, 13)
+                }
+            );
+        }
+
 
         for (int i = 1; i <= 10; i++)
         {
@@ -112,31 +202,6 @@ public static class ModelBuilderExtensions
                     UserId = userId[i - 1]
                 });
             }
-
-            //genre
-            modelBuilder.Entity<Genre>().HasData(new Genre
-            {
-                GenreId = i,
-                Name = "Genre " + i.ToString(),
-            });
-
-            modelBuilder.Entity<BookGenre>().HasData(
-                new BookGenre
-                {
-                    BookId = i,
-                    GenreId = i,
-                },
-                new BookGenre
-                {
-                    BookId = 10 + i,
-                    GenreId = i,
-                },
-                new BookGenre
-                {
-                    BookId = 20 + i,
-                    GenreId = i,
-                }
-            );
 
             //wishItem
             modelBuilder.Entity<WishItem>().HasData(new WishItem
