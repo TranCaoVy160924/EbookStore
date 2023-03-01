@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace EbookStore.Client.Helper;
 
@@ -9,6 +10,14 @@ public class UserManager
     public UserManager(ClaimsPrincipal claimsPrincipal)
     {
         _claimsPrincipal = claimsPrincipal;
+    }
+
+    public string GetToken()
+    {
+        var tokenString = _claimsPrincipal.Claims
+            .Where(c => c.Type == "AuthHeader")
+            .SingleOrDefault().Value;
+        return tokenString;
     }
 
     public string GetUserId()
