@@ -1,0 +1,136 @@
+﻿@using EbookStore.Client.Helper;
+@using EbookStore.Client.RefitClient;
+@using EbookStore.Contract.ViewModel.Pagination;
+@using EbookStore.Contract.ViewModel.Sale.Request;
+@using EbookStore.Contract.ViewModel.Sale.Response;
+@using Newtonsoft.Json;
+@using Refit;
+@inject ISaleClient _saleClient;
+
+@{
+    UserManager userManager = new UserManager(this.User);
+    List<SaleResponse> data = new List<SaleResponse>();
+    PaginationHeader paginationHeader = null;
+
+    if (userManager.IsLogin())
+    {
+        var token = userManager.GetToken();
+        SaleQueryRequest queryRequest = new SaleQueryRequest
+                {
+                    PageNumber = 1,
+                    PageSize = 10,
+                    Name = string.Empty,
+                    StartDate = DateTime.MinValue,
+                    EndDate = DateTime.MaxValue
+    };
+        ApiResponse<List<SaleResponse>> response
+                    = await _saleClient.GetResponseAsync(queryRequest, token);
+        string headerString = await response.GetPaginationHeader();
+        paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
+        data = response.ReadResult();
+    }
+
+}
+
+@{
+    ViewData["Title"] = "Sale List";
+}
+<head>
+    <title>Sale</title>
+    <style>
+        body {
+            margin-top: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-left: 30%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn {
+            border: none;
+            color: white;
+            margin: 4px 2px;
+            padding: 6px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: #008CBA;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            float: left;
+            margin-left: 2%;
+            margin-top: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 12px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search...">
+    </div>
+    <table>
+        <thead>
+            <tr>
+            <th>ID</th>
+                <th>Name</th>
+                <th>Sale</th>
+                <th>Start Date</th>
+                <th>Extend Date</th>
+                <th>Extend</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SaleResponse sale in data)
+            {
+                <tr>
+                    <td>@sale.Id</td>
+                    <td>@sale.Name</td>
+                    <td>@sale.SalePercent%</td>
+                    <td>@sale.StartDate.ToString("dd-MM-yyyy")</td>
+                    <td><input type="date" min="@DateTime.Now.ToString("dd-MM-yyyy")"></td>
+                    <td><button class="btn btn-delete">Update</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+

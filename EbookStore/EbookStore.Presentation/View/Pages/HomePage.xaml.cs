@@ -72,6 +72,8 @@ public partial class HomePage : Page
         RefreshList();
     }
 
+  
+
     private async Task LoadGenreData()
     {
         GenreChoices = await _genreClient.GetAsync();
