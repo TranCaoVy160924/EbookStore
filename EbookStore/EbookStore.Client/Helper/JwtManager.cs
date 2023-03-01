@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Web;
@@ -40,11 +41,12 @@ namespace EbookStore.Client.Helper
         public ClaimsPrincipal GetPriciples()
         {
             var claims = new List<Claim>();
-
+            var tokenString = "Bearer " + JwtTokenString;
             claims.Add(new Claim(ClaimTypes.Sid, GetUserId()));
             claims.Add(new Claim(ClaimTypes.Name, GetUsername()));
             claims.Add(new Claim(ClaimTypes.Role, GetUserRole()));
-            claims.Add(new Claim("AuthHeader", "Bearer " + _secureToken));
+            claims.Add(new Claim("AuthHeader", 
+                tokenString));
 
             var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
