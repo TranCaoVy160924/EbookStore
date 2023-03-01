@@ -126,7 +126,7 @@
                     <td>@sale.Name</td>
                     <td>@sale.SalePercent%</td>
                     <td>@sale.StartDate.ToString("dd-MM-yyyy")</td>
-                    <td><input type="date" min="@DateTime.Now.ToString("dd-MM-yyyy")" asp-for=@sale.EndDate.ToString("dd-MM-yyyy")></td>
+                    <td><input type="date" min="@DateTime.Now.ToString("dd-MM-yyyy")"></td>
                     <td><button class="btn btn-delete">Update</button></td>
                 </tr>
             }
