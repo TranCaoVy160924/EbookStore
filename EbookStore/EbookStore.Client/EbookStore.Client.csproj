@@ -14,6 +14,10 @@
   <ItemGroup>
     <ProjectReference Include="..\EbookStore.Contract\EbookStore.Contract.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\User\" />
+  </ItemGroup>
 	
     <ItemGroup>
 		<Folder Include="Views\Sale\" />
