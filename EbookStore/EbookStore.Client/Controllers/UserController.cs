@@ -11,4 +11,8 @@ public class UserController : Controller
     {
         _userClient = userClient;
     }
+    public IActionResult Index()
+    {
+        return View();
+    }
 }
