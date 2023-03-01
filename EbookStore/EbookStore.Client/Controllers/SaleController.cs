@@ -11,9 +11,9 @@ using Refit;
 public class SaleController: Controller
 {
     private readonly ISaleClient _saleClient;
-    public SaleController(ISaleClient userClient)
+    public SaleController(ISaleClient saleClient)
     {
-        _saleClient = userClient;
+        _saleClient = saleClient;
     }
     public IActionResult Index() {
 
