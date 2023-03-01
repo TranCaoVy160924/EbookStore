@@ -9,22 +9,13 @@ using Newtonsoft.Json;
 using Refit;
 
 public class SaleController: Controller
-{   
-    public readonly ISaleClient _saleClient;
-    private readonly string _jwtToken;
-    private PaginationHeader PaginationMetadata;
-
-    public List<SaleResponse> Data { get; private set; }
-    
-    private async Task LoadSaleData(SaleQueryRequest saleQueryRequest)
+{
+    private readonly ISaleClient _saleClient;
+    public SaleController(ISaleClient userClient)
     {
-        ApiResponse<List<SaleResponse>> response
-        = await _saleClient.GetResponseAsync(saleQueryRequest, _jwtToken);
-        string headerString = await response.GetPaginationHeader();
-        PaginationMetadata = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
-        Data = response.ReadResult();
+        _saleClient = userClient;
     }
-    public IActionResult Index(ISaleClient saleClient) {
+    public IActionResult Index() {
 
         return View();
     }

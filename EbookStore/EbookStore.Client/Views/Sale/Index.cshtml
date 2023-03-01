@@ -1,11 +1,35 @@
 ﻿@using EbookStore.Client.Helper;
 @using EbookStore.Client.RefitClient;
+@using EbookStore.Contract.ViewModel.Pagination;
 @using EbookStore.Contract.ViewModel.Sale.Request;
 @using EbookStore.Contract.ViewModel.Sale.Response;
+@using Newtonsoft.Json;
+@using Refit;
 @inject ISaleClient _saleClient;
 
 @{
-    List<SaleQueryRequest> sales = await _saleClient.GetResponseAsync();
+    UserManager userManager = new UserManager(this.User);
+    List<SaleResponse> data = new List<SaleResponse>();
+    PaginationHeader paginationHeader = null;
+
+    if (userManager.IsLogin())
+    {
+        var token = userManager.GetToken();
+        SaleQueryRequest queryRequest = new SaleQueryRequest
+                {
+                    PageNumber = 1,
+                    PageSize = 10,
+                    Name = string.Empty,
+                    StartDate = DateTime.MinValue,
+                    EndDate = DateTime.MaxValue
+    };
+        ApiResponse<List<SaleResponse>> response
+                    = await _saleClient.GetResponseAsync(queryRequest, token);
+        string headerString = await response.GetPaginationHeader();
+        paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
+        data = response.ReadResult();
+    }
+
 }
 
 @{
@@ -106,20 +130,15 @@
                     <thead>
                         <tr>
                             <th>Sale</th>
-                            <th>Start Datet</th>
                             <th>End Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (SaleQueryRequest saleQueryRequest in sales)
+                        @foreach (SaleResponse sale in data)
                         {
-                            <tr>@saleQueryRequest.PageNumber</tr>
-                            <tr>@saleQueryRequest.PageSize</tr>
-                            <tr class="nav-item nav-link">@saleQueryRequest.Name</tr>
-                            <tr class="nav-item nav-link">@saleQueryRequest.StartDate</tr>
-                            <tr class="nav-item nav-link">@saleQueryRequest.EndDate</tr>
+                            <tr>@sale.SalePercent</tr>
+                            <tr>@sale.EndDate</tr>
                         }
-                       
                     </tbody>
                 </table>
             </div>
