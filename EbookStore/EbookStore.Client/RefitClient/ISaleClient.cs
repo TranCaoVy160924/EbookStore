@@ -14,9 +14,9 @@ namespace EbookStore.Client.RefitClient;
 
 [Headers("Content-Type: application/json")]
 public interface ISaleClient
-    {
+{
     [Post("/Sale/Search/")]
-        Task<ApiResponse<List<SaleResponse>>> GetResponseAsync([Body] SaleQueryRequest queryRequest,
+    Task<ApiResponse<List<SaleResponse>>> GetResponseAsync([Body] SaleQueryRequest queryRequest,
             [Header("Authorization")] string jwtToken);
 
-    }
+}
