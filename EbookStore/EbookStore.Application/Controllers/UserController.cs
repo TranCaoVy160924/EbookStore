@@ -115,6 +115,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("Search")]
+    [Authorize]
     public async Task<IActionResult> GetUsersAsync([FromBody] UserQueryRequest queryRequest)
     {
         try

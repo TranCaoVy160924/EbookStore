@@ -11,5 +11,15 @@ public class UserController : Controller
     {
         _userClient = userClient;
     }
-
+    public async Task<IActionResult> Index()
+    {
+        var sales = await _userClient.GetResponseAsync();
+        var saleResponses = sales.ConvertAll(s => new SaleResponse
+        {
+            Id = s.Id,
+            SalePercentage = s.SalePercentage,
+            SaleDate = s.SaleDate
+        });
+        return View(saleResponses);
+    }
 }
