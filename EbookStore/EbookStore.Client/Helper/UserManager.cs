@@ -10,7 +10,8 @@ public class UserManager
     {
         _claimsPrincipal = claimsPrincipal;
     }
-
+    public string GetToken()
+        => _claimsPrincipal.Claims.Where(c => c.Type == "AuthHeader").SingleOrDefault().Value;
     public string GetUserId()
         => _claimsPrincipal.Claims.Where(c => c.Type == ClaimTypes.Sid).SingleOrDefault().Value;
 
