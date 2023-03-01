@@ -36,7 +36,7 @@
     ViewData["Title"] = "Sale List";
 }
 <head>
-    <title>User</title>
+    <title>Sale</title>
     <style>
         body {
             margin-top: 50px;
@@ -110,16 +110,23 @@
     <table>
         <thead>
             <tr>
+            <th>ID</th>
+                <th>Name</th>
                 <th>Sale</th>
-                <th>Date</th>
+                <th>Start Date</th>
+                <th>Extend Date</th>
+                <th>Extend</th>
             </tr>
         </thead>
         <tbody>
             @foreach (SaleResponse sale in data)
             {
                 <tr>
-                    <td>@sale.SalePercent</td>
-                    <td><input type="date" asp-for=@sale.EndDate></td>
+                    <td>@sale.Id</td>
+                    <td>@sale.Name</td>
+                    <td>@sale.SalePercent%</td>
+                    <td>@sale.StartDate.ToString("dd-MM-yyyy")</td>
+                    <td><input type="date" min="@DateTime.Now.ToString("dd-MM-yyyy")" asp-for=@sale.EndDate></td>
                     <td><button class="btn btn-delete">Update</button></td>
                 </tr>
             }
