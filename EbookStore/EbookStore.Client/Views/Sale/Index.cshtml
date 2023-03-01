@@ -1,8 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Sale List";
+﻿@using EbookStore.Client.Helper;
+@using EbookStore.Client.RefitClient;
+@using EbookStore.Contract.ViewModel.Sale.Request;
+@using EbookStore.Contract.ViewModel.Sale.Response;
+@inject ISaleClient _saleClient;
+
+@{
+    List<SaleQueryRequest> sales = await _saleClient.GetResponseAsync();
 }
 
-
+@{
+    ViewData["Title"] = "Sale List";
+}
 <!-- Carousel Start -->
 <div class="container-fluid mb-3">
     <div class="row px-xl-5">
@@ -93,9 +101,30 @@
     <div class="row px-xl-5">
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
             <div class="product-item bg-light mb-4">
-               
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sale</th>
+                            <th>Start Datet</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (SaleQueryRequest saleQueryRequest in sales)
+                        {
+                            <tr>@saleQueryRequest.PageNumber</tr>
+                            <tr>@saleQueryRequest.PageSize</tr>
+                            <tr class="nav-item nav-link">@saleQueryRequest.Name</tr>
+                            <tr class="nav-item nav-link">@saleQueryRequest.StartDate</tr>
+                            <tr class="nav-item nav-link">@saleQueryRequest.EndDate</tr>
+                        }
+                       
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
+    </div>
+
 <!-- Products End -->
