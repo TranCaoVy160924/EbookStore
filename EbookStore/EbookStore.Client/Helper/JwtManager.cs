@@ -45,11 +45,12 @@ namespace EbookStore.Client.Helper
             claims.Add(new Claim(ClaimTypes.Sid, GetUserId()));
             claims.Add(new Claim(ClaimTypes.Name, GetUsername()));
             claims.Add(new Claim(ClaimTypes.Role, GetUserRole()));
-            claims.Add(new Claim("AuthHeader", 
+            claims.Add(new Claim("AuthHeader",
                 tokenString));
 
             var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
             return new ClaimsPrincipal(claimsIdentity);
         }
     }

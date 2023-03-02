@@ -1,3 +1,8 @@
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using dotenv.net;
+using EbookStore.Client.ExternalService.EbookHostService;
+using EbookStore.Client.ExternalService.ImageHostService;
 using EbookStore.Client.RefitClient;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Refit;
@@ -21,13 +26,16 @@ builder.Services.AddSession(options =>
 
 string baseUrl = "https://localhost:7186/api";
 builder.Services.AddRefitClient<IUserClient>()
-                    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<IBookClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<IGenreClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<ISaleClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+
+builder.Services.AddSingleton<IImageHostHelper, CloudinaryHelper>();
+builder.Services.AddTransient<IEbookHostHelper, DropboxHelper>();
 
 builder.Services.AddRazorPages();
 

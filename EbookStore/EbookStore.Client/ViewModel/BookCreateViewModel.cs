@@ -1,13 +1,8 @@
-﻿using EbookStore.Contract.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace EbookStore.Contract.ViewModel.Book.Request;
-public class BookCreateRequest
+namespace EbookStore.Client.ViewModel;
+
+public class BookCreateViewModel
 {
     [StringLength(50, MinimumLength = 4, ErrorMessage = "Book title must be between 4 and 50 characters!")]
     [Required(ErrorMessage = "Please enter book title")]
@@ -25,13 +20,12 @@ public class BookCreateRequest
     [Required(ErrorMessage = "Please enter book description")]
     public string Description { get; set; }
 
-    [Url]
     [Required(ErrorMessage = "Please enter book cover image")]
-    public string CoverImage { get; set; }
+    public IFormFile CoverImage { get; set; }
 
-    public string PdfLink { get; set; } = String.Empty;
+    public IFormFile PdfFile { get; set; }
 
-    public string EpubLink { get; set; } = String.Empty;
+    //public IFormFile EpubFile { get; set; }
 
     public List<int> BookGenreIds { get; set; } = new List<int>();
 }
