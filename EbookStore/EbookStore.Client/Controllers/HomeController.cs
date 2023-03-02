@@ -1,4 +1,5 @@
-﻿using EbookStore.Client.Models;
+﻿using EbookStore.Client.Helper;
+using EbookStore.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -14,6 +15,11 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        UserManager userManager = new UserManager(User);
+        if (userManager.IsLogin() && userManager.GetUserRole().Equals("Admin"))
+        {
+            return RedirectToAction("Index", "Book");
+        }
         return View();
     }
 

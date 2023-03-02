@@ -89,4 +89,9 @@ public class AuthController : Controller
         await HttpContext.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
+
+    public IActionResult AccessDenied()
+    {
+        return RedirectToAction("Login", "Auth");
+    }
 }
