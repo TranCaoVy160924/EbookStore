@@ -6,25 +6,31 @@
 @using Newtonsoft.Json;
 @using Refit;
 @inject IUserClient _userClient;
+@inject IHttpContextAccessor HttpContextAccessor;
 
 @{
     ViewData["Title"] = "List User";
 }
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     UserManager userManager = new UserManager(this.User);
     List<UserQueryResponse> data = new List<UserQueryResponse>();
     PaginationHeader paginationHeader = null;
+
+    var pageNumber = int.Parse(session.GetString("PageNumber_UserIndex"));
+    var pageSize = int.Parse(session.GetString("PageSize_UserIndex"));
+    var username = session.GetString("Username_UserIndex");
 
     if (userManager.IsLogin())
     {
         var token = userManager.GetToken();
         UserQueryRequest queryRequest = new UserQueryRequest
-        {
-            PageNumber = 1,
-            PageSize = 10,
-            UserName = string.Empty
-        };
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    UserName = username
+                };
         ApiResponse<List<UserQueryResponse>> response
                     = await _userClient.GetResponseAsync(queryRequest, token);
         string headerString = await response.GetPaginationHeader();
@@ -65,6 +71,7 @@
 
         .btn {
             border: none;
+            background-color: #ffc107;
             color: white;
             padding: 6px 12px;
             text-align: center;
@@ -96,41 +103,79 @@
         .search-box {
             margin-bottom: 12px;
             padding: 8px;
-            border: 1px solid #ddd;
             border-radius: 4px;
             width: 100%;
+            margin-right: 10px;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: right;
+            margin-top: 20px;
+        }
+
+            .pagination button {
+                margin: 0 10px;
+                background-color: #ffc107;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                cursor: pointer;
+            }
+
+                .pagination button:hover {
+                    background-color: #006a8e;
+                }
+
+                .pagination button:disabled {
+                    background-color: grey;
+                }
     </style>
 </head>
 
 <body>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search...">
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Active</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (UserQueryResponse user in data)
-            {
+    <div>
+        <table>
+            <thead>
                 <tr>
-                    <td>@user.UserId</td>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>@(user.IsActive ? "Yes" : "No")</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Active</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (UserQueryResponse user in data)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@(user.IsActive ? "Yes" : "No")</td>
+                        <td>
+                            <button class="btn btn-edit">Edit</button>
+                            <button class="btn btn-delete">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination">
+            <form asp-controller="User" asp-action="ChangePage" method="post">
+                <input hidden name="pageNumber"
+                       value="@(paginationHeader.CurrentPage-1)" />
+                <button disabled="@(!paginationHeader.HasPrevious)">Previous</button>
+            </form>
+
+            <form asp-controller="User" asp-action="ChangePage" method="post">
+                <input hidden name="pageNumber"
+                       value="@(paginationHeader.CurrentPage+1)" />
+                <button disabled="@(!paginationHeader.HasNext)">Next</button>
+            </form>
+        </div>
+    </div>
 </body>
