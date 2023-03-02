@@ -6,32 +6,37 @@
 @using Newtonsoft.Json;
 @using Refit;
 @inject IUserClient _userClient;
+@inject IHttpContextAccessor HttpContextAccessor;
 
 @{
     ViewData["Title"] = "List User";
 }
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     UserManager userManager = new UserManager(this.User);
     List<UserQueryResponse> data = new List<UserQueryResponse>();
     PaginationHeader paginationHeader = null;
+
+    var pageNumber = int.Parse(session.GetString("PageNumber_UserIndex"));
+    var pageSize = int.Parse(session.GetString("PageSize_UserIndex"));
+    var username = session.GetString("Username_UserIndex");
 
     if (userManager.IsLogin())
     {
         var token = userManager.GetToken();
         UserQueryRequest queryRequest = new UserQueryRequest
-        {
-            PageNumber = 1,
-            PageSize = 10,
-            UserName = string.Empty
-        };
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    UserName = username
+                };
         ApiResponse<List<UserQueryResponse>> response
                     = await _userClient.GetResponseAsync(queryRequest, token);
         string headerString = await response.GetPaginationHeader();
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();
     }
-    
 }
 
 
@@ -121,13 +126,19 @@
                 .pagination button:hover {
                     background-color: #006a8e;
                 }
+
+                .pagination button:disabled {
+                    background-color: grey;
+                }
     </style>
 </head>
 
 <body>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search...">
-        <button class="btn btn-search">Search</button>
+        <form asp-controller="User" asp-action="Search" method="post">
+            <input name="username" type="text" value="@username" class="search-box" placeholder="Search username...">
+            <button type="submit" class="btn btn-search">Search</button>
+        </form>
     </div>
     <div>
         <table>
@@ -157,8 +168,17 @@
             </tbody>
         </table>
         <div class="pagination">
-            <button>Previous</button>
-            <button>Next</button>
+            <form asp-controller="User" asp-action="ChangePage" method="post">
+                <input hidden name="pageNumber"
+                       value="@(paginationHeader.CurrentPage-1)" />
+                <button disabled="@(!paginationHeader.HasPrevious)">Previous</button>
+            </form>
+
+            <form asp-controller="User" asp-action="ChangePage" method="post">
+                <input hidden name="pageNumber"
+                       value="@(paginationHeader.CurrentPage+1)" />
+                <button disabled="@(!paginationHeader.HasNext)">Next</button>
+            </form>
         </div>
     </div>
 </body>
