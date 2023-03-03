@@ -146,14 +146,17 @@
         <tbody>
             @foreach (SaleResponse sale in data)
             {
-                <tr>
+                        <tr>
+                    <form asp-controller="Sale" asp-action="Update" method="post">
                     <td>@sale.Id</td>
                     <td>@sale.Name</td>
                     <td>@sale.SalePercent%</td>
                     <td>@sale.StartDate.ToString("dd-MM-yyyy")</td>
-                    <td><input type="date" asp-for="@sale.EndDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")"/></td>
-                    <td><button class="btn btn-delete">Update</button></td>
-                </tr>
+                    <td><input type="date" value="@sale.EndDate.ToString("yyyy-MM-dd")" class="form-control" name="NewEndDate" min ="@sale.EndDate.ToString("yyyy-MM-dd")" /></td>
+                    <input type="hidden" name="SaleId" value="@sale.Id" />
+                    <td><button type="submit" id="@sale.Id" class="btn btn-delete">Update</button></td>
+                        </form>
+                    </tr>
             }
         </tbody>
     </table>
