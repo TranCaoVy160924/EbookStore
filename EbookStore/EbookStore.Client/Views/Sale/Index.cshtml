@@ -22,7 +22,7 @@
                     Name = string.Empty,
                     StartDate = DateTime.MinValue,
                     EndDate = DateTime.MaxValue
-    };
+                };
         ApiResponse<List<SaleResponse>> response
                     = await _saleClient.GetResponseAsync(queryRequest, token);
         string headerString = await response.GetPaginationHeader();
@@ -135,7 +135,7 @@
     <table>
         <thead>
             <tr>
-            <th>ID</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Sale</th>
                 <th>Start Date</th>
@@ -146,23 +146,23 @@
         <tbody>
             @foreach (SaleResponse sale in data)
             {
-                        <tr>
+                <tr>
                     <form asp-controller="Sale" asp-action="Update" method="post">
                     <td>@sale.Id</td>
                     <td>@sale.Name</td>
                     <td>@sale.SalePercent%</td>
                     <td>@sale.StartDate.ToString("dd-MM-yyyy")</td>
-                    <td><input type="date" value="@sale.EndDate.ToString("yyyy-MM-dd")" class="form-control" name="NewEndDate" min ="@sale.EndDate.ToString("yyyy-MM-dd")" /></td>
+                    <td><input type="date" value="@sale.EndDate.ToString("yyyy-MM-dd")" class="form-control" name="NewEndDate" min="@sale.EndDate.ToString("yyyy-MM-dd")" /></td>
                     <input type="hidden" name="SaleId" value="@sale.Id" />
                     <td><button type="submit" id="@sale.Id" class="btn btn-delete">Update</button></td>
-                        </form>
-                    </tr>
+                    </form>
+                </tr>
             }
         </tbody>
     </table>
     <div class="pagination">
-    <button>Previous</button>
-    <button>Next</button>
+        <button>Previous</button>
+        <button>Next</button>
     </div>
 </body>
 
