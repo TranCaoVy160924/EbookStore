@@ -39,6 +39,7 @@ public class UserController : Controller
     public IActionResult Search(string username)
     {
         var session = Request.HttpContext.Session;
+        username = (username != null) ? username : "";
         session.SetString("Username_UserIndex", username);
         return RedirectToAction("Index", "User");
     }

@@ -5,31 +5,40 @@
 @using EbookStore.Contract.ViewModel.Sale.Response;
 @using Newtonsoft.Json;
 @using Refit;
+@inject IHttpContextAccessor HttpContextAccessor;
 @inject ISaleClient _saleClient;
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     UserManager userManager = new UserManager(this.User);
     List<SaleResponse> data = new List<SaleResponse>();
     PaginationHeader paginationHeader = null;
+
+    var pageNumber = int.Parse(session.GetString("PageNumber_SaleIndex"));
+    var pageSize = int.Parse(session.GetString("PageSize_SaleIndex"));
+    var saleName = session.GetString("Name_SaleIndex");
+    var startDate = JsonConvert.DeserializeObject<DateTime>(
+        session.GetString("Start_SaleIndex"));
+    var endDate = JsonConvert.DeserializeObject<DateTime>(
+        session.GetString("End_SaleIndex"));
 
     if (userManager.IsLogin())
     {
         var token = userManager.GetToken();
         SaleQueryRequest queryRequest = new SaleQueryRequest
                 {
-                    PageNumber = 1,
-                    PageSize = 10,
-                    Name = string.Empty,
-                    StartDate = DateTime.MinValue,
-                    EndDate = DateTime.MaxValue
-    };
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    Name = saleName,
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
         ApiResponse<List<SaleResponse>> response
                     = await _saleClient.GetResponseAsync(queryRequest, token);
         string headerString = await response.GetPaginationHeader();
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();
     }
-
 }
 
 @{
@@ -96,21 +105,54 @@
         .search-box {
             margin-bottom: 12px;
             padding: 8px;
-            border: 1px solid #ddd;
             border-radius: 4px;
             width: 100%;
+            margin-right: 10px;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: right;
+            margin-top: 20px;
+        }
+
+            .pagination button {
+                margin: 0 10px;
+                background-color: #ffc107;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                cursor: pointer;
+            }
+
+                .pagination button:hover {
+                    background-color: #006a8e;
+                }
+
+                .pagination button:disabled {
+                    background-color: grey;
+                }
     </style>
 </head>
 
 <body>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search...">
+        <form asp-controller="Sale" asp-action="Filter" method="post">
+            <input name="saleName" type="text" class="search-box" placeholder="Search..." />
+            <label>Start Date</label>
+            <input name="saleStart" value="@null" class="search-box" placeholder="Start Date"
+                   type="date" max="@DateTime.Today" />
+            <label>End Date</label>
+            <input name="saleEnd" value="@null" class="search-box" placeholder="End Date"
+                   type="date" min="@DateTime.Today" />
+            <button type="submit">Search f</button>
+        </form>
     </div>
     <table>
         <thead>
             <tr>
-            <th>ID</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Sale</th>
                 <th>Start Date</th>
@@ -122,15 +164,32 @@
             @foreach (SaleResponse sale in data)
             {
                 <tr>
+                    <form asp-controller="Sale" asp-action="Update" method="post">
                     <td>@sale.Id</td>
                     <td>@sale.Name</td>
                     <td>@sale.SalePercent%</td>
                     <td>@sale.StartDate.ToString("dd-MM-yyyy")</td>
-                    <td><input type="date" min="@DateTime.Now.ToString("dd-MM-yyyy")"></td>
-                    <td><button class="btn btn-delete">Update</button></td>
+                    <td><input type="date" value="@sale.EndDate.ToString("yyyy-MM-dd")" class="form-control" name="NewEndDate" min="@sale.EndDate.ToString("yyyy-MM-dd")" /></td>
+                    <input type="hidden" name="SaleId" value="@sale.Id" />
+                    <td><button type="submit" id="@sale.Id" class="btn btn-delete">Update</button></td>
+                    </form>
                 </tr>
             }
         </tbody>
     </table>
+    <div class="pagination">
+        <form asp-controller="Sale" asp-action="ChangePage" method="post">
+            <button name="pageNumber" value="@(paginationHeader.CurrentPage-1)"
+                    type="submit" disabled="@(!paginationHeader.HasPrevious)">
+                Previous
+            </button>
+        </form>
+        <form asp-controller="Sale" asp-action="ChangePage" method="post">
+            <button type="submit" disabled="@(!paginationHeader.HasNext)"
+                    name="pageNumber" value="@(paginationHeader.CurrentPage+1)">
+                Next
+            </button>
+        </form>
+    </div>
 </body>
 
