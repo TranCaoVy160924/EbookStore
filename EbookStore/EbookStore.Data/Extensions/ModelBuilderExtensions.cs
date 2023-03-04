@@ -52,7 +52,7 @@ public static class ModelBuilderExtensions
             modelBuilder.Entity<Sale>().HasData(new Sale
             {
                 SaleId = i,
-                Name = "Sale " + i.ToString(),
+                Name = LoremNET.Lorem.Words(1, 5, true, false),
                 SalePercent = rand.Next(1, 5) * 10,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now
@@ -71,9 +71,9 @@ public static class ModelBuilderExtensions
                 NumberOfPage = rand.Next(1, 5) * 100,
                 Price = i * 10,
                 Description = LoremNET.Lorem.Words(1, 20, true, true),
-                CoverImage = "cover " + i.ToString(),
-                PdfLink = "PdfLink " + i.ToString(),
-                EpubLink = "EpubLink" + i.ToString(),
+                CoverImage = $"https://picsum.photos/seed/{i}/200/300",
+                PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
                 ReleaseDate = DateTime.Now
             });
         }
