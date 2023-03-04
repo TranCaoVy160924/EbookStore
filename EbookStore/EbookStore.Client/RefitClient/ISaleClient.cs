@@ -18,5 +18,7 @@ public interface ISaleClient
     [Post("/Sale/Search/")]
     Task<ApiResponse<List<SaleResponse>>> GetResponseAsync([Body] SaleQueryRequest queryRequest,
             [Header("Authorization")] string jwtToken);
-
+    [Patch("/Sale/")]
+    Task ExtendSaleAsync(SaleExtendRequest saleExtendRequest,
+        [Header("Authorization")] string jwtToken);
 }
