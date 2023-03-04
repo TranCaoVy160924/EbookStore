@@ -5,23 +5,33 @@
 @using EbookStore.Contract.ViewModel.Sale.Response;
 @using Newtonsoft.Json;
 @using Refit;
+@inject IHttpContextAccessor HttpContextAccessor;
 @inject ISaleClient _saleClient;
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     UserManager userManager = new UserManager(this.User);
     List<SaleResponse> data = new List<SaleResponse>();
     PaginationHeader paginationHeader = null;
+
+    var pageNumber = int.Parse(session.GetString("PageNumber_SaleIndex"));
+    var pageSize = int.Parse(session.GetString("PageSize_SaleIndex"));
+    var saleName = session.GetString("Name_SaleIndex");
+    var startDate = JsonConvert.DeserializeObject<DateTime>(
+        session.GetString("Start_SaleIndex"));
+    var endDate = JsonConvert.DeserializeObject<DateTime>(
+        session.GetString("End_SaleIndex"));
 
     if (userManager.IsLogin())
     {
         var token = userManager.GetToken();
         SaleQueryRequest queryRequest = new SaleQueryRequest
                 {
-                    PageNumber = 1,
-                    PageSize = 10,
-                    Name = string.Empty,
-                    StartDate = DateTime.MinValue,
-                    EndDate = DateTime.MaxValue
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    Name = saleName,
+                    StartDate = startDate,
+                    EndDate = endDate
                 };
         ApiResponse<List<SaleResponse>> response
                     = await _saleClient.GetResponseAsync(queryRequest, token);
@@ -29,7 +39,6 @@
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();
     }
-
 }
 
 @{
@@ -129,8 +138,16 @@
 
 <body>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search...">
-        <button>Search</button>
+        <form asp-controller="Sale" asp-action="Filter" method="post">
+            <input name="saleName" type="text" class="search-box" placeholder="Search..." />
+            <label>Start Date</label>
+            <input name="saleStart" value="@null" class="search-box" placeholder="Start Date"
+                   type="date" max="@DateTime.Today" />
+            <label>End Date</label>
+            <input name="saleEnd" value="@null" class="search-box" placeholder="End Date"
+                   type="date" min="@DateTime.Today" />
+            <button type="submit">Search f</button>
+        </form>
     </div>
     <table>
         <thead>
@@ -161,8 +178,18 @@
         </tbody>
     </table>
     <div class="pagination">
-        <button>Previous</button>
-        <button>Next</button>
+        <form asp-controller="Sale" asp-action="ChangePage" method="post">
+            <button name="pageNumber" value="@(paginationHeader.CurrentPage-1)"
+                    type="submit" disabled="@(!paginationHeader.HasPrevious)">
+                Previous
+            </button>
+        </form>
+        <form asp-controller="Sale" asp-action="ChangePage" method="post">
+            <button type="submit" disabled="@(!paginationHeader.HasNext)"
+                    name="pageNumber" value="@(paginationHeader.CurrentPage+1)">
+                Next
+            </button>
+        </form>
     </div>
 </body>
 
