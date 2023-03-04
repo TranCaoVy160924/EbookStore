@@ -37,7 +37,7 @@
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();
     }
-    
+
 }
 
 
@@ -136,6 +136,10 @@
 
 <body>
     <div class="search-container">
+        <form asp-controller="User" asp-action="Search" method="post">
+            <input name="username" type="text" value="@(username)" class="search-box" placeholder="Search username...">
+            <button type="submit" class="btn btn-search">Search</button>
+        </form>
     </div>
     <div>
         <table>
