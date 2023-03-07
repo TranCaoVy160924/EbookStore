@@ -1,37 +1,35 @@
-﻿using EbookStore.Application.Helpers;
-using EbookStore.Contract.Model;
-using EbookStore.Contract.ViewModel.WishItem.Request;
-using EbookStore.Domain.Repository.WishlistRepo;
+﻿using EbookStore.Contract.Model;
+using EbookStore.Contract.ViewModel.CartItem.Request;
+using EbookStore.Domain.Repository.CartlistRepo;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace EbookStore.Application.Controllers;
-
 [Route("api/[controller]")]
 [ApiController]
-public class WishlistController : ControllerBase
+public class CartlistController : ControllerBase
 {
-    private readonly IWishlistRepository _wishlistRepo;
+    private readonly ICartlistRepository _cartlistRepo;
     private readonly UserManager<User> _userManager;
 
-    public WishlistController(
-        IWishlistRepository wishlistRepo,
+    public CartlistController(
+        ICartlistRepository cartlistRepo,
         UserManager<User> userManager)
     {
-        _wishlistRepo = wishlistRepo;
+        _cartlistRepo = cartlistRepo;
         _userManager = userManager;
     }
 
     [HttpPost("Search")]
     [Authorize]
-    public async Task<IActionResult> GetAsync([FromBody] WishItemQueryRequest queryRequest)
+    public async Task<IActionResult> GetAsync([FromBody] CartItemQueryRequest queryRequest)
     {
         try
         {
-            var pagedResult = await _wishlistRepo.GetAsync(queryRequest, GetUserId());
+            var pagedResult = await _cartlistRepo.GetAsync(queryRequest, GetUserId());
 
             Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
 
@@ -40,6 +38,27 @@ public class WishlistController : ControllerBase
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("{bookId}")]
+    [Authorize]
+    public async Task<IActionResult> AddBookToCartlist(int bookId)
+    {
+        try
+        {
+            var userId = GetUserId();
+
+            await _cartlistRepo.AddBookToCartlistAsync(bookId, await userId);
+            return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
         }
     }
 
@@ -52,26 +71,5 @@ public class WishlistController : ControllerBase
         User user = await _userManager.FindByNameAsync(userName);
 
         return user.Id;
-    }
-
-    [HttpPost("{bookId}")]
-    [Authorize]
-    public async Task<IActionResult> AddBookToWishlist(int bookId)
-    {
-        try
-        {
-            var userId = GetUserId();
-
-            await _wishlistRepo.AddBookToWishlistAsync(bookId, await userId);
-            return Ok();
-        }
-        catch (ApplicationException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
-        }
     }
 }
