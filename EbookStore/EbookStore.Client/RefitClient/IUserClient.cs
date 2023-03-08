@@ -29,6 +29,7 @@ public interface IUserClient
         [Header("Authorization")] string jwtToken);
 
     [Post("/User/Ban")]
-    Task<ApiResponse<List<UserQueryResponse>>> BanAsync(UserQueryRequest userQueryRequest, [Header("Authorization")] string jwtToken);
+    Task<ApiResponse<List<UserQueryResponse>>> BanAsync([Body] UserQueryRequest userQueryRequest,
+        [Header("Authorization")] string jwtToken);
 
 }

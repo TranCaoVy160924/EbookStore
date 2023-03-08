@@ -41,16 +41,30 @@ public class UserController : Controller
     public async Task<IActionResult> Ban(string username)
     {
         UserManager userManager = new UserManager(this.User);
-        if (userManager.IsLogin()){
-            var Token = userManager.GetToken();
-            var userQueryRequest = new UserQueryRequest
+        if (ModelState.IsValid)
+        {
+            if (userManager.IsLogin())
             {
-                UserName = username
-            };
-            await _userClient.BanAsync(userQueryRequest, Token);
+                var Token = userManager.GetToken();
+                var userQueryRequest = new UserQueryRequest
+                {
+                    UserName = username
+                };
+                var response = await _userClient.BanAsync(userQueryRequest, Token);
+                ViewBag.ResponseStatusCode = (int)response.StatusCode; // store the response status code
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
         }
-        return RedirectToAction("Index");
+        return View("Index");
     }
+
 
     [HttpPost]
     public IActionResult Search(string username)
