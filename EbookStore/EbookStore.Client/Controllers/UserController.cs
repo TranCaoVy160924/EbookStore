@@ -1,5 +1,7 @@
-﻿using EbookStore.Client.Models;
+﻿using EbookStore.Client.Helper;
+using EbookStore.Client.Models;
 using EbookStore.Client.RefitClient;
+using EbookStore.Contract.ViewModel.User.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -33,6 +35,21 @@ public class UserController : Controller
         }
 
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Ban(string username)
+    {
+        UserManager userManager = new UserManager(this.User);
+        if (userManager.IsLogin()){
+            var Token = userManager.GetToken();
+            var userQueryRequest = new UserQueryRequest
+            {
+                UserName = username
+            };
+            await _userClient.BanAsync(userQueryRequest, Token);
+        }
+        return RedirectToAction("Index");
     }
 
     [HttpPost]

@@ -1,4 +1,5 @@
-﻿using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+﻿using AutoMapper.Internal;
+using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.User.Request;
 using EbookStore.Contract.ViewModel.User.Response;
@@ -26,5 +27,8 @@ public interface IUserClient
     [Post("/User/Search/")]
     Task<ApiResponse<List<UserQueryResponse>>> GetResponseAsync([Body] UserQueryRequest queryRequest,
         [Header("Authorization")] string jwtToken);
+
+    [Post("/User/Ban")]
+    Task<ApiResponse<List<UserQueryResponse>>> BanAsync(UserQueryRequest userQueryRequest, [Header("Authorization")] string jwtToken);
 
 }
