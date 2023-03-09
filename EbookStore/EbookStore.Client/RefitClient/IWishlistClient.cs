@@ -12,5 +12,6 @@ public interface IWishlistClient
     Task AddBookToWishlistAsync(int bookId, [Header("Authorization")] string jwtToken);
 
     [Post("/Wishlist/Search/")]
-    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] WishItemQueryRequest queryRequest);
+    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] WishItemQueryRequest queryRequest,
+                                                        [Header("Authorization")] string jwtToken);
 }

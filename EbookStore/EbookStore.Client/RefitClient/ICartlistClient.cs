@@ -11,5 +11,6 @@ public interface ICartlistClient
     Task AddBookToCartlistAsync(int bookId, [Header("Authorization")] string jwtToken);
 
     [Post("/Cartlist/Search/")]
-    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] CartItemQueryRequest queryRequest);
+    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] CartItemQueryRequest queryRequest, 
+                                                        [Header("Authorization")] string jwtToken);
 }

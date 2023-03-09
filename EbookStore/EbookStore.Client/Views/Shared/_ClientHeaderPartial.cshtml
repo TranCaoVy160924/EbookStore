@@ -1,11 +1,55 @@
 ﻿@using EbookStore.Client.Helper;
 @using EbookStore.Client.RefitClient;
+@using EbookStore.Contract.ViewModel.Book.BookResponse;
 @using EbookStore.Contract.ViewModel.Genre.Response;
+@using EbookStore.Contract.ViewModel.WishItem.Request;
+@using EbookStore.Contract.ViewModel.CartItem.Request;
+@using Refit;
 @inject IGenreClient _genreClient;
+@inject ICartlistClient _cartlistClient;
+@inject IWishlistClient _wishlistClient;
 
 @{
     UserManager userManager = new UserManager(this.User);
     List<GenreResponse> genres = await _genreClient.GetAsync();
+
+    int wishlistCount = 0;
+    int cartlistCount = 0;
+
+    if (userManager.IsLogin())
+    {
+        var token = userManager.GetToken();
+
+        WishItemQueryRequest wishlistQsueryRequest = new WishItemQueryRequest()
+                {
+                    Title = string.Empty,
+                    Genres = new List<int>(),
+                    PageSize = int.MaxValue,
+                    PageNumber = 1,
+                    EndReleaseDate = DateTime.MaxValue,
+                    StartReleaseDate = DateTime.MinValue,
+                };
+        ApiResponse<List<BookResponse>> wishBooks = await _wishlistClient.GetResponseAsync(wishlistQsueryRequest, token);
+
+        List<BookResponse> wishlist = new List<BookResponse>();
+        wishlist = wishBooks.ReadResult();
+        wishlistCount = wishlist.Count();
+
+        CartItemQueryRequest cartlistQsueryRequest = new CartItemQueryRequest()
+                {
+                    Title = string.Empty,
+                    Genres = new List<int>(),
+                    PageSize = int.MaxValue,
+                    PageNumber = 1,
+                    EndReleaseDate = DateTime.MaxValue,
+                    StartReleaseDate = DateTime.MinValue,
+                };
+        ApiResponse<List<BookResponse>> cartBooks = await _cartlistClient.GetResponseAsync(cartlistQsueryRequest, token);
+
+        List<BookResponse> cartlist = new List<BookResponse>();
+        cartlist = cartBooks.ReadResult();
+        cartlistCount = cartlist.Count();
+    }
 }
 
 <!-- Topbar Start -->
@@ -54,11 +98,11 @@
             <div class="d-inline-flex align-items-center d-block d-lg-none">
                 <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">@wishlistCount</span>
                 </a>
                 <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-shopping-cart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">@cartlistCount</span>
                 </a>
             </div>
         </div>
@@ -137,12 +181,12 @@
                         <a href="" class="btn px-0">
                             <i class="fas fa-heart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle"
-                                  style="padding-bottom: 2px;">0</span>
+                                  style="padding-bottom: 2px;">@wishlistCount</span>
                         </a>
                         <a href="" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle"
-                                  style="padding-bottom: 2px;">0</span>
+                                  style="padding-bottom: 2px;">@cartlistCount</span>
                         </a>
                     </div>
                 </div>
