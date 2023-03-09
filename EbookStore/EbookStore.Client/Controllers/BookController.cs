@@ -87,6 +87,7 @@ public class BookController : Controller
         try
         {
             await _bookClient.CreateAsync(request, userManager.GetToken());
+            return RedirectToAction("Index", "Book");
         }
         catch(Exception ex)
         {

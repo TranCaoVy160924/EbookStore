@@ -7,7 +7,7 @@ namespace EbookStore.Client.ExternalService.EbookHostService;
 public class DropboxHelper : IEbookHostHelper
 {
     private readonly DropboxClient _dropbox;
-    private const string TOKEN = "sl.BZz345lt9b6cn0EkfAYHraC7K4lyT-Xajdryhe6r9Yt7FtAU3CJXtVBrpCvdBWa41PXCNIRrNBf1Yg_TEPFRSjQqIXZ48CAlFLiqIacNdUC-slPxpSOQWd12ghkDFI-pIZHezJA8QqSl";
+    private const string TOKEN = "sl.BaR0DFXD16WWsyQLNjmECsfw4KxOhK6MfIEQGV7Z4q_3Tb_HK-x7dURoaYZ3sMetEjyRGi-2_EVkOeQP-OwyBWTXbvn7GtIfYcNFODcsX87eX8OKeWpF9rHLTlbVWAVYoMdMA1_6ViTf";
     private const string FOLDER = "/sdfg";
 
     public DropboxHelper()
