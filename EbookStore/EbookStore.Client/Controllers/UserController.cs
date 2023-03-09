@@ -42,12 +42,20 @@ public class UserController : Controller
     public async Task<IActionResult> Ban(string username)
     {
         UserManager userManager = new UserManager(this.User);
+        var currentUsername = userManager.GetUsername();
         if (ModelState.IsValid)
         {
             if (userManager.IsLogin())
             {
+                if (username== currentUsername)
+                {
+                    return View("Index");
+                }
+                else
+                {
                 var Token = userManager.GetToken();
                 await _userClient.BanAsync(username, Token);
+                }
             }
             return RedirectToAction("Index");
         }
