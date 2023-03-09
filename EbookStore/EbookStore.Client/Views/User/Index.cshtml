@@ -69,6 +69,14 @@
             color: white;
         }
 
+        .btn-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 250px;
+        }
+
         .btn {
             border: none;
             background-color: #ffc107;
@@ -78,8 +86,9 @@
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-            margin: 4px 2px;
+            margin: 4px;
             cursor: pointer;
+            flex: 1;
         }
 
         .btn-edit {
@@ -88,6 +97,14 @@
 
         .btn-delete {
             background-color: #f44336;
+        }
+
+        .btn-ban {
+            background-color: #ffc107;
+        }
+
+        .btn-unban {
+            background-color: #00FF00;
         }
 
         .search-container {
@@ -161,22 +178,24 @@
                         <td>@user.Email</td>
                         <td>@(user.IsActive ? "Yes" : "No")</td>
                         <td>
-                            @if (user.IsActive)
-                            {
-                                <form asp-controller="User" asp-action="Ban" method="post">
-                                    <input type="hidden" name="Username" value="@user.UserName" />
-                                    <button type="submit" class="btn btn-ban">Ban</button>
-                                </form>
-                            }
-                            else
-                            {
-                                <form asp-controller="User" asp-action="UnBan" method="post">
-                                    <input type="hidden" name="Username" value="@user.UserName" />
-                                    <button type="submit" class="btn btn-unban">Unban</button>
-                                </form>
-                            }
-                            <button class="btn btn-edit">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <div class="btn-container">
+                                @if (user.IsActive)
+                                {
+                                    <form asp-controller="User" asp-action="Ban" method="post">
+                                        <input type="hidden" name="Username" value="@user.UserName" />
+                                        <button type="submit" class="btn btn-ban">Ban</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-controller="User" asp-action="UnBan" method="post">
+                                        <input type="hidden" name="Username" value="@user.UserName" />
+                                        <button type="submit" class="btn btn-unban">Unban</button>
+                                    </form>
+                                }
+                                <button class="btn btn-edit">Edit</button>
+                                <button class="btn btn-delete">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 }

@@ -38,9 +38,9 @@ public class UserController : Controller
         return View();
     }
 
-        [HttpPost]
-        public async Task<IActionResult> Ban(string username)
-        {
+    [HttpPost]
+    public async Task<IActionResult> Ban(string username)
+    {
         UserManager userManager = new UserManager(this.User);
         if (ModelState.IsValid)
         {
