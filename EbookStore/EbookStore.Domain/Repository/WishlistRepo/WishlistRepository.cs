@@ -37,7 +37,7 @@ public class WishlistRepository : IWishlistRepository
         _userManager = userManager;
     }
 
-    
+    #region addToWishlistAsync
     public async Task AddBookToWishlistAsync(int bookId, Guid userid)
     {
         var existingWishItem = await _dbContext.WishItems.SingleOrDefaultAsync(wi => wi.UserId == userid && wi.BookId == bookId);
@@ -65,12 +65,13 @@ public class WishlistRepository : IWishlistRepository
             User = user,
             BookId = book.BookId,
             Book = book,
-            IsActive = false
+            IsActive = true
         };
 
         _dbContext.WishItems.Add(wishItem);
         await _dbContext.SaveChangesAsync();
     }
+    #endregion
 
     #region GetWisherAsync
     public async Task<List<User>> GetWishersAsync(int bookId)

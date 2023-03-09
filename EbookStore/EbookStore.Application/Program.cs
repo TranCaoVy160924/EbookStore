@@ -3,6 +3,7 @@ using EbookStore.Contract.Model;
 using EbookStore.Data.EF;
 using EbookStore.Domain.Repository;
 using EbookStore.Domain.Repository.BookRepo;
+using EbookStore.Domain.Repository.CartlistRepo;
 using EbookStore.Domain.Repository.GenreRepo;
 using EbookStore.Domain.Repository.SaleRepo;
 using EbookStore.Domain.Repository.WishlistRepo;
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+builder.Services.AddScoped<ICartlistRepository, CartlistRepository>();
 
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperProfile)));
 
