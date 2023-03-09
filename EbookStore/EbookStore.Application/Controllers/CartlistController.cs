@@ -47,9 +47,9 @@ public class CartlistController : ControllerBase
     {
         try
         {
-            var userId = GetUserId();
+            var userId = await GetUserId();
 
-            await _cartlistRepo.AddBookToCartlistAsync(bookId, await userId);
+            await _cartlistRepo.AddBookToCartlistAsync(bookId, userId);
             return Ok();
         }
         catch (ApplicationException ex)
