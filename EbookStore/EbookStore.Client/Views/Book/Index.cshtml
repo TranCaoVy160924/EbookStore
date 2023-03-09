@@ -16,6 +16,7 @@
     UserManager userManager = new UserManager(this.User);
     List<BookResponse> data = new List<BookResponse>();
     PaginationHeader paginationHeader = null;
+    BookQueryRequest bookQueryRequest = new BookQueryRequest();
 
     List<GenreResponse> genresResponse = await _genreClient.GetAsync();
     var pageNumber = int.Parse(session.GetString("PageNumber_BookIndex"));
@@ -221,7 +222,10 @@
                     <td>@book.ReleaseDate.ToString()</td>
                     <td>
                         <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
+                        <form asp-controller="Book" asp-action="Delete" method="post">
+                            <input type="hidden" name="bookId" value="@book.Id" />
+                            <button type="submit" class="btn btn-delete">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }

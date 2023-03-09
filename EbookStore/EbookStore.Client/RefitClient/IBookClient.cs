@@ -20,7 +20,7 @@ public interface IBookClient
     //[Post("/Book")]
     //Task CreateAsync([Body] BookCreateRequest createRequest,
     //    [Header("Authorization")] string jwtToken);
-    //[Delete("/Book/{id}")]
-    //Task DeleteAsync(int id,
-    //    [Header("Authorization")] string jwtToken);
+    [Delete("/Book/{id}")]
+    Task DeleteAsync(int id,
+        [Header("Authorization")] string jwtToken);
 }

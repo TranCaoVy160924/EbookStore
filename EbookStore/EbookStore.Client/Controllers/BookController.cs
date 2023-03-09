@@ -1,6 +1,8 @@
 ﻿using EbookStore.Client.RefitClient;
 using Microsoft.AspNetCore.Mvc;
 using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+using Microsoft.AspNetCore.Http;
+using EbookStore.Client.Helper;
 
 namespace EbookStore.Client.Controllers;
 public class BookController : Controller
@@ -80,5 +82,23 @@ public class BookController : Controller
         var session = Request.HttpContext.Session;
         session.SetString("PageNumber_BookIndex", pageNumber);
         return RedirectToAction("Index", "Book");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(int bookId)
+    {
+        try
+        {
+            var userManager = new UserManager(User);
+            if (userManager.IsLogin())
+            {
+                await _bookClient.DeleteAsync(bookId, userManager.GetToken());
+            }
+            return RedirectToAction("Index", "Book");
+        }
+        catch (Exception ex)
+        {
+            return RedirectToAction("Index", "Book");
+        }
     }
 }
