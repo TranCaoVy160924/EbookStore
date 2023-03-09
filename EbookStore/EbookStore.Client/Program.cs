@@ -33,6 +33,10 @@ builder.Services.AddRefitClient<IGenreClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<ISaleClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<IWishlistClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<ICartlistClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 
 builder.Services.AddSingleton<IImageHostHelper, CloudinaryHelper>();
 builder.Services.AddTransient<IEbookHostHelper, DropboxHelper>();

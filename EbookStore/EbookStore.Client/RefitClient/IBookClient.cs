@@ -14,14 +14,13 @@ namespace EbookStore.Client.RefitClient;
 [Headers("Content-Type: application/json")]
 public interface IBookClient
 {
-    [Get("/Book")]
-    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] BookQueryRequest queryRequest,
-        [Header("Authorization")] string jwtToken);
+    [Post("/Book/Search/")]
+    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] BookQueryRequest queryRequest);
 
-    [Post("/Book")]
-    Task CreateAsync([Body] BookCreateRequest createRequest,
-        [Header("Authorization")] string jwtToken);
-    [Delete("/Book/{id}")]
-    Task DeleteAsync(int id,
-        [Header("Authorization")] string jwtToken);
+    //[Post("/Book")]
+    //Task CreateAsync([Body] BookCreateRequest createRequest,
+    //    [Header("Authorization")] string jwtToken);
+    //[Delete("/Book/{id}")]
+    //Task DeleteAsync(int id,
+    //    [Header("Authorization")] string jwtToken);
 }

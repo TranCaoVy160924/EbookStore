@@ -12,6 +12,7 @@ public class BookResponse
     public double Price { get; set; }
     public int SalePercent { get; set; }
     public int NumberOfPage { get; set; }
+    public string CoverImage { get; set; }
     public string Description { get; set; }
     public DateTime ReleaseDate { get; set; }
 }

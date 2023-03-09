@@ -6,32 +6,38 @@
 @using Newtonsoft.Json;
 @using Refit;
 @inject IUserClient _userClient;
+@inject IHttpContextAccessor HttpContextAccessor;
 
 @{
     ViewData["Title"] = "List User";
 }
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     UserManager userManager = new UserManager(this.User);
     List<UserQueryResponse> data = new List<UserQueryResponse>();
     PaginationHeader paginationHeader = null;
+
+    var pageNumber = int.Parse(session.GetString("PageNumber_UserIndex"));
+    var pageSize = int.Parse(session.GetString("PageSize_UserIndex"));
+    var username = session.GetString("Username_UserIndex");
 
     if (userManager.IsLogin())
     {
         var token = userManager.GetToken();
         UserQueryRequest queryRequest = new UserQueryRequest
-        {
-            PageNumber = 1,
-            PageSize = 10,
-            UserName = string.Empty
-        };
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    UserName = username
+                };
         ApiResponse<List<UserQueryResponse>> response
                     = await _userClient.GetResponseAsync(queryRequest, token);
         string headerString = await response.GetPaginationHeader();
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();
     }
-    
+
 }
 
 
@@ -63,25 +69,35 @@
             color: white;
         }
 
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .btn {
             border: none;
             background-color: #ffc107;
             color: white;
-            padding: 6px 12px;
+            padding: 8px 16px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-            margin: 4px 2px;
+            margin: 4px;
             cursor: pointer;
         }
 
-        .btn-edit {
-            background-color: #008CBA;
+        .btn-ban {
+            background-color: #f44336;
         }
 
-        .btn-delete {
-            background-color: #f44336;
+        .btn-unban {
+            background-color: #00FF00;
+        }
+
+        .btn-ban, .btn-unban {
+            width: 80px;
         }
 
         .search-container {
@@ -95,8 +111,8 @@
         }
 
         .search-box {
+            margin-bottom: 12px;
             padding: 8px;
-            border: 1px solid #b9b3b3;
             border-radius: 4px;
             width: 100%;
             margin-right: 10px;
@@ -121,13 +137,19 @@
                 .pagination button:hover {
                     background-color: #006a8e;
                 }
+
+                .pagination button:disabled {
+                    background-color: grey;
+                }
     </style>
 </head>
 
 <body>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search...">
-        <button class="btn btn-search">Search</button>
+        <form asp-controller="User" asp-action="Search" method="post">
+            <input name="username" type="text" value="@(username)" class="search-box" placeholder="Search username...">
+            <button type="submit" class="btn btn-search">Search</button>
+        </form>
     </div>
     <div>
         <table>
@@ -149,16 +171,42 @@
                         <td>@user.Email</td>
                         <td>@(user.IsActive ? "Yes" : "No")</td>
                         <td>
-                            <button class="btn btn-edit">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <div class="btn-container">
+                                @if (user.IsActive)
+                                {
+                                    <form asp-controller="User" asp-action="Ban" method="post">
+                                        <input type="hidden" name="Username" value="@user.UserName" />
+                                        @if (user.UserName != userManager.GetUsername())
+                                        {
+                                            <button type="submit" class="btn btn-ban">Ban</button>
+                                        }
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-controller="User" asp-action="UnBan" method="post">
+                                        <input type="hidden" name="Username" value="@user.UserName" />
+                                        <button type="submit" class="btn btn-unban">Unban</button>
+                                    </form>
+                                }
+                            </div>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
         <div class="pagination">
-            <button>Previous</button>
-            <button>Next</button>
+            <form asp-controller="User" asp-action="ChangePage" method="post">
+                <input hidden name="pageNumber"
+                       value="@(paginationHeader.CurrentPage-1)" />
+                <button disabled="@(!paginationHeader.HasPrevious)">Previous</button>
+            </form>
+
+            <form asp-controller="User" asp-action="ChangePage" method="post">
+                <input hidden name="pageNumber"
+                       value="@(paginationHeader.CurrentPage+1)" />
+                <button disabled="@(!paginationHeader.HasNext)">Next</button>
+            </form>
         </div>
     </div>
 </body>
