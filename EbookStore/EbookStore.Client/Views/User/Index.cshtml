@@ -69,25 +69,35 @@
             color: white;
         }
 
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .btn {
             border: none;
             background-color: #ffc107;
             color: white;
-            padding: 6px 12px;
+            padding: 8px 16px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-            margin: 4px 2px;
+            margin: 4px;
             cursor: pointer;
         }
 
-        .btn-edit {
-            background-color: #008CBA;
+        .btn-ban {
+            background-color: #f44336;
         }
 
-        .btn-delete {
-            background-color: #f44336;
+        .btn-unban {
+            background-color: #00FF00;
+        }
+
+        .btn-ban, .btn-unban {
+            width: 80px;
         }
 
         .search-container {
@@ -161,8 +171,25 @@
                         <td>@user.Email</td>
                         <td>@(user.IsActive ? "Yes" : "No")</td>
                         <td>
-                            <button class="btn btn-edit">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <div class="btn-container">
+                                @if (user.IsActive)
+                                {
+                                    <form asp-controller="User" asp-action="Ban" method="post">
+                                        <input type="hidden" name="Username" value="@user.UserName" />
+                                        @if (user.UserName != userManager.GetUsername())
+                                        {
+                                            <button type="submit" class="btn btn-ban">Ban</button>
+                                        }
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-controller="User" asp-action="UnBan" method="post">
+                                        <input type="hidden" name="Username" value="@user.UserName" />
+                                        <button type="submit" class="btn btn-unban">Unban</button>
+                                    </form>
+                                }
+                            </div>
                         </td>
                     </tr>
                 }

@@ -119,8 +119,15 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="@book.CoverImage" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                            <form asp-controller="Cartlist" asp-action="AddToCartlist" method="post">
+                                <input type="hidden" name="cartAddBookId" value=@book.Id />
+                                <button type="submit" class="btn btn-outline-dark btn-square"><i class="fa fa-shopping-cart"></i></button>
+                            </form>
+
+                            <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post">
+                                <input type="hidden" name="bookId" value=@book.Id />
+                                <button type="submit" class="btn btn-outline-dark btn-square"><i class="far fa-heart"></i></button>
+                            </form>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>

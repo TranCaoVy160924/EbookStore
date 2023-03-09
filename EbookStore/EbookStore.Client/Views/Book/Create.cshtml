@@ -1,0 +1,109 @@
+﻿@using EbookStore.Client.RefitClient;
+@using EbookStore.Client.ViewModel;
+@using EbookStore.Contract.ViewModel.Book.Request;
+@using EbookStore.Contract.ViewModel.Genre.Response;
+@inject IGenreClient _genreClient;
+@model BookCreateViewModel;
+@{
+    List<GenreResponse> genres = await _genreClient.GetAsync();
+}
+
+<div class="container-fluid pb-5">
+    <form enctype="multipart/form-data" asp-controller="Book" asp-action="Create" method="post">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-30">
+                <img id="bookCreateCover" class="w-100 h-100" src="https://res.cloudinary.com/dddvmxs3h/image/upload/v1667961949/phvwsqtcvzzt2yfojqwu.jpg" alt="Product" />
+                <input asp-for=CoverImage onchange="uploadImage(this)" type="file" accept="image/*" defaultValue="" />
+                <span asp-validation-for=CoverImage class="text-danger" />
+            </div>
+            <div class="col-lg-7 h-auto mb-30">
+                <div class="h-100 bg-light p-30">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label>Title</label>
+                            <input asp-for=Title type="text" class="mb-3" />
+                            <span asp-validation-for=Title class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label>Number Of Page</label>
+                            <input asp-for=NumberOfPage type="text" class="mb-3" />
+                            <span asp-validation-for=NumberOfPage class="text-danger" />
+                        </div>
+                        <div class="col-6">
+                            <label>Price</label>
+                            <input asp-for=Price type="text" class="mb-3" />
+                            <span asp-validation-for=Price class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label>Description</label>
+                            <textarea asp-for=Description type="text" rows="10" cols="80"></textarea>
+                            <span asp-validation-for=Description class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 form-group">
+                            <label>Genres</label>
+                            <select asp-for=BookGenreIds class="form-control" multiple>
+                                @foreach(GenreResponse genre in genres)
+                                {
+                                    <option value=@genre.GenreId>@genre.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for=BookGenreIds class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label>Pdf File</label>
+                            <input type="file" asp-for=PdfFile accept="application/pdf" />
+                            <span asp-validation-for=PdfFile class="text-danger" />
+                        </div>
+                        @*<div class="col-6">
+                        <label>Epub File</label>
+                        <input type="file" asp-for=EpubFile accept=".epub" />
+                        <span asp-validation-for=EpubFile class="text-danger" />
+                        </div>*@
+                    </div>
+
+                    @*<div class="row mb-3">
+                    <Col>
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control as="textarea" rows={5}
+                    {...register("description")}
+                    class="mb-3" />
+                    <p class="text-danger">{errors.description?.message}</p>
+                    </Col>
+                    </div>
+                    <div class="d-flex align-items-center mb-4 pt-2">*@
+                    <button type="submit" class="btn btn-primary px-3">
+                        <i class="fa fa-shopping-cart mr-1"></i>
+                        Add New Product Product
+                    </button>
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const uploadImage = (fileInput) => {
+        let bookCover = document.getElementById("bookCreateCover");
+        var [file] = fileInput.files;
+        bookCover.src = URL.createObjectURL(file);
+    }
+
+    const uploadFile = fileName => {
+        console.log(fileName);
+    }
+
+    $(document).ready(function () {
+        $('#ingredients').multiselect();
+    });
+</script>
