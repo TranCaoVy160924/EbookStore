@@ -12,6 +12,11 @@ public class CartlistController : Controller
         _cartistClient = cartlistClient;
     }
 
+    public IActionResult Index()
+    {
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddToCartlist(int cartAddBookId)
     {
