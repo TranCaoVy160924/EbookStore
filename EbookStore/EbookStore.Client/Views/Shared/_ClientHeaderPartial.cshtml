@@ -1,11 +1,37 @@
 ﻿@using EbookStore.Client.Helper;
 @using EbookStore.Client.RefitClient;
 @using EbookStore.Contract.ViewModel.Genre.Response;
+@using EbookStore.Contract.ViewModel.Pagination;
+@using EbookStore.Contract.ViewModel.WishItem.Request;
+@using EbookStore.Contract.ViewModel.Book.BookResponse;
+@using Newtonsoft.Json;
+@using Refit;
 @inject IGenreClient _genreClient;
+@inject IWishlistClient _wishlistClient;
 
 @{
     UserManager userManager = new UserManager(this.User);
     List<GenreResponse> genres = await _genreClient.GetAsync();
+    List<BookResponse> data = new List<BookResponse>();
+    PaginationHeader paginationHeader = null;
+    if (userManager.IsLogin())
+    {
+        var Token = userManager.GetToken();
+        WishItemQueryRequest wishItemQueryRequest = new WishItemQueryRequest
+                {
+                    PageNumber = 1,
+                    PageSize = 10,
+                    Title = string.Empty,
+                    Genres = new List<int> { 0 },
+                    StartReleaseDate = DateTime.MinValue,
+                    EndReleaseDate = DateTime.MaxValue
+                };
+        ApiResponse<List<BookResponse>> response
+            = await _wishlistClient.GetResponseAsync(wishItemQueryRequest, Token);
+        string headerString = await response.GetPaginationHeader();
+        paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
+        data = response.ReadResult();
+    }
 }
 
 <!-- Topbar Start -->
@@ -139,10 +165,10 @@
                             <span class="badge text-secondary border border-secondary rounded-circle"
                                   style="padding-bottom: 2px;">0</span>
                         </a>
-                        <a href="" class="btn px-0 ml-3">
+                        <a asp-controller="WishList" asp-action="Index" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle"
-                                  style="padding-bottom: 2px;">0</span>
+                                  style="padding-bottom: 2px;">@data.Count()</span>
                         </a>
                     </div>
                 </div>

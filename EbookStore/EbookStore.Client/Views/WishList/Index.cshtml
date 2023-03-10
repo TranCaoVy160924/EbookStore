@@ -28,7 +28,7 @@
                     EndReleaseDate = DateTime.MaxValue
                 };
         ApiResponse<List<BookResponse>> response
-            = await _wishlistClient.GetResponseAsync(wishItemQueryRequest);
+            = await _wishlistClient.GetResponseAsync(wishItemQueryRequest, Token);
         string headerString = await response.GetPaginationHeader();
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();
@@ -138,8 +138,7 @@
                 <th>Book Title</th>
                 <th>Price</th>
                 <th>Sale Price</th>
-                <th>Sale</th>
-                <th>release date</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -149,13 +148,13 @@
                     <td>@book.Id</td>
                     <td>@book.Title</td>
                     <td>@book.Price</td>
-                    <td>@{
-                            double priceAfterSale = book.Price * (100 - book.SalePercent) / 100; 
-                        }
-                        @priceAfterSale
+                    <td>
+                        $@(book.Price * (100 - book.SalePercent) / 100)
                     </td>
-                    <td>@book.SalePercent</td>
-                    <td>@book.ReleaseDate</td>
+                    <td>
+                        <button>Remove</button>
+                        <button>Add to cart</button>
+                    </td>
                 </tr>
             }
         </tbody>
