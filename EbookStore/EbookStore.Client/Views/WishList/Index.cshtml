@@ -1,0 +1,163 @@
+﻿@using EbookStore.Client.Helper;
+@using EbookStore.Client.RefitClient;
+@using EbookStore.Contract.ViewModel.Pagination;
+@using EbookStore.Contract.ViewModel.WishItem.Request;
+@using EbookStore.Contract.ViewModel.Book.BookResponse;
+@using Newtonsoft.Json;
+@using Refit;
+@inject IWishlistClient _wishlistClient;
+
+@{
+    ViewData["Title"] = "Wish List";
+}
+
+@{
+    UserManager userManager = new UserManager(this.User);
+    List<BookResponse> data = new List<BookResponse>();
+    PaginationHeader paginationHeader = null;
+    if (userManager.IsLogin())
+    {
+        var Token = userManager.GetToken();
+        WishItemQueryRequest wishItemQueryRequest = new WishItemQueryRequest
+                {
+                    PageNumber = 1,
+                    PageSize = 10,
+                    Title = string.Empty,
+                    Genres = new List<int> {},
+                    StartReleaseDate = DateTime.MinValue,
+                    EndReleaseDate = DateTime.MaxValue
+                };
+        ApiResponse<List<BookResponse>> response
+            = await _wishlistClient.GetResponseAsync(wishItemQueryRequest, Token);
+        string headerString = await response.GetPaginationHeader();
+        paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
+        data = response.ReadResult();
+    }
+}
+
+<head>
+    <title>Sale</title>
+    <style>
+        body {
+            margin-top: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-left: 30%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn {
+            border: none;
+            color: white;
+            margin: 4px 2px;
+            padding: 6px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: #008CBA;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            float: left;
+            margin-left: 2%;
+            margin-top: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 4px;
+            width: 100%;
+            margin-right: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: right;
+            margin-top: 20px;
+        }
+
+            .pagination button {
+                margin: 0 10px;
+                background-color: #ffc107;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                cursor: pointer;
+            }
+
+                .pagination button:hover {
+                    background-color: #006a8e;
+                }
+
+                .pagination button:disabled {
+                    background-color: grey;
+                }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input name="saleName" type="text" class="search-box" placeholder="Search..." />
+        <button type="submit">Search</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Book Title</th>
+                <th>Price</th>
+                <th>Sale Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BookResponse book in data)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Title</td>
+                    <td>$@book.Price</td>
+                    <td>
+                        $@(book.Price * (100 - book.SalePercent) / 100)
+                    </td>
+                    <td>
+                        <button class="btn btn-delete">Remove</button>
+                        <button class="btn btn-edit">Add to cart</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
