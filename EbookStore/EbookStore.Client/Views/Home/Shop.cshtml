@@ -1,0 +1,95 @@
+﻿@using EbookStore.Client.RefitClient;
+@using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
+@using EbookStore.Contract.ViewModel.Book.BookResponse;
+@using Newtonsoft.Json;
+@using Refit;
+@inject IHttpContextAccessor HttpContextAccessor;
+@inject IBookClient _bookClient;
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    var titleSearch = ViewData["TitleSearch"] as string;
+    var genre = session.GetString("Genre");
+    var startDate = JsonConvert.DeserializeObject<DateTime>(
+        session.GetString("Start_HomeShop"));
+    var endDate = JsonConvert.DeserializeObject<DateTime>(
+        session.GetString("End_HomeShop"));
+
+    BookQueryRequest queryRequest = new BookQueryRequest()
+            {
+                Title = titleSearch,
+                Genres = (genre == null) ? new List<int>() : new List<int> { int.Parse(genre) },
+                PageSize = 12,
+                PageNumber = 1,
+                EndReleaseDate = endDate,
+                StartReleaseDate = startDate,
+            };
+    ApiResponse<List<BookResponse>> books = await _bookClient.GetResponseAsync(queryRequest);
+
+    List<BookResponse> bookList = new List<BookResponse>();
+    bookList = books.ReadResult();
+}
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <form asp-controller="Home" asp-action="DateFilter">
+                <label>Release date</label><br />
+                <label>From</label><input name="startDate" type="date" /> <br />
+                <label>To</label><input name="endDate" type="date" /> <br />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+                @foreach (BookResponse book in bookList)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                        <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden">
+                                <img class="img-fluid w-100" src="@book.CoverImage" alt="">
+                                <div class="product-action">
+                                    <form asp-controller="Cartlist" asp-action="AddToCartlist" method="post">
+                                        <input type="hidden" name="cartAddBookId" value=@book.Id />
+                                        <button type="submit" class="btn btn-outline-dark btn-square"><i class="fa fa-shopping-cart"></i></button>
+                                    </form>
+
+                                    <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post">
+                                        <input type="hidden" name="bookId" value=@book.Id />
+                                        <button type="submit" class="btn btn-outline-dark btn-square"><i class="far fa-heart"></i></button>
+                                    </form>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center py-4">
+                                <a class="h6 text-decoration-none text-truncate" href="">@book.Title</a>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h5>$@(book.Price * (100 - book.SalePercent) / 100)</h5>
+                                    @if (book.SalePercent > 0)
+                                    {
+                                        <h6 class="text-muted ml-2"><del>$@book.Price</del></h6>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="col-12">
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
