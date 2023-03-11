@@ -149,7 +149,7 @@
                     <td>@book.Title</td>
                     <td>@book.Price</td>
                     <td>
-                        $@(book.Price * (100 - book.SalePercent) / 100)
+                        @(book.Price * (100 - book.SalePercent) / 100)
                     </td>
                     <td>
                         <button>Remove</button>
