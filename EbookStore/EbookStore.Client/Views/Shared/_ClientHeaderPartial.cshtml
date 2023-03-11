@@ -1,6 +1,7 @@
 ﻿@using EbookStore.Client.Helper;
 @using EbookStore.Client.RefitClient;
 @using EbookStore.Contract.ViewModel.Genre.Response;
+@using Refit;
 @inject IGenreClient _genreClient;
 @inject ICartlistClient _cartlistClient;
 @inject IWishlistClient _wishlistClient;
@@ -147,7 +148,7 @@
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <a href="" class="btn px-0">
+                        <a asp-controller="WishList" asp-action="Index" class="btn px-0">
                             <i class="fas fa-heart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle"
                                   style="padding-bottom: 2px;">@wishlistCount</span>

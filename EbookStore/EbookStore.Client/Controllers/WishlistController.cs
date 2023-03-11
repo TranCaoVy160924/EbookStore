@@ -12,6 +12,11 @@ public class WishlistController : Controller
         _wishlistClient = wishlistClient;
     }
 
+    public IActionResult Index()
+    {
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddToWishlist(int bookId)
     {
