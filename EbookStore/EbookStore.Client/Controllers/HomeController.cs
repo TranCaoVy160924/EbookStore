@@ -50,6 +50,16 @@ public class HomeController : Controller
                 JsonConvert.SerializeObject(DateTime.MaxValue));
         }
 
+        if (session.GetString("PageNumber_HomeShop") == null)
+        {
+            session.SetString("PageNumber_HomeShop", "1");
+        }
+
+        if (session.GetString("PageSize_HomeShop") == null)
+        {
+            session.SetString("PageSize_HomeShop", "12");
+        }
+
         ViewData["TitleSearch"] = titleSearch;
         return View();
     }
@@ -78,6 +88,14 @@ public class HomeController : Controller
         session.SetString("End_HomeShop",
                 JsonConvert.SerializeObject(endDate));
 
+        return RedirectToAction("Shop", "Home");
+    }
+
+    [HttpPost]
+    public IActionResult ChangePage(string pageNumber)
+    {
+        var session = Request.HttpContext.Session;
+        session.SetString("PageNumber_HomeShop", pageNumber);
         return RedirectToAction("Shop", "Home");
     }
 
