@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Claims;
 
 namespace EbookStore.Application.Controllers;
@@ -29,7 +30,9 @@ public class CartlistController : ControllerBase
     {
         try
         {
-            var pagedResult = await _cartlistRepo.GetAsync(queryRequest, GetUserId());
+            var userId = await GetUserId();
+
+            var pagedResult = await _cartlistRepo.GetAsync(queryRequest, userId);
 
             Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
 
@@ -71,5 +74,47 @@ public class CartlistController : ControllerBase
         User user = await _userManager.FindByNameAsync(userName);
 
         return user.Id;
+    }
+
+    [HttpPost("GetCount")]
+    [Authorize]
+    public async Task<IActionResult> GetCountAsync()
+    {
+        try
+        {
+            var userId = await GetUserId();
+
+            int count = await _cartlistRepo.GetCountAsync(userId);
+            return Ok(count);
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+    [HttpPost("Delete")]
+    [Authorize]
+    public async Task<IActionResult> DeleteAsync(int bookid)
+    {
+        try
+        {
+            var userId = await GetUserId();
+
+            await _cartlistRepo.DeleteAsync(bookid, userId);
+            return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
     }
 }

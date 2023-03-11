@@ -113,7 +113,7 @@ public class WishlistRepository : IWishlistRepository
     #endregion
 
     #region GetAsync
-    public async Task<PagedList<BookResponse>> GetAsync(WishItemQueryRequest request, Task<Guid> id)
+    public async Task<PagedList<BookResponse>> GetAsync(WishItemQueryRequest request, Guid id)
     {
         IQueryable<Book> query = _dbContext.Books
             .Include(b => b.Sale)
@@ -121,11 +121,19 @@ public class WishlistRepository : IWishlistRepository
             .QueryTitle(request.Title)
             .QueryGenres(request.Genres)
             .QueryReleaseDate(request.StartReleaseDate, request.EndReleaseDate)
-            .QueryCurrentWishItem(_dbContext.WishItems, await id)
+            .QueryCurrentWishItem(_dbContext.WishItems, id)
             .AsQueryable();
 
         var paginatedResult = await query.PaginateResultAsync(request);
         return paginatedResult.MapResultToResponse<Book, BookResponse>(_mapper);
+    }
+    #endregion
+
+    #region GetCountAsync
+    public async Task<int> GetCountAsync(Guid userId)
+    {
+        int Count = _dbContext.WishItems.Where(c => c.UserId == userId).Count();
+        return Count;
     }
     #endregion
 }
