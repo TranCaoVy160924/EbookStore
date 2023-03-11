@@ -1,6 +1,5 @@
 ﻿using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.WishItem.Request;
-using Microsoft.AspNetCore.Mvc;
 using Refit;
 
 namespace EbookStore.Client.RefitClient;
@@ -12,5 +11,8 @@ public interface IWishlistClient
     Task AddBookToWishlistAsync(int bookId, [Header("Authorization")] string jwtToken);
 
     [Post("/Wishlist/Search/")]
-    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] WishItemQueryRequest queryRequest, [Header("Authorization")] string jwtToken);
+    Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] WishItemQueryRequest queryRequest,
+                                                        [Header("Authorization")] string jwtToken);
+    [Post("/Wishlist/GetCount")]
+    Task <int> GetCountAsync([Header("Authorization")] string jwtToken);
 }
