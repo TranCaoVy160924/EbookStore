@@ -1,5 +1,6 @@
 ﻿using EbookStore.Client.Helper;
 using EbookStore.Client.RefitClient;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EbookStore.Client.Controllers;
@@ -10,6 +11,16 @@ public class CartlistController : Controller
     public CartlistController(ICartlistClient cartlistClient)
     {
         _cartistClient = cartlistClient;
+    }
+
+    public IActionResult Index()
+    {
+        UserManager userManager = new UserManager(User);
+        if (userManager.IsLogin())
+        {
+            return View();
+        }
+        return RedirectToAction("Login", "Auth");
     }
 
     [HttpPost]
@@ -29,5 +40,13 @@ public class CartlistController : Controller
         {
             return RedirectToAction("Index", controllerName: "Home");
         }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(int bookId)
+    {
+        UserManager userManager = new UserManager(User);
+        await _cartistClient.DeleteBookAsync(bookId, userManager.GetToken());
+        return RedirectToAction("Index", "Cartlist");
     }
 }

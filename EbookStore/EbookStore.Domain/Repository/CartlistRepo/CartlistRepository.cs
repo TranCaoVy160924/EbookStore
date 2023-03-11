@@ -33,8 +33,8 @@ public class CartlistRepository : ICartlistRepository
     #region addToCartAsync
     public async Task AddBookToCartlistAsync(int bookId, Guid userId)
     {
-        var existingWishItem = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
-        if (existingWishItem != null)
+        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
+        if (existingCartItem != null)
         {
             throw new ApplicationException($"This book {bookId} is already in cart.");
         }
@@ -67,7 +67,7 @@ public class CartlistRepository : ICartlistRepository
     #endregion
 
     #region GetAsync
-    public async Task<PagedList<BookResponse>> GetAsync(CartItemQueryRequest request, Task<Guid> id)
+    public async Task<PagedList<BookResponse>> GetAsync(CartItemQueryRequest request, Guid id)
     {
         IQueryable<Book> query = _dbContext.Books
             .Include(b => b.Sale)
@@ -75,11 +75,29 @@ public class CartlistRepository : ICartlistRepository
             .QueryTitle(request.Title)
             .QueryGenres(request.Genres)
             .QueryReleaseDate(request.StartReleaseDate, request.EndReleaseDate)
-            .QueryCurrentCartItem(_dbContext.CartItems, await id)
+            .QueryCurrentCartItem(_dbContext.CartItems, id)
             .AsQueryable();
 
         var paginatedResult = await query.PaginateResultAsync(request);
         return paginatedResult.MapResultToResponse<Book, BookResponse>(_mapper);
+    }
+    #endregion
+
+    #region GetCountAsync
+    public async Task<int> GetCountAsync(Guid userId)
+    {
+        int Count = _dbContext.CartItems.Where(c => c.UserId == userId).Count();
+        return Count;
+    }
+    #endregion
+
+    #region DeleteAsync
+    public async Task DeleteAsync(int bookId, Guid userId)
+    {
+        var book = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
+
+        _dbContext.CartItems.Remove(book);
+        await _dbContext.SaveChangesAsync();
     }
     #endregion
 }

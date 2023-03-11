@@ -31,7 +31,9 @@ public class WishlistController : ControllerBase
     {
         try
         {
-            var pagedResult = await _wishlistRepo.GetAsync(queryRequest, GetUserId());
+            var userId = await GetUserId();
+
+            var pagedResult = await _wishlistRepo.GetAsync(queryRequest, userId);
 
             Response.Headers.Add("X-Pagination", pagedResult.GetMetadata());
 
@@ -60,10 +62,31 @@ public class WishlistController : ControllerBase
     {
         try
         {
-            var userId = GetUserId();
+            var userId = await GetUserId();
 
-            await _wishlistRepo.AddBookToWishlistAsync(bookId, await userId);
+            await _wishlistRepo.AddBookToWishlistAsync(bookId, userId);
             return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+    [HttpPost("GetCount")]
+    [Authorize]
+    public async Task<IActionResult> GetCountAsync()
+    {
+        try
+        {
+            var userId = await GetUserId();
+
+            int count = await _wishlistRepo.GetCountAsync(userId);
+            return Ok(count);
         }
         catch (ApplicationException ex)
         {

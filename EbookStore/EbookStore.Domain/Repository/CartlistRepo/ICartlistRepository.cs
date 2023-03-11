@@ -11,5 +11,7 @@ namespace EbookStore.Domain.Repository.CartlistRepo;
 public interface ICartlistRepository
 {
     Task AddBookToCartlistAsync(int bookId, Guid userId);
-    Task<PagedList<BookResponse>> GetAsync(CartItemQueryRequest request, Task<Guid> id);
+    Task<PagedList<BookResponse>> GetAsync(CartItemQueryRequest request, Guid id);
+    Task<int> GetCountAsync(Guid userId);
+    Task DeleteAsync(int bookId, Guid userId);
 }
