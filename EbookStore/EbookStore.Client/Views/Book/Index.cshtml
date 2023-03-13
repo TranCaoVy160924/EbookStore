@@ -109,6 +109,7 @@
             cursor: pointer;
         }
 
+
         .btn-edit {
             background-color: #008CBA;
         }
@@ -177,22 +178,22 @@
                     <div class="navbar-nav w-100">
                         @foreach (GenreResponse genre in genresResponse)
                         {
-                            <option value=@genre.GenreId>@genre.Name</option>
+                        <option value=@genre.GenreId>@genre.Name</option>
                         }
-                    </div>
-                </select>
             </div>
+            </select>
+    </div>
 
-            <div>
-                <input value="@DateTime.Now" asp-for="StartReleaseDate" type="date">
-                Start Date
-            </div>
-            <div>
-                <input value="@DateTime.Now" asp-for="EndReleaseDate" type="date">
-                End Date
-            </div>
-            <button type="submit" class="btn btn-search">Apply Filter</button>
-        </form>
+    <div>
+        <input value="@DateTime.Now" asp-for="StartReleaseDate" type="date">
+        Start Date
+    </div>
+    <div>
+        <input value="@DateTime.Now" asp-for="EndReleaseDate" type="date">
+        End Date
+    </div>
+    <button type="submit" class="btn btn-search">Apply Filter</button>
+    </form>
     </div>
 
 
@@ -218,10 +219,12 @@
                     <td>@book.Price</td>
                     <td>@book.SalePercent%</td>
                     <td>@book.NumberOfPage</td>
-                    <td>@(book.Description.Length>15 ? book.Description.Substring(0,15)+"..." : book.Description)</td>
+                    <td>@(book.Description.Length>20 ? book.Description.Substring(0,20)+"..." : book.Description)</td>
                     <td>@book.ReleaseDate.ToString()</td>
                     <td>
-                        <button class="btn btn-edit">Edit</button>
+                        <a asp-controller="Book" asp-action="Update" asp-route-id=@book.Id class="btn btn-edit">
+                            Update
+                        </a>
                         <form asp-controller="Book" asp-action="Delete" method="post">
                             <input type="hidden" name="bookId" value="@book.Id" />
                             <button type="submit" class="btn btn-delete">Delete</button>
@@ -231,6 +234,9 @@
             }
         </tbody>
     </table>
+    <a asp-controller="Book" asp-action="Create" class="btn btn-create">
+                            Create New
+                        </a>
     <div class="pagination">
         <form asp-controller="Book" asp-action="ChangePage" method="post">
             <input hidden name="pageNumber"

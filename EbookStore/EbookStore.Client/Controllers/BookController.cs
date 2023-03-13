@@ -1,16 +1,11 @@
-﻿using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
-using EbookStore.Client.ViewModel;
-using Microsoft.AspNetCore.Mvc;
-using EbookStore.Contract.ViewModel.Book.Request;
+﻿using EbookStore.Client.ExternalService.EbookHostService;
 using EbookStore.Client.ExternalService.ImageHostService;
-using EbookStore.Client.ExternalService.EbookHostService;
+using EbookStore.Client.Helper;
 using EbookStore.Client.RefitClient;
-using EbookStore.Client.Helper;
-using Microsoft.AspNetCore.Mvc;
+using EbookStore.Client.ViewModel;
 using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
-using Microsoft.AspNetCore.Http;
-using EbookStore.Client.Helper;
+using EbookStore.Contract.ViewModel.Book.Request;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EbookStore.Client.Controllers;
 public class BookController : Controller
@@ -70,6 +65,13 @@ public class BookController : Controller
         return View();
     }
 
+    public IActionResult Update(int id)
+    {
+        var session = Request.HttpContext.Session;
+        session.SetString("chosen_id", id.ToString());
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(BookCreateViewModel viewModel)
     {
@@ -91,23 +93,55 @@ public class BookController : Controller
             await _bookClient.CreateAsync(request, userManager.GetToken());
             return RedirectToAction("Index", "Book");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return RedirectToAction("Create", "Book");
         }
     }
-    
+
+    [HttpPost]
+    public async Task<IActionResult> Update(BookUpdateViewModel viewModel)
+    {
+        UserManager userManager = new UserManager(User);
+
+
+        BookUpdateRequest request = new BookUpdateRequest
+        {
+            Id = viewModel.Id,
+            Title = viewModel.Title,
+            NumberOfPage = viewModel.NumberOfPage,
+            Price = viewModel.Price,
+            Description = viewModel.Description,
+            CoverImage = viewModel.CoverImage==null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
+            PdfLink = viewModel.PdfFile==null? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
+            EpubLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
+            BookGenreIds = viewModel.BookGenreIds
+        };
+
+        try
+        {
+            await _bookClient.UpdateAsync(request, userManager.GetToken());
+            return RedirectToAction("Index", "Book");
+        }
+        catch (Exception)
+        {
+            return RedirectToAction("Update", "Book");
+        }
+    }
+
     [HttpPost]
     public IActionResult Search(BookQueryRequest request)
     {
         var session = Request.HttpContext.Session;
-        if (request!=null)
+        if (request != null)
         {
-            request.Title = request.Title!=null ? request.Title : String.Empty;
-            request.Genres = request.Genres!=null ? request.Genres : new List<int>();
+            //request.Title = request.Title!=null ? request.Title : String.Empty;
+            //request.Genres = request.Genres!=null ? request.Genres : new List<int>();
+            request.Title ??= String.Empty;
+            request.Genres ??= new List<int>();
 
             string genresString = String.Empty;
-            if (request.Genres.Count==0)
+            if (request.Genres.Count == 0)
             {
                 foreach (var genres in request.Genres) { genresString += genres + " "; }
             }
