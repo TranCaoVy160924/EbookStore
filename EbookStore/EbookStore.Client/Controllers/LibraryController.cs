@@ -42,7 +42,7 @@ public class LibraryController : Controller
 
         return View();
     }
-
+   
     public IActionResult Search(LibraryItemQueryRequest request)
     {
         var session = Request.HttpContext.Session;

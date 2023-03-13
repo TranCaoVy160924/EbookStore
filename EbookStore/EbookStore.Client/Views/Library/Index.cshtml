@@ -29,8 +29,7 @@
                     PageSize = pageSize,
                     Title = title,
                 };
-        ApiResponse<List<LibraryItemResponse>> response
-                    = await _librarylient.GetResponseAsync(queryRequest);
+        ApiResponse<List<LibraryItemResponse>> response = await _librarylient.GetResponseAsync(queryRequest, token);
         string headerString = await response.GetPaginationHeader();
         paginationHeader = JsonConvert.DeserializeObject<PaginationHeader>(headerString);
         data = response.ReadResult();

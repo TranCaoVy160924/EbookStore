@@ -6,6 +6,6 @@ namespace EbookStore.Client.RefitClient;
 
 public interface ILibraryClient
 {
-    [Post("/Book/Search/")]
-    Task<ApiResponse<List<LibraryItemResponse>>> GetResponseAsync([Body] LibraryItemQueryRequest queryRequest);
+    [Post("/LibraryItem/Search")]
+    Task<ApiResponse<List<LibraryItemResponse>>> GetResponseAsync([Body] LibraryItemQueryRequest queryRequest, [Header("Authorization")] string jwtToken);
 }
