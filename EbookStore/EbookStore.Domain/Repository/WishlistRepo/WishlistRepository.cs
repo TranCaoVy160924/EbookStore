@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using System.Net.Http;
+using EbookStore.Domain.Repository.CartlistRepo;
 
 namespace EbookStore.Domain.Repository.WishlistRepo;
 public class WishlistRepository : IWishlistRepository
@@ -136,4 +137,24 @@ public class WishlistRepository : IWishlistRepository
         return Count;
     }
     #endregion
+
+    #region RemoveWishlistAsync
+    public async Task RemoveWishlistAsync(int bookId)
+    {
+        WishItem wishItem = await _dbContext.WishItems
+            .QueryActive()
+            .QueryId(bookId)
+            .FirstOrDefaultAsync();
+        if (wishItem != null)
+        {
+            wishItem.IsActive = false; 
+            await _dbContext.SaveChangesAsync();
+        }
+        else
+        {
+            throw new Exception("Book not exist");
+        }
+    }
+    #endregion
+
 }
