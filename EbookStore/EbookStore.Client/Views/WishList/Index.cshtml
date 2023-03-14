@@ -65,7 +65,6 @@
 
         .btn {
             border: none;
-            color: white;
             margin: 4px 2px;
             padding: 6px 12px;
             text-align: center;
@@ -75,12 +74,12 @@
             cursor: pointer;
         }
 
-        .btn-edit {
-            background-color: #008CBA;
-        }
-
         .btn-delete {
             background-color: #f44336;
+        }
+
+        .btn-edit {
+            background-color: #008CBA;
         }
 
         .search-container {
@@ -153,7 +152,10 @@
                     </td>
                     <td>
                         <button class="btn btn-delete">Remove</button>
-                        <button class="btn btn-edit">Add to cart</button>
+                        <form asp-controller="Cartlist" asp-action="AddToCartlist" method="post">
+                            <input type="hidden" name="cartAddBookId" value="@book.Id" />
+                            <button type="submit" class="btn btn-edit">Add to cart</button>
+                        </form>
                     </td>
                 </tr>
             }
