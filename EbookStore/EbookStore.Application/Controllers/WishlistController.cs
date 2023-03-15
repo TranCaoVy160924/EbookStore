@@ -77,7 +77,7 @@ public class WishlistController : ControllerBase
         }
     }
 
-    [HttpPost("{bookId}")]
+    [HttpDelete("{bookId}")]
     [Authorize]
     public async Task<IActionResult> RemoveWishlist(int bookId)
     {
@@ -85,16 +85,12 @@ public class WishlistController : ControllerBase
         {
             var userId = await GetUserId();
             await _wishlistRepo.RemoveWishlistAsync(bookId, userId);
-            return Ok();
         }
         catch (ApplicationException ex)
         {
             return BadRequest(ex.Message);
         }
-        catch (Exception)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
-        }
+        return Ok();
     }
 
     [HttpPost("GetCount")]

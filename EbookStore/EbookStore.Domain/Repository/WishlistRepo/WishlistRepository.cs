@@ -139,11 +139,12 @@ public class WishlistRepository : IWishlistRepository
     #endregion
 
     #region RemoveWishlistAsync
-    public async Task RemoveWishlistAsync(int bookId)
+    public async Task RemoveWishlistAsync(int bookId, Guid userId)
     {
         WishItem wishItem = await _dbContext.WishItems
-            .QueryActive()
-            .QueryId(bookId)
+            .Where(x => x.IsActive == true)
+            .Where(x => x.BookId == bookId)
+            .Where(x=>x.UserId== userId)
             .FirstOrDefaultAsync();
         if (wishItem != null)
         {

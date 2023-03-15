@@ -36,4 +36,22 @@ public class WishlistController : Controller
         }
 
     }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoveWishlist(int bookId)
+    {
+        try
+        {
+            var userManager = new UserManager(User);
+            if (userManager.IsLogin())
+            {
+                await _wishlistClient.RemoveWishlistAsync(bookId, userManager.GetToken());
+            }
+            return RedirectToAction("Index");
+        }
+        catch (Exception)
+        {
+            return RedirectToAction("Index");
+        }
+    }
 }

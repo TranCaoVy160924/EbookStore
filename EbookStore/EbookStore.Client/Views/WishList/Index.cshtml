@@ -23,7 +23,7 @@
                     PageNumber = 1,
                     PageSize = 10,
                     Title = string.Empty,
-                    Genres = new List<int> {},
+                    Genres = new List<int> { },
                     StartReleaseDate = DateTime.MinValue,
                     EndReleaseDate = DateTime.MaxValue
                 };
@@ -151,7 +151,10 @@
                         $@(book.Price * (100 - book.SalePercent) / 100)
                     </td>
                     <td>
-                        <button class="btn btn-delete">Remove</button>
+                        <form asp-action="RemoveWishlist" asp-controller="Wishlist" method="post">
+                            <input type="hidden" name="removeBookId" value="@book.Id" />
+                            <button type="submit" class="btn btn-delete">Remove</button>
+                        </form>
                         <form asp-controller="Cartlist" asp-action="AddToCartlist" method="post">
                             <input type="hidden" name="cartAddBookId" value="@book.Id" />
                             <button type="submit" class="btn btn-edit">Add to cart</button>
