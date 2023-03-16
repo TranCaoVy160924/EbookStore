@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EbookStore.Data.Migrations
 {
     [DbContext(typeof(EbookStoreDbContext))]
-    [Migration("20230311042558_Initial")]
+    [Migration("20230316090955_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             Id = new Guid("423e533c-d43d-4fd9-9676-e31af724522a"),
-                            ConcurrencyStamp = "a0c05400-b6c5-454d-b2ed-24b4cbda3af6",
+                            ConcurrencyStamp = "f862637e-6d78-4fca-bc1e-ce30d482d181",
                             Description = "Administrator role",
                             Name = "Admin",
                             NormalizedName = "admin"
@@ -67,7 +67,7 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             Id = new Guid("da35db1a-5b54-4618-884e-bcd7f7b1dd19"),
-                            ConcurrencyStamp = "59de0315-072d-4f22-b8e4-b5c29cd3a68b",
+                            ConcurrencyStamp = "67f458ef-2122-4e91-a837-6fc4fa4b4696",
                             Description = "User role",
                             Name = "User",
                             NormalizedName = "user"
@@ -87,10 +87,6 @@ namespace EbookStore.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EpubLink")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -128,1376 +124,1276 @@ namespace EbookStore.Data.Migrations
                         {
                             BookId = 1,
                             CoverImage = "https://picsum.photos/seed/1/500/500",
-                            Description = "Mollis mauris luctus, mattis hac tellus, ex urna, porttitor convallis morbi in, nec, dolor aliquet donec vel lacinia imperdiet",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Odio blandit, bibendum, nisi, condimentum",
                             IsActive = true,
                             NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 10.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(2097),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(3768),
                             SaleId = 2,
-                            Title = "Sagittis"
+                            Title = "Sed nisi"
                         },
                         new
                         {
                             BookId = 2,
                             CoverImage = "https://picsum.photos/seed/2/500/500",
-                            Description = "Erat, lectus, porttitor integer tempus mollis blandit interdum fringilla",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Non ad tincidunt volutpat dignissim platea iaculis nisi",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 20.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(3066),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(4362),
                             SaleId = 3,
-                            Title = "Dui nulla auctor"
+                            Title = "Nibh bibendum faucibus"
                         },
                         new
                         {
                             BookId = 3,
                             CoverImage = "https://picsum.photos/seed/3/500/500",
-                            Description = "Nisi, sodales elementum maecenas ultricies lacus euismod, porttitor, finibus leo",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Diam neque erat, lorem, semper etiam blandit nam eros id, vivamus tempor, primis nostra, sed, eget lorem finibus aliquet",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 30.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(4053),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(4917),
                             SaleId = 1,
-                            Title = "Ligula"
+                            Title = "Mattis congue"
                         },
                         new
                         {
                             BookId = 4,
                             CoverImage = "https://picsum.photos/seed/4/500/500",
-                            Description = "Tortor tincidunt sed a, sapien vestibulum platea sem mauris curabitur",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ut at, nulla himenaeos pretium efficitur orci justo sapien orci, eleifend, nec vestibulum, dignissim",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 40.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(5105),
-                            Title = "Cursus maximus faucibus"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(5480),
+                            Title = "Finibus laoreet odio imperdiet"
                         },
                         new
                         {
                             BookId = 5,
                             CoverImage = "https://picsum.photos/seed/5/500/500",
-                            Description = "Rhoncus tempor in accumsan odio justo nunc ultricies blandit, class arcu, et congue libero mauris",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Varius consequat nostra, felis ac sagittis, semper finibus, fusce dapibus habitasse scelerisque commodo, neque commodo eros,",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 50.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(6104),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(6446),
                             SaleId = 3,
-                            Title = "Lacus neque erat leo"
+                            Title = "Urna mi"
                         },
                         new
                         {
                             BookId = 6,
                             CoverImage = "https://picsum.photos/seed/6/500/500",
-                            Description = "Tristique massa, posuere, nibh nam morbi lobortis cras per",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ad aenean turpis orci leo, conubia vitae, euismod, euismod condimentum ac eleifend, lacus",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 60.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(7112),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(7680),
                             SaleId = 1,
-                            Title = "Vulputate blandit torquent"
+                            Title = "Nunc facilisis"
                         },
                         new
                         {
                             BookId = 7,
                             CoverImage = "https://picsum.photos/seed/7/500/500",
-                            Description = "Maecenas sagittis, pulvinar urna, laoreet, cras dictum ultrices, accumsan hac at, blandit, scelerisque fringilla, aenean luctus, porta, quisque",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Aliquet lectus, et neque, tellus ligula,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 70.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(8273),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(8560),
                             SaleId = 2,
-                            Title = "Elit urna aliquam"
+                            Title = "Tellus imperdiet leo vestibulum"
                         },
                         new
                         {
                             BookId = 8,
                             CoverImage = "https://picsum.photos/seed/8/500/500",
-                            Description = "Lacus tortor, aptent sem, facilisis consectetur volutpat ex scelerisque finibus, nullam ut a, dui condimentum",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ante, velit amet, sem, ut morbi nibh metus conubia dolor dapibus",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 80.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(9543),
-                            Title = "Non eu commodo"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(9330),
+                            Title = "Rhoncus eleifend dolor mi"
                         },
                         new
                         {
                             BookId = 9,
                             CoverImage = "https://picsum.photos/seed/9/500/500",
-                            Description = "Venenatis viverra turpis praesent mauris donec congue sagittis,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ante,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 90.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(489),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(9983),
                             SaleId = 1,
-                            Title = "Neque magna ut"
+                            Title = "At"
                         },
                         new
                         {
                             BookId = 10,
                             CoverImage = "https://picsum.photos/seed/10/500/500",
-                            Description = "Mattis, mattis a, hendrerit lacinia tristique",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Diam metus sit placerat, eros, consequat",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 100.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(1695),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(608),
                             SaleId = 2,
-                            Title = "Dolor volutpat cursus"
+                            Title = "Dui in"
                         },
                         new
                         {
                             BookId = 11,
                             CoverImage = "https://picsum.photos/seed/11/500/500",
-                            Description = "Vel urna porta ad mi, vel, ultricies laoreet, suspendisse hac euismod, finibus, eros quam",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "At elit tortor, litora pharetra massa, dui mollis sem ligula lorem placerat ex ex, congue proin ipsum pulvinar, lacinia,",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 110.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(3075),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(1164),
                             SaleId = 3,
-                            Title = "Id nisl lorem"
+                            Title = "Massa"
                         },
                         new
                         {
                             BookId = 12,
                             CoverImage = "https://picsum.photos/seed/12/500/500",
-                            Description = "Arcu vitae, platea",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nibh, non, ipsum diam mattis, mauris hac nulla, porttitor suspendisse nullam dui, ligula, nostra, odio, laoreet, phasellus class nec",
                             IsActive = true,
                             NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 120.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(4194),
-                            Title = "Consectetur pulvinar finibus"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(1760),
+                            Title = "Arcu ipsum"
                         },
                         new
                         {
                             BookId = 13,
                             CoverImage = "https://picsum.photos/seed/13/500/500",
-                            Description = "Class vitae, primis quis, placerat quisque tempus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Arcu morbi ligula vitae, vestibulum, etiam neque, eu nibh egestas",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 130.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(5074),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(2332),
                             SaleId = 2,
-                            Title = "Leo nisi"
+                            Title = "Vitae sit"
                         },
                         new
                         {
                             BookId = 14,
                             CoverImage = "https://picsum.photos/seed/14/500/500",
-                            Description = "Sem, arcu, dolor,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Sociosqu lectus, finibus, convallis tempor, consequat tempus varius scelerisque facilisis orci porta, cras",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 140.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(6049),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(2884),
                             SaleId = 3,
-                            Title = "Bibendum ullamcorper vehicula integer"
+                            Title = "Curabitur"
                         },
                         new
                         {
                             BookId = 15,
                             CoverImage = "https://picsum.photos/seed/15/500/500",
-                            Description = "Posuere, pulvinar mattis pretium fringilla sed sit tortor commodo, purus inceptos porttitor, feugiat erat,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Laoreet, enim, tincidunt velit placerat interdum, quis, commodo dui, mi, semper rutrum sit in, porttitor, etiam himenaeos quam, sem,",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 150.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(7018),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(3475),
                             SaleId = 1,
-                            Title = "Tristique fames tellus fringilla"
+                            Title = "Risus mollis est blandit"
                         },
                         new
                         {
                             BookId = 16,
                             CoverImage = "https://picsum.photos/seed/16/500/500",
-                            Description = "Luctus, primis et, nulla, fringilla amet malesuada velit hac feugiat rutrum urna ultrices,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Per sollicitudin blandit conubia arcu, cursus turpis dapibus est porta, euismod, aptent a, pharetra",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 160.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(8015),
-                            Title = "Viverra blandit ullamcorper"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(4042),
+                            Title = "Libero tristique leo"
                         },
                         new
                         {
                             BookId = 17,
                             CoverImage = "https://picsum.photos/seed/17/500/500",
-                            Description = "Mauris, a, at amet, venenatis rutrum varius urna nunc, sollicitudin auctor inceptos vitae litora tincidunt bibendum, ut",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Praesent at vitae, tellus, laoreet, non semper nunc, eleifend, amet, curabitur felis dolor mauris porttitor, ultricies pellentesque",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 170.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 225, DateTimeKind.Local).AddTicks(9233),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(4614),
                             SaleId = 3,
-                            Title = "Augue"
+                            Title = "Nullam posuere leo etiam"
                         },
                         new
                         {
                             BookId = 18,
                             CoverImage = "https://picsum.photos/seed/18/500/500",
-                            Description = "Feugiat, nisi vitae, orci imperdiet nec, lectus vitae curabitur lectus, turpis viverra dapibus varius, ultrices,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Euismod magna nunc sodales massa, ultrices pulvinar sit nisi nulla, ipsum nullam blandit,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 180.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(959),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(5183),
                             SaleId = 1,
-                            Title = "Cursus fringilla"
+                            Title = "Rutrum"
                         },
                         new
                         {
                             BookId = 19,
                             CoverImage = "https://picsum.photos/seed/19/500/500",
-                            Description = "Quis velit dictum sollicitudin placerat pellentesque lectus, in, semper curabitur amet lorem, porttitor, eleifend, nisi massa, cursus,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Vehicula ultrices ad fames eleifend, duis donec ante, pretium in, dui malesuada lacinia",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 190.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(2053),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(5747),
                             SaleId = 2,
-                            Title = "Sed facilisis"
+                            Title = "Accumsan fringilla pulvinar facilisis"
                         },
                         new
                         {
                             BookId = 20,
                             CoverImage = "https://picsum.photos/seed/20/500/500",
-                            Description = "Euismod habitasse semper pulvinar nunc hendrerit morbi",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Auctor turpis gravida bibendum, imperdiet varius velit dui morbi vulputate posuere, molestie commodo,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 200.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(2959),
-                            Title = "Elit"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(6316),
+                            Title = "Ac euismod lacus"
                         },
                         new
                         {
                             BookId = 21,
                             CoverImage = "https://picsum.photos/seed/21/500/500",
-                            Description = "Dapibus elit, iaculis sem enim, varius, nunc, sem, orci nec, odio,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Et,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 210.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(3932),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(6967),
                             SaleId = 1,
-                            Title = "Tempus"
+                            Title = "Quam erat"
                         },
                         new
                         {
                             BookId = 22,
                             CoverImage = "https://picsum.photos/seed/22/500/500",
-                            Description = "Eleifend porttitor, erat eros, mattis, faucibus auctor quam habitasse elit, ut",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nec, luctus ac, metus lorem, auctor, finibus, urna, tincidunt sit id nullam vel nibh accumsan posuere, lacus",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 220.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(4897),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(7590),
                             SaleId = 2,
-                            Title = "Nostra eu inceptos"
+                            Title = "Praesent posuere accumsan massa"
                         },
                         new
                         {
                             BookId = 23,
                             CoverImage = "https://picsum.photos/seed/23/500/500",
-                            Description = "Neque lacus at, a",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Posuere nec, tincidunt pharetra mattis, cras",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 230.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(5970),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(8151),
                             SaleId = 3,
-                            Title = "Aenean interdum nulla id"
+                            Title = "Erat a urna"
                         },
                         new
                         {
                             BookId = 24,
                             CoverImage = "https://picsum.photos/seed/24/500/500",
-                            Description = "Metus hac per orci, auctor quis scelerisque blandit luctus, ac, hendrerit ligula,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Eu id odio faucibus euismod quam, dui amet cursus magna, quis ex, pulvinar eros, non,",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 240.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(6844),
-                            Title = "Nec"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(8667),
+                            Title = "Orci"
                         },
                         new
                         {
                             BookId = 25,
                             CoverImage = "https://picsum.photos/seed/25/500/500",
-                            Description = "Lacinia, vitae, dui, arcu imperdiet semper aliquam dapibus himenaeos",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Fringilla ex class pellentesque dictumst",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 250.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(7763),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(9210),
                             SaleId = 2,
-                            Title = "Nulla aliquet pellentesque"
+                            Title = "Fermentum fames"
                         },
                         new
                         {
                             BookId = 26,
                             CoverImage = "https://picsum.photos/seed/26/500/500",
-                            Description = "Bibendum, interdum, urna libero rhoncus vestibulum, aenean habitasse leo placerat, gravida vel donec",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Sit consequat porttitor rutrum curabitur dignissim nunc ante nullam ultrices suspendisse tortor",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 260.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(8708),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 728, DateTimeKind.Local).AddTicks(9716),
                             SaleId = 3,
-                            Title = "Interdum"
+                            Title = "Euismod"
                         },
                         new
                         {
                             BookId = 27,
                             CoverImage = "https://picsum.photos/seed/27/500/500",
-                            Description = "Congue conubia urna, pellentesque nostra, diam porttitor nec imperdiet sociosqu nisi nulla, nisi, iaculis primis pharetra sollicitudin non, vivamus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Neque placerat amet, iaculis ligula justo varius, mauris, viverra nibh in luctus sagittis, donec pellentesque nibh, tristique maximus",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 270.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 226, DateTimeKind.Local).AddTicks(9798),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(315),
                             SaleId = 1,
-                            Title = "Nulla vel id"
+                            Title = "Finibus massa"
                         },
                         new
                         {
                             BookId = 28,
                             CoverImage = "https://picsum.photos/seed/28/500/500",
-                            Description = "Consectetur mattis, massa,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Euismod dolor ultrices eleifend varius, fringilla commodo tortor, ante dignissim duis turpis",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 280.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(670),
-                            Title = "Inceptos"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(819),
+                            Title = "Metus"
                         },
                         new
                         {
                             BookId = 29,
                             CoverImage = "https://picsum.photos/seed/29/500/500",
-                            Description = "Aptent blandit lectus, vel mauris porta, at lacinia, massa, pharetra",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Auctor porttitor, vehicula mauris feugiat, dui, amet mollis viverra",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 290.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(1568),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(1367),
                             SaleId = 3,
-                            Title = "Sociosqu"
+                            Title = "Eleifend"
                         },
                         new
                         {
                             BookId = 30,
                             CoverImage = "https://picsum.photos/seed/30/500/500",
-                            Description = "Pellentesque eu vitae, augue",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Id proin platea nibh feugiat fringilla, interdum convallis libero dui dapibus",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 300.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(2557),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(1971),
                             SaleId = 1,
-                            Title = "A tristique odio"
+                            Title = "Sed"
                         },
                         new
                         {
                             BookId = 31,
                             CoverImage = "https://picsum.photos/seed/31/500/500",
-                            Description = "Mauris, massa, volutpat, interdum, ad nulla id tempor, fusce semper hac leo",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Odio, suscipit nunc, nam curabitur sodales",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 310.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(3525),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(2602),
                             SaleId = 2,
-                            Title = "Ex dictum nec"
+                            Title = "Nam vestibulum eleifend"
                         },
                         new
                         {
                             BookId = 32,
                             CoverImage = "https://picsum.photos/seed/32/500/500",
-                            Description = "Luctus, fames urna at, amet nam a, quis, quam",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Morbi nibh accumsan euismod, porttitor consectetur vel eu, nulla, eleifend venenatis faucibus magna leo a praesent in",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 320.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(4764),
-                            Title = "Sit morbi nibh mauris"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(3171),
+                            Title = "Lectus fringilla dignissim"
                         },
                         new
                         {
                             BookId = 33,
                             CoverImage = "https://picsum.photos/seed/33/500/500",
-                            Description = "Ultricies lobortis nullam scelerisque velit tempor nostra, tempus mauris orci, convallis euismod iaculis odio, neque eu,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Integer nisi eros torquent per rhoncus, orci,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 330.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(5898),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(3966),
                             SaleId = 1,
-                            Title = "Donec placerat tempor"
+                            Title = "A nam tellus"
                         },
                         new
                         {
                             BookId = 34,
                             CoverImage = "https://picsum.photos/seed/34/500/500",
-                            Description = "Sagittis, nunc libero sit curabitur erat porta per",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Massa, sem congue dolor, id",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 340.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(6941),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(4829),
                             SaleId = 2,
-                            Title = "Fringilla dictum"
+                            Title = "Enim enim donec interdum"
                         },
                         new
                         {
                             BookId = 35,
                             CoverImage = "https://picsum.photos/seed/35/500/500",
-                            Description = "Luctus, at ante odio, ligula sem, vestibulum",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "A laoreet, odio, dui, purus ornare curabitur suscipit sem,",
                             IsActive = true,
                             NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 350.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(7895),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(6007),
                             SaleId = 3,
-                            Title = "Enim ante"
+                            Title = "Lectus viverra"
                         },
                         new
                         {
                             BookId = 36,
                             CoverImage = "https://picsum.photos/seed/36/500/500",
-                            Description = "Feugiat, leo, mi massa, fames diam ac duis et proin",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Magna, ullamcorper eget urna metus id blandit felis tortor ultrices proin efficitur ex, vitae, risus dolor conubia odio",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 360.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 227, DateTimeKind.Local).AddTicks(8986),
-                            Title = "Vivamus consectetur lobortis et"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(6872),
+                            Title = "Faucibus elit ultrices eu"
                         },
                         new
                         {
                             BookId = 37,
                             CoverImage = "https://picsum.photos/seed/37/500/500",
-                            Description = "Sodales integer libero vulputate rhoncus mollis malesuada dapibus id tempor, non, massa, nam",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Porta, quis consectetur sit arcu, in, aliquet sollicitudin ante, et sagittis tristique habitasse maecenas ut orci,",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 370.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(770),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(7509),
                             SaleId = 2,
-                            Title = "Lectus et feugiat ligula"
+                            Title = "Rhoncus morbi ornare"
                         },
                         new
                         {
                             BookId = 38,
                             CoverImage = "https://picsum.photos/seed/38/500/500",
-                            Description = "Elit mollis magna laoreet varius arcu ultrices, class platea efficitur vel,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Vestibulum, rhoncus consectetur eleifend dui,",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 380.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(1831),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(8148),
                             SaleId = 3,
-                            Title = "Venenatis"
+                            Title = "Dolor leo"
                         },
                         new
                         {
                             BookId = 39,
                             CoverImage = "https://picsum.photos/seed/39/500/500",
-                            Description = "Lectus, accumsan augue auctor, neque, porttitor sagittis, rutrum magna eleifend, fusce risus ut volutpat",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Risus nunc non fringilla, orci, finibus nec, nisl magna nulla, quis,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 390.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(2855),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(8802),
                             SaleId = 1,
-                            Title = "Porttitor quam nec"
+                            Title = "Cursus"
                         },
                         new
                         {
                             BookId = 40,
                             CoverImage = "https://picsum.photos/seed/40/500/500",
-                            Description = "Sagittis, facilisis venenatis blandit, fusce urna eleifend vivamus finibus, taciti tristique fermentum diam bibendum nullam commodo,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Lacinia eleifend, fringilla metus litora cursus nisi, ligula pulvinar, enim ac,",
                             IsActive = true,
                             NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 400.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(3906),
-                            Title = "Congue"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 729, DateTimeKind.Local).AddTicks(9681),
+                            Title = "Neque pellentesque"
                         },
                         new
                         {
                             BookId = 41,
                             CoverImage = "https://picsum.photos/seed/41/500/500",
-                            Description = "In facilisis fermentum vel, neque lectus vestibulum, amet hac tincidunt ex, dignissim nulla ultricies vehicula",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Cursus",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 410.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(4801),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(262),
                             SaleId = 3,
-                            Title = "Nibh justo ligula"
+                            Title = "Varius tempor vestibulum"
                         },
                         new
                         {
                             BookId = 42,
                             CoverImage = "https://picsum.photos/seed/42/500/500",
-                            Description = "Lectus feugiat integer est dolor, at, urna",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Consequat luctus, est eros, aptent condimentum quam, auctor pulvinar,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 420.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(6416),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(918),
                             SaleId = 1,
-                            Title = "Vitae nunc dolor"
+                            Title = "Sagittis odio tortor neque"
                         },
                         new
                         {
                             BookId = 43,
                             CoverImage = "https://picsum.photos/seed/43/500/500",
-                            Description = "Id, justo nisl lectus, in erat nunc efficitur tristique congue ligula",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Neque eros nunc eu, suspendisse massa feugiat quam, dapibus fermentum nisi, tristique odio nam molestie pharetra mi, leo,",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 430.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(7908),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(1746),
                             SaleId = 2,
-                            Title = "Lobortis sociosqu molestie sollicitudin"
+                            Title = "Convallis blandit metus nibh"
                         },
                         new
                         {
                             BookId = 44,
                             CoverImage = "https://picsum.photos/seed/44/500/500",
-                            Description = "Turpis quam, dolor faucibus vestibulum tempor, rhoncus nec orci, quam elit, leo,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "In, dui, interdum",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 440.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 228, DateTimeKind.Local).AddTicks(9570),
-                            Title = "Dolor pulvinar"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(2344),
+                            Title = "Pellentesque torquent"
                         },
                         new
                         {
                             BookId = 45,
                             CoverImage = "https://picsum.photos/seed/45/500/500",
-                            Description = "Mollis nulla, at, egestas odio ipsum lorem porttitor bibendum lacinia, augue ante laoreet, fringilla, tristique",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Tempor eu, a, nunc, rhoncus ultricies ligula urna,",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 450.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(1499),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(3061),
                             SaleId = 1,
-                            Title = "Luctus"
+                            Title = "Nec hac gravida enim"
                         },
                         new
                         {
                             BookId = 46,
                             CoverImage = "https://picsum.photos/seed/46/500/500",
-                            Description = "Sit faucibus pharetra integer ac, ligula aenean lectus, volutpat, eu, dolor, quis, ultrices porttitor, nunc himenaeos et,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Metus eu volutpat suspendisse erat, urna laoreet dui, lacinia justo tempor, feugiat eget lectus ante, ipsum",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 460.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(3273),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(3648),
                             SaleId = 2,
-                            Title = "Ad non laoreet himenaeos"
+                            Title = "Posuere vestibulum"
                         },
                         new
                         {
                             BookId = 47,
                             CoverImage = "https://picsum.photos/seed/47/500/500",
-                            Description = "Neque urna, nunc cursus nec, pretium conubia",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Placerat, etiam at, auctor litora quam, laoreet, dapibus",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 470.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(4706),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(4389),
                             SaleId = 3,
-                            Title = "Adipiscing elementum"
+                            Title = "Commodo"
                         },
                         new
                         {
                             BookId = 48,
                             CoverImage = "https://picsum.photos/seed/48/500/500",
-                            Description = "Neque class tincidunt finibus nulla, non leo, placerat malesuada nisi, dui vivamus volutpat, lorem",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Lorem luctus, augue elit, rhoncus, ante, nec,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 480.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(6108),
-                            Title = "Nostra mi"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(5038),
+                            Title = "Ultrices lacinia amet"
                         },
                         new
                         {
                             BookId = 49,
                             CoverImage = "https://picsum.photos/seed/49/500/500",
-                            Description = "Bibendum, fames eros dolor massa finibus, ipsum blandit posuere, tempor, convallis quam, purus ac mollis ante",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Eget phasellus vel,",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 490.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(7145),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(5778),
                             SaleId = 2,
-                            Title = "Laoreet ante et feugiat"
+                            Title = "Nam tristique sit himenaeos"
                         },
                         new
                         {
                             BookId = 50,
                             CoverImage = "https://picsum.photos/seed/50/500/500",
-                            Description = "In id torquent rhoncus amet, dapibus pulvinar, faucibus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Urna, lacus bibendum, posuere nec risus efficitur proin cursus mattis duis ac, praesent",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 500.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(8348),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(6424),
                             SaleId = 3,
-                            Title = "Per finibus malesuada porttitor"
+                            Title = "Eleifend in cursus a"
                         },
                         new
                         {
                             BookId = 51,
                             CoverImage = "https://picsum.photos/seed/51/500/500",
-                            Description = "Gravida vulputate volutpat, vel, nulla habitasse nam ex",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Lacus convallis posuere, sagittis quis, ullamcorper tellus curabitur tempus himenaeos sapien placerat, venenatis placerat elementum massa",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 510.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 229, DateTimeKind.Local).AddTicks(9347),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(7168),
                             SaleId = 1,
-                            Title = "Pulvinar neque mi"
+                            Title = "Mauris finibus"
                         },
                         new
                         {
                             BookId = 52,
                             CoverImage = "https://picsum.photos/seed/52/500/500",
-                            Description = "Morbi",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Efficitur lacinia, nisi, lectus tortor suscipit",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 520.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(364),
-                            Title = "Lacinia nec commodo bibendum"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(7749),
+                            Title = "Ac"
                         },
                         new
                         {
                             BookId = 53,
                             CoverImage = "https://picsum.photos/seed/53/500/500",
-                            Description = "Pulvinar, aliquet",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Amet curabitur quam, nostra, pulvinar, aptent etiam eleifend pellentesque",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 530.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(1401),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(8342),
                             SaleId = 3,
-                            Title = "Pulvinar vestibulum tellus vitae"
+                            Title = "Class"
                         },
                         new
                         {
                             BookId = 54,
                             CoverImage = "https://picsum.photos/seed/54/500/500",
-                            Description = "Torquent venenatis ad placerat sapien fringilla nullam lobortis morbi mattis, tellus, condimentum commodo",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Elementum cursus, pulvinar aliquam tellus vitae porta, velit vulputate libero tincidunt commodo urna adipiscing",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 540.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(2352),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(9084),
                             SaleId = 1,
-                            Title = "Habitasse"
+                            Title = "Nec pharetra condimentum platea"
                         },
                         new
                         {
                             BookId = 55,
                             CoverImage = "https://picsum.photos/seed/55/500/500",
-                            Description = "Duis a sit elit, molestie massa, sed, commodo, gravida habitasse laoreet, luctus, tincidunt sagittis, integer lacinia, nec vulputate lacinia",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "At praesent dapibus risus ac, quam ligula tempus nulla, porta et, sagittis, feugiat sed, nibh urna, consectetur finibus per",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 550.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(3298),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 730, DateTimeKind.Local).AddTicks(9659),
                             SaleId = 2,
-                            Title = "Aptent"
+                            Title = "Eros efficitur at commodo"
                         },
                         new
                         {
                             BookId = 56,
                             CoverImage = "https://picsum.photos/seed/56/500/500",
-                            Description = "Rhoncus suspendisse varius varius, metus blandit lacus lectus, gravida quis urna pulvinar augue nunc, mi, interdum",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Non, ornare congue, elementum dictum donec velit dignissim arcu, fames",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 560.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(4356),
-                            Title = "Curabitur ac taciti fusce"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(376),
+                            Title = "Libero porta"
                         },
                         new
                         {
                             BookId = 57,
                             CoverImage = "https://picsum.photos/seed/57/500/500",
-                            Description = "Magna, vestibulum,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Aenean praesent eleifend, semper ex mi, eu, amet,",
                             IsActive = true,
                             NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 570.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(5281),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(1015),
                             SaleId = 1,
-                            Title = "Maximus"
+                            Title = "Purus mollis ipsum lacinia"
                         },
                         new
                         {
                             BookId = 58,
                             CoverImage = "https://picsum.photos/seed/58/500/500",
-                            Description = "At euismod, placerat, elementum dui",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Non et posuere velit sollicitudin magna dapibus elit volutpat, laoreet, hac diam",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 580.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(6283),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(1694),
                             SaleId = 2,
-                            Title = "Mi enim dui posuere"
+                            Title = "Ipsum massa"
                         },
                         new
                         {
                             BookId = 59,
                             CoverImage = "https://picsum.photos/seed/59/500/500",
-                            Description = "Morbi nibh, sed, hendrerit malesuada vitae class in tristique",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nostra, leo aliquet dui, urna massa, magna dui interdum et inceptos vulputate per nibh, lacus",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 590.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(7188),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(2316),
                             SaleId = 3,
-                            Title = "Ipsum"
+                            Title = "Eu"
                         },
                         new
                         {
                             BookId = 60,
                             CoverImage = "https://picsum.photos/seed/60/500/500",
-                            Description = "Nisl auctor, mi, ex, lacus diam feugiat suspendisse bibendum fames ultrices feugiat, arcu, curabitur dolor, ante, sapien orci, malesuada",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Platea eget eu, faucibus blandit feugiat nostra, eleifend, non nunc maecenas lacinia, dictumst donec euismod, ante,",
                             IsActive = true,
                             NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 600.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(8403),
-                            Title = "At dapibus laoreet"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(2882),
+                            Title = "Metus lectus cursus"
                         },
                         new
                         {
                             BookId = 61,
                             CoverImage = "https://picsum.photos/seed/61/500/500",
-                            Description = "Dolor, auctor,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Orci feugiat justo nulla, volutpat, nulla fusce erat, nec,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 610.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 230, DateTimeKind.Local).AddTicks(9695),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(3620),
                             SaleId = 2,
-                            Title = "Per"
+                            Title = "Vestibulum in sagittis neque"
                         },
                         new
                         {
                             BookId = 62,
                             CoverImage = "https://picsum.photos/seed/62/500/500",
-                            Description = "Nunc lobortis erat tellus, lectus, sagittis, fringilla aenean class",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Mattis diam placerat dictum bibendum quis rhoncus quam tortor, accumsan leo, nulla, interdum",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 620.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(832),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(4181),
                             SaleId = 3,
-                            Title = "Ante ex nostra himenaeos"
+                            Title = "Ultrices leo"
                         },
                         new
                         {
                             BookId = 63,
                             CoverImage = "https://picsum.photos/seed/63/500/500",
-                            Description = "Eleifend, donec ante, ornare tellus ultricies pellentesque nulla scelerisque enim, erat",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Dolor, consectetur maecenas aenean",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 630.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(1809),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(4904),
                             SaleId = 1,
-                            Title = "Sagittis feugiat ornare nam"
+                            Title = "Nisi lectus aliquam dapibus"
                         },
                         new
                         {
                             BookId = 64,
                             CoverImage = "https://picsum.photos/seed/64/500/500",
-                            Description = "Malesuada mi ligula, lacinia erat luctus volutpat tellus nisi, nisl eget integer ante, faucibus vel dignissim porttitor aliquam augue",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Pellentesque egestas urna in gravida elit, vestibulum varius duis viverra integer volutpat, ultricies commodo",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 640.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(2740),
-                            Title = "Massa mi"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(5485),
+                            Title = "Aptent tellus"
                         },
                         new
                         {
                             BookId = 65,
                             CoverImage = "https://picsum.photos/seed/65/500/500",
-                            Description = "Nisi, eros, mattis",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "At lectus, ullamcorper elit, pretium finibus faucibus",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 650.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(3742),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(6239),
                             SaleId = 3,
-                            Title = "Congue dictum quisque posuere"
+                            Title = "Dui integer mauris augue"
                         },
                         new
                         {
                             BookId = 66,
                             CoverImage = "https://picsum.photos/seed/66/500/500",
-                            Description = "Nam porttitor",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Per lectus ac, mauris, lacinia",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 660.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(4829),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(6858),
                             SaleId = 1,
-                            Title = "Quis sodales a tincidunt"
+                            Title = "Eros imperdiet dolor"
                         },
                         new
                         {
                             BookId = 67,
                             CoverImage = "https://picsum.photos/seed/67/500/500",
-                            Description = "Nisl molestie egestas class dignissim",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nec, posuere,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 670.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(5741),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(7395),
                             SaleId = 2,
-                            Title = "Vivamus fringilla bibendum"
+                            Title = "Non nunc"
                         },
                         new
                         {
                             BookId = 68,
                             CoverImage = "https://picsum.photos/seed/68/500/500",
-                            Description = "Mauris ut ligula, varius, neque quis congue fringilla,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Magna, placerat tempus tellus, pretium ultrices, magna lacus mi, condimentum commodo",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 680.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(6686),
-                            Title = "A platea"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(8069),
+                            Title = "Pellentesque per nunc mi"
                         },
                         new
                         {
                             BookId = 69,
                             CoverImage = "https://picsum.photos/seed/69/500/500",
-                            Description = "Nulla, rhoncus at sagittis, conubia tempor, ad cursus, venenatis",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Eleifend, mattis",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 690.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(7654),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(8640),
                             SaleId = 1,
-                            Title = "Blandit eleifend lorem et"
+                            Title = "Non"
                         },
                         new
                         {
                             BookId = 70,
                             CoverImage = "https://picsum.photos/seed/70/500/500",
-                            Description = "Urna primis iaculis ullamcorper facilisis magna magna, ante pulvinar, vehicula tortor,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Posuere, arcu et, congue dolor donec auctor",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 700.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(8725),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 731, DateTimeKind.Local).AddTicks(9435),
                             SaleId = 2,
-                            Title = "Fames sagittis volutpat"
+                            Title = "Metus orci consequat bibendum"
                         },
                         new
                         {
                             BookId = 71,
                             CoverImage = "https://picsum.photos/seed/71/500/500",
-                            Description = "Vitae, nisi inceptos mollis arcu, turpis",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ac, inceptos congue, rutrum mauris, fames primis per eu, eleifend odio nullam",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 710.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 231, DateTimeKind.Local).AddTicks(9597),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(34),
                             SaleId = 3,
-                            Title = "Ut"
+                            Title = "Mi sagittis aliquam suscipit"
                         },
                         new
                         {
                             BookId = 72,
                             CoverImage = "https://picsum.photos/seed/72/500/500",
-                            Description = "Felis dolor, dolor porttitor tellus a laoreet ante neque, sit quis inceptos platea turpis convallis pretium vitae, maximus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Pretium vestibulum, lorem per non imperdiet odio vel, rhoncus lacinia taciti justo placerat, iaculis eros",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 720.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(567),
-                            Title = "Massa"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(832),
+                            Title = "Orci congue"
                         },
                         new
                         {
                             BookId = 73,
                             CoverImage = "https://picsum.photos/seed/73/500/500",
-                            Description = "Congue, dictumst iaculis eget nunc et, nostra, ipsum mi imperdiet lorem, mi, luctus ante tortor ultricies",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nunc, aenean sit fames sagittis ligula, vulputate nec, sapien vestibulum, orci,",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 730.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(1448),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(1463),
                             SaleId = 2,
-                            Title = "Neque"
+                            Title = "Et sem tellus"
                         },
                         new
                         {
                             BookId = 74,
                             CoverImage = "https://picsum.photos/seed/74/500/500",
-                            Description = "Neque, laoreet, fusce et massa taciti",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Mauris, bibendum, erat dui tortor cursus, cursus duis venenatis",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 740.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(2383),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(2249),
                             SaleId = 3,
-                            Title = "Odio"
+                            Title = "Urna blandit"
                         },
                         new
                         {
                             BookId = 75,
                             CoverImage = "https://picsum.photos/seed/75/500/500",
-                            Description = "Mi elementum vitae sem ultricies morbi blandit nostra, ornare vestibulum vel sed, dignissim convallis tortor conubia",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Hac sed, tellus,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 750.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(3418),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(2910),
                             SaleId = 1,
-                            Title = "Ante interdum eleifend quis"
+                            Title = "Dapibus"
                         },
                         new
                         {
                             BookId = 76,
                             CoverImage = "https://picsum.photos/seed/76/500/500",
-                            Description = "Ultrices fames eleifend",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Luctus, congue, tellus, felis interdum,",
                             IsActive = true,
                             NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 760.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(4358),
-                            Title = "Tempor mattis mauris varius"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(3450),
+                            Title = "Nam arcu neque vitae"
                         },
                         new
                         {
                             BookId = 77,
                             CoverImage = "https://picsum.photos/seed/77/500/500",
-                            Description = "Orci, dictumst lorem aptent ligula non, et luctus tristique",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Metus conubia congue cursus, mattis,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 770.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(5320),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(4192),
                             SaleId = 3,
-                            Title = "Ornare a amet praesent"
+                            Title = "Odio arcu imperdiet varius"
                         },
                         new
                         {
                             BookId = 78,
                             CoverImage = "https://picsum.photos/seed/78/500/500",
-                            Description = "Turpis ex quis vitae, euismod placerat ante, sollicitudin diam dolor",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Sagittis, non, dapibus dolor, et porttitor nullam interdum, vehicula per duis urna sapien ultrices, fringilla",
                             IsActive = true,
                             NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 780.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(6327),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(4807),
                             SaleId = 1,
-                            Title = "Dui aliquet porttitor"
+                            Title = "Bibendum est"
                         },
                         new
                         {
                             BookId = 79,
                             CoverImage = "https://picsum.photos/seed/79/500/500",
-                            Description = "Consectetur faucibus quam in, sollicitudin primis amet tortor est torquent ac, habitasse",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Auctor, malesuada in dictumst",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 790.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(7383),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(5585),
                             SaleId = 2,
-                            Title = "At a posuere"
+                            Title = "Nullam volutpat lorem enim"
                         },
                         new
                         {
                             BookId = 80,
                             CoverImage = "https://picsum.photos/seed/80/500/500",
-                            Description = "Donec nulla, magna sociosqu auctor odio, fermentum luctus, maximus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Cursus, molestie aptent",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 800.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(8541),
-                            Title = "Lacinia sollicitudin"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(6278),
+                            Title = "Nisi venenatis erat eleifend"
                         },
                         new
                         {
                             BookId = 81,
                             CoverImage = "https://picsum.photos/seed/81/500/500",
-                            Description = "Mauris, ligula euismod posuere, pretium posuere ornare",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Morbi",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 810.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 232, DateTimeKind.Local).AddTicks(9472),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(6995),
                             SaleId = 1,
-                            Title = "Sem eu"
+                            Title = "Leo hac"
                         },
                         new
                         {
                             BookId = 82,
                             CoverImage = "https://picsum.photos/seed/82/500/500",
-                            Description = "Class nisl id, vestibulum, donec sodales eros quis, nullam volutpat, ad purus scelerisque elit vehicula eleifend,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Dictumst elit maximus urna, porttitor, per vitae ex, volutpat, aliquet hendrerit sollicitudin nulla, nostra,",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 820.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(470),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(7583),
                             SaleId = 2,
-                            Title = "Class"
+                            Title = "Tempor morbi"
                         },
                         new
                         {
                             BookId = 83,
                             CoverImage = "https://picsum.photos/seed/83/500/500",
-                            Description = "Tempor, proin lacinia,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ex, dictumst efficitur pellentesque finibus, vestibulum tellus est finibus magna, maecenas eleifend,",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 830.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(1373),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(8261),
                             SaleId = 3,
-                            Title = "Venenatis"
+                            Title = "Nec ut"
                         },
                         new
                         {
                             BookId = 84,
                             CoverImage = "https://picsum.photos/seed/84/500/500",
-                            Description = "Suspendisse phasellus torquent mattis, erat laoreet",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Tincidunt massa, dolor faucibus nec curabitur per leo leo, diam luctus praesent ultricies",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 840.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(2444),
-                            Title = "Fusce ultrices nisi ipsum"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(9014),
+                            Title = "Tempor tellus at"
                         },
                         new
                         {
                             BookId = 85,
                             CoverImage = "https://picsum.photos/seed/85/500/500",
-                            Description = "Nulla adipiscing class mattis purus morbi pulvinar, quis, elit ut viverra commodo risus himenaeos placerat",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Porta, posuere, diam odio, vestibulum commodo pellentesque turpis congue, leo, elementum",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 850.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(3400),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 732, DateTimeKind.Local).AddTicks(9647),
                             SaleId = 2,
-                            Title = "Magna"
+                            Title = "Gravida"
                         },
                         new
                         {
                             BookId = 86,
                             CoverImage = "https://picsum.photos/seed/86/500/500",
-                            Description = "Urna, dapibus erat",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Leo, dictum amet, integer",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 860.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(4392),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(362),
                             SaleId = 3,
-                            Title = "Placerat amet"
+                            Title = "Feugiat eros in"
                         },
                         new
                         {
                             BookId = 87,
                             CoverImage = "https://picsum.photos/seed/87/500/500",
-                            Description = "Pharetra taciti rhoncus feugiat feugiat, fringilla odio, nisi, lobortis est",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Lacus himenaeos etiam nibh, dictum et at sociosqu urna faucibus",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 870.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(5445),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(985),
                             SaleId = 1,
-                            Title = "Justo placerat"
+                            Title = "Porta nulla duis"
                         },
                         new
                         {
                             BookId = 88,
                             CoverImage = "https://picsum.photos/seed/88/500/500",
-                            Description = "Congue magna, volutpat, sit blandit",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Iaculis platea dictum adipiscing",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 880.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(6762),
-                            Title = "Et bibendum"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(1719),
+                            Title = "Adipiscing non luctus"
                         },
                         new
                         {
                             BookId = 89,
                             CoverImage = "https://picsum.photos/seed/89/500/500",
-                            Description = "Dictum litora cras lobortis",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "A, laoreet, ornare dapibus lorem convallis cursus interdum",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 890.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(7799),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(2383),
                             SaleId = 3,
-                            Title = "Nam sagittis"
+                            Title = "In sodales"
                         },
                         new
                         {
                             BookId = 90,
                             CoverImage = "https://picsum.photos/seed/90/500/500",
-                            Description = "Sodales nibh, et, cras nec nullam convallis dignissim",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Faucibus diam rutrum commodo ligula, metus primis per quisque tempus eu eros, tempor posuere praesent felis cursus, tellus tellus,",
                             IsActive = true,
                             NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 900.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(9046),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(3001),
                             SaleId = 1,
-                            Title = "Congue ullamcorper"
+                            Title = "Rhoncus"
                         },
                         new
                         {
                             BookId = 91,
                             CoverImage = "https://picsum.photos/seed/91/500/500",
-                            Description = "Lectus efficitur augue",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nunc fringilla, mollis euismod quis, nibh neque, odio, orci cursus, tortor,",
                             IsActive = true,
                             NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 910.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 233, DateTimeKind.Local).AddTicks(9958),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(3646),
                             SaleId = 2,
-                            Title = "Ante in auctor maecenas"
+                            Title = "Et augue commodo feugiat"
                         },
                         new
                         {
                             BookId = 92,
                             CoverImage = "https://picsum.photos/seed/92/500/500",
-                            Description = "Inceptos finibus bibendum suscipit ex",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Lobortis eros, urna",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 920.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(927),
-                            Title = "Hendrerit ex volutpat"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(4186),
+                            Title = "Lorem"
                         },
                         new
                         {
                             BookId = 93,
                             CoverImage = "https://picsum.photos/seed/93/500/500",
-                            Description = "Ornare odio ex donec maecenas dapibus urna viverra lorem, metus magna,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Fringilla conubia placerat, quisque dui justo maximus tellus tortor, hac elementum ut",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 930.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(1886),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(4862),
                             SaleId = 1,
-                            Title = "Pulvinar dictum etiam"
+                            Title = "Quisque dui"
                         },
                         new
                         {
                             BookId = 94,
                             CoverImage = "https://picsum.photos/seed/94/500/500",
-                            Description = "In, tempor tortor, amet nullam urna sagittis pulvinar venenatis at praesent nisi nisi, tincidunt",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Porta odio laoreet, maximus pulvinar purus a, consequat vestibulum aliquam pretium dui, ac, per libero auctor, eleifend",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 300,
+                            PdfLink = "Book.pdf",
                             Price = 940.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(2807),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(5397),
                             SaleId = 2,
-                            Title = "Leo erat porta"
+                            Title = "Purus vivamus"
                         },
                         new
                         {
                             BookId = 95,
                             CoverImage = "https://picsum.photos/seed/95/500/500",
-                            Description = "Cursus dignissim ante, tempor in, accumsan nisi nec aliquam auctor nisl lorem viverra bibendum, in neque fringilla suscipit amet,",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Tempor, maecenas odio, eros, bibendum, nostra, porttitor mollis fringilla, habitasse nullam hendrerit commodo interdum, tempus laoreet,",
                             IsActive = true,
                             NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            PdfLink = "Book.pdf",
                             Price = 950.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(4006),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(6146),
                             SaleId = 3,
-                            Title = "Ornare pulvinar luctus urna"
+                            Title = "Urna class nibh"
                         },
                         new
                         {
                             BookId = 96,
                             CoverImage = "https://picsum.photos/seed/96/500/500",
-                            Description = "Tortor, est tempor, semper quam, ipsum",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Nam torquent proin auctor, eros, tellus, vulputate dui, aptent amet, at, vel, tincidunt nisi",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 960.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(5440),
-                            Title = "Quisque"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(6692),
+                            Title = "Ex"
                         },
                         new
                         {
                             BookId = 97,
                             CoverImage = "https://picsum.photos/seed/97/500/500",
-                            Description = "Volutpat, erat duis euismod venenatis eu, nec dui, platea orci, ultricies et",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Et, nibh",
                             IsActive = true,
-                            NumberOfPage = 400,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 200,
+                            PdfLink = "Book.pdf",
                             Price = 970.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(6637),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(7354),
                             SaleId = 2,
-                            Title = "Tincidunt lacinia"
+                            Title = "Laoreet leo"
                         },
                         new
                         {
                             BookId = 98,
                             CoverImage = "https://picsum.photos/seed/98/500/500",
-                            Description = "Dictum porttitor cursus, velit magna, rutrum in, tempor vitae, pulvinar, posuere nunc nostra, eros",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Ac phasellus pharetra nunc feugiat dolor, ac, nisi, arcu in,",
                             IsActive = true,
-                            NumberOfPage = 200,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 100,
+                            PdfLink = "Book.pdf",
                             Price = 980.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(7554),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(7931),
                             SaleId = 3,
-                            Title = "Feugiat"
+                            Title = "Sed lacinia"
                         },
                         new
                         {
                             BookId = 99,
                             CoverImage = "https://picsum.photos/seed/99/500/500",
-                            Description = "Condimentum faucibus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Placerat, ex, himenaeos varius, litora aliquet eu massa nisi, volutpat, libero elit, tortor quisque amet, maximus",
                             IsActive = true,
-                            NumberOfPage = 300,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 990.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(8386),
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(8508),
                             SaleId = 1,
-                            Title = "Ac"
+                            Title = "Habitasse risus"
                         },
                         new
                         {
                             BookId = 100,
                             CoverImage = "https://picsum.photos/seed/100/500/500",
-                            Description = "Elit, vel, ultricies quis efficitur fermentum vitae id, luctus nisi, proin ultrices suspendisse vitae, tempus",
-                            EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            Description = "Tempor pellentesque praesent lectus, platea class vehicula ex, euismod, molestie torquent",
                             IsActive = true,
-                            NumberOfPage = 100,
-                            PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                            NumberOfPage = 400,
+                            PdfLink = "Book.pdf",
                             Price = 1000.0,
-                            ReleaseDate = new DateTime(2023, 3, 11, 11, 25, 58, 234, DateTimeKind.Local).AddTicks(9438),
-                            Title = "Eu vulputate sapien"
+                            ReleaseDate = new DateTime(2023, 3, 16, 16, 9, 54, 733, DateTimeKind.Local).AddTicks(9088),
+                            Title = "Felis auctor lectus"
                         });
                 });
 
@@ -1519,32 +1415,32 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 1,
-                            GenreId = 7
+                            GenreId = 12
                         },
                         new
                         {
                             BookId = 2,
-                            GenreId = 6
+                            GenreId = 3
                         },
                         new
                         {
                             BookId = 3,
-                            GenreId = 8
+                            GenreId = 7
                         },
                         new
                         {
                             BookId = 4,
-                            GenreId = 2
+                            GenreId = 12
                         },
                         new
                         {
                             BookId = 5,
-                            GenreId = 2
+                            GenreId = 12
                         },
                         new
                         {
                             BookId = 6,
-                            GenreId = 5
+                            GenreId = 7
                         },
                         new
                         {
@@ -1559,97 +1455,97 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 9,
-                            GenreId = 12
+                            GenreId = 1
                         },
                         new
                         {
                             BookId = 10,
-                            GenreId = 3
+                            GenreId = 2
                         },
                         new
                         {
                             BookId = 11,
-                            GenreId = 2
+                            GenreId = 11
                         },
                         new
                         {
                             BookId = 12,
-                            GenreId = 1
+                            GenreId = 8
                         },
                         new
                         {
                             BookId = 13,
-                            GenreId = 9
+                            GenreId = 6
                         },
                         new
                         {
                             BookId = 14,
-                            GenreId = 5
-                        },
-                        new
-                        {
-                            BookId = 15,
                             GenreId = 3
                         },
                         new
                         {
-                            BookId = 16,
-                            GenreId = 2
+                            BookId = 15,
+                            GenreId = 8
                         },
                         new
                         {
-                            BookId = 17,
+                            BookId = 16,
                             GenreId = 12
                         },
                         new
                         {
-                            BookId = 18,
-                            GenreId = 8
-                        },
-                        new
-                        {
-                            BookId = 19,
-                            GenreId = 10
-                        },
-                        new
-                        {
-                            BookId = 20,
-                            GenreId = 8
-                        },
-                        new
-                        {
-                            BookId = 21,
-                            GenreId = 5
-                        },
-                        new
-                        {
-                            BookId = 22,
-                            GenreId = 4
-                        },
-                        new
-                        {
-                            BookId = 23,
-                            GenreId = 10
-                        },
-                        new
-                        {
-                            BookId = 24,
+                            BookId = 17,
                             GenreId = 1
                         },
                         new
                         {
-                            BookId = 25,
-                            GenreId = 7
+                            BookId = 18,
+                            GenreId = 10
                         },
                         new
                         {
-                            BookId = 26,
+                            BookId = 19,
+                            GenreId = 5
+                        },
+                        new
+                        {
+                            BookId = 20,
+                            GenreId = 4
+                        },
+                        new
+                        {
+                            BookId = 21,
+                            GenreId = 12
+                        },
+                        new
+                        {
+                            BookId = 22,
                             GenreId = 9
                         },
                         new
                         {
-                            BookId = 27,
+                            BookId = 23,
+                            GenreId = 2
+                        },
+                        new
+                        {
+                            BookId = 24,
+                            GenreId = 9
+                        },
+                        new
+                        {
+                            BookId = 25,
                             GenreId = 5
+                        },
+                        new
+                        {
+                            BookId = 26,
+                            GenreId = 10
+                        },
+                        new
+                        {
+                            BookId = 27,
+                            GenreId = 10
                         },
                         new
                         {
@@ -1659,52 +1555,52 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 29,
-                            GenreId = 1
+                            GenreId = 11
                         },
                         new
                         {
                             BookId = 30,
-                            GenreId = 11
+                            GenreId = 8
                         },
                         new
                         {
                             BookId = 31,
-                            GenreId = 6
+                            GenreId = 3
                         },
                         new
                         {
                             BookId = 32,
-                            GenreId = 11
-                        },
-                        new
-                        {
-                            BookId = 33,
-                            GenreId = 7
-                        },
-                        new
-                        {
-                            BookId = 34,
-                            GenreId = 4
-                        },
-                        new
-                        {
-                            BookId = 35,
-                            GenreId = 5
-                        },
-                        new
-                        {
-                            BookId = 36,
                             GenreId = 1
                         },
                         new
                         {
+                            BookId = 33,
+                            GenreId = 10
+                        },
+                        new
+                        {
+                            BookId = 34,
+                            GenreId = 11
+                        },
+                        new
+                        {
+                            BookId = 35,
+                            GenreId = 6
+                        },
+                        new
+                        {
+                            BookId = 36,
+                            GenreId = 10
+                        },
+                        new
+                        {
                             BookId = 37,
-                            GenreId = 9
+                            GenreId = 11
                         },
                         new
                         {
                             BookId = 38,
-                            GenreId = 7
+                            GenreId = 10
                         },
                         new
                         {
@@ -1714,42 +1610,42 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 40,
-                            GenreId = 1
+                            GenreId = 9
                         },
                         new
                         {
                             BookId = 41,
-                            GenreId = 9
+                            GenreId = 1
                         },
                         new
                         {
                             BookId = 42,
-                            GenreId = 12
+                            GenreId = 8
                         },
                         new
                         {
                             BookId = 43,
-                            GenreId = 10
-                        },
-                        new
-                        {
-                            BookId = 44,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BookId = 45,
                             GenreId = 5
                         },
                         new
                         {
+                            BookId = 44,
+                            GenreId = 7
+                        },
+                        new
+                        {
+                            BookId = 45,
+                            GenreId = 1
+                        },
+                        new
+                        {
                             BookId = 46,
-                            GenreId = 9
+                            GenreId = 12
                         },
                         new
                         {
                             BookId = 47,
-                            GenreId = 1
+                            GenreId = 8
                         },
                         new
                         {
@@ -1759,17 +1655,17 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 49,
-                            GenreId = 8
+                            GenreId = 6
                         },
                         new
                         {
                             BookId = 50,
-                            GenreId = 7
+                            GenreId = 2
                         },
                         new
                         {
                             BookId = 51,
-                            GenreId = 1
+                            GenreId = 10
                         },
                         new
                         {
@@ -1779,72 +1675,72 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 53,
-                            GenreId = 4
-                        },
-                        new
-                        {
-                            BookId = 54,
-                            GenreId = 8
-                        },
-                        new
-                        {
-                            BookId = 55,
-                            GenreId = 2
-                        },
-                        new
-                        {
-                            BookId = 56,
-                            GenreId = 1
-                        },
-                        new
-                        {
-                            BookId = 57,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BookId = 58,
-                            GenreId = 12
-                        },
-                        new
-                        {
-                            BookId = 59,
-                            GenreId = 12
-                        },
-                        new
-                        {
-                            BookId = 60,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BookId = 61,
-                            GenreId = 3
-                        },
-                        new
-                        {
-                            BookId = 62,
-                            GenreId = 4
-                        },
-                        new
-                        {
-                            BookId = 63,
-                            GenreId = 6
-                        },
-                        new
-                        {
-                            BookId = 64,
-                            GenreId = 11
-                        },
-                        new
-                        {
-                            BookId = 65,
                             GenreId = 5
                         },
                         new
                         {
-                            BookId = 66,
+                            BookId = 54,
+                            GenreId = 6
+                        },
+                        new
+                        {
+                            BookId = 55,
+                            GenreId = 7
+                        },
+                        new
+                        {
+                            BookId = 56,
+                            GenreId = 9
+                        },
+                        new
+                        {
+                            BookId = 57,
+                            GenreId = 5
+                        },
+                        new
+                        {
+                            BookId = 58,
                             GenreId = 2
+                        },
+                        new
+                        {
+                            BookId = 59,
+                            GenreId = 10
+                        },
+                        new
+                        {
+                            BookId = 60,
+                            GenreId = 1
+                        },
+                        new
+                        {
+                            BookId = 61,
+                            GenreId = 9
+                        },
+                        new
+                        {
+                            BookId = 62,
+                            GenreId = 11
+                        },
+                        new
+                        {
+                            BookId = 63,
+                            GenreId = 12
+                        },
+                        new
+                        {
+                            BookId = 64,
+                            GenreId = 10
+                        },
+                        new
+                        {
+                            BookId = 65,
+                            GenreId = 12
+                        },
+                        new
+                        {
+                            BookId = 66,
+                            GenreId = 12
                         },
                         new
                         {
@@ -1854,27 +1750,27 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 68,
-                            GenreId = 1
+                            GenreId = 3
                         },
                         new
                         {
                             BookId = 69,
-                            GenreId = 11
+                            GenreId = 5
                         },
                         new
                         {
                             BookId = 70,
-                            GenreId = 9
+                            GenreId = 10
                         },
                         new
                         {
                             BookId = 71,
-                            GenreId = 12
+                            GenreId = 7
                         },
                         new
                         {
                             BookId = 72,
-                            GenreId = 4
+                            GenreId = 8
                         },
                         new
                         {
@@ -1884,67 +1780,67 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 74,
-                            GenreId = 3
+                            GenreId = 8
                         },
                         new
                         {
                             BookId = 75,
-                            GenreId = 3
-                        },
-                        new
-                        {
-                            BookId = 76,
-                            GenreId = 1
-                        },
-                        new
-                        {
-                            BookId = 77,
-                            GenreId = 12
-                        },
-                        new
-                        {
-                            BookId = 78,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BookId = 79,
-                            GenreId = 11
-                        },
-                        new
-                        {
-                            BookId = 80,
-                            GenreId = 5
-                        },
-                        new
-                        {
-                            BookId = 81,
                             GenreId = 2
                         },
                         new
                         {
-                            BookId = 82,
-                            GenreId = 1
-                        },
-                        new
-                        {
-                            BookId = 83,
+                            BookId = 76,
                             GenreId = 7
                         },
                         new
                         {
-                            BookId = 84,
+                            BookId = 77,
                             GenreId = 4
                         },
                         new
                         {
-                            BookId = 85,
+                            BookId = 78,
+                            GenreId = 4
+                        },
+                        new
+                        {
+                            BookId = 79,
+                            GenreId = 4
+                        },
+                        new
+                        {
+                            BookId = 80,
                             GenreId = 3
                         },
                         new
                         {
+                            BookId = 81,
+                            GenreId = 9
+                        },
+                        new
+                        {
+                            BookId = 82,
+                            GenreId = 8
+                        },
+                        new
+                        {
+                            BookId = 83,
+                            GenreId = 11
+                        },
+                        new
+                        {
+                            BookId = 84,
+                            GenreId = 3
+                        },
+                        new
+                        {
+                            BookId = 85,
+                            GenreId = 8
+                        },
+                        new
+                        {
                             BookId = 86,
-                            GenreId = 6
+                            GenreId = 10
                         },
                         new
                         {
@@ -1954,42 +1850,42 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 88,
-                            GenreId = 5
-                        },
-                        new
-                        {
-                            BookId = 89,
-                            GenreId = 11
-                        },
-                        new
-                        {
-                            BookId = 90,
                             GenreId = 8
                         },
                         new
                         {
+                            BookId = 89,
+                            GenreId = 3
+                        },
+                        new
+                        {
+                            BookId = 90,
+                            GenreId = 12
+                        },
+                        new
+                        {
                             BookId = 91,
-                            GenreId = 7
+                            GenreId = 3
                         },
                         new
                         {
                             BookId = 92,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BookId = 93,
-                            GenreId = 6
-                        },
-                        new
-                        {
-                            BookId = 94,
                             GenreId = 5
                         },
                         new
                         {
+                            BookId = 93,
+                            GenreId = 2
+                        },
+                        new
+                        {
+                            BookId = 94,
+                            GenreId = 9
+                        },
+                        new
+                        {
                             BookId = 95,
-                            GenreId = 3
+                            GenreId = 12
                         },
                         new
                         {
@@ -1999,22 +1895,22 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             BookId = 97,
-                            GenreId = 7
+                            GenreId = 11
                         },
                         new
                         {
                             BookId = 98,
-                            GenreId = 5
+                            GenreId = 9
                         },
                         new
                         {
                             BookId = 99,
-                            GenreId = 7
+                            GenreId = 11
                         },
                         new
                         {
                             BookId = 100,
-                            GenreId = 6
+                            GenreId = 5
                         });
                 });
 
@@ -2273,162 +2169,162 @@ namespace EbookStore.Data.Migrations
                         new
                         {
                             SaleId = 1,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(1197),
-                            Name = "Accumsan",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(1176)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(7661),
+                            Name = "Massa",
+                            SalePercent = 20.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(7653)
                         },
                         new
                         {
                             SaleId = 2,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(1893),
-                            Name = "Porta tellus ex",
-                            SalePercent = 30.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(1892)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8012),
+                            Name = "At nullam",
+                            SalePercent = 40.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8011)
                         },
                         new
                         {
                             SaleId = 3,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(2431),
-                            Name = "Vel arcu euismod metus",
-                            SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(2430)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8310),
+                            Name = "Dapibus enim turpis sagittis",
+                            SalePercent = 30.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8309)
                         },
                         new
                         {
                             SaleId = 4,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(2930),
-                            Name = "A dapibus",
-                            SalePercent = 20.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(2928)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8626),
+                            Name = "Posuere tempus elementum",
+                            SalePercent = 10.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8625)
                         },
                         new
                         {
                             SaleId = 5,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(3524),
-                            Name = "Porttitor orci inceptos",
-                            SalePercent = 20.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(3523)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8907),
+                            Name = "Mattis",
+                            SalePercent = 30.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(8907)
                         },
                         new
                         {
                             SaleId = 6,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(4013),
-                            Name = "Integer nibh suspendisse",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(4012)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(9168),
+                            Name = "Varius nibh metus",
+                            SalePercent = 10.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(9167)
                         },
                         new
                         {
                             SaleId = 7,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(4627),
-                            Name = "Eros aliquam sed commodo",
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(9447),
+                            Name = "Varius nulla",
                             SalePercent = 30.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(4626)
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(9446)
                         },
                         new
                         {
                             SaleId = 8,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(5097),
-                            Name = "Massa",
-                            SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(5096)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(9716),
+                            Name = "Aptent enim ultricies",
+                            SalePercent = 40.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 726, DateTimeKind.Local).AddTicks(9716)
                         },
                         new
                         {
                             SaleId = 9,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(5702),
-                            Name = "Sollicitudin eu interdum",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(5701)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(30),
+                            Name = "Neque blandit neque",
+                            SalePercent = 10.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(30)
                         },
                         new
                         {
                             SaleId = 10,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(6227),
-                            Name = "Ex placerat tempor",
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(332),
+                            Name = "Congue tristique",
                             SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(6226)
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(332)
                         },
                         new
                         {
                             SaleId = 11,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(6686),
-                            Name = "Eget placerat pulvinar hac",
-                            SalePercent = 30.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(6684)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(591),
+                            Name = "Nulla class lacinia",
+                            SalePercent = 10.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(591)
                         },
                         new
                         {
                             SaleId = 12,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(7252),
-                            Name = "Urna nam inceptos congue",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(7250)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(865),
+                            Name = "Etiam",
+                            SalePercent = 20.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(865)
                         },
                         new
                         {
                             SaleId = 13,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(7691),
-                            Name = "Vitae",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(7690)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(1162),
+                            Name = "Orci fringilla at egestas",
+                            SalePercent = 30.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(1161)
                         },
                         new
                         {
                             SaleId = 14,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(8186),
-                            Name = "Magna",
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(1482),
+                            Name = "Non maecenas",
                             SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(8185)
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(1481)
                         },
                         new
                         {
                             SaleId = 15,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(8742),
-                            Name = "Lorem commodo ac porta",
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(1813),
+                            Name = "Maecenas bibendum interdum",
                             SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(8741)
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(1813)
                         },
                         new
                         {
                             SaleId = 16,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(9223),
-                            Name = "Sapien vulputate rutrum",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(9222)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2074),
+                            Name = "Placerat",
+                            SalePercent = 10.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2073)
                         },
                         new
                         {
                             SaleId = 17,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(9678),
-                            Name = "Nullam gravida neque placerat",
-                            SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 223, DateTimeKind.Local).AddTicks(9676)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2335),
+                            Name = "Pellentesque",
+                            SalePercent = 40.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2334)
                         },
                         new
                         {
                             SaleId = 18,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(119),
-                            Name = "Litora",
-                            SalePercent = 10.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(118)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2610),
+                            Name = "Lacinia",
+                            SalePercent = 40.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2609)
                         },
                         new
                         {
                             SaleId = 19,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(621),
-                            Name = "Scelerisque",
-                            SalePercent = 40.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(620)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2909),
+                            Name = "Integer fusce",
+                            SalePercent = 10.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(2908)
                         },
                         new
                         {
                             SaleId = 20,
-                            EndDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(1113),
-                            Name = "Id inceptos varius",
-                            SalePercent = 20.0,
-                            StartDate = new DateTime(2023, 3, 11, 11, 25, 58, 224, DateTimeKind.Local).AddTicks(1112)
+                            EndDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(3166),
+                            Name = "Elementum",
+                            SalePercent = 40.0,
+                            StartDate = new DateTime(2023, 3, 16, 16, 9, 54, 727, DateTimeKind.Local).AddTicks(3166)
                         });
                 });
 
@@ -2515,7 +2411,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef60"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "408d9224-59ee-4f8e-9a4d-a566c361fe27",
+                            ConcurrencyStamp = "f1f35b40-0365-440c-936e-9833c038f72d",
                             Email = "user1@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 1",
@@ -2524,7 +2420,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user1@gmail.com",
                             NormalizedUserName = "user1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHvFhO8euO3JWOuaPkFVtKe2Yk5Ab6GkY6MuUH/hFK3U1GnLWsVJRQVtpZYmumj8Kw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIiAeS64GTSHWhxkKbU40Y3TpenFQgbtsj4LMpJXYP+THUmxYecxLrInOEzIH1NIGg==",
                             PhoneNumber = "123456781",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2535,7 +2431,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef61"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70489530-c1af-4f72-973e-151b0e54a8eb",
+                            ConcurrencyStamp = "2a0d5cd8-03ad-4645-afa6-f9a0fabcac6a",
                             Email = "user2@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 2",
@@ -2544,7 +2440,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user2@gmail.com",
                             NormalizedUserName = "user2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP6y4zGz6F/SVkSMN0LZS4Rsu+r24ybeJvIIEXixk+wMgz/gIy97paGogG+YsTvovA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK3JuVZzv9aXygNrHo94s5k+s/6D/12EflzAEOkWGBCLTQPpM0axTO7pdb/OZg4uAQ==",
                             PhoneNumber = "123456782",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2555,7 +2451,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef62"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ad2ed5cc-235f-4ed2-99a6-a618651c1def",
+                            ConcurrencyStamp = "d029f936-60c5-4b2b-8e74-9786d0306e92",
                             Email = "user3@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 3",
@@ -2564,7 +2460,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user3@gmail.com",
                             NormalizedUserName = "user3",
-                            PasswordHash = "AQAAAAEAACcQAAAAELJvvV31h38rRgYsO/GDCgJ8B/oQTPNgH1jNggJapbz6b7qtYR4hRLYUxmfZFslhog==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGwsBov+UH9fQgReAz/4JUrKBN5EbPEtHamqj0HLBTobpU5U4TJGNVa7bdV72gfZxA==",
                             PhoneNumber = "123456783",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2575,7 +2471,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef63"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03304762-d82e-46ac-8dfc-50d69bc7209d",
+                            ConcurrencyStamp = "0eb13420-8ca3-4623-b174-1a1753d5a957",
                             Email = "user4@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 4",
@@ -2584,7 +2480,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user4@gmail.com",
                             NormalizedUserName = "user4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAklDf9IPSGLIamS29QhJrgSE81lA6EcnTLtWnpBdEuc0HqPul1G8W2krz4gUNnmoA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF685KzX3Rq6Kx60GpibFIOEXccsFg6HNLiip3vPGiPtXhBXOolqWgJnx6jJms+2TA==",
                             PhoneNumber = "123456784",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2595,7 +2491,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef64"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce75650f-fa13-4566-8be6-f9718ed33bac",
+                            ConcurrencyStamp = "585c878b-982c-4103-b9c1-aed4ea6f8c46",
                             Email = "user5@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 5",
@@ -2604,7 +2500,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user5@gmail.com",
                             NormalizedUserName = "user5",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFah3zfmswk9F5fknzOM6cTFV1WyWWpxAeHErXNT6s+ugQZNB6EwnahGU8BFsCzezQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKBXMUHafvJJ4qYL5P0l2oTJvBE/YDE1Lw9W9mgKxLNcXfL9Sm2y8r46Y3jHCMq7/A==",
                             PhoneNumber = "123456785",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2615,7 +2511,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef65"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "474d5e3a-ecaa-48d4-bf9a-f13204ec277c",
+                            ConcurrencyStamp = "c97273d0-ff1d-4f19-b5f1-cf10b938488d",
                             Email = "user6@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 6",
@@ -2624,7 +2520,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user6@gmail.com",
                             NormalizedUserName = "user6",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEIA2BgfYzh7Bu44G8ptS/s0vkiq1K8b0EDVX6Rofh9a3YdbHlomREWMAJWUZSspVw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHP5AWXZucdxs1z+YOp+9D3QCSVO5PvIGNCQ7rhJ/K836N2rGipKQB/OXKzlKdTerQ==",
                             PhoneNumber = "123456786",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2635,7 +2531,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef66"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba1dbd5e-a927-4c71-926e-5d708ff2dcc4",
+                            ConcurrencyStamp = "28d62360-5292-4ba4-a7a4-2a139f048db8",
                             Email = "user7@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 7",
@@ -2644,7 +2540,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user7@gmail.com",
                             NormalizedUserName = "user7",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMiXzXddXFwFuVj9/7veHoK6FlKk3ykyG/+VzlgkHy6zGs84N/g1PXXsasuIdCRhYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECgccFHpjW2K7MR9/VsBKv2330EJ+kmWqFTajCwG3T4Rt1wcgZkSCmLW52+mbf5buQ==",
                             PhoneNumber = "123456787",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2655,7 +2551,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef67"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d4937f0f-96ce-4b9f-95b6-e3fa719edcd3",
+                            ConcurrencyStamp = "274830f3-79c1-4e20-9c27-0aa23a780519",
                             Email = "user8@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 8",
@@ -2664,7 +2560,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user8@gmail.com",
                             NormalizedUserName = "user8",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIKoyUTJxuGXl7Cg3G/r8OxiF/P8DRoUe0TisirSNHBHbYoj879lK5f0MfqrwF5/dw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC23Oay8oHwH8fIuqcouUnd/meT4BeFjSXC1H23PU0Cp5WKXr6aPGXr4Wk1cey/RwQ==",
                             PhoneNumber = "123456788",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2675,7 +2571,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef68"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa90b790-fe56-4fac-b3aa-bf10a609ed96",
+                            ConcurrencyStamp = "9a4b277e-f3ab-401d-99fb-9bd2b688eb30",
                             Email = "user9@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 9",
@@ -2684,7 +2580,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user9@gmail.com",
                             NormalizedUserName = "user9",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAu/3JAZyuSGiwuQpzO4DY3h3Ydr8sg0CFLBCyZYumWsebgEwc0IiU4lW/bNicpHUA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMejFnewSfvUBF8AMdp+znTyaBmm1FvdVXds1rDV22fapn6INNKLHsQfQlgXPxZymQ==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -2695,7 +2591,7 @@ namespace EbookStore.Data.Migrations
                         {
                             Id = new Guid("6baa519d-aaed-4190-a3c9-3c8f67ecef69"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e8d9cb05-7e3b-43df-85a0-1c6278a25738",
+                            ConcurrencyStamp = "ed0bc46f-8f0a-4531-86d8-87b9383dfab7",
                             Email = "user10@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ten 10",
@@ -2704,7 +2600,7 @@ namespace EbookStore.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user10@gmail.com",
                             NormalizedUserName = "user10",
-                            PasswordHash = "AQAAAAEAACcQAAAAECpiNQRfhy0hq54+Z9YOotCtXJ5COYNf3sJ51hR7lcbuy98L0BmQsCGL0pYc9I0o3g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE/0H+krfq/saFxlZkPiuvCXAWMjKRpa8zbNlx7qnbU6VB+DBApXWxMcjR40uYDKQg==",
                             PhoneNumber = "1234567810",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
