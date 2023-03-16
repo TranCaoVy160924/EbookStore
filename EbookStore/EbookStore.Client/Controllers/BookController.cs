@@ -73,24 +73,22 @@ public class BookController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(BookCreateViewModel viewModel)
     {
-        //UserManager userManager = new UserManager(User);
-        //BookCreateRequest request = new BookCreateRequest
-        //{
-        //    Title = viewModel.Title,
-        //    NumberOfPage = viewModel.NumberOfPage,
-        //    Price = viewModel.Price,
-        //    Description = viewModel.Description,
-        //    CoverImage = _imageHelper.UploadImage(viewModel.CoverImage),
-        //    PdfLink = await _ebookHelper.Upload(viewModel.PdfFile),
-        //    EpubLink = await _ebookHelper.Upload(viewModel.PdfFile),
-        //    BookGenreIds = viewModel.BookGenreIds,
-        //};
-
-        string PdfLink = await _ebookHelper.Upload(viewModel.PdfFile);
+        UserManager userManager = new UserManager(User);
+        BookCreateRequest request = new BookCreateRequest
+        {
+            Title = viewModel.Title,
+            NumberOfPage = viewModel.NumberOfPage,
+            Price = viewModel.Price,
+            Description = viewModel.Description,
+            CoverImage = _imageHelper.UploadImage(viewModel.CoverImage),
+            PdfLink = await _ebookHelper.Upload(viewModel.PdfFile),
+            EpubLink = await _ebookHelper.Upload(viewModel.PdfFile),
+            BookGenreIds = viewModel.BookGenreIds,
+        };
 
         try
         {
-            //await _bookClient.CreateAsync(request, userManager.GetToken());
+            await _bookClient.CreateAsync(request, userManager.GetToken());
             return RedirectToAction("Index", "Book");
         }
         catch(Exception ex)
