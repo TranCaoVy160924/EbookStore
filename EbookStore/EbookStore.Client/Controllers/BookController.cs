@@ -100,21 +100,20 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update(BookDetailResponse viewModel)
+    public async Task<IActionResult> Update(BookUpdateViewModel viewModel, string description)
     {
         UserManager userManager = new UserManager(User);
 
-
         BookUpdateRequest request = new BookUpdateRequest
         {
-            Id = viewModel.BookId,
+            Id = viewModel.Id,
             Title = viewModel.Title,
             NumberOfPage = viewModel.NumberOfPage,
             Price = viewModel.Price,
-            Description = viewModel.Description,
-            //CoverImage = viewModel.CoverImage == null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
-            //PdfLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
-            //BookGenreIds = viewModel.BookGenreIds
+            Description = description,
+            CoverImage = viewModel.CoverImage == null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
+            PdfLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
+            BookGenreIds = viewModel.BookGenreIds
         };
 
         try
@@ -132,8 +131,6 @@ public class BookController : Controller
     public IActionResult Search(string title, DateTime start, DateTime end, List<int> genres)
     {
         var session = Request.HttpContext.Session;
-        //request.Title = request.Title!=null ? request.Title : String.Empty;
-        //request.Genres = request.Genres!=null ? request.Genres : new List<int>();
         title ??= String.Empty;
         start = start == DateTime.MinValue ? DateTime.MinValue : start;
         end = end == DateTime.MinValue ? DateTime.MaxValue : end;

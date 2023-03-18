@@ -56,8 +56,7 @@
                     <div class="row mb-3">
                         <div class="col-12">
                             <label>Description</label>
-                            <textarea asp-for="Description" type="text" rows="10" cols="90"></textarea>
-                            <span asp-validation-for=Description class="text-danger" />
+                            <textarea name="description" type="text" rows="10" cols="90">@bookDetail.Description</textarea>
                         </div>
                     </div>
                     <div class="row mb-3">
