@@ -24,7 +24,7 @@ public interface IBookClient
     [Post("/Book")]
     Task CreateAsync([Body] BookCreateRequest createRequest,
         [Header("Authorization")] string jwtToken);
-    [Post("/Book")]
+    [Patch("/Book")]
     Task UpdateAsync([Body] BookUpdateRequest updateRequest,
         [Header("Authorization")] string jwtToken);
     [Get("/Book/{id}")]

@@ -1,7 +1,9 @@
 ﻿namespace EbookStore.Client.ViewModel;
+
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-public class BookUpdateViewModel
+public class BookUpdateViewModel : PageModel
 {
     public int Id { get; set; }
 
@@ -19,15 +21,12 @@ public class BookUpdateViewModel
     public double Price { get; set; }
 
     [Required(ErrorMessage = "Please enter book description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = "aaaaaaaaaaaaaaaaaaa";
 
     public IFormFile? CoverImage { get; set; }
     public string StringCoverImage { get; set; }
 
     public IFormFile? PdfFile { get; set; }
     public string StringPdfFile { get; set; }
-
-    //public IFormFile EpubFile { get; set; }
-
     public List<int> BookGenreIds { get; set; } = new List<int>();
 }

@@ -3,8 +3,8 @@ using EbookStore.Client.ExternalService.ImageHostService;
 using EbookStore.Client.Helper;
 using EbookStore.Client.RefitClient;
 using EbookStore.Client.ViewModel;
-using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using EbookStore.Contract.ViewModel.Book.Request;
+using EbookStore.Contract.ViewModel.Book.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EbookStore.Client.Controllers;
@@ -100,22 +100,21 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update(BookUpdateViewModel viewModel)
+    public async Task<IActionResult> Update(BookDetailResponse viewModel)
     {
         UserManager userManager = new UserManager(User);
 
 
         BookUpdateRequest request = new BookUpdateRequest
         {
-            Id = viewModel.Id,
+            Id = viewModel.BookId,
             Title = viewModel.Title,
             NumberOfPage = viewModel.NumberOfPage,
             Price = viewModel.Price,
             Description = viewModel.Description,
-            CoverImage = viewModel.CoverImage==null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
-            PdfLink = viewModel.PdfFile==null? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
-            EpubLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
-            BookGenreIds = viewModel.BookGenreIds
+            //CoverImage = viewModel.CoverImage == null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
+            //PdfLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
+            //BookGenreIds = viewModel.BookGenreIds
         };
 
         try
@@ -130,27 +129,26 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public IActionResult Search(BookQueryRequest request)
+    public IActionResult Search(string title, DateTime start, DateTime end, List<int> genres)
     {
         var session = Request.HttpContext.Session;
-        if (request != null)
+        //request.Title = request.Title!=null ? request.Title : String.Empty;
+        //request.Genres = request.Genres!=null ? request.Genres : new List<int>();
+        title ??= String.Empty;
+        start = start == DateTime.MinValue ? DateTime.MinValue : start;
+        end = end == DateTime.MinValue ? DateTime.MaxValue : end;
+        genres ??= new List<int>();
+
+        string genresString = String.Empty;
+        if (genres.Count > 0)
         {
-            //request.Title = request.Title!=null ? request.Title : String.Empty;
-            //request.Genres = request.Genres!=null ? request.Genres : new List<int>();
-            request.Title ??= String.Empty;
-            request.Genres ??= new List<int>();
-
-            string genresString = String.Empty;
-            if (request.Genres.Count == 0)
-            {
-                foreach (var genres in request.Genres) { genresString += genres + " "; }
-            }
-
-            session.SetString("Title_BookIndex", request.Title);
-            session.SetString("Genres_BookIndex", genresString);
-            session.SetString("StartReleaseDate_BookIndex", request.StartReleaseDate.ToString());
-            session.SetString("EndReleaseDate_BookIndex", request.EndReleaseDate.ToString());
+            foreach (var genre in genres) { genresString += genre + " "; }
         }
+
+        session.SetString("Title_BookIndex", title);
+        session.SetString("Genres_BookIndex", genresString);
+        session.SetString("StartReleaseDate_BookIndex", start.ToString());
+        session.SetString("EndReleaseDate_BookIndex", end.ToString());
 
         return RedirectToAction("Index", "Book");
     }

@@ -16,7 +16,6 @@
     UserManager userManager = new UserManager(this.User);
     List<BookResponse> data = new List<BookResponse>();
     PaginationHeader paginationHeader = null;
-    BookQueryRequest bookQueryRequest = new BookQueryRequest();
 
     List<GenreResponse> genresResponse = await _genreClient.GetAsync();
     var pageNumber = int.Parse(session.GetString("PageNumber_BookIndex"));
@@ -42,10 +41,6 @@
             genresString = genresString.Substring(spaceIndex + 1);
             spaceIndex = genresString.IndexOf(' ');
         }
-
-        // add final node to list
-        int finalValue = int.Parse(genresString);
-        genres.Add(finalValue);
     }
 
     if (userManager.IsLogin())
@@ -56,7 +51,7 @@
                     PageNumber = pageNumber,
                     PageSize = pageSize,
                     Title = title,
-                    Genres = new List<int>(),
+                    Genres = genres,
                     StartReleaseDate = startReleaseDate,
                     EndReleaseDate = endReleaseDate
                 };
@@ -100,22 +95,27 @@
             border: none;
             background-color: #ffc107;
             color: white;
-            padding: 6px 12px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-            margin: 4px 2px;
-            cursor: pointer;
+            margin: auto
         }
-
 
         .btn-edit {
             background-color: #008CBA;
+            width: 70px;
+            line-height: 20px;
         }
 
         .btn-delete {
             background-color: #f44336;
+            width: 70px;
+            line-height: 20px;
+        }
+
+        .btn-create {
+            margin-top: 50px;
         }
 
         .search-container {
@@ -126,6 +126,7 @@
             float: left;
             margin-left: 2%;
             margin-top: 20px;
+            justify-content: center; 
         }
 
         .search-box {
@@ -170,32 +171,25 @@
 <body>
     <div class="search-container">
         <form asp-controller="Book" asp-action="Search" method="post">
-            <input asp-for="Title" type="text" class="search-box" placeholder="Search title...">
-
-            <div class="col-lg-3 d-none d-lg-block">
-                <label>Genre</label>
-                <select asp-for=Genres>
-                    <div class="navbar-nav w-100">
-                        @foreach (GenreResponse genre in genresResponse)
-                        {
-                        <option value=@genre.GenreId>@genre.Name</option>
-                        }
-            </div>
+            <input name="title" type="text" class="search-box" placeholder="Search..." />
+            <label>Start Date</label>
+            <input name="start" class="search-box" type="date" />
+            <label>End Date</label>
+            <input name="end" class="search-box" type="date" />
+            <label>Genre</label>
+            <select name="genres" class="search-box" multiple>
+                @foreach (GenreResponse genre in genresResponse)
+                {
+                    <option value=@genre.GenreId>@genre.Name</option>
+                }
             </select>
+            <button type="submit">Search</button>
+            <br />
+            <a asp-controller="Book" asp-action="Create" class="btn btn-create">
+                New Book +
+            </a>
+        </form>
     </div>
-
-    <div>
-        <input value="@DateTime.Now" asp-for="StartReleaseDate" type="date">
-        Start Date
-    </div>
-    <div>
-        <input value="@DateTime.Now" asp-for="EndReleaseDate" type="date">
-        End Date
-    </div>
-    <button type="submit" class="btn btn-search">Apply Filter</button>
-    </form>
-    </div>
-
 
     <table>
         <thead>
@@ -203,10 +197,10 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Price</th>
-                <th>SalePercent</th>
-                <th>NumberOfPage</th>
+                <th>Sale</th>
+                <th>Pages</th>
                 <th>Description</th>
-                <th>ReleaseDate</th>
+                <th>Release Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -220,23 +214,21 @@
                     <td>@book.SalePercent%</td>
                     <td>@book.NumberOfPage</td>
                     <td>@(book.Description.Length>20 ? book.Description.Substring(0,20)+"..." : book.Description)</td>
-                    <td>@book.ReleaseDate.ToString()</td>
+                    <td>@book.ReleaseDate.ToString("dd-MM-yyyy")</td>
                     <td>
-                        <a asp-controller="Book" asp-action="Update" asp-route-id=@book.Id class="btn btn-edit">
-                            Update
-                        </a>
+                        
                         <form asp-controller="Book" asp-action="Delete" method="post">
                             <input type="hidden" name="bookId" value="@book.Id" />
                             <button type="submit" class="btn btn-delete">Delete</button>
                         </form>
+                        <a asp-controller="Book" asp-action="Update" asp-route-id=@book.Id class="btn btn-edit">
+                            Update
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <a asp-controller="Book" asp-action="Create" class="btn btn-create">
-                            Create New
-                        </a>
     <div class="pagination">
         <form asp-controller="Book" asp-action="ChangePage" method="post">
             <input hidden name="pageNumber"

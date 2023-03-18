@@ -31,10 +31,8 @@ public class BookUpdateRequest
     [Required(ErrorMessage = "Please enter book cover image")]
     public string CoverImage { get; set; }
 
-    [Url]
     public string PdfLink { get; set; } = String.Empty;
 
-    [Url]
     //public string EpubLink { get; set; } = String.Empty;
 
     public List<int> BookGenreIds { get; set; } = new List<int>();
