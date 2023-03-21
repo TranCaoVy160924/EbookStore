@@ -23,7 +23,7 @@
                     PageNumber = 1,
                     PageSize = 10,
                     Title = string.Empty,
-                    Genres = new List<int> {},
+                    Genres = new List<int> { },
                     StartReleaseDate = DateTime.MinValue,
                     EndReleaseDate = DateTime.MaxValue
                 };
@@ -65,7 +65,6 @@
 
         .btn {
             border: none;
-            color: white;
             margin: 4px 2px;
             padding: 6px 12px;
             text-align: center;
@@ -75,12 +74,12 @@
             cursor: pointer;
         }
 
-        .btn-edit {
-            background-color: #008CBA;
-        }
-
         .btn-delete {
             background-color: #f44336;
+        }
+
+        .btn-edit {
+            background-color: #008CBA;
         }
 
         .search-container {
@@ -152,8 +151,15 @@
                         $@(book.Price * (100 - book.SalePercent) / 100)
                     </td>
                     <td>
-                        <button class="btn btn-delete">Remove</button>
-                        <button class="btn btn-edit">Add to cart</button>
+                        <form asp-controller="Wishlist" asp-action="RemoveItems" method="post">
+                            <input type="hidden" name="bookId" value="@book.Id" />
+                            <button type="submit" class="btn btn-delete">Remove</button>
+                        </form>
+
+                        <form asp-controller="Wishlist" asp-action="AddItemToCart" method="post">
+                            <input type="hidden" name="bookId" value="@book.Id" />
+                            <button type="submit" class="btn btn-edit">Add to cart</button>
+                        </form>
                     </td>
                 </tr>
             }
