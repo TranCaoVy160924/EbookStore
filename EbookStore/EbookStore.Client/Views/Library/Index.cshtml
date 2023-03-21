@@ -160,7 +160,12 @@
                     <td>@book.Price</td>
                     <td>@book.CoverImage</td>
                     <td>
-                        <button class="btn btn-edit">PDF</button>
+                        <form asp-controller="Library" asp-action="DownloadEbook">
+                            <button type="submit" name="fileName"
+                                value="@book.PdfLink" class="btn btn-edit">
+                                PDF
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 counter++;

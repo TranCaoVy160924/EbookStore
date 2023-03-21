@@ -4,6 +4,7 @@ using EbookStore.Contract.ViewModel.LibraryItem.Request;
 using EbookStore.Client.RefitClient;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.CodeAnalysis;
 
 namespace EbookStore.Client.Controllers;
 
@@ -42,7 +43,7 @@ public class LibraryController : Controller
 
         return View();
     }
-   
+
     public IActionResult Search(LibraryItemQueryRequest request)
     {
         var session = Request.HttpContext.Session;
@@ -60,5 +61,23 @@ public class LibraryController : Controller
         var session = Request.HttpContext.Session;
         session.SetString("PageNumber_BookIndex", pageNumber);
         return RedirectToAction("Index", "Library");
+    }
+
+    public IActionResult DownloadEbook(string fileName)
+    {
+        string filePath;
+
+        try
+        {
+            filePath = _ebookHelper.GetDownloadPath(fileName);
+            byte[] filebytes = System.IO.File.ReadAllBytes(filePath);
+            string contentType = "application/pdf";
+
+            return File(filebytes, contentType);
+        }
+        catch (Exception ex)
+        {
+            return RedirectToAction("Index", "Library");
+        }
     }
 }
