@@ -132,7 +132,7 @@ public class WishlistRepository : IWishlistRepository
     #region GetCountAsync
     public async Task<int> GetCountAsync(Guid userId)
     {
-        int Count = _dbContext.WishItems.Where(c => c.UserId == userId).Count();
+        int Count = _dbContext.WishItems.Where(c => c.UserId == userId && c.IsActive == true).Count();
         return Count;
     }
     #endregion

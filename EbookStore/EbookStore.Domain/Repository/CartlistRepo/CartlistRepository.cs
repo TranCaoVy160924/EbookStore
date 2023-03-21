@@ -86,7 +86,7 @@ public class CartlistRepository : ICartlistRepository
     #region GetCountAsync
     public async Task<int> GetCountAsync(Guid userId)
     {
-        int Count = _dbContext.CartItems.Where(c => c.UserId == userId).Count();
+        int Count = _dbContext.CartItems.Where(c => c.UserId == userId && c.IsActive == true).Count();
         return Count;
     }
     #endregion
@@ -95,9 +95,23 @@ public class CartlistRepository : ICartlistRepository
     public async Task DeleteAsync(int bookId, Guid userId)
     {
         var book = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
-
-        _dbContext.CartItems.Remove(book);
-        await _dbContext.SaveChangesAsync();
+        
+        if(book != null)
+        {
+            if (book.IsActive)
+            {
+                book.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Book already been deleted!");
+            }
+        }
+        else
+        {
+            throw new Exception("Delete book fail!");
+        }
     }
     #endregion
 }
