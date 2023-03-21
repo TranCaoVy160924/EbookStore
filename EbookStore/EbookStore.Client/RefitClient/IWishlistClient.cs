@@ -17,5 +17,5 @@ public interface IWishlistClient
     Task <int> GetCountAsync([Header("Authorization")] string jwtToken);
 
     [Delete("/Wishlist/{bookId}/")]
-    Task RemoveWishlistAsync(int bookId, [Header("Authorization")] string jwtToken);
+    Task RemoveItemsAsync(int bookId, [Header("Authorization")] string jwtToken);
 }

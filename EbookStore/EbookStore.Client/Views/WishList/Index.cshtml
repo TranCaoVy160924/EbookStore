@@ -151,7 +151,7 @@
                         $@(book.Price * (100 - book.SalePercent) / 100)
                     </td>
                     <td>
-                        <form asp-action="RemoveWishlist" asp-controller="Wishlist" method="post">
+                        <form asp-controller="Wishlist" asp-action="RemoveItems" method="post">
                             <input type="hidden" name="removeBookId" value="@book.Id" />
                             <button type="submit" class="btn btn-delete">Remove</button>
                         </form>

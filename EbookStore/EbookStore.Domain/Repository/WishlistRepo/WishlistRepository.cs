@@ -141,8 +141,8 @@ public class WishlistRepository : IWishlistRepository
     }
     #endregion
 
-    #region RemoveWishlistAsync
-    public async Task RemoveWishlistAsync(int bookId, Guid userId)
+    #region RemoveItemsAsync
+    public async Task RemoveItemsAsync(int bookId, Guid userId)
     {
         WishItem wishItem = await _dbContext.WishItems
             .Where(x => x.IsActive == true)
