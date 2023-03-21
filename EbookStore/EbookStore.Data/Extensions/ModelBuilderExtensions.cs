@@ -72,8 +72,8 @@ public static class ModelBuilderExtensions
                 Price = i * 10,
                 Description = LoremNET.Lorem.Words(1, 20, true, true),
                 CoverImage = $"https://picsum.photos/seed/{i}/500/500",
-                PdfLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
-                EpubLink = "https://www.dropbox.com/s/pbulz27qp62esx3/CubexCursedxCurious%20-%20Volume%2001.pdf?dl=0",
+                PdfLink = "Book.pdf",
+                //EpubLink = "Book.pdf",
                 ReleaseDate = DateTime.Now
             });
         }

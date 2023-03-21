@@ -82,7 +82,7 @@ public class BookController : Controller
             Description = viewModel.Description,
             CoverImage = _imageHelper.UploadImage(viewModel.CoverImage),
             PdfLink = await _ebookHelper.Upload(viewModel.PdfFile),
-            EpubLink = await _ebookHelper.Upload(viewModel.PdfFile),
+            //EpubLink = await _ebookHelper.Upload(viewModel.PdfFile),
             BookGenreIds = viewModel.BookGenreIds,
         };
 
