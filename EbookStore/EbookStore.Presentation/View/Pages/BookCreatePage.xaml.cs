@@ -45,7 +45,7 @@ public partial class BookCreatePage : Page
         {
             CoverImage = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox",
             PdfLink = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox",
-            EpubLink = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox"
+            //EpubLink = "https://stackoverflow.com/questions/2650144/multiline-for-wpf-textbox"
         };
         this.DataContext = CreateRequest;
 

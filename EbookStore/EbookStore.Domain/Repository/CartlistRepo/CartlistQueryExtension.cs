@@ -24,7 +24,7 @@ public static class CartlistQueryExtension
                                     Description = b.Description,
                                     CoverImage = b.CoverImage,
                                     PdfLink = b.PdfLink,
-                                    EpubLink = b.EpubLink,
+                                    //EpubLink = b.EpubLink,
                                     ReleaseDate = b.ReleaseDate,
                                     Sale = b.Sale
                                 });
