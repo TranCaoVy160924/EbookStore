@@ -33,7 +33,7 @@ public class CartlistRepository : ICartlistRepository
     #region addToCartAsync
     public async Task AddBookToCartlistAsync(int bookId, Guid userId)
     {
-        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
+        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId && ci.IsActive);
         if (existingCartItem != null)
         {
             throw new ApplicationException($"This book {bookId} is already in cart.");

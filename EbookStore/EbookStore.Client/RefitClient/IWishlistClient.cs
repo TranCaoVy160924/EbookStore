@@ -15,4 +15,10 @@ public interface IWishlistClient
                                                         [Header("Authorization")] string jwtToken);
     [Post("/Wishlist/GetCount")]
     Task <int> GetCountAsync([Header("Authorization")] string jwtToken);
+
+    [Delete("/Wishlist/{bookId}/")]
+    Task RemoveItemsAsync(int bookId, [Header("Authorization")] string jwtToken);
+
+    [Patch("/Wishlist/{bookId}/")]
+    Task AddItemtoCartAsync(int bookId, [Header("Authorization")] string jwtToken);
 }
