@@ -37,6 +37,8 @@ builder.Services.AddRefitClient<IWishlistClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<ICartlistClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<ILibraryClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<IDropboxClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://www.dropbox.com"));
 

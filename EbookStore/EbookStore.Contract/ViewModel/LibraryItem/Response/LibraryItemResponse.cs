@@ -12,5 +12,4 @@ public class LibraryItemResponse
     public double Price { get; set; }
     public string CoverImage { get; set; }
     public string PdfLink { get; set; }
-    public string EpubLink { get; set; }
 }

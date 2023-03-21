@@ -69,7 +69,7 @@
         .btn {
             border: none;
             background-color: #ffc107;
-            color: white;
+            color: black;
             padding: 6px 12px;
             text-align: center;
             text-decoration: none;
@@ -137,12 +137,6 @@
 </head>
 
 <body>
-    <div class="search-container">
-        <form asp-controller="Library" asp-action="Search" method="post">
-            <input asp-for="Title" type="text" class="search-box" placeholder="Search title...">
-            <button type="submit" class="btn btn-search">Apply Filter</button>
-        </form>
-    </div>
 
     @{
         int counter = (paginationHeader.CurrentPage - 1) * 10 + 1;
@@ -167,7 +161,6 @@
                     <td>@book.CoverImage</td>
                     <td>
                         <button class="btn btn-edit">PDF</button>
-                        <button class="btn btn-edit">Epub</button>
                     </td>
                 </tr>
                 counter++;
