@@ -41,7 +41,7 @@ public class WishlistRepository : IWishlistRepository
     #region addToWishlistAsync
     public async Task AddBookToWishlistAsync(int bookId, Guid userid)
     {
-        var existingWishItem = await _dbContext.WishItems.SingleOrDefaultAsync(wi => wi.UserId == userid && wi.BookId == bookId);
+        var existingWishItem = await _dbContext.WishItems.SingleOrDefaultAsync(wi => wi.UserId == userid && wi.BookId == bookId && wi.IsActive);
         if (existingWishItem != null)
         {
             throw new ApplicationException($"This book {bookId} is already in the wishlist.");
@@ -77,7 +77,7 @@ public class WishlistRepository : IWishlistRepository
     #region AddItemToCartAsync
     public async Task AddItemToCartAsync(int bookId, Guid userid)
     {
-        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(x => x.UserId == userid && x.BookId==bookId);
+        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(x => x.UserId == userid && x.BookId==bookId && x.IsActive);
         if(existingCartItem != null)
         {
             throw new ApplicationException($"This book {bookId} is already in cart.");
@@ -96,13 +96,14 @@ public class WishlistRepository : IWishlistRepository
         }
 
         var cartItem = new CartItem 
-        { 
+        {
             UserId = user.Id,
             User = user,
             BookId = book.BookId,
             Book = book,
             IsActive = true
         };
+        await RemoveItemsAsync(bookId, userid);
         _dbContext.CartItems.Add(cartItem);
         await _dbContext.SaveChangesAsync();
     }
@@ -185,7 +186,7 @@ public class WishlistRepository : IWishlistRepository
             .FirstOrDefaultAsync();
         if (wishItem != null)
         {
-            wishItem.IsActive = false; 
+            _dbContext.Remove(wishItem);
             await _dbContext.SaveChangesAsync();
         }
         else
