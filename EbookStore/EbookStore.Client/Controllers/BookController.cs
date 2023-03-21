@@ -104,20 +104,28 @@ public class BookController : Controller
     {
         UserManager userManager = new UserManager(User);
 
-        BookUpdateRequest request = new BookUpdateRequest
-        {
-            Id = viewModel.Id,
-            Title = viewModel.Title,
-            NumberOfPage = viewModel.NumberOfPage,
-            Price = viewModel.Price,
-            Description = description,
-            CoverImage = viewModel.CoverImage == null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
-            PdfLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
-            BookGenreIds = viewModel.BookGenreIds
-        };
+        
 
         try
         {
+            if(String.IsNullOrEmpty(description))
+            {
+                TempData["DescriptionError"] = "Please enter book description";
+                throw new Exception();
+            }
+
+            BookUpdateRequest request = new BookUpdateRequest
+            {
+                Id = viewModel.Id,
+                Title = viewModel.Title,
+                NumberOfPage = viewModel.NumberOfPage,
+                Price = viewModel.Price,
+                Description = description,
+                CoverImage = viewModel.CoverImage == null ? viewModel.StringCoverImage : _imageHelper.UploadImage(viewModel.CoverImage),
+                PdfLink = viewModel.PdfFile == null ? viewModel.StringPdfFile : await _ebookHelper.Upload(viewModel.PdfFile),
+                BookGenreIds = viewModel.BookGenreIds
+            };
+
             await _bookClient.UpdateAsync(request, userManager.GetToken());
             return RedirectToAction("Index", "Book");
         }
