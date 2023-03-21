@@ -1,6 +1,7 @@
 ﻿using EbookStore.Application.Helpers;
 using EbookStore.Contract.Model;
 using EbookStore.Contract.ViewModel.WishItem.Request;
+using EbookStore.Domain.Repository.CartlistRepo;
 using EbookStore.Domain.Repository.WishlistRepo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,12 +16,15 @@ namespace EbookStore.Application.Controllers;
 public class WishlistController : ControllerBase
 {
     private readonly IWishlistRepository _wishlistRepo;
+    private readonly ICartlistRepository _cartlistRepo;
     private readonly UserManager<User> _userManager;
 
     public WishlistController(
         IWishlistRepository wishlistRepo,
+        ICartlistRepository cartlistRepo,
         UserManager<User> userManager)
     {
+        _cartlistRepo = cartlistRepo;
         _wishlistRepo = wishlistRepo;
         _userManager = userManager;
     }
@@ -77,6 +81,25 @@ public class WishlistController : ControllerBase
         }
     }
 
+    [HttpPatch("{bookId}")]
+    [Authorize]
+    public async Task<IActionResult> AddItemToCart(int bookId)
+    {
+        try
+        {
+            var userId = await GetUserId();
+            await _cartlistRepo.AddBookToCartlistAsync(bookId, userId);
+            return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+    }
     [HttpDelete("{bookId}")]
     [Authorize]
     public async Task<IActionResult> RemoveItems(int bookId)

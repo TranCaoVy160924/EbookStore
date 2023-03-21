@@ -156,8 +156,8 @@
                             <button type="submit" class="btn btn-delete">Remove</button>
                         </form>
 
-                        <form asp-controller="Cartlist" asp-action="AddToCartlist" method="post">
-                            <input type="hidden" name="cartAddBookId" value="@book.Id" />
+                        <form asp-controller="Wishlist" asp-action="AddItemToCart" method="post">
+                            <input type="hidden" name="bookId" value="@book.Id" />
                             <button type="submit" class="btn btn-edit">Add to cart</button>
                         </form>
                     </td>

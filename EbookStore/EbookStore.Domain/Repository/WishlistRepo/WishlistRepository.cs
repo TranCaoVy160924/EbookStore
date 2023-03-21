@@ -74,6 +74,40 @@ public class WishlistRepository : IWishlistRepository
     }
     #endregion
 
+    #region AddItemToCartAsync
+    public async Task AddItemToCartAsync(int bookId, Guid userid)
+    {
+        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(x => x.UserId == userid && x.BookId==bookId);
+        if(existingCartItem != null)
+        {
+            throw new ApplicationException($"This book {bookId} is already in cart.");
+        }
+        var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == userid);
+
+        if (user == null)
+        {
+            throw new ApplicationException($"Unable to find user with username: {userid}");
+        }
+        var book = await _dbContext.Books.SingleOrDefaultAsync(b => b.BookId == bookId);
+
+        if (book == null)
+        {
+            throw new ApplicationException($"Unable to find book with id: {bookId}");
+        }
+
+        var cartItem = new CartItem 
+        { 
+            UserId = user.Id,
+            User = user,
+            BookId = book.BookId,
+            Book = book,
+            IsActive = true
+        };
+        _dbContext.CartItems.Add(cartItem);
+        await _dbContext.SaveChangesAsync();
+    }
+    #endregion
+
     #region GetWisherAsync
     public async Task<List<User>> GetWishersAsync(int bookId)
     {

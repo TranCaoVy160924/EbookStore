@@ -20,4 +20,5 @@ public interface IWishlistRepository
     Task<PagedList<BookResponse>> GetAsync(WishItemQueryRequest request, Guid id);
     Task<int> GetCountAsync(Guid userId);
     Task RemoveItemsAsync(int bookId, Guid userId);
+    Task AddItemToCartAsync(int bookId, Guid userId);
 }

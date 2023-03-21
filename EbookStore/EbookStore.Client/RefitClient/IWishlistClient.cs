@@ -18,4 +18,7 @@ public interface IWishlistClient
 
     [Delete("/Wishlist/{bookId}/")]
     Task RemoveItemsAsync(int bookId, [Header("Authorization")] string jwtToken);
+
+    [Patch("/Wishlist/{bookId}/")]
+    Task AddItemtoCartAsync(int bookId, [Header("Authorization")] string jwtToken);
 }
