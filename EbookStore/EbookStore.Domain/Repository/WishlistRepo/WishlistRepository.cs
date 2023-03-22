@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using EbookStore.Contract.ViewModel.Book.BookQueryRequest;
 using System.Net.Http;
+using EbookStore.Domain.Repository.CartlistRepo;
 
 namespace EbookStore.Domain.Repository.WishlistRepo;
 public class WishlistRepository : IWishlistRepository
@@ -40,7 +41,7 @@ public class WishlistRepository : IWishlistRepository
     #region addToWishlistAsync
     public async Task AddBookToWishlistAsync(int bookId, Guid userid)
     {
-        var existingWishItem = await _dbContext.WishItems.SingleOrDefaultAsync(wi => wi.UserId == userid && wi.BookId == bookId);
+        var existingWishItem = await _dbContext.WishItems.SingleOrDefaultAsync(wi => wi.UserId == userid && wi.BookId == bookId && wi.IsActive);
         if (existingWishItem != null)
         {
             throw new ApplicationException($"This book {bookId} is already in the wishlist.");
@@ -69,6 +70,41 @@ public class WishlistRepository : IWishlistRepository
         };
 
         _dbContext.WishItems.Add(wishItem);
+        await _dbContext.SaveChangesAsync();
+    }
+    #endregion
+
+    #region AddItemToCartAsync
+    public async Task AddItemToCartAsync(int bookId, Guid userid)
+    {
+        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(x => x.UserId == userid && x.BookId==bookId && x.IsActive);
+        if(existingCartItem != null)
+        {
+            throw new ApplicationException($"This book {bookId} is already in cart.");
+        }
+        var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == userid);
+
+        if (user == null)
+        {
+            throw new ApplicationException($"Unable to find user with username: {userid}");
+        }
+        var book = await _dbContext.Books.SingleOrDefaultAsync(b => b.BookId == bookId);
+
+        if (book == null)
+        {
+            throw new ApplicationException($"Unable to find book with id: {bookId}");
+        }
+
+        var cartItem = new CartItem 
+        {
+            UserId = user.Id,
+            User = user,
+            BookId = book.BookId,
+            Book = book,
+            IsActive = true
+        };
+        await RemoveItemsAsync(bookId, userid);
+        _dbContext.CartItems.Add(cartItem);
         await _dbContext.SaveChangesAsync();
     }
     #endregion
@@ -139,4 +175,25 @@ public class WishlistRepository : IWishlistRepository
         return Count;
     }
     #endregion
+
+    #region RemoveItemsAsync
+    public async Task RemoveItemsAsync(int bookId, Guid userId)
+    {
+        WishItem wishItem = await _dbContext.WishItems
+            .Where(x => x.IsActive == true)
+            .Where(x => x.BookId == bookId)
+            .Where(x=>x.UserId== userId)
+            .FirstOrDefaultAsync();
+        if (wishItem != null)
+        {
+            _dbContext.Remove(wishItem);
+            await _dbContext.SaveChangesAsync();
+        }
+        else
+        {
+            throw new Exception("Book not exist");
+        }
+    }
+    #endregion
+
 }

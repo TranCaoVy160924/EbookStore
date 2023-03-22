@@ -36,4 +36,42 @@ public class WishlistController : Controller
         }
 
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AddItemToCart(int bookId)
+    {
+        try
+        {
+            var userManager = new UserManager(this.User);
+            if (userManager.IsLogin())
+            {
+                await _wishlistClient.AddItemtoCartAsync(bookId, userManager.GetToken());
+                await _wishlistClient.RemoveItemsAsync(bookId, userManager.GetToken());
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Login", "Auth");
+        }
+        catch(Exception ex)
+        {
+            return RedirectToAction("Index");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoveItems(int bookId)
+    {
+        try
+        {
+            var userManager = new UserManager(User);
+            if (userManager.IsLogin())
+            {
+                await _wishlistClient.RemoveItemsAsync(bookId, userManager.GetToken());
+            }
+            return RedirectToAction("Index");
+        }
+        catch (Exception)
+        {
+            return RedirectToAction("Index");
+        }
+    }
 }

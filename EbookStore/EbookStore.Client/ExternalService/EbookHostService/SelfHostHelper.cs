@@ -1,4 +1,6 @@
-﻿namespace EbookStore.Client.ExternalService.EbookHostService;
+﻿using Microsoft.CodeAnalysis;
+
+namespace EbookStore.Client.ExternalService.EbookHostService;
 
 public class SelfHostHelper : IEbookHostHelper
 {
@@ -21,5 +23,18 @@ public class SelfHostHelper : IEbookHostHelper
         }
 
         return fileName;
+    }
+
+    public string GetDownloadPath(string fileName)
+    {
+        string path = Path.Combine(_env.WebRootPath, "Ebook");
+        string fullpath = Path.Combine(path, fileName);
+
+        if (!System.IO.File.Exists(fullpath))
+        {
+            throw new Exception("File not exist");
+        }
+
+        return fullpath;
     }
 }
