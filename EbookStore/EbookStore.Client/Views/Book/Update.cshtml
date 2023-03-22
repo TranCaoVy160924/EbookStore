@@ -1,0 +1,124 @@
+﻿@using EbookStore.Client.RefitClient;
+@using EbookStore.Client.ViewModel;
+@using EbookStore.Contract.ViewModel.Book.Request;
+@using EbookStore.Contract.ViewModel.Book.Response
+@using EbookStore.Contract.ViewModel.Genre.Response;
+
+@inject IHttpContextAccessor HttpContextAccessor;
+@inject IGenreClient _genreClient;
+@inject IBookClient _bookClient;
+@model BookUpdateViewModel;
+@{
+    List<GenreResponse> genres = await _genreClient.GetAsync();
+
+    var session = HttpContextAccessor.HttpContext.Session;
+    int updateId = int.Parse(session.GetString("chosen_id"));
+    var data = await _bookClient.GetOneAsync(updateId);
+    BookDetailResponse bookDetail = data.ReadResult();
+
+    List<GenreResponse> bookGenres = await _genreClient.GetByBookIdAsync(bookDetail.BookId);
+}
+
+<div class="container-fluid pb-5">
+    <form enctype="multipart/form-data" asp-controller="Book" asp-action="Update" method="post">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-30">
+                <img id="bookCreateCover" class="w-100 h-100" src="@bookDetail.CoverImage" alt="Product" />
+                <input asp-for=CoverImage onchange="uploadImage(this)" type="file" accept="image/*"/>
+                <input asp-for=StringCoverImage type="text" value="@bookDetail.CoverImage" hidden/>
+            </div>
+            <div class="col-lg-7 h-auto mb-30">
+                <div class="h-100 bg-light p-30">
+                    <div class="row mb-3">
+                        <div class="col-12" hidden>
+                            <label>ID</label>
+                            <input asp-for=Id type="text" class="mb-3" value=@bookDetail.BookId/>
+                            <span asp-validation-for=Title class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label>Title</label>
+                            <input asp-for=Title type="text" class="mb-3" value=@bookDetail.Title/>
+                            <span asp-validation-for=Title class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label>Number Of Page</label>
+                            <input asp-for=NumberOfPage type="text" class="mb-3" value=@bookDetail.NumberOfPage/>
+                            <span asp-validation-for=NumberOfPage class="text-danger" />
+                        </div>
+                        <div class="col-6">
+                            <label>Price</label>
+                            <input asp-for=Price type="text" class="mb-3" value=@bookDetail.Price/>
+                            <span asp-validation-for=Price class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label>Description</label>
+                            <textarea name="description" type="text" rows="10" cols="90">@bookDetail.Description</textarea>
+                            <span class="text-danger">@TempData["DescriptionError"]</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 form-group">
+                            <label>Genres</label>
+                            <select asp-for=BookGenreIds class="form-control" multiple>
+                                @foreach(GenreResponse genre in genres)
+                                {
+                                    if (bookGenres.Any(bg => bg.GenreId.Equals(genre.GenreId)))
+                                    {
+                                        <option value=@genre.GenreId selected>@genre.Name </option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@genre.GenreId>@genre.Name </option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for=BookGenreIds class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label>Pdf File</label>
+                            <input type="file" asp-for=PdfFile accept="application/pdf"/>
+                            <input type="text" asp-for="StringPdfFile" value="@bookDetail.PdfLink" hidden/>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary px-3">
+                        <i class="fa fa-shopping-cart mr-1"></i>
+                        Update Book @bookDetail.BookId
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const uploadImage = (fileInput) => {
+        let bookCover = document.getElementById("bookCreateCover");
+        var [file] = fileInput.files;
+        bookCover.src = URL.createObjectURL(file);
+    }
+
+    const uploadFile = fileName => {
+        console.log(fileName);
+    }
+
+    $(document).ready(function () {
+        $('#ingredients').multiselect();
+    });
+
+    const textarea = document.getElementById('descriptionTextarea');
+    const input = document.getElementById('descriptionInput');
+
+    textarea.addEventListener('change', (event) => {
+        input.value = event.target.value;
+    });
+</script>

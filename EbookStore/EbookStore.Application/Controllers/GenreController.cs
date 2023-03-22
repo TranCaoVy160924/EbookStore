@@ -22,4 +22,10 @@ public class GenreController : ControllerBase
     {
         return Ok(await _genreRepo.GetAsync());
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByBookIdAsync(int id)
+    {
+        return Ok(await _genreRepo.GetByBookIdAsync(id));
+    }
 }
