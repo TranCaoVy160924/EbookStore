@@ -104,8 +104,6 @@ public class BookController : Controller
     {
         UserManager userManager = new UserManager(User);
 
-        
-
         try
         {
             if(String.IsNullOrEmpty(description))
