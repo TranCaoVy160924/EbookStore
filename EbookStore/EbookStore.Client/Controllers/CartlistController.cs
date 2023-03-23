@@ -53,7 +53,7 @@ public class CartlistController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddToLibrary(List<int> cartAddBookId)
+    public async Task<IActionResult> AddToLibrary(int[] cartAddBookId)
     {
         try
         {
