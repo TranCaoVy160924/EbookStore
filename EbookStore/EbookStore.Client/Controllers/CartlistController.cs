@@ -15,15 +15,6 @@ public class CartlistController : Controller
         _libraryItemClient = libraryItemClient;
     }
 
-    public IActionResult Index()
-    {
-        UserManager userManager = new UserManager(User);
-        if (userManager.IsLogin())
-        {
-            return View();
-        }
-        return RedirectToAction("Login", "Auth");
-    }
 
     public IActionResult Index()
     {

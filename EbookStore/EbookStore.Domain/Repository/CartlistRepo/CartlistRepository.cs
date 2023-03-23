@@ -38,6 +38,13 @@ public class CartlistRepository : ICartlistRepository
         {
             throw new ApplicationException($"This book {bookId} is already in cart.");
         }
+
+        var existingLibraryItem = await _dbContext.LibraryItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId );
+        if (existingLibraryItem != null)
+        {
+            throw new ApplicationException($"This book {bookId} is already in library.");
+        }
+
         var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == userId);
 
         if (user == null)
