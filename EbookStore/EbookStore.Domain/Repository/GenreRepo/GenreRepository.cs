@@ -72,4 +72,10 @@ public class GenreRepository : IGenreRepository
         }
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<List<GenreResponse>> GetByBookIdAsync(int bookId)
+    {
+        List<Genre> genres = await _dbContext.Genres.Where(g => g.BookGenres.Any(bg => bg.BookId == bookId)).ToListAsync();
+        return _mapper.Map<List<GenreResponse>>(genres);
+    }
 }

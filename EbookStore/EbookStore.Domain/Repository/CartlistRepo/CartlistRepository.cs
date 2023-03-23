@@ -33,7 +33,7 @@ public class CartlistRepository : ICartlistRepository
     #region addToCartAsync
     public async Task AddBookToCartlistAsync(int bookId, Guid userId)
     {
-        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
+        var existingCartItem = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId && ci.IsActive);
         if (existingCartItem != null)
         {
             throw new ApplicationException($"This book {bookId} is already in cart.");
@@ -86,7 +86,10 @@ public class CartlistRepository : ICartlistRepository
     #region GetCountAsync
     public async Task<int> GetCountAsync(Guid userId)
     {
-        int Count = _dbContext.CartItems.Where(c => c.UserId == userId && c.IsActive == true).Count();
+        int Count = _dbContext.CartItems
+            .Where(c => c.UserId == userId)
+            .Where(c => c.IsActive)
+            .Count();
         return Count;
     }
     #endregion
@@ -112,6 +115,9 @@ public class CartlistRepository : ICartlistRepository
         {
             throw new Exception("Delete book fail!");
         }
+
+        _dbContext.CartItems.Remove(book);
+        await _dbContext.SaveChangesAsync();
     }
     #endregion
 }

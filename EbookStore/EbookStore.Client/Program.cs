@@ -39,9 +39,13 @@ builder.Services.AddRefitClient<ICartlistClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
 builder.Services.AddRefitClient<ILibraryItemClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<ILibraryClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl));
+builder.Services.AddRefitClient<IDropboxClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://www.dropbox.com"));
 
 builder.Services.AddSingleton<IImageHostHelper, CloudinaryHelper>();
-builder.Services.AddTransient<IEbookHostHelper, DropboxHelper>();
+builder.Services.AddTransient<IEbookHostHelper, SelfHostHelper>();
 
 builder.Services.AddRazorPages();
 

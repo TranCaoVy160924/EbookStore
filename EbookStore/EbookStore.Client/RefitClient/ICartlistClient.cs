@@ -1,5 +1,6 @@
 ﻿using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.CartItem.Request;
+using EbookStore.Contract.ViewModel.WishItem.Request;
 using Refit;
 
 namespace EbookStore.Client.RefitClient;

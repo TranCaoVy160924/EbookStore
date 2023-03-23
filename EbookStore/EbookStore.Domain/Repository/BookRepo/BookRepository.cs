@@ -147,7 +147,7 @@ public class BookRepository : IBookRepository
         book.Description = updateRequest.Description;
         book.CoverImage = updateRequest.CoverImage;
         book.PdfLink = updateRequest.PdfLink;
-        book.EpubLink = updateRequest.EpubLink;
+        //book.EpubLink = updateRequest.EpubLink;
     }
     #endregion
 

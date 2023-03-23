@@ -16,7 +16,7 @@ public class Book
     public string Description { get; set; }
     public string CoverImage { get; set; }
     public string PdfLink { get; set; }
-    public string EpubLink { get; set; }
+    //public string EpubLink { get; set; }
     public DateTime ReleaseDate { get; set; }
     public int? SaleId { get; set; }
 

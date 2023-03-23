@@ -82,7 +82,7 @@
                     <tbody class="align-middle">
                     @foreach (BookResponse book in cartlist)
                     {
-                            TotalPrice += book.Price;
+                        TotalPrice += book.Price;
                         <form asp-controller="Cartlist" asp-action="Delete" method="post">
                                 <input type="hidden" name="bookId" value=@book.Id />
                             <tr>

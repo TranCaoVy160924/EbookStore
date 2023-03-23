@@ -7,6 +7,8 @@ using EbookStore.Contract.ViewModel.Book.Response;
 using EbookStore.Contract.ViewModel.Genre.Response;
 using EbookStore.Contract.ViewModel.Sale.Response;
 using EbookStore.Contract.ViewModel.Sale.Request;
+using EbookStore.Contract.ViewModel.LibraryItem.Request;
+using EbookStore.Contract.ViewModel.LibraryItem.Response;
 using EbookStore.Contract.ViewModel.User.UserRegisterResponse;
 using EbookStore.Contract.ViewModel.User.UserRegsiterRequest;
 using EbookStore.Contract.ViewModel.User.Response;
@@ -61,8 +63,12 @@ public class MapperProfile : Profile
         #region Sale
         CreateMap<Sale, SaleDetailResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SaleId))
-            .ForMember(dest => dest.OnSaleBookIds, opt => 
+            .ForMember(dest => dest.OnSaleBookIds, opt =>
             opt.MapFrom(src => src.Books.Select(b => b.BookId).ToList()));
+        #endregion
+
+        #region Library
+        CreateMap<Book, LibraryItemResponse>();
         #endregion
     }
 }

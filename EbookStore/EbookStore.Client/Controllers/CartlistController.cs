@@ -25,6 +25,16 @@ public class CartlistController : Controller
         return RedirectToAction("Login", "Auth");
     }
 
+    public IActionResult Index()
+    {
+        UserManager userManager = new UserManager(User);
+        if (userManager.IsLogin())
+        {
+            return View();
+        }
+        return RedirectToAction("Login", "Auth");
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddToCartlist(int cartAddBookId)
     {
@@ -65,8 +75,6 @@ public class CartlistController : Controller
                     await _libraryItemClient.AddBookToLibraryAsync(id, userManager.GetToken());
                     await _cartistClient.DeleteBookAsync(id, userManager.GetToken());
                 }
-                //await _libraryItemClient.AddBookToLibraryAsync(cartAddBookId, userManager.GetToken());
-                //await _cartistClient.DeleteBookAsync(cartAddBookId, userManager.GetToken());
                 return RedirectToAction("Index", "Cartlist");
             }
             return RedirectToAction("Index", "Cartlist");

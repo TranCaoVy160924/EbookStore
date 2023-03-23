@@ -34,6 +34,7 @@ builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
 builder.Services.AddScoped<ICartlistRepository, CartlistRepository>();
 builder.Services.AddScoped<ILibraryItemRepository, LibraryItemRepository>();
+builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperProfile)));
 
