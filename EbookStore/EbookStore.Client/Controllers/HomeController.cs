@@ -66,7 +66,9 @@ public class HomeController : Controller
 
     public IActionResult SearchTitle(string title)
     {
+        var session = Request.HttpContext.Session;
         TempData["TitleSearch"] = title;
+        session.SetString("PageNumber_HomeShop", "1");
         return RedirectToAction("Shop", "Home");
     }
 
@@ -74,6 +76,7 @@ public class HomeController : Controller
     {
         var session = Request.HttpContext.Session;
         session.SetString("Genre", genreId.ToString());
+        session.SetString("PageNumber_HomeShop", "1");
         return RedirectToAction("Shop", "Home");
     }
 
@@ -87,6 +90,7 @@ public class HomeController : Controller
                 JsonConvert.SerializeObject(startDate));
         session.SetString("End_HomeShop",
                 JsonConvert.SerializeObject(endDate));
+        session.SetString("PageNumber_HomeShop", "1");
 
         return RedirectToAction("Shop", "Home");
     }

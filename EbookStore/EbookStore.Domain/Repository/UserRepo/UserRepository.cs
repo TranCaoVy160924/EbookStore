@@ -160,6 +160,7 @@ public class UserRepository : IUserRepository
             {
                 user.IsActive = false;
                 await _dbContext.SaveChangesAsync();
+                SendBanNotificationEmail(username, user.Email);
             }
             else
             {
@@ -170,6 +171,26 @@ public class UserRepository : IUserRepository
         {
             throw new Exception("Ban user fail!");
         }
+    }
+
+    private void SendBanNotificationEmail(String username, String emailAddress)
+    {
+        var smtpClient = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential("vytcse160924@fpt.edu.vn", "wnwdgndadurwcwzg"),
+            EnableSsl = true,
+        };
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress("vytcse160924@fpt.edu.vn"),
+            Subject = "Your account has been Banned",
+            Body = $"account with username <h1>{username} has been banned!!</h1>",
+            IsBodyHtml = true,
+        };
+
+        mailMessage.To.Add(emailAddress);
+        smtpClient.Send(mailMessage);
     }
     #endregion
 
@@ -183,6 +204,7 @@ public class UserRepository : IUserRepository
             {
                 user.IsActive = true;
                 await _dbContext.SaveChangesAsync();
+                SendUnbanNotificationEmail(username, user.Email);
             }
             else
             {
@@ -194,35 +216,8 @@ public class UserRepository : IUserRepository
             throw new Exception("Unban user fail!");
         }
     }
-    #endregion
 
-    #region EmailBanNotification
-    public void SendBanNotificationEmail(String username)
-    {
-        var smtpClient = new SmtpClient("smtp.gmail.com")
-        {
-            Port = 587,
-            Credentials = new NetworkCredential("vytcse160924@fpt.edu.vn", "wnwdgndadurwcwzg"),
-            EnableSsl = true,
-        };
-        var mailMessage = new MailMessage
-        {
-            From = new MailAddress("vytcse160924@fpt.edu.vn"),
-            Subject = "Your account has been Banned",
-            Body = $"account with email <h1>{username} has been banned!!</h1>",
-            IsBodyHtml = true,
-        };
-    }
-
-    private async Task NotificationUserBanByEmail(User user)
-    {
-        String username = user.UserName;
-        SendBanNotificationEmail(username);
-    }
-    #endregion
-
-    #region EmailUnBanNotification
-    public void SendUnbanNotificationEmail(String username)
+    public void SendUnbanNotificationEmail(String username, String emailAddress)
     {
         var smtpClient = new SmtpClient("smtp.gmail.com")
         {
@@ -234,15 +229,11 @@ public class UserRepository : IUserRepository
         {
             From = new MailAddress("vytcse160924@fpt.edu.vn"),
             Subject = "Your account has been Unbanned",
-            Body = $"account with email <h1>{username} has been Unbanned!!</h1>",
+            Body = $"account with username <h1>{username} has been Unbanned!!</h1>",
             IsBodyHtml = true,
         };
-    }
-
-    private async Task NotificationUserUnban(User user)
-    {
-        String username = user.UserName;
-        SendUnbanNotificationEmail(username);
+        mailMessage.To.Add(emailAddress);
+        smtpClient.Send(mailMessage);
     }
     #endregion
 
