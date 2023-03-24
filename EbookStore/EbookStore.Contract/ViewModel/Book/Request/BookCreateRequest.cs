@@ -31,7 +31,7 @@ public class BookCreateRequest
 
     public string PdfLink { get; set; } = String.Empty;
 
-    public string EpubLink { get; set; } = String.Empty;
+    //public string EpubLink { get; set; } = String.Empty;
 
     public List<int> BookGenreIds { get; set; } = new List<int>();
 }

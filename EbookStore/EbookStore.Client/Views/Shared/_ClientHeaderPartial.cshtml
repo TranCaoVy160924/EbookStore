@@ -10,6 +10,12 @@
     UserManager userManager = new UserManager(this.User);
     List<GenreResponse> genres = await _genreClient.GetAsync();
 
+    var titleSearch = ViewData["TitleSearch"] as string;
+    if (titleSearch == null)
+    {
+        titleSearch = "";
+    }
+
     int wishlistCount = 0;
     int cartlistCount = 0;
 
@@ -21,14 +27,29 @@
         cartlistCount = await _cartlistClient.GetCountAsync(token);
     }
 }
-
+<head>
+    <title>Sale</title>
+    <style>
+        button {
+            background: none !important;
+            border: none;
+            padding: 0 !important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            /*input has OS specific font-family*/
+            color: #069;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
                 <a class="text-body mr-3" href="">About</a>
-                <a class="text-body mr-3" href="">Contact</a>
+                <a class="text-body mr-3" href="">Library</a>
                 <a class="text-body mr-3" href="">Help</a>
                 <a class="text-body mr-3" href="">FAQs</a>
             </div>
@@ -79,19 +100,19 @@
     </div>
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
-            <a href="" class="text-decoration-none">
+            <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark px-2">Ebook</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Store</span>
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            <form action="">
+            <form asp-controller="Home" asp-action="SearchTitle">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
+                    <input name="title" type="text" value="@titleSearch" class="form-control" placeholder="Search for products">
                     <div class="input-group-append">
-                        <span class="input-group-text bg-transparent text-primary">
+                        <button type="submit" class="input-group-text bg-transparent text-primary">
                             <i class="fa fa-search"></i>
-                        </span>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -117,25 +138,27 @@
                 <div class="navbar-nav w-100">
                     @foreach (GenreResponse genre in genres)
                     {
-                        <a href="" class="nav-item nav-link">@(genre.Name)</a>
+                        <form id=@("form-" + genre.GenreId) asp-controller="Home" asp-action="SearchGenre" method="get">
+                            <input name="genreId" value=@genre.GenreId type="hidden" />
+                            <button runat="server" type="submit" class="nav-item nav-item btn btn-link">@(genre.Name)</button>
+                        </form>
                     }
                 </div>
             </nav>
         </div>
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
-                    <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none d-block d-lg-none">
+                    <span class="h1 text-uppercase text-dark bg-light px-2">Ebook</span>
+                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Store</span>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
-                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Home</a>
+                        <a asp-controller="Home" asp-action="Shop" class="nav-item nav-link">Shop</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 Pages <i class="fa fa-angle-down mt-1"></i>
@@ -148,17 +171,27 @@
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <a asp-controller="WishList" asp-action="Index" class="btn px-0">
-                            <i class="fas fa-heart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle"
-                                  style="padding-bottom: 2px;">@wishlistCount</span>
-                        </a>
-                        <a asp-controller="Cartlist" asp-action="Index" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle"
-                                  style="padding-bottom: 2px;">@cartlistCount</span>
-                        </a>
+                        </div>
+                        @if (userManager.IsLogin())
+                        {
+                            <a asp-controller="Library" asp-action="Index" class="nav-item nav-link">Library</a>
+                        }
                     </div>
+                    @if (userManager.IsLogin())
+                    {
+                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                            <a asp-controller="WishList" asp-action="Index" class="btn px-0">
+                                <i class="fas fa-heart text-primary"></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle"
+                                  style="padding-bottom: 2px;">@wishlistCount</span>
+                            </a>
+                            <a asp-controller="Cartlist" asp-action="Index" class="btn px-0 ml-3">
+                                <i class="fas fa-shopping-cart text-primary"></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle"
+                                  style="padding-bottom: 2px;">@cartlistCount</span>
+                            </a>
+                        </div>
+                    }
                 </div>
             </nav>
         </div>

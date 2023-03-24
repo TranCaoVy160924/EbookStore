@@ -13,4 +13,5 @@ public interface IGenreRepository
     Task<bool> CheckValidGenresAsync(List<int> bookGenres);
     Task AddBookGenreAsync(int bookId, List<int> genreIds);
     Task UpdateBookGenreAsync(int bookId, List<int> newGenreIds);
+    Task<List<GenreResponse>> GetByBookIdAsync(int bookId);
 }

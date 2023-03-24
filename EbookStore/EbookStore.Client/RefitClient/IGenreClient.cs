@@ -13,4 +13,7 @@ public interface IGenreClient
 {
     [Get("/Genre")]
     Task<List<GenreResponse>> GetAsync();
+
+    [Get("/Genre/{bookId}")]
+    Task<List<GenreResponse>> GetByBookIdAsync(int bookId);
 }
