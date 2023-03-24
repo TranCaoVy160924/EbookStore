@@ -152,6 +152,7 @@ public class BookController : Controller
         session.SetString("Genres_BookIndex", genresString);
         session.SetString("StartReleaseDate_BookIndex", start.ToString());
         session.SetString("EndReleaseDate_BookIndex", end.ToString());
+        session.SetString("PageNumber_BookIndex", "1");
 
         return RedirectToAction("Index", "Book");
     }

@@ -85,6 +85,7 @@ public class UserController : Controller
         var session = Request.HttpContext.Session;
         username = (username != null) ? username : "";
         session.SetString("Username_UserIndex", username);
+        session.SetString("PageNumber_UserIndex", "1");
         return RedirectToAction("Index", "User");
     }
 
