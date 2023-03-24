@@ -1,0 +1,66 @@
+﻿@using EbookStore.Client.RefitClient;
+@using EbookStore.Client.ViewModel;
+@using EbookStore.Contract.ViewModel.Book.BookResponse;
+@using EbookStore.Contract.ViewModel.Sale.Request;
+
+@inject IBookClient _bookClient;
+@model SaleCreateViewModel
+@{
+    List<BookResponse> books = await _bookClient.GetAllAsync();
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <h2 class="mb-4">Create New Sale</h2>
+                    <form enctype="multipart/form-data" asp-controller="Sale" asp-action="Create" method="post">
+                        <div class="form-group">
+                            <label for="Name" class="font-weight-bold">Name:</label>
+                            <input asp-for=Name type="text" class="form-control" id="Name" required />
+                            <span asp-validation-for=Name class="text-danger" />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="SalePercent" class="font-weight-bold">Sale Percent:</label>
+                                <input asp-for=SalePercent type="text" class="form-control" id="SalePercent" required />
+                                <span asp-validation-for=SalePercent class="text-danger" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="StartDate" class="font-weight-bold">Start Date:</label>
+                                        <input asp-for=StartDate class="form-control" id="StartDate" placeholder="YYYY-MM-DD" type="date" required />
+                                        <span asp-validation-for=StartDate class="text-danger" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="EndDate" class="font-weight-bold">End Date:</label>
+                                        <input asp-for=EndDate class="form-control" id="EndDate" placeholder="YYYY-MM-DD" type="date" required />
+                                        <span asp-validation-for=EndDate class="text-danger" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12 form-group">
+                                    <label for="BookIds" class="font-weight-bold">Book Titles:</label>
+                                    <select asp-for=BookIds class="form-control" multiple required>
+                                        @foreach (BookResponse book in books)
+                                        {
+                                            <option value=@book.Id>@book.Title</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for=BookIds class="text-danger" />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">
+                            <i class="fa fa-shopping-cart mr-1"></i>
+                            Add New Sale
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

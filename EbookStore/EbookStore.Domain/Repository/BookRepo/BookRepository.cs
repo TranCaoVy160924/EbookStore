@@ -16,6 +16,7 @@ using EbookStore.Contract.ViewModel.Book.Request;
 using EbookStore.Domain.Repository.GenreRepo;
 using EbookStore.Contract.ViewModel.Book.Response;
 using System.Net;
+using EbookStore.Contract.ViewModel.Genre.Response;
 
 namespace EbookStore.Domain.Repository.BookRepo;
 
@@ -33,6 +34,11 @@ public class BookRepository : IBookRepository
         _dbContext = dbContext;
         _mapper = mapper;
         _genreRepo = genreRepository;
+    }
+    public async Task<List<BookResponse>> GetAllAsync()
+    {
+        List<Book> books = await _dbContext.Books.ToListAsync();
+        return _mapper.Map<List<BookResponse>>(books);
     }
 
     #region GetAsync

@@ -21,4 +21,7 @@ public interface ISaleClient
     [Patch("/Sale/")]
     Task ExtendSaleAsync(SaleExtendRequest saleExtendRequest,
         [Header("Authorization")] string jwtToken);
+    [Post("/Sale")]
+    Task CreateAsync([Body] SaleCreateRequest createRequest,
+        [Header("Authorization")] string jwtToken);
 }

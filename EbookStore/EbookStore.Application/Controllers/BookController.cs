@@ -22,6 +22,11 @@ public class BookController : ControllerBase
     {
         _bookRepo = bookRepo;
     }
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        return Ok(await _bookRepo.GetAllAsync());
+    }
 
     [HttpPost("Search")]
     public async Task<IActionResult> GetAsync([FromBody] BookQueryRequest queryRequest)
