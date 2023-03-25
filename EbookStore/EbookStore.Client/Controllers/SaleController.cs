@@ -2,6 +2,8 @@
 
 using EbookStore.Client.Helper;
 using EbookStore.Client.RefitClient;
+using EbookStore.Client.ViewModel;
+using EbookStore.Contract.ViewModel.Book.Request;
 using EbookStore.Contract.ViewModel.Pagination;
 using EbookStore.Contract.ViewModel.Sale.Request;
 using EbookStore.Contract.ViewModel.Sale.Response;
@@ -71,7 +73,34 @@ public class SaleController : Controller
 
         return View();
     }
-
+    public IActionResult Create()
+    {
+        ViewData["DateValidate"] = TempData["DateValidate"];
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> Create(SaleCreateViewModel viewModel)
+    {
+        UserManager userManager = new UserManager(User);
+        SaleCreateRequest request = new SaleCreateRequest
+        {
+            Name = viewModel.Name,
+            SalePercent = viewModel.SalePercent,
+            StartDate = viewModel.StartDate,
+            EndDate = viewModel.EndDate,
+            BookIds = viewModel.BookIds
+        };
+        try
+        {
+            await _saleClient.CreateAsync(request, userManager.GetToken());
+            return RedirectToAction("Index", "Sale");
+        }
+        catch (Exception ex)
+        {
+            TempData["DateValidate"] = "Date must be later than today";
+            return RedirectToAction("Create", "Sale");
+        }
+    }
     [HttpPost]
     public IActionResult Filter(string saleName, DateTime saleStart, DateTime saleEnd)
     {

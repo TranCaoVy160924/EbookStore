@@ -42,12 +42,12 @@ public class MapperProfile : Profile
         CreateMap<Book, BookResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.BookId))
             .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(
-                src => src.Sale != null ? src.Sale.SalePercent : 0));
+                src => (src.Sale != null && DateTime.Compare(src.Sale.EndDate, DateTime.Today) > 0) ? src.Sale.SalePercent : 0));
         CreateMap<BookCreateRequest, Book>()
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
         CreateMap<Book, BookDetailResponse>()
             .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(
-                src => src.Sale != null ? src.Sale.SalePercent : 0));
+                src => (src.Sale != null && DateTime.Compare(src.Sale.EndDate, DateTime.Today) > 0) ? src.Sale.SalePercent : 0));
         #endregion
 
         #region Sale

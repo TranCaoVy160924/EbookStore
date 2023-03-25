@@ -55,7 +55,7 @@ public static class ModelBuilderExtensions
                 Name = LoremNET.Lorem.Words(1, 5, true, false),
                 SalePercent = rand.Next(1, 5) * 10,
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now
+                EndDate = new DateTime(2023, 10, 12)
             });
         }
 

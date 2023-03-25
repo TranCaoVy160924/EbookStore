@@ -23,6 +23,12 @@ public class BookController : ControllerBase
         _bookRepo = bookRepo;
     }
 
+    [HttpGet("NotOnSale")]
+    public async Task<IActionResult> GetNotOnSaleAsync()
+    {
+        return Ok(await _bookRepo.GetNotOnSaleAsync());
+    }
+
     [HttpPost("Search")]
     public async Task<IActionResult> GetAsync([FromBody] BookQueryRequest queryRequest)
     {

@@ -112,7 +112,10 @@ public class WishlistRepository : IWishlistRepository
     #region GetWisherAsync
     public async Task<List<User>> GetWishersAsync(int bookId)
     {
-        var wishedBook = await _dbContext.Books.QueryId(bookId).FirstOrDefaultAsync();
+        var wishedBook = await _dbContext.Books
+            .Include(b => b.WishItems)
+            .ThenInclude(wi => wi.User)
+            .QueryId(bookId).FirstOrDefaultAsync();
         if (wishedBook == null)
         {
             throw new Exception("Book not exist");
@@ -144,7 +147,11 @@ public class WishlistRepository : IWishlistRepository
             mailMessage.To.Add(whisherEmail);
         }
 
-        smtpClient.Send(mailMessage);
+        try
+        {
+            smtpClient.Send(mailMessage);
+        }
+        catch(Exception ex) { }
     }
     #endregion
 

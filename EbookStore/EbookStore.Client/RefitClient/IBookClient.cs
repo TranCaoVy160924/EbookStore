@@ -2,6 +2,7 @@
 using EbookStore.Contract.ViewModel.Book.BookResponse;
 using EbookStore.Contract.ViewModel.Book.Request;
 using EbookStore.Contract.ViewModel.Book.Response;
+using EbookStore.Contract.ViewModel.Genre.Response;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
 using System;
@@ -15,6 +16,9 @@ namespace EbookStore.Client.RefitClient;
 [Headers("Content-Type: application/json")]
 public interface IBookClient
 {
+
+    [Get("/Book/NotOnSale")]
+    Task<List<BookResponse>> GetNotOnSaleAsync();
     [Post("/Book/Search/")]
     Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] BookQueryRequest queryRequest);
 
