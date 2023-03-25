@@ -19,6 +19,6 @@ public static class SaleQueryExtension
     public static IQueryable<Sale> QuerySaleDate(this IQueryable<Sale> query, DateTime start, DateTime end)
     {
         return query.Where(s => DateTime.Compare(s.StartDate, start) >= 0
-            && DateTime.Compare(s.EndDate, end) <= 0);
+            && DateTime.Compare(s.EndDate, end) >= 0);
     }
 }

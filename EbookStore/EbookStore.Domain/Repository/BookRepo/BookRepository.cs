@@ -35,9 +35,14 @@ public class BookRepository : IBookRepository
         _mapper = mapper;
         _genreRepo = genreRepository;
     }
-    public async Task<List<BookResponse>> GetAllAsync()
+
+    public async Task<List<BookResponse>> GetNotOnSaleAsync()
     {
-        List<Book> books = await _dbContext.Books.ToListAsync();
+        List<Book> books = await _dbContext.Books
+            .Include(b => b.Sale)
+            .Where(b => b.SaleId == null 
+                || DateTime.Compare(b.Sale.EndDate, DateTime.Today) < 0)
+            .ToListAsync();
         return _mapper.Map<List<BookResponse>>(books);
     }
 

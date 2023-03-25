@@ -22,10 +22,11 @@ public class BookController : ControllerBase
     {
         _bookRepo = bookRepo;
     }
-    [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+
+    [HttpGet("NotOnSale")]
+    public async Task<IActionResult> GetNotOnSaleAsync()
     {
-        return Ok(await _bookRepo.GetAllAsync());
+        return Ok(await _bookRepo.GetNotOnSaleAsync());
     }
 
     [HttpPost("Search")]

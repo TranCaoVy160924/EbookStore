@@ -17,8 +17,8 @@ namespace EbookStore.Client.RefitClient;
 public interface IBookClient
 {
 
-    [Get("/Book")]
-    Task<List<BookResponse>> GetAllAsync();
+    [Get("/Book/NotOnSale")]
+    Task<List<BookResponse>> GetNotOnSaleAsync();
     [Post("/Book/Search/")]
     Task<ApiResponse<List<BookResponse>>> GetResponseAsync([Body] BookQueryRequest queryRequest);
 

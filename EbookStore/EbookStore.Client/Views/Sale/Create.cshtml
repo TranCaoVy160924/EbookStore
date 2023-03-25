@@ -6,7 +6,8 @@
 @inject IBookClient _bookClient;
 @model SaleCreateViewModel
 @{
-    List<BookResponse> books = await _bookClient.GetAllAsync();
+    List<BookResponse> books = await _bookClient.GetNotOnSaleAsync();
+    string validatetion = ViewData["DateValidate"] as string;
 }
 
 <div class="container-fluid">
@@ -33,11 +34,13 @@
                                         <label for="StartDate" class="font-weight-bold">Start Date:</label>
                                         <input asp-for=StartDate class="form-control" id="StartDate" placeholder="YYYY-MM-DD" type="date" required />
                                         <span asp-validation-for=StartDate class="text-danger" />
+                                        <span class="text-danger">@validatetion</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="EndDate" class="font-weight-bold">End Date:</label>
                                         <input asp-for=EndDate class="form-control" id="EndDate" placeholder="YYYY-MM-DD" type="date" required />
                                         <span asp-validation-for=EndDate class="text-danger" />
+                                        <span class="text-danger">@validatetion</span>
                                     </div>
                                 </div>
                             </div>

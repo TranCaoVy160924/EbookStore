@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace EbookStore.Domain.Repository.BookRepo;
 public interface IBookRepository
 {
-    Task<List<BookResponse>> GetAllAsync();
+    Task<List<BookResponse>> GetNotOnSaleAsync();
     Task<PagedList<BookResponse>> GetAsync(BookQueryRequest request);
     Task<BookDetailResponse> GetOneAsync(int bookId);
     Task CreateAsync(BookCreateRequest createRequest);

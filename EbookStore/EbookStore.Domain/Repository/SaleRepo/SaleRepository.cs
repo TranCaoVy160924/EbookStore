@@ -89,10 +89,20 @@ public class SaleRepository : ISaleRepository
     public async Task CreateAsync(SaleCreateRequest createRequest)
     {
         Sale sale = _mapper.Map<Sale>(createRequest);
+        List<Sale> oldSale = new List<Sale>();
         List<Book> books = await CheckBookForAddingToSale(createRequest.BookIds);
 
         if (books.Count > 0)
         {
+            foreach (Book book in books)
+            {
+                if (oldSale != null)
+                {
+                    oldSale.Add(book.Sale);
+                }
+                book.Sale = sale;
+            }
+
             sale.Books = books;
             _dbContext.Sales.Add(sale);
             await _dbContext.SaveChangesAsync();
@@ -111,10 +121,12 @@ public class SaleRepository : ISaleRepository
 
         foreach (int bookId in bookIds)
         {
-            Book book = await _dbContext.Books.FirstOrDefaultAsync(b => b.BookId == bookId);
+            Book book = await _dbContext.Books
+                .Include(b => b.Sale)
+                .FirstOrDefaultAsync(b => b.BookId == bookId);
             if (book != null)
             {
-                if (book.SaleId != null)
+                if (book.SaleId != null && DateTime.Compare(book.Sale.EndDate, DateTime.Today) >= 0)
                 {
                     throw new Exception("Book already has a sale assigned.");
                 }
@@ -143,6 +155,11 @@ public class SaleRepository : ISaleRepository
     #region GetSalesAsync
     public async Task<PagedList<SaleResponse>> GetSalesAsync(SaleQueryRequest queryRequest)
     {
+        if (DateTime.Compare(queryRequest.EndDate, DateTime.Today) <= 0
+            || queryRequest.EndDate == DateTime.MaxValue)
+        {
+            queryRequest.EndDate = DateTime.Now;
+        }
         IQueryable<Sale> query = _dbContext.Sales
             .Include(s => s.Books)
             .QueryName(queryRequest.Name)
@@ -154,4 +171,3 @@ public class SaleRepository : ISaleRepository
     }
     #endregion
 }
-

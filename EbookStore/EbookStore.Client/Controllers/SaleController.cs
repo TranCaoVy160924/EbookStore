@@ -75,6 +75,7 @@ public class SaleController : Controller
     }
     public IActionResult Create()
     {
+        ViewData["DateValidate"] = TempData["DateValidate"];
         return View();
     }
     [HttpPost]
@@ -96,6 +97,7 @@ public class SaleController : Controller
         }
         catch (Exception ex)
         {
+            TempData["DateValidate"] = "Date must be later than today";
             return RedirectToAction("Create", "Sale");
         }
     }
