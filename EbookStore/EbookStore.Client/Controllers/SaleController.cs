@@ -112,6 +112,7 @@ public class SaleController : Controller
                 JsonConvert.SerializeObject(saleStart));
         session.SetString("End_SaleIndex",
                 JsonConvert.SerializeObject(saleEnd));
+        session.SetString("PageNumber_SaleIndex", "1");
 
         return RedirectToAction("Index", "Sale");
     }

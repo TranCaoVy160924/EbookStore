@@ -1,4 +1,7 @@
 ﻿using EbookStore.Contract.Model;
+using EbookStore.Domain.Repository.LibraryItemRepo;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using EbookStore.Contract.ViewModel.LibraryItem.Request;
 using EbookStore.Contract.ViewModel.WishItem.Request;
 using EbookStore.Domain.Repository.LibraryItemRepo;
@@ -9,20 +12,45 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace EbookStore.Application.Controllers;
-
 [Route("api/[controller]")]
 [ApiController]
-public class LibraryItemController : Controller
+public class LibraryItemController : ControllerBase
 {
+    private readonly ILibraryItemRepository _libraryItemRepo;
     private readonly ILibraryRepository _libraryRepo;
     private readonly UserManager<User> _userManager;
+
     public LibraryItemController(
-        ILibraryRepository libraryRepo,
-        UserManager<User> userManager)
+        ILibraryItemRepository libraryItemRepo,
+        UserManager<User> userManager,
+        ILibraryRepository libraryRepo)
     {
-        _libraryRepo = libraryRepo;
+        _libraryItemRepo = libraryItemRepo;
         _userManager = userManager;
+        _libraryRepo = libraryRepo;
     }
+
+    [HttpPost("{bookId}")]
+    [Authorize]
+    public async Task<IActionResult> AddBookToCartlist(int bookId)
+    {
+        try
+        {
+            var userId = await GetUserId();
+
+            await _libraryItemRepo.AddBookToLibrarylistAsync(bookId, userId);
+            return Ok();
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
     [HttpPost("Search")]
     [Authorize]
     public async Task<IActionResult> GetAsync([FromBody] LibraryItemQueryRequest queryRequest)

@@ -9,6 +9,7 @@
 @{
     UserManager userManager = new UserManager(this.User);
     List<GenreResponse> genres = await _genreClient.GetAsync();
+
     var titleSearch = ViewData["TitleSearch"] as string;
     if (titleSearch == null)
     {
@@ -85,6 +86,16 @@
                     </div>
                 </div>
             </div>
+            <div class="d-inline-flex align-items-center d-block d-lg-none">
+                <a href="" class="btn px-0 ml-2">
+                    <i class="fas fa-heart text-dark"></i>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">@wishlistCount</span>
+                </a>
+                <a href="" class="btn px-0 ml-2">
+                    <i class="fas fa-shopping-cart text-dark"></i>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">@cartlistCount</span>
+                </a>
+            </div>
         </div>
     </div>
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
@@ -152,6 +163,14 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 Pages <i class="fa fa-angle-down mt-1"></i>
                             </a>
+                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                <a asp-controller="Cartlist" asp-action="Index" class="dropdown-item">Shopping Cart</a>
+                                <a href="checkout.html" class="dropdown-item">Checkout</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         </div>
                         @if (userManager.IsLogin())
                         {

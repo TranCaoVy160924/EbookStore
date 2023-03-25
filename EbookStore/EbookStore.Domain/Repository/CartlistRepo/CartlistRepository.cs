@@ -38,6 +38,13 @@ public class CartlistRepository : ICartlistRepository
         {
             throw new ApplicationException($"This book {bookId} is already in cart.");
         }
+
+        var existingLibraryItem = await _dbContext.LibraryItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId );
+        if (existingLibraryItem != null)
+        {
+            throw new ApplicationException($"This book {bookId} is already in library.");
+        }
+
         var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == userId);
 
         if (user == null)
@@ -98,6 +105,23 @@ public class CartlistRepository : ICartlistRepository
     public async Task DeleteAsync(int bookId, Guid userId)
     {
         var book = await _dbContext.CartItems.SingleOrDefaultAsync(ci => ci.UserId == userId && ci.BookId == bookId);
+        
+        if(book != null)
+        {
+            if (book.IsActive)
+            {
+                book.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Book already been deleted!");
+            }
+        }
+        else
+        {
+            throw new Exception("Delete book fail!");
+        }
 
         _dbContext.CartItems.Remove(book);
         await _dbContext.SaveChangesAsync();
