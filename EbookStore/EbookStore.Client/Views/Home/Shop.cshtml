@@ -22,8 +22,8 @@
             {
                 Title = titleSearch,
                 Genres = (genre == null) ? new List<int>() : new List<int> { int.Parse(genre) },
-                PageSize = 12,
-                PageNumber = 1,
+                PageSize = pageSize,
+                PageNumber = pageNumber,
                 EndReleaseDate = endDate,
                 StartReleaseDate = startDate,
             };
@@ -43,6 +43,7 @@
                 <label>Release date</label><br />
                 <label>From</label><input name="startDate" type="date" /> <br />
                 <label>To</label><input name="endDate" type="date" /> <br />
+                <input type="hidden" name="titleSearch" value="@titleSearch" />
                 <button type="submit">Search</button>
             </form>
         </div>
@@ -57,17 +58,21 @@
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid w-100" src="@book.CoverImage" alt="">
                                 <div class="product-action">
-                                    <form asp-controller="Cartlist" asp-action="AddToCartlist" method="post">
-                                        <input type="hidden" name="cartAddBookId" value=@book.Id />
+                                    <form asp-controller="Home" asp-action="AddItemToCartFromShop" method="post">
+                                        <input type="hidden" name="bookId" value=@book.Id />
+                                        <input type="hidden" name="titleSearch" value="@titleSearch" />
                                         <button type="submit" class="btn btn-outline-dark btn-square"><i class="fa fa-shopping-cart"></i></button>
                                     </form>
 
-                                    <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post">
+                                    <form asp-controller="Home" asp-action="AddToWishlistFromShop" method="post">
                                         <input type="hidden" name="bookId" value=@book.Id />
+                                        <input type="hidden" name="titleSearch" value="@titleSearch" />
                                         <button type="submit" class="btn btn-outline-dark btn-square"><i class="far fa-heart"></i></button>
                                     </form>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                    <form asp-controller="Home" asp-action="Detail">
+                                        <input type="hidden" name="id" value=@book.Id />
+                                        <button type="submit" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="text-center py-4">
@@ -86,12 +91,14 @@
                 <div class="col-12">
                     <div class="pagination justify-content-center">
                         <form asp-controller="Home" asp-action="ChangePage" method="post">
+                            <input type="hidden" name="titleSearch" value="@titleSearch" />
                             <button name="pageNumber" value="@(paginationHeader.CurrentPage-1)"
                                     type="submit" disabled="@(!paginationHeader.HasPrevious)">
                                 Previous
                             </button>
                         </form>
                         <form asp-controller="Home" asp-action="ChangePage" method="post">
+                            <input type="hidden" name="titleSearch" value="@titleSearch" />
                             <button type="submit" disabled="@(!paginationHeader.HasNext)"
                                     name="pageNumber" value="@(paginationHeader.CurrentPage+1)">
                                 Next

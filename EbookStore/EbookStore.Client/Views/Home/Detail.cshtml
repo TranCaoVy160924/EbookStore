@@ -1,0 +1,113 @@
+﻿@using EbookStore.Client.RefitClient;
+@using EbookStore.Client.ViewModel;
+@using EbookStore.Contract.ViewModel.Book.Request;
+@using EbookStore.Contract.ViewModel.Book.Response
+@using EbookStore.Contract.ViewModel.Genre.Response;
+
+@inject IHttpContextAccessor HttpContextAccessor;
+@inject IGenreClient _genreClient;
+@inject IBookClient _bookClient;
+@{
+    List<GenreResponse> genres = await _genreClient.GetAsync();
+
+    var session = HttpContextAccessor.HttpContext.Session;
+    int updateId = int.Parse(session.GetString("chosen_id"));
+    var data = await _bookClient.GetOneAsync(updateId);
+    BookDetailResponse bookDetail = data.ReadResult();
+
+    List<GenreResponse> bookGenres = await _genreClient.GetByBookIdAsync(bookDetail.BookId);
+}
+
+<div class="container-fluid pb-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-5 mb-30">
+            <img id="bookCreateCover" class="w-100 h-100" src="@bookDetail.CoverImage" alt="Product" />
+        </div>
+        <div class="col-lg-7 h-auto mb-30">
+            <div class="h-100 bg-light p-30">
+                <div class="row mb-3">
+                    <div class="col-12" hidden>
+                        <label>ID</label>
+                        <input disabled type="text" class="mb-3" value=@bookDetail.BookId />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label>Title</label>
+                        <input disabled type="text" class="mb-3" value=@bookDetail.Title />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label>Number Of Page</label>
+                        <input disabled type="text" class="mb-3" value=@bookDetail.NumberOfPage />
+                    </div>
+                    <div class="col-6">
+                        <label>Price</label>
+                        <input disabled type="text" class="mb-3" value=@bookDetail.Price />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label>Description</label>
+                        <textarea disabled name="description" type="text" rows="10" cols="90">@bookDetail.Description</textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 form-group">
+                        <label>Genres</label>
+                        <select disabled class="form-control" multiple>
+                            @foreach (GenreResponse genre in genres)
+                            {
+                                if (bookGenres.Any(bg => bg.GenreId.Equals(genre.GenreId)))
+                                {
+                                    <option value=@genre.GenreId selected>@genre.Name </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <form asp-controller="Home" asp-action="AddItemToCartFromShop" method="post">
+                    <input type="hidden" name="bookId" value=@updateId />
+                    <input type="hidden" name="titleSearch" value="" />
+                    <button type="submit" class="btn btn-primary px-3">
+                        <i class="fa fa-shopping-cart mr-1"></i>
+                        Add To Cart
+                    </button>
+                </form>
+
+                <form asp-controller="Home" asp-action="AddToWishlistFromShop" method="post">
+                    <input type="hidden" name="bookId" value=@updateId />
+                    <input type="hidden" name="titleSearch" value="" />
+                    <button type="submit" class="btn btn-primary px-3">
+                        <i class="far fa-heart mr-1"></i>
+                        Add To Wishlist
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const uploadImage = (fileInput) => {
+        let bookCover = document.getElementById("bookCreateCover");
+        var [file] = fileInput.files;
+        bookCover.src = URL.createObjectURL(file);
+    }
+
+    const uploadFile = fileName => {
+        console.log(fileName);
+    }
+
+    $(document).ready(function () {
+        $('#ingredients').multiselect();
+    });
+
+    const textarea = document.getElementById('descriptionTextarea');
+    const input = document.getElementById('descriptionInput');
+
+    textarea.addEventListener('change', (event) => {
+        input.value = event.target.value;
+    });
+</script>
